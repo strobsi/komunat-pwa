@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title text-center>Komunat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-card class="opt0">
+        <ion-card-header>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-button (click) ="selected(0)" color="primary" expand="block" shape="rounded">{{this.btn0Val.name}}</ion-button>
+          </ion-card-content>
+    </ion-card>
+
+    <ion-card class="opt1">
+        <ion-card-header>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-button (click) ="selected(1)" color="primary" expand="block" shape="rounded" >{{this.btn1Val.name}}</ion-button>
+        </ion-card-content>
+      </ion-card>
+</ion-content>
