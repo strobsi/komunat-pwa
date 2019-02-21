@@ -1,9 +1,79 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>matches</ion-title>
+    <ion-title text-center>Wähle dein Team</ion-title>
+    <progress-bar [progress]="teamLength" [color-degraded]="{'0': ' #000099','50': '#428bff', '100': '#428bff'}">
+      </progress-bar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+    <ion-list>
+      <ion-card *ngFor="let match of matches; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }}">
+          <ion-card-content>
 
+          <ion-item class="text-wrap">
+              <ion-thumbnail slot="start">
+                  <ion-img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"></ion-img>
+                </ion-thumbnail>
+                <ion-label>{{match.candidate.name}}</ion-label>
+                <ion-checkbox color="dark" [(ngModel)]="match.isChecked"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+             
+              <ion-grid>
+                  <ion-row>
+                      <ion-col size=4>
+                          <p><b>Geburtsdatum:</b></p>
+                      </ion-col>
+                      <ion-col size=8>
+                          <p>{{match.candidate.birthdate}}</p>
+                      </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col size=4>
+                          <p><b>Liste:</b></p>
+                      </ion-col>
+                      <ion-col size=8>
+                          <p>{{match.candidate.list}}</p>
+                      </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col size=4>
+                          <p><b>Listenplatz:</b></p>
+                      </ion-col>
+                      <ion-col size=8>
+                          <p>{{match.candidate.list_number}}</p>
+                      </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col size=4>
+                          <p><b>Stadtbezirk:</b></p>
+                      </ion-col>
+                      <ion-col size=8>
+                          <p>{{match.candidate.district}}</p>
+                      </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col text-center size=12>
+
+                              <div *ngIf="match.isChecked == true; then thenBlock else elseBlock"></div>
+                              <ng-template #thenBlock>
+                                  <ion-button size="default"(click) ="toggleTeam(match,i)" expand="block" color="dark" shape="rounded" fill="solid">
+                                      Von meinem Team entfernen
+                                  </ion-button>
+                                  </ng-template>
+                              <ng-template #elseBlock>
+                                  <ion-button size="default"(click) ="toggleTeam(match,i)" expand="block" color="dark" shape="rounded" fill="outline">
+                                      Zu meinem Team hinzufügen
+                                  </ion-button>
+                                  </ng-template>
+                            </ion-col>
+                    </ion-row>
+                  </ion-grid>
+            </ion-item>
+       
+          </ion-card-content>
+      </ion-card>
+      </ion-list>
+      
 </ion-content>

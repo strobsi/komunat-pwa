@@ -6,11 +6,16 @@
 
 <ion-content padding>
 
+    <div class="spinner">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+      </div>
+
     <ion-card class="opt0">
         <ion-card-header>
         </ion-card-header>
         <ion-card-content>
-            <ion-button (click) ="selected(0)" color="primary" expand="block" shape="rounded">{{this.btn0Val.name}}</ion-button>
+            <ion-button class=".opt0" (click) ="selected(0)" color="dark" expand="block" shape="rounded">{{this.btn0Val.name}}</ion-button>
           </ion-card-content>
     </ion-card>
 
@@ -18,7 +23,7 @@
         <ion-card-header>
         </ion-card-header>
         <ion-card-content>
-            <ion-button (click) ="selected(1)" color="primary" expand="block" shape="rounded" >{{this.btn1Val.name}}</ion-button>
+            <ion-button class=".opt0" (click) ="selected(1)" color="dark" expand="block" shape="rounded" >{{this.btn1Val.name}}</ion-button>
         </ion-card-content>
       </ion-card>
 </ion-content>

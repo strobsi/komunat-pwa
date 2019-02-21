@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, Events } from "@ionic/angular";
+import { ModalController, Events } from "@ionic/angular";
 import { ngControlStatusHost } from '@angular/forms/src/directives/ng_control_status';
+import { MatchesPage } from '../matches/matches.page';
 
 @Component({
   selector: 'app-komunat',
@@ -9,7 +10,7 @@ import { ngControlStatusHost } from '@angular/forms/src/directives/ng_control_st
 })
 export class KomunatPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public modalCtrl: ModalController) {
   }
 
   btn0Val;
@@ -21,6 +22,7 @@ export class KomunatPage {
   insertIndex = 0;
   decisionCounter = 0;
   startedTimeStamp = 0;
+  spinner;
 
   initarr = [    
     [
@@ -114,6 +116,7 @@ export class KomunatPage {
              "name":"Gerechtigkeit",
              "rating":0
         },
+        /*
         {
               "id":5,
               "name":"Frieden",
@@ -149,12 +152,15 @@ export class KomunatPage {
             "name":"Toleranz",
             "rating":0
         }
+        */
     ]
 ]
 
   ionViewWillEnter(){
     console.log("init")
       this.arr = this.initarr
+      this.spinner = document.querySelector(".spinner")
+      this.spinner.style.opacity = "0.0"
       this.newRound()
   }
 
@@ -178,9 +184,15 @@ export class KomunatPage {
     } else {
         // Finished overall sorting, since nothing has to be sorted anymore.
         console.log("Finished sorting with " + this.decisionCounter + " decisions")
+        this.spinner.style.opacity = "1.0"
         this.calculateValue()
         this.wrapResult()
         this.btn0Val.name = ""
+        const btn0 = document.querySelector(".opt0")
+        const btn1 = document.querySelector(".opt0")
+        btn0.setAttribute("disabled","true")
+        btn1.setAttribute("disabled","true")
+
         this.btn1Val.name = ""
         //this.collapseAndRotate()
         this.sendResult(this.arr)
@@ -332,8 +344,11 @@ private sendResult(a) {
       if (xhr.readyState === 4 && xhr.status === 200) {
           // Successfully stored values, continue with animation
           console.log("Successfully uploaded result")
+          console.log(JSON.parse(xhr.responseText))
           //fakeLoad()
-          this.moveOn()
+          this.spinner.style.opacity = "0.0"
+          this.moveOn(JSON.parse(xhr.responseText))
+
       }
   };
   var data = JSON.stringify(res);
@@ -341,8 +356,16 @@ private sendResult(a) {
   xhr.send(data);
 }
 
-  moveOn() {
+  moveOn(data) {
     console.log("Moving on")
-    this.navCtrl.navigateForward('/matches');
+    this.modalCtrl.create({
+        component: MatchesPage,
+        componentProps: { 
+          matches: data
+        }
+    }).then((modal) => {
+        modal.present();
+    });
+   // this.navCtrl.navigateForward("/matches", { 'data': data });
 }
 }
