@@ -1,15 +1,23 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+
 /** Ionic CSS Variables **/
 :root {
+
+  --komunat-blue: #59BCED;
+  --komunat-gray-light: #DEE0E5;
+  --komunat-gray-medium: #B2B4B9;
+  --komunat-gray-dark: #4C4D4F;
+  --komunat-red:#FC735D;
+
   /** primary **/
-  --ion-color-primary: #3880ff;
+  --ion-color-primary: #59BCED;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+  --ion-color-primary-shade: #59BCED;
+  --ion-color-primary-tint: #59BCED;
 
   /** secondary **/
   --ion-color-secondary: #0cd1e8;

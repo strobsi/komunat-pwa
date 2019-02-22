@@ -157,7 +157,7 @@ export class KomunatPage {
 ]
 
   ionViewWillEnter(){
-    console.log("init")
+      console.log("init")
       this.arr = this.initarr
       this.spinner = document.querySelector(".spinner")
       this.spinner.style.opacity = "0.0"
@@ -189,10 +189,9 @@ export class KomunatPage {
         this.wrapResult()
         this.btn0Val.name = ""
         const btn0 = document.querySelector(".opt0")
-        const btn1 = document.querySelector(".opt0")
-        btn0.setAttribute("disabled","true")
-        btn1.setAttribute("disabled","true")
-
+        const btn1 = document.querySelector(".opt1")
+        btn0.parentNode.removeChild(btn0);
+        btn1.parentNode.removeChild(btn1);
         this.btn1Val.name = ""
         //this.collapseAndRotate()
         this.sendResult(this.arr)

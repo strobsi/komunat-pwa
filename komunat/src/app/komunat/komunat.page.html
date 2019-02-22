@@ -1,29 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title text-center>Komunat</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
 
-<ion-content padding>
-
-    <div class="spinner">
-        <div class="cube1"></div>
-        <div class="cube2"></div>
-      </div>
-
-    <ion-card class="opt0">
+    <img class="logo" src="../../assets/img/logo.png"/>
+    <h4>Welcher Wert ist dir wichtiger</h4>
+    <ion-card class="opt0 upper" (click) ="selected(0)">
         <ion-card-header>
         </ion-card-header>
-        <ion-card-content>
-            <ion-button class=".opt0" (click) ="selected(0)" color="dark" expand="block" shape="rounded">{{this.btn0Val.name}}</ion-button>
-          </ion-card-content>
+        <ion-card-content >
+            <h2 class=".opt0">{{this.btn0Val.name}}</h2>
+        </ion-card-content>
     </ion-card>
-
-    <ion-card class="opt1">
+    <ion-card class="opt1 lower"  (click) ="selected(1)">
         <ion-card-header>
         </ion-card-header>
         <ion-card-content>
-            <ion-button class=".opt0" (click) ="selected(1)" color="dark" expand="block" shape="rounded" >{{this.btn1Val.name}}</ion-button>
+              <h2 class=".opt1">{{this.btn1Val.name}}</h2>
         </ion-card-content>
       </ion-card>
+      <div class="spinner">
+          <div class="cube1"></div>
+          <div class="cube2"></div>
+        </div>
+    
 </ion-content>

@@ -48,3 +48,36 @@
     -webkit-transform: rotate(-360deg);
   }
 }
+
+.logo {
+  height: 10vh;
+  width: auto;
+  margin: auto;
+  display: block;
+}
+
+.upper {
+  height:35vh;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.lower {
+  height: 35vh;
+  vertical-align: middle;
+  text-align: center;
+}
+
+h2 {
+  color: #4C4D4F;
+  font-size: 8vw;
+  text-align: center; 
+}
+
+h4 {
+  height: 5vh;
+  font-size: 6vw;
+  margin: 1em;
+  color: #4C4D4F;
+  text-align: center; 
+}

@@ -3,11 +3,108 @@
     height: auto !important;
 }
 
+.title {
+    margin-top:10px;
+} 
+
 img {
     width: 100px;
     height:100px;
     vertical-align: top;
 }
 
+.progressBg {
+    background-color: var(--komunat-gray-light);
+    width:100vw;
+    height:10px;
+    min-height: 10px;
+}
 
+.progress {
+    background-color: var(--komunat-blue);
+    width:100vw;
+    height:10px;
+    min-height: 1px;
+    -webkit-transition: width 0.5s; /* Safari */
+    transition: width 0.5s;
+}
 
+.indicatorTxt {
+    text-align:right;
+    padding-right:10px;
+    padding-bottom:5px;
+}
+
+.candidateImg {
+    object-fit: cover;
+    width:100%;
+    height:35vh;
+    border-radius: 20px;
+}
+
+.candidateCard {
+    margin-bottom: 30px;
+}
+
+.candidateInfoContainer {
+    margin:auto;
+    margin-top: -50px;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 0px 41px 14px rgba(0,0,0,0.06);
+    -moz-box-shadow: 0px 0px 41px 14px rgba(0,0,0,0.06);
+    box-shadow: 0px 0px 41px 14px rgba(0,0,0,0.06);
+    width:85vw;
+    height:auto;
+    min-height: 10px;
+}
+
+.candidateInfo {
+    padding-top:40px;
+    padding-left:10px;
+    font-size:6vw;
+}
+
+.matchDiv {
+    background-color: var(--komunat-blue);
+    border-radius:40px;
+    margin-top:18px;
+    color:white;
+    text-align: center;
+}
+
+.candidateInfoText p{
+    font-size: 3vw;
+    margin:0px;
+}
+
+.reject {
+    border-radius:50%;
+    width: 10vh; 
+    float:left; 
+    height:10vh; 
+    margin:5px;
+    text-align: center;
+    font-size: 10vh;
+    color: var(--komunat-red)
+}
+
+.match {
+    border-radius:50%;
+    float:left; 
+    width: 10vh; 
+    height:10vh; 
+    margin:5px;
+    text-align: center;
+    font-size: 10vh;
+    color: var(--komunat-blue)
+}
+
+.tinderButtonOuterWrapper {
+  overflow: hidden;
+  margin-top:1vh;
+  margin: auto;
+}
+
+.tinderButtonInnerWrapper {
+    width: auto;
+}

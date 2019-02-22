@@ -1,25 +1,75 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title text-center>Wähle dein Team</ion-title>
-    <progress-bar [progress]="teamLength" [color-degraded]="{'0': ' #000099','50': '#428bff', '100': '#428bff'}">
-      </progress-bar>
-  </ion-toolbar>
-</ion-header>
+
+    <h2 class="title" text-center>DEIN ERGEBNIS</h2>
+    <div class="progressWrapper">
+        <div class="indicatorTxt">
+             0 / 20
+        </div>
+        <div class="progressBg">
+            <div class="progress">
+        
+            </div>
+        </div>
+    </div>
 
 <ion-content padding>
     <ion-list>
-      <ion-card *ngFor="let match of matches; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }}">
-          <ion-card-content>
+      <div *ngFor="let match of matches; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }} candidateCard">
+          <div class="imageWrapper">
+            <img class="candidateImg" src="http://192.168.2.119:3000/uploads/{{match.uuid}}.png"/>
+          </div>
+          <div class="candidateInfoContainer">
+            
+            <div class="candidateInfo"> 
+                    <ion-grid>
+                            <ion-row>
+                                <ion-col size=8>
+                                    <h2>{{match.candidate.name}}</h2>
+                                </ion-col>
+                                <ion-col size=4>
+                                       <div class="matchDiv">
+                                        {{match.distance}}
+                                       </div>
+                                    </ion-col>
+                            </ion-row>
+                            <ion-row class="candidateInfoText">
+                                    <ion-col size=7>
+                                        <p><b>Partei:</b> {{match.candidate.list}}</p>
+                                    </ion-col>
+                                    <ion-col size=5>
+                                            <p><b>Alter:</b> {{match.candidate.birthdate}}</p>
+                                     </ion-col>
+                            </ion-row>
+                            <ion-row class="candidateInfoText">
+                                    <ion-col size=7>
+                                        <p><b>Wahlbezirk:</b> {{match.candidate.district}}</p>
+                                    </ion-col>
+                                    <ion-col size=5>
+                                            <p><b>Listenplatz:</b> {{match.candidate.list_number}}</p>
+                                     </ion-col>
+                            </ion-row>
 
-          <ion-item class="text-wrap">
-              <ion-thumbnail slot="start">
-                  <ion-img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"></ion-img>
-                </ion-thumbnail>
-                <ion-label>{{match.candidate.name}}</ion-label>
-                <ion-checkbox color="dark" [(ngModel)]="match.isChecked"></ion-checkbox>
+                            <ion-row>
+
+                                <div class="tinderButtonOuterWrapper">
+                                    <div class="reject" (click) ="toggleTeam(match,i)">
+                                    <ion-icon name="close-circle"></ion-icon>
+                                    </div>
+                                    <div class="match" (click) ="toggleTeam(match,i)">
+                                    <ion-icon name="checkmark-circle"></ion-icon>
+                                    </div>
+                                    </div>
+                            </ion-row>
+
+                    </ion-grid>
+            </div>
+
+          </div>
+
+          <!--
+          <ion-item class="text-wrap">  
+            <ion-label>{{match.candidate.name}}</ion-label>
           </ion-item>
           <ion-item>
-             
               <ion-grid>
                   <ion-row>
                       <ion-col size=4>
@@ -71,9 +121,8 @@
                     </ion-row>
                   </ion-grid>
             </ion-item>
-       
-          </ion-card-content>
-      </ion-card>
+            -->
+    </div>
       </ion-list>
       
 </ion-content>

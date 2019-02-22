@@ -16,7 +16,7 @@ export class MatchesPage implements OnInit{
     { distance: 10.954451150103322,
       uuid: '00ujg0oq19HkhvpW40h7',
       candidate:
-       { name: 'Simon Strobel',
+       { name: 'Steffen Schuldis',
          birthdate: '27.12.1993',
          list: '1',
          list_number: '2',
@@ -33,10 +33,13 @@ export class MatchesPage implements OnInit{
 
   //constructor(private navParams: NavParams, public alertController: AlertController) {}
   constructor(public alertController: AlertController) {}
-
+ 
   ngOnInit() {
     //this.matches = this.navParams.get("matches");
+    document.querySelector('.progress').setAttribute("style","width:"+this.teamLength+"%;");
     this.matches.sort(function (a, b) {
+      a.distance = Math.round(a.distance)
+      b.distance = Math.round(b.distance)
       if (a.distance > b.distance) {
         return 1;
       }
@@ -47,14 +50,29 @@ export class MatchesPage implements OnInit{
     });
   }
 
+  private updateUI() {
+    if (this.teamLength != 0) {
+      var count = this.teamLength / 5;
+      var html = count + " / 20";
+      document.querySelector('.indicatorTxt').innerHTML = html
+    }
+    else {
+      document.querySelector('.indicatorTxt').innerHTML = "0 / 20"
+    }
+    document.querySelector('.progress').setAttribute("style","width:"+this.teamLength+"%;");
+
+  }
+
   public toggleTeam(match,i) {
+    console.log("Toggling team")
     const element =  document.querySelector('.match_'+i);
     element.classList.remove('animated','fadeInRight','delay-'+i+'s');
     if (match.isChecked) {
       element.classList.remove('animated','pulse','faster');
       this.teamLength = this.teamLength -5;
+      this.updateUI();
     }
-    else {
+    else {                                                    
       element.classList.add('animated', 'pulse','faster');
       if (this.teamLength >= 95) {
         this.teamLength = 100;
@@ -62,6 +80,7 @@ export class MatchesPage implements OnInit{
       }
       else {
         this.teamLength = this.teamLength + 5;
+        this.updateUI();
       }
     }
     match.isChecked = !match.isChecked;
