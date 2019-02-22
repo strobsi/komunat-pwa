@@ -87,7 +87,7 @@ export class MatchesPage implements OnInit{
       elem[0].share = this.share;
     }
   }
-
+  
   private updateUI() {
     if (this.teamLength != 0) {
       var count = this.teamLength / 5;
