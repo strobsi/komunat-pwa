@@ -15,6 +15,7 @@ import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { MatchesPageModule } from './matches/matches.module';
 import { MatchesPage } from './matches/matches.page';
+import { SocialSharing } from "@ionic-native/social-sharing/ngx"
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,7 +33,8 @@ import { MatchesPage } from './matches/matches.page';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    SocialSharing
   ],
   bootstrap: [AppComponent]
 })

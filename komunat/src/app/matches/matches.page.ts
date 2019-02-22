@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 import { timeout } from 'q';
 import { AlertController } from '@ionic/angular';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-matches',
@@ -30,10 +31,42 @@ export class MatchesPage implements OnInit{
              list_number: '2',
              district: 'Untertürkheim' } }
     ];
+  
+    // Share options
+    share = {
+      displayNames: true,
+      config: [{
+        facebook: {
+          socialShareUrl: 'https://fluster.io',
+          socialSharePopupWidth: 400,
+          socialSharePopupHeight: 400
+        }
+      },{
+        twitter: {
+          socialShareUrl: 'https://fluster.io',
+          socialSharePopupWidth: 300,
+          socialSharePopupHeight: 400
+        }
+      },{
+        linkedin: {
+          socialShareUrl: 'https://fluster.io'
+        }
+      },{
+        email: {
+          socialShareTo: '',
+          socialShareBody: 'https://fluster.io'
+        }
+      }, {
+        whatsapp: {
+          socialShareText: 'Mein Komunat Ergebnis',
+          socialShareUrl: 'https://fluster.io'
+        }
+      }]
+    };
 
-  //constructor(private navParams: NavParams, public alertController: AlertController) {}
-  constructor(public alertController: AlertController) {}
- 
+  //constructor(private navParams: NavParams, public alertController: AlertController, public actionSheetController: ActionSheetController) {}
+  constructor(public alertController: AlertController, public actionSheetController: ActionSheetController) {}
+    
   ngOnInit() {
     //this.matches = this.navParams.get("matches");
     document.querySelector('.progress').setAttribute("style","width:"+this.teamLength+"%;");
@@ -48,6 +81,11 @@ export class MatchesPage implements OnInit{
       }
       return 0;
     });
+
+    const elem = document.getElementsByTagName('web-social-share');
+    if (elem && elem.length > 0) {
+      elem[0].share = this.share;
+    }
   }
 
   private updateUI() {
@@ -77,6 +115,7 @@ export class MatchesPage implements OnInit{
       if (this.teamLength >= 95) {
         this.teamLength = 100;
         this.presentAlert();
+        //this.presentActionSheet();
       }
       else {
         this.teamLength = this.teamLength + 5;
@@ -110,5 +149,58 @@ export class MatchesPage implements OnInit{
     });
 
     await alert.present();
+  }
+
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Teilen',
+      buttons: [{
+        text: 'Facebook',
+        icon: 'logo-facebook',
+        handler: () => {
+          /*
+          console.log('Delete clicked');
+          this.socialSharing.shareViaFacebook(this.matches[0].candidate.name).then(() => {
+              console.log("Shared");
+          }).catch(e => {
+            console.log("Shared failed: " +e);
+          });
+          */
+        }
+      }, {
+        text: 'Twitter',
+        icon: 'logo-twitter',
+        handler: () => {
+          console.log('Share clicked');
+        }
+      }, {
+        text: 'WhatsApp',
+        icon: 'logo-whatsapp',
+        handler: () => {
+          console.log('Play clicked');
+        }
+      }, {
+        text: 'E-Mail',
+        icon: 'mail',
+        handler: () => {
+          /*
+          this.socialSharing.shareViaEmail("Komunat Ergebnis","Komunat Ergebnis",["simon.strobel@web.de"],null,null,null).then(() => {
+            console.log("Shared");
+        }).catch(e => {
+          console.log("Shared failed: " +e);
+        });
+        */
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 }
