@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, Events } from "@ionic/angular";
-import { KomunatPage } from '../komunat/komunat.page';
 
 @Component({
   selector: 'app-home',
@@ -17,4 +16,11 @@ export class HomePage {
     this.navCtrl.navigateForward('/komunat');
   }
 
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    let vh = window.innerHeight * 0.01;
+    // Then we set the value in the --vh custom property to the root of the document
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
 }

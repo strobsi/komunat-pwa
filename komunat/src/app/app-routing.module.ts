@@ -11,15 +11,9 @@ const routes: Routes = [
     path: 'home',
     loadChildren: './home/home.module#HomePageModule'
   },
-  {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
-  },
-  { 
-    path: 'komunat', 
-    loadChildren: './komunat/komunat.module#KomunatPageModule' 
-  },
-  { path: 'matches', loadChildren: './matches/matches.module#MatchesPageModule' }
+  { path: 'komunat', loadChildren: './komunat/komunat.module#KomunatPageModule' },
+  { path: 'matches', loadChildren: './matches/matches.module#MatchesPageModule' },
+  { path: 'share', loadChildren: './share/share.module#SharePageModule' },
 ];
 
 @NgModule({

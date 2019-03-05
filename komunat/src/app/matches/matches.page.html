@@ -1,78 +1,204 @@
-
-    <h2 class="title" text-center>DEIN ERGEBNIS</h2>
-    <div class="progressWrapper">
-        <div class="indicatorTxt">
-             0 / 20
+    <ion-row>
+      <ion-col size="2">
+        <div text-center>
+            <ion-icon hidden class="topIcon backBtn" name="arrow-round-back" (click) = "backClicked()" ></ion-icon>
+            <ion-icon text-center class="topIcon substitutesBtn" name="filing" (click) = "showSubstitutes()"></ion-icon>
         </div>
-        <div class="progressBg">
-            <div class="progress">
-        
+      </ion-col>
+      <ion-col size="8">
+          <h2 class="title" text-center>{{present_title}}</h2>
+      </ion-col>
+      <ion-col size="2">
+          <div text-center>
+              <ion-icon text-center class="topIcon teamBtn" name="people"  (click) = "showTeam()"></ion-icon>
             </div>
-        </div>
-    </div>
-
+      </ion-col>
+    </ion-row>
+    <ion-row>
+   <div class="progressWrapper">
+       <div class="indicatorTxt">
+            0 / 20
+       </div>
+       <div class="progressBg">
+           <div class="progress">
+       
+           </div>
+       </div>
+   </div>
+  </ion-row>
+   
 <ion-content padding>
+   <div *ngIf="SHOW_STATE == 1" >
+     <div @items *ngFor="let match of matches; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }} candidateCard">
+       <div>
+         <div class="imageWrapper">
+           <img class="candidateImg" src="http://localhost:3000/uploads/{{match.uuid}}.png"/>
+         </div>
+         <div class="candidateInfoContainer" (swiperight)="swipedRight($event,i)" (swipeleft)="swipedLeft($event,i)">
+           
+           <div class="candidateInfo"> 
+                   <ion-grid>
+                           <ion-row>
+                               <ion-col size=8>
+                                   <h2>{{match.candidate.name}}</h2>
+                               </ion-col>
+                               <ion-col size=4>
+                                      <div class="matchDiv">
+                                       {{match.distance}}
+                                      </div>
+                                   </ion-col>
+                           </ion-row>
+                           <ion-row class="candidateInfoText">
+                                   <ion-col size=7>
+                                       <p><b>Partei:</b> {{match.candidate.list}}</p>
+                                   </ion-col>
+                                   <ion-col size=5>
+                                           <p><b>Alter:</b> {{match.candidate.birthdate}}</p>
+                                    </ion-col>
+                           </ion-row>
+                           <ion-row class="candidateInfoText">
+                                   <ion-col size=7>
+                                       <p><b>Wahlbezirk:</b> {{match.candidate.district}}</p>
+                                   </ion-col>
+                                   <ion-col size=5>
+                                           <p><b>Listenplatz:</b> {{match.candidate.list_number}}</p>
+                                    </ion-col>
+                           </ion-row>
 
-    <ion-list>
-      <div *ngFor="let match of matches; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }} candidateCard">
+                           <ion-row>
+
+                               <div class="tinderButtonOuterWrapper">
+                                   <div class="reject" (click) ="reject(i)">
+                                   <ion-icon name="close-circle"></ion-icon>
+                                   </div>
+                                   <div class="match" (click) ="accept(i)">
+                                   <ion-icon name="checkmark-circle"></ion-icon>
+                                   </div>
+                                   </div>
+                           </ion-row>
+
+                   </ion-grid>
+           </div>
+         </div>
+       </div>
+   </div>
+   </div>
+
+
+   <div *ngIf="SHOW_STATE == 2" >
+      <div @items *ngFor="let s of substitutes; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }} candidateCard">
+        <div>
           <div class="imageWrapper">
-            <img class="candidateImg" src="http://192.168.2.119:3000/uploads/{{match.uuid}}.png"/>
+            <img class="candidateImg" src="http://localhost:3000/uploads/{{match.uuid}}.png"/>
           </div>
-          <div class="candidateInfoContainer">
+          <div class="candidateInfoContainer" (swiperight)="swipedRight($event,i)" (swipeleft)="swipedLeft($event,i)">
             
             <div class="candidateInfo"> 
                     <ion-grid>
                             <ion-row>
                                 <ion-col size=8>
-                                    <h2>{{match.candidate.name}}</h2>
+                                    <h2>{{s.candidate.name}}</h2>
                                 </ion-col>
                                 <ion-col size=4>
                                        <div class="matchDiv">
-                                        {{match.distance}}
+                                        {{s.distance}}
                                        </div>
                                     </ion-col>
                             </ion-row>
                             <ion-row class="candidateInfoText">
                                     <ion-col size=7>
-                                        <p><b>Partei:</b> {{match.candidate.list}}</p>
+                                        <p><b>Partei:</b> {{s.candidate.list}}</p>
                                     </ion-col>
                                     <ion-col size=5>
-                                            <p><b>Alter:</b> {{match.candidate.birthdate}}</p>
+                                            <p><b>Alter:</b> {{s.candidate.birthdate}}</p>
                                      </ion-col>
                             </ion-row>
                             <ion-row class="candidateInfoText">
                                     <ion-col size=7>
-                                        <p><b>Wahlbezirk:</b> {{match.candidate.district}}</p>
+                                        <p><b>Wahlbezirk:</b> {{s.candidate.district}}</p>
                                     </ion-col>
                                     <ion-col size=5>
-                                            <p><b>Listenplatz:</b> {{match.candidate.list_number}}</p>
+                                            <p><b>Listenplatz:</b> {{s.candidate.list_number}}</p>
                                      </ion-col>
                             </ion-row>
-
+ 
                             <ion-row>
-
+ 
                                 <div class="tinderButtonOuterWrapper">
-                                    <div class="reject" (click) ="toggleTeam(match,i)">
-                                    <ion-icon name="close-circle"></ion-icon>
-                                    </div>
-                                    <div class="match" (click) ="toggleTeam(match,i)">
+                                   
+                                    <div class="match" (click) ="accept(i)">
                                     <ion-icon name="checkmark-circle"></ion-icon>
                                     </div>
                                     </div>
                             </ion-row>
-
+ 
                     </ion-grid>
             </div>
           </div>
+        </div>
     </div>
-      </ion-list>
-      <web-social-share show="true">
-            <ion-icon slot="facebook" name="logo-facebook"></ion-icon>
-            <ion-icon slot="twitter" name="logo-twitter"></ion-icon>
-            <ion-icon slot="linkedin" name="logo-linkedin"></ion-icon>
-            <ion-icon slot="email" name="mail"></ion-icon>
-            <ion-icon slot="whatsapp" name="logo-whatsapp"></ion-icon>
-          </web-social-share>
-        
+    </div>
+
+
+    <div *ngIf="SHOW_STATE == 3" >
+        <div @items *ngFor="let s of team; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }} candidateCard">
+          <div>
+            <div class="imageWrapper">
+              <img class="candidateImg" src="http://localhost:3000/uploads/{{match.uuid}}.png"/>
+            </div>
+            <div class="candidateInfoContainer" (swiperight)="swipedRight($event,i)" (swipeleft)="swipedLeft($event,i)">
+              
+              <div class="candidateInfo"> 
+                      <ion-grid>
+                              <ion-row>
+                                  <ion-col size=8>
+                                      <h2>{{s.candidate.name}}</h2>
+                                  </ion-col>
+                                  <ion-col size=4>
+                                         <div class="matchDiv">
+                                          {{s.distance}}
+                                         </div>
+                                      </ion-col>
+                              </ion-row>
+                              <ion-row class="candidateInfoText">
+                                      <ion-col size=7>
+                                          <p><b>Partei:</b> {{s.candidate.list}}</p>
+                                      </ion-col>
+                                      <ion-col size=5>
+                                              <p><b>Alter:</b> {{s.candidate.birthdate}}</p>
+                                       </ion-col>
+                              </ion-row>
+                              <ion-row class="candidateInfoText">
+                                      <ion-col size=7>
+                                          <p><b>Wahlbezirk:</b> {{s.candidate.district}}</p>
+                                      </ion-col>
+                                      <ion-col size=5>
+                                              <p><b>Listenplatz:</b> {{s.candidate.list_number}}</p>
+                                       </ion-col>
+                              </ion-row>
+   
+                              <ion-row>
+   
+                                  <div class="tinderButtonOuterWrapper">
+                                     
+                                      <div class="match" (click) ="accept(i)">
+                                      <ion-icon name="checkmark-circle"></ion-icon>
+                                      </div>
+                                      </div>
+                              </ion-row>
+   
+                      </ion-grid>
+              </div>
+            </div>
+          </div>
+      </div>
+      </div>
+     <web-social-share show="false">
+           <ion-icon slot="facebook" name="logo-facebook"></ion-icon>
+           <ion-icon slot="twitter" name="logo-twitter"></ion-icon>
+           <ion-icon slot="linkedin" name="logo-linkedin"></ion-icon>
+           <ion-icon slot="email" name="mail"></ion-icon>
+           <ion-icon slot="whatsapp" name="logo-whatsapp"></ion-icon>
+     </web-social-share>
 
 </ion-content>

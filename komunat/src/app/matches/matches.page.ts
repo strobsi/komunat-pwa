@@ -1,18 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
-import { timeout } from 'q';
-import { AlertController } from '@ionic/angular';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ActionSheetController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { ActivatedRoute } from "@angular/router";
+import anime from 'animejs';
+import 'hammerjs';
+import {PSTATE} from '../utils/pstate';  
 
 @Component({
   selector: 'app-matches',
   templateUrl: './matches.page.html',
   styleUrls: ['./matches.page.scss'],
+  animations: [
+    trigger('items', [
+      transition(':enter', [
+        style({ transform: 'scale(0.5)', opacity: 0 }),  // initial
+        animate('0.6s cubic-bezier(.4, -0.6, 0.2, 1.5)', 
+          style({ transform: 'scale(1)', opacity: 1 }))  // final
+      ]),
+      transition(':leave', [
+        style({ transform: 'translateY(-10in)', opacity: 0, height: '*' }),
+        animate('0.4s cubic-bezier(.4, -0.6, 0.2, 0.6)', 
+         style({ 
+           transform: 'scale(0.5)', opacity: 0, 
+           height: '0px', margin: '0px' 
+         })) 
+      ])
+    ])
+  ]
 })
-export class MatchesPage implements OnInit{
 
-  teamLength = 0;
-  
+export class MatchesPage implements OnInit {
+
+  SHOW_STATE;
+
   matches = [
     { distance: 10.954451150103322,
       uuid: '00ujg0oq19HkhvpW40h7',
@@ -31,6 +52,12 @@ export class MatchesPage implements OnInit{
              list_number: '2',
              district: 'Untertürkheim' } }
     ];
+  
+
+  teamLength = 0;
+  team = [];
+  substitutes = [];
+  present_title = "DEIN ERGEBNIS";
   
     // Share options
     share = {
@@ -63,12 +90,24 @@ export class MatchesPage implements OnInit{
         }
       }]
     };
-
-  //constructor(private navParams: NavParams, public alertController: AlertController, public actionSheetController: ActionSheetController) {}
-  constructor(public alertController: AlertController, public actionSheetController: ActionSheetController) {}
+  constructor(private route: ActivatedRoute, public alertController: AlertController, public actionSheetController: ActionSheetController) {
     
+  }
+
+  swipedRight(e,i) {
+    this.accept(i);
+  } 
+
+  swipedLeft(e,i) {
+    this.reject(i);
+  } 
+  
   ngOnInit() {
-    //this.matches = this.navParams.get("matches");
+    this.setState(PSTATE.MATCHES);
+    this.route.queryParams.subscribe(params => {
+     this.matches = JSON.parse(params["matches"]);
+    });
+
     document.querySelector('.progress').setAttribute("style","width:"+this.teamLength+"%;");
     this.matches.sort(function (a, b) {
       a.distance = Math.round(a.distance)
@@ -81,10 +120,10 @@ export class MatchesPage implements OnInit{
       }
       return 0;
     });
-
+    
     const elem = document.getElementsByTagName('web-social-share');
     if (elem && elem.length > 0) {
-      elem[0].share = this.share;
+     // elem[0].share = this.share;
     }
   }
   
@@ -101,29 +140,27 @@ export class MatchesPage implements OnInit{
 
   }
 
-  public toggleTeam(match,i) {
-    console.log("Toggling team")
+  public reject(i) {
+    console.log("Remove from team")
     const element =  document.querySelector('.match_'+i);
-    element.classList.remove('animated','fadeInRight','delay-'+i+'s');
-    if (match.isChecked) {
-      element.classList.remove('animated','pulse','faster');
-      this.teamLength = this.teamLength -5;
+    this.swipeOutLeft(element,i)
+  }
+
+  public accept(i) {
+    console.log("Add to team")
+    const element =  document.querySelector('.match_'+i);
+    this.swipeOutRight(element,i)
+    if (this.teamLength >= 95) {
+      this.teamLength = 100;
+      this.presentAlert();
+      //this.presentActionSheet();
+    }
+    else {
+      this.teamLength = this.teamLength + 5;
       this.updateUI();
     }
-    else {                                                    
-      element.classList.add('animated', 'pulse','faster');
-      if (this.teamLength >= 95) {
-        this.teamLength = 100;
-        this.presentAlert();
-        //this.presentActionSheet();
-      }
-      else {
-        this.teamLength = this.teamLength + 5;
-        this.updateUI();
-      }
-    }
-    match.isChecked = !match.isChecked;
   }
+
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -202,5 +239,136 @@ export class MatchesPage implements OnInit{
       }]
     });
     await actionSheet.present();
+  }
+
+  private swipeOutLeft(elem,i) {
+    this.pulseSubstitute();
+    anime({
+      targets: elem,
+      translateX: "-150vw",
+      rotate: -40,
+      easing: 'easeInOutQuad',
+      duration: 400
+    });
+    var m = this.matches;
+    var s = this.substitutes;
+    setTimeout((function() {
+      s.push(m[i])
+      m.splice(i,1)
+    }),220);
+}
+
+  private swipeOutRight(elem,i) {
+      this.pulseTeam();
+      anime({
+        targets: elem,
+        translateX: "150vw",
+        rotate: 40,
+        easing: 'easeInOutQuad',
+        duration: 400
+      });
+      var t = this.team;
+      var m = this.matches;
+      setTimeout((function() {
+        t.push(m[i]);
+        m.splice(i,1)
+      }),220);
+  }
+
+  backClicked() {
+    this.setState(PSTATE.MATCHES)
+    var subs = document.querySelector(".substitutesBtn");
+    var team = document.querySelector(".teamBtn");
+    anime({
+      targets: [subs,team],
+      opacity: 1,
+      easing: 'easeInOutQuad',
+      duration: 200,
+      complete: function(){
+        var back = document.querySelector(".backBtn");
+        var subs = document.querySelector(".substitutesBtn");
+        subs.removeAttribute("hidden");
+        back.setAttribute("hidden","false");
+      }
+    });
+    // TODO hide subs and show matches
+    console.log("Substitute Length: " + this.team.length)
+  }
+
+  showSubstitutes() {
+    this.setState(PSTATE.SUBS)
+    var subs = document.querySelector(".substitutesBtn");
+    var team = document.querySelector(".teamBtn");
+    anime({
+      targets: [subs,team],
+      opacity: 0,
+      easing: 'easeInOutQuad',
+      duration: 200,
+      complete: function(){
+        var back = document.querySelector(".backBtn");
+        var subs = document.querySelector(".substitutesBtn");
+        subs.setAttribute("hidden","true");
+        back.removeAttribute("hidden");
+      }
+    });
+    // TODO: show subs and hide matches
+  }
+
+  showTeam() {
+    this.setState(PSTATE.TEAM)
+    var subs = document.querySelector(".substitutesBtn");
+    var team = document.querySelector(".teamBtn");
+    anime({
+      targets: [subs,team],
+      opacity: 0,
+      easing: 'easeInOutQuad',
+      duration: 200,
+      complete: function(){
+        var back = document.querySelector(".backBtn");
+        var subs = document.querySelector(".substitutesBtn");
+        subs.setAttribute("hidden","true");
+        back.removeAttribute("hidden");
+      }
+    });
+    // TODO: show subs and hide matches
+  }
+
+  public pulseTeam() {
+    var elem = document.querySelector(".teamBtn")
+    anime({
+      targets: elem,
+      scale: 1.1,
+      color: "#59BCED",
+      easing: 'easeInOutQuad',
+      translateY: "-1vh",
+      duration: 200,
+      direction: 'alternate',
+    });
+  }
+
+  public pulseSubstitute() {
+    var elem = document.querySelector(".substitutesBtn")
+    anime({
+      targets: elem,
+      scale: 1.1,
+      color: "#59BCED",
+      translateY: "-1vh",
+      easing: 'easeInOutQuad',
+      duration: 200,
+      direction: 'alternate',
+    });
+  }
+
+  private setState(s) {
+    this.SHOW_STATE = s;
+    if (s == PSTATE.MATCHES) {
+      this.present_title = "DEIN ERGEBNIS"
+    }
+    else if (s == PSTATE.SUBS) {
+      this.present_title = "DEINE ERSATZBANK"
+    }
+    else {
+      this.present_title = "DEIN TEAM"
+    }
   }
 }

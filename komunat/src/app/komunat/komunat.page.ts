@@ -1,16 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, Events } from "@ionic/angular";
-import { ngControlStatusHost } from '@angular/forms/src/directives/ng_control_status';
-import { MatchesPage } from '../matches/matches.page';
+import { NavController, Events } from "@ionic/angular";
+import { NavigationExtras } from '@angular/router';
+
 
 @Component({
   selector: 'app-komunat',
   templateUrl: './komunat.page.html',
   styleUrls: ['./komunat.page.scss'],
 })
-export class KomunatPage {
+export class KomunatPage implements OnInit {
 
-  constructor(public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController) {
+
+  }
+
+  ngOnInit() {
+    console.log("init")
+      this.arr = this.initarr
+      this.spinner = document.querySelector(".spinner")
+      this.spinner.style.opacity = "0.0"
+      this.newRound()
   }
 
   btn0Val;
@@ -155,14 +164,6 @@ export class KomunatPage {
         */
     ]
 ]
-
-  ionViewWillEnter(){
-      console.log("init")
-      this.arr = this.initarr
-      this.spinner = document.querySelector(".spinner")
-      this.spinner.style.opacity = "0.0"
-      this.newRound()
-  }
 
   private newRound(): void {
     var needsToBeSorted = false
@@ -336,7 +337,7 @@ private sendResult(a) {
   res.values = a
 
   var xhr = new XMLHttpRequest();
-  var url = "http://192.168.2.119:3000/result";
+  var url = "http://localhost:3000/result";
   xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.onreadystatechange = () => {
@@ -346,8 +347,7 @@ private sendResult(a) {
           console.log(JSON.parse(xhr.responseText))
           //fakeLoad()
           this.spinner.style.opacity = "0.0"
-          this.moveOn(JSON.parse(xhr.responseText))
-
+          this.moveOn(xhr.responseText)
       }
   };
   var data = JSON.stringify(res);
@@ -357,14 +357,14 @@ private sendResult(a) {
 
   moveOn(data) {
     console.log("Moving on")
-    this.modalCtrl.create({
-        component: MatchesPage,
-        componentProps: { 
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
           matches: data
-        }
-    }).then((modal) => {
-        modal.present();
-    });
+      }
+    };
+    this.navCtrl.navigateForward(['matches'], navigationExtras);
+
    // this.navCtrl.navigateForward("/matches", { 'data': data });
 }
 }

@@ -1,7 +1,5 @@
 {
   "name": "komunat",
-  "integrations": {
-    "cordova": {}
-  },
+  "integrations": {},
   "type": "angular"
 }
