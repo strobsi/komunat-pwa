@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { ActionSheetController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ActivatedRoute } from "@angular/router";
 import anime from 'animejs';
 import 'hammerjs';
 import {PSTATE} from '../utils/pstate';  
+import { NavController } from "@ionic/angular";
+import { NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-matches',
@@ -35,8 +36,8 @@ export class MatchesPage implements OnInit {
   SHOW_STATE;
 
   matches = [
-    { distance: 10.954451150103322,
-      uuid: '00ujg0oq19HkhvpW40h7',
+    { distance: 10.054451150103322,
+      uuid: '00ujlsqbdmfxBgI0M0h7',
       candidate:
        { name: 'Steffen Schuldis',
          birthdate: '27.12.1993',
@@ -44,7 +45,7 @@ export class MatchesPage implements OnInit {
          list_number: '2',
          district: 'Untertürkheim' } },
          { distance: 10.954451150103322,
-          uuid: '00ujg0oq19HkhvpW40h7',
+          uuid: '00ujlsq5ohzh98lEd0h7',
           candidate:
            { name: 'Simon Strobel',
              birthdate: '27.12.1993',
@@ -90,7 +91,7 @@ export class MatchesPage implements OnInit {
         }
       }]
     };
-  constructor(private route: ActivatedRoute, public alertController: AlertController, public actionSheetController: ActionSheetController) {
+  constructor(private route: ActivatedRoute, public alertController: AlertController, public navCtrl: NavController) {
     
   }
 
@@ -101,29 +102,36 @@ export class MatchesPage implements OnInit {
   swipedLeft(e,i) {
     this.reject(i);
   } 
+
+  backToMatches(t,i) {
+    if (t == 0) {
+      // Coming from subs
+      this.matches.push(this.substitutes[i])
+      this.substitutes.splice(i,1)
+    }
+    else {
+        // Coming from Team
+        this.matches.push(this.team[i])
+        this.team.splice(i,1)
+        this.teamLength = this.teamLength-5;
+        this.updateUI()
+    }
+  }
   
+
   ngOnInit() {
     this.setState(PSTATE.MATCHES);
     this.route.queryParams.subscribe(params => {
      this.matches = JSON.parse(params["matches"]);
+     console.log(this.matches)
     });
 
     document.querySelector('.progress').setAttribute("style","width:"+this.teamLength+"%;");
-    this.matches.sort(function (a, b) {
-      a.distance = Math.round(a.distance)
-      b.distance = Math.round(b.distance)
-      if (a.distance > b.distance) {
-        return 1;
-      }
-      if (a.distance < b.distance) {
-        return -1;
-      }
-      return 0;
-    });
+    this.sortMatches();
     
     const elem = document.getElementsByTagName('web-social-share');
     if (elem && elem.length > 0) {
-     // elem[0].share = this.share;
+      elem[0].share = this.share;
     }
   }
   
@@ -152,8 +160,8 @@ export class MatchesPage implements OnInit {
     this.swipeOutRight(element,i)
     if (this.teamLength >= 95) {
       this.teamLength = 100;
+      this.updateUI();
       this.presentAlert();
-      //this.presentActionSheet();
     }
     else {
       this.teamLength = this.teamLength + 5;
@@ -161,25 +169,28 @@ export class MatchesPage implements OnInit {
     }
   }
 
-
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Glückwunsch',
-      subHeader: 'Team erstellt',
-      message: 'Team behalten?',
+      subHeader: 'Dein Team ist komplett',
+      message: 'Willst du dein Team nochmal bearbeiten oder weiter?',
       buttons: [
         {
-          text: 'Nein, bearbeiten',
+          text: 'Ja, bearbeiten',
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
             console.log('Confirm Cancel: blah');
           }
         }, {
-          text: 'Ja',
+          text: 'Nein, weiter',
           handler: () => {
             console.log('Confirm Okay');
-
+            let navigationExtras: NavigationExtras = {
+              queryParams: {
+              }
+            };
+            this.navCtrl.navigateForward(['share'], navigationExtras);
           }
         }
       ]
@@ -187,60 +198,6 @@ export class MatchesPage implements OnInit {
 
     await alert.present();
   }
-
-
-  async presentActionSheet() {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Teilen',
-      buttons: [{
-        text: 'Facebook',
-        icon: 'logo-facebook',
-        handler: () => {
-          /*
-          console.log('Delete clicked');
-          this.socialSharing.shareViaFacebook(this.matches[0].candidate.name).then(() => {
-              console.log("Shared");
-          }).catch(e => {
-            console.log("Shared failed: " +e);
-          });
-          */
-        }
-      }, {
-        text: 'Twitter',
-        icon: 'logo-twitter',
-        handler: () => {
-          console.log('Share clicked');
-        }
-      }, {
-        text: 'WhatsApp',
-        icon: 'logo-whatsapp',
-        handler: () => {
-          console.log('Play clicked');
-        }
-      }, {
-        text: 'E-Mail',
-        icon: 'mail',
-        handler: () => {
-          /*
-          this.socialSharing.shareViaEmail("Komunat Ergebnis","Komunat Ergebnis",["simon.strobel@web.de"],null,null,null).then(() => {
-            console.log("Shared");
-        }).catch(e => {
-          console.log("Shared failed: " +e);
-        });
-        */
-        }
-      }, {
-        text: 'Cancel',
-        icon: 'close',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    await actionSheet.present();
-  }
-
   private swipeOutLeft(elem,i) {
     this.pulseSubstitute();
     anime({
@@ -363,6 +320,7 @@ export class MatchesPage implements OnInit {
     this.SHOW_STATE = s;
     if (s == PSTATE.MATCHES) {
       this.present_title = "DEIN ERGEBNIS"
+      this.sortMatches();
     }
     else if (s == PSTATE.SUBS) {
       this.present_title = "DEINE ERSATZBANK"
@@ -370,5 +328,19 @@ export class MatchesPage implements OnInit {
     else {
       this.present_title = "DEIN TEAM"
     }
+  }
+
+  private sortMatches() {
+    this.matches.sort(function (a, b) {
+      a.distance = Math.round(a.distance)
+      b.distance = Math.round(b.distance)
+      if (a.distance > b.distance) {
+        return 1;
+      }
+      if (a.distance < b.distance) {
+        return -1;
+      }
+      return 0;
+    });
   }
 }

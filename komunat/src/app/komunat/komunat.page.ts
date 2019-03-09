@@ -337,7 +337,7 @@ private sendResult(a) {
   res.values = a
 
   var xhr = new XMLHttpRequest();
-  var url = "http://localhost:3000/result";
+  var url = "http://192.168.2.123:3000/result";
   xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.onreadystatechange = () => {
