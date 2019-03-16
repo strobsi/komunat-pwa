@@ -14,6 +14,8 @@ const routes: Routes = [
   { path: 'komunat', loadChildren: './komunat/komunat.module#KomunatPageModule' },
   { path: 'matches', loadChildren: './matches/matches.module#MatchesPageModule' },
   { path: 'share', loadChildren: './share/share.module#SharePageModule' },
+  { path: 'intermediate', loadChildren: './intermediate/intermediate.module#IntermediatePageModule' },
+  { path: 'content', loadChildren: './content/content.module#ContentPageModule' },
 ];
 
 @NgModule({

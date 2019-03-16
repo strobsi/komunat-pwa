@@ -131,7 +131,7 @@ export class MatchesPage implements OnInit {
     
     const elem = document.getElementsByTagName('web-social-share');
     if (elem && elem.length > 0) {
-      elem[0].share = this.share;
+      //elem[0].share = this.share;
     }
   }
   
@@ -334,10 +334,10 @@ export class MatchesPage implements OnInit {
     this.matches.sort(function (a, b) {
       a.distance = Math.round(a.distance)
       b.distance = Math.round(b.distance)
-      if (a.distance > b.distance) {
+      if (a.distance < b.distance) {
         return 1;
       }
-      if (a.distance < b.distance) {
+      if (a.distance > b.distance) {
         return -1;
       }
       return 0;

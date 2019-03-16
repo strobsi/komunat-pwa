@@ -1,25 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, Events } from "@ionic/angular";
 import { NavigationExtras } from '@angular/router';
+import { ActivatedRoute } from "@angular/router";
 
 
 @Component({
-  selector: 'app-komunat',
-  templateUrl: './komunat.page.html',
-  styleUrls: ['./komunat.page.scss'],
+  selector: 'app-content',
+  templateUrl: './content.page.html',
+  styleUrls: ['./content.page.scss'],
 })
-export class KomunatPage implements OnInit {
+export class ContentPage implements OnInit {
 
-  constructor(public navCtrl: NavController) {
-
-  }
-
-  ngOnInit() {
-    console.log("init")
-      this.arr = this.initarr
-      this.spinner = document.querySelector(".spinner")
-      this.spinner.style.opacity = "0.0"
-      this.newRound()
+  constructor(public navCtrl: NavController, private route: ActivatedRoute) {
   }
 
   btn0Val;
@@ -33,66 +25,85 @@ export class KomunatPage implements OnInit {
   startedTimeStamp = 0;
   spinner;
 
+  vData = {
+    values:{},
+    contents:{},
+    metadata:{
+      isCandidate: false,
+      valueStarted: 0,
+      valueFinished: 0,
+      contentStarted: 0,
+      contentFinished: 0,
+      valueDecisions: 0,
+      contentDecisions: 0
+    }
+  }
+
   initarr = [    
     [
         {
             "id":0,
-            "name":"Sicherheit",
+            "name":"Bezahlbaren Wohnraum schaffen",
             "rating":0
         },
         {
             "id":1,
-            "name":"Solidarität",
+            "name":"Preise für Bus und Bahn senken",
             "rating":0
         },
         {
             "id":2,
-            "name":"Menschenwürde",
+            "name":"Alternativen zum Auto fördern",
             "rating":0
         },
         {
             "id":3,
-            "name":"Gerechtigkeit",
+            "name":"Die Kinderbetreuung ausbauen",
             "rating":0
         },
         {
              "id":4,
-             "name":"Toleranz",
+             "name":"Keine neuen Schulden für die Stadt machen",
              "rating":0
         },
         {
               "id":5,
-              "name":"Meinungsfreiheit",
+              "name":"Für mehr Sicherheit im öffentlichen Raum sorgen",
               "rating":0
         },
         {
               "id":6,
-              "name":"Pressefreiheit",
+              "name":"Langfristige Integration und das Zusammenleben in der Stadt fördern",
               "rating":0
         },
         {
              "id":7,
-             "name":"Nachhaltigkeit",
+             "name":"Schulen sanieren",
              "rating":0
         },
         {
              "id":8,
-             "name":"Wohlstand",    
+             "name":"Subkultur fördern",    
              "rating":0
         },
         {
             "id":9,
-             "name":"Selbstbestimmung",
+             "name":"Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
              "rating":0
         },
         {
             "id":10,
-            "name":"Tradition",
+            "name":"Die regionale Wirtschaft fördern",
             "rating":0
         },
         {
             "id":11,
-            "name":"Rechtsstaatlichkeit",
+            "name":"Eine klimaneutrale Stadt gestalten",
+            "rating":0
+        },
+        {
+            "id":12,
+            "name":"Kommunalpolitik transparenter machen",
             "rating":0
         }
     ]
@@ -165,6 +176,17 @@ export class KomunatPage implements OnInit {
     ]
 ]
 
+ngOnInit() {
+  this.route.queryParams.subscribe(params => {
+    this.vData = JSON.parse(params["vData"]);
+    console.log(this.vData)
+  });
+    this.arr = this.initarr
+    this.spinner = document.querySelector(".spinner")
+    this.spinner.style.opacity = "0.0"
+    this.newRound()
+}
+
   private newRound(): void {
     var needsToBeSorted = false
     // We iterate over the whole array and check if we have to sort sth. 
@@ -193,8 +215,8 @@ export class KomunatPage implements OnInit {
         btn1.parentNode.removeChild(btn1);
         //this.collapseAndRotate()
         this.sendResult(this.arr)
-        this.btn1Val.name = ""
         this.btn0Val.name = ""
+        this.btn1Val.name = ""
         this.decisionCounter = 0;
     }
   }
@@ -315,40 +337,45 @@ private calculateValue() {
 // Send the calculated result of the user to the backend
 private sendResult(a) {
 
-  var res = {
-    metadata:{},
-    values: {},
-    contents: {}
-   }
-  // Setup some metadata format
   var finished = new Date().getTime()/1000;
   finished = parseInt(finished.toString())
-  res.metadata = {
-      isCandidate: false,
-      valueStarted: this.startedTimeStamp,
-      valueFinished: finished,
-      contentStarted: 0,
-      contentFinished: 0,
-      valueDecisions: this.decisionCounter,
-      contentDecisions: 0
-  }
+ 
+  this.vData.metadata.contentStarted = this.startedTimeStamp
+  this.vData.contents = a
+  this.vData.metadata.contentDecisions = this.decisionCounter;
+  this.vData.metadata.contentStarted = this.startedTimeStamp;
+  this.vData.metadata.contentFinished = finished;
 
-  // Append the values 
-  res.values = a
-  var data = JSON.stringify(res);
-  this.moveOn(data)
+  console.log("Showing result")
+  console.log(this.vData);
+  
+  var xhr = new XMLHttpRequest();
+  var url = "http://localhost:3000/result";
+  var data = JSON.stringify(this.vData);
 
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+          // Successfully stored values, continue with animation
+          console.log("Successfully uploaded result")
+          console.log(JSON.parse(xhr.responseText))
+          //fakeLoad()
+          this.spinner.style.opacity = "0.0"
+          this.moveOn(xhr.responseText)
+      }
+  };
+  xhr.send(data);
 }
 
   moveOn(data) {
     console.log("Moving on")
-
     let navigationExtras: NavigationExtras = {
       queryParams: {
-          vData: data
+          matches: data
       }
     };
-    this.navCtrl.navigateForward(['intermediate'], navigationExtras);
+    this.navCtrl.navigateForward(['matches'], navigationExtras);
    // this.navCtrl.navigateForward("/matches", { 'data': data });
-}
+ }
 }

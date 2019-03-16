@@ -17,6 +17,8 @@ export class HomePage {
   }
 
   ngAfterViewInit(): void {
+    var isiOSSafari = (navigator.userAgent.match(/like Mac OS X/i)) ? true: false;
+    console.log("On iOS: " + isiOSSafari)
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
     let vh = window.innerHeight * 0.01;

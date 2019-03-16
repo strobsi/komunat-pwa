@@ -32,7 +32,7 @@
      <div @items *ngFor="let match of matches; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }} candidateCard">
        <div>
          <div class="imageWrapper">
-           <img class="candidateImg" src="http://192.168.2.123:3000/uploads/{{match.uuid}}.png"/>
+           <img class="candidateImg" src="http://localhost:3000/uploads/{{match.uuid}}.png"/>
          </div>
         <!--
          <div class="candidateInfoContainer" (swiperight)="swipedRight($event,i)" (swipeleft)="swipedLeft($event,i)">
@@ -46,7 +46,7 @@
                                </ion-col>
                                <ion-col size=4>
                                       <div class="matchDiv">
-                                       {{match.distance}}
+                                       {{match.distance}} %
                                       </div>
                                    </ion-col>
                            </ion-row>
@@ -95,7 +95,7 @@
                       <ion-row>
                           <ion-col size=4 text-center>
                               <ion-avatar class="substituteImg">
-                                <img src="http://192.168.2.123:3000/uploads/{{s.uuid}}.png"/>
+                                <img src="http://localhost:3000/uploads/{{s.uuid}}.png"/>
                               </ion-avatar>
                           </ion-col>
                           <ion-col class="subsDescription" size=8>
@@ -128,12 +128,12 @@
                         <ion-row>
                             <ion-col size=4>
                                 <ion-avatar class="substituteImg">
-                                  <img src="http://192.168.2.123:3000/uploads/{{s.uuid}}.png"/>
+                                  <img src="http://localhost:3000/uploads/{{s.uuid}}.png"/>
                                 </ion-avatar>
                             </ion-col>
                             <ion-col class="subsDescription" size=8>
                                <h2 class="subsHeader">{{s.name}}</h2>     
-                              <p><b>Übereinstimmung:</b> {{s.distance}}</p>                           
+                              <p><b>Übereinstimmung:</b> {{s.distance}} %</p>                           
                               <p><b>Partei:</b> {{s.list}}</p>
                               <p><b>Wahlbezirk: </b>{{s.district}}</p>
                             </ion-col>
