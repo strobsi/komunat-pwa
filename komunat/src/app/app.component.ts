@@ -17,9 +17,14 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
+      title: 'DSGVO',
+      url: '/dsgvo',
+      icon: 'book'
+    },
+    {
+      title: 'Impressum',
+      url: '/impressum',
+      icon: 'information-circle-outline'
     }
   ];
 

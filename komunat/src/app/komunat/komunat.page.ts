@@ -18,8 +18,6 @@ export class KomunatPage implements OnInit {
   ngOnInit() {
     console.log("init")
       this.arr = this.initarr
-      this.spinner = document.querySelector(".spinner")
-      this.spinner.style.opacity = "0.0"
       this.newRound()
   }
 
@@ -32,7 +30,6 @@ export class KomunatPage implements OnInit {
   insertIndex = 0;
   decisionCounter = 0;
   startedTimeStamp = 0;
-  spinner;
 
   initarr = [    
     [
@@ -186,7 +183,6 @@ export class KomunatPage implements OnInit {
     } else {
         // Finished overall sorting, since nothing has to be sorted anymore.
         console.log("Finished sorting with " + this.decisionCounter + " decisions")
-        this.spinner.style.opacity = "1.0"
         this.calculateValue()
         const btn0 = document.querySelector(".opt0")
         const btn1 = document.querySelector(".opt1")

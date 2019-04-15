@@ -16,6 +16,8 @@ const routes: Routes = [
   { path: 'share', loadChildren: './share/share.module#SharePageModule' },
   { path: 'intermediate', loadChildren: './intermediate/intermediate.module#IntermediatePageModule' },
   { path: 'content', loadChildren: './content/content.module#ContentPageModule' },
+  { path: 'dsgvo', loadChildren: './dsgvo/dsgvo.module#DsgvoPageModule' },
+  { path: 'impressum', loadChildren: './impressum/impressum.module#ImpressumPageModule' },
 ];
 
 @NgModule({
