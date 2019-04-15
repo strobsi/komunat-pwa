@@ -1,24 +1,27 @@
 <div class="container">
-  <img class="logo" src="../../assets/img/logo.png"/>
-
- <ion-slides zoom="false">
+ <ion-slides zoom="false" pager="true">
    <ion-slide>
      <div class="swiper">
        <img class="instruction" src="../../assets/img/placeholder.png">
-         <ion-button (click) ="goToKomunat($event)" color="primary" expand="block" shape="round" class="goBtn">LOS GEHT'S</ion-button>
+       <h2>Stelle dein Team auf!</h2>
+       <p>
+         Finde mit dem Komunat heraus, wer deine Top 20 KandidatInnen für die Komunalwahl 2019 in Stuttgart sind.
+       </p>
+         <ion-button (click) ="slideToNext()" color="primary" expand="block" class="goBtn">Weiter</ion-button>
+         <br>
+         <br>
      </div>
    </ion-slide>
    <ion-slide>
        <div class="swiper">
-           <img class="instruction" src="../../assets/img/placeholder.png">
-             <ion-button (click) ="goToKomunat($event)" color="primary" expand="block" shape="round" class="goBtn">LOS GEHT'S</ion-button>
-         </div>
-   </ion-slide>
-   <ion-slide>
-       <div class="swiper">
-           <img class="instruction" src="../../assets/img/placeholder.png">
-             <ion-button (click) ="goToKomunat($event)" color="primary" expand="block" shape="round" class="goBtn">LOS GEHT'S</ion-button>
-         </div>
+        <img class="instruction" src="../../assets/img/placeholder.png">
+        <h2>Jetzt bist du dran!</h2>
+        <p>
+          Vergleiche die Werte und Aufgaben, die dir wichtig sind, mit Antowrten der KandidatInnen.
+        </p>
+          <ion-button (click) ="goToKomunat($event)" color="primary" expand="block" class="goBtn">Los geht's</ion-button>
+          <br>
+      </div>
    </ion-slide>
  </ion-slides>
 </div>

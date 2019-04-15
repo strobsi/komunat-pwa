@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, Events } from "@ionic/angular";
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Events, IonSlides } from "@ionic/angular";
 
 @Component({
   selector: 'app-home',
@@ -8,12 +8,18 @@ import { NavController, Events } from "@ionic/angular";
 })
 export class HomePage {
 
+  @ViewChild(IonSlides) slides: IonSlides;
+
   constructor(public navCtrl: NavController) {
 
   }
   goToKomunat(e): void{
     console.log("Clicked on button ")
     this.navCtrl.navigateForward('/komunat');
+  }
+
+  slideToNext(): void {
+      this.slides.slideNext();
   }
 
   ngAfterViewInit(): void {

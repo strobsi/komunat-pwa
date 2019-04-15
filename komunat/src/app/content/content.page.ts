@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, Events } from "@ionic/angular";
 import { NavigationExtras } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
-
+import anime from 'animejs';
+import 'hammerjs';
 
 @Component({
   selector: 'app-content',
@@ -242,11 +243,25 @@ private selected(index) {
   }
   this.decisionCounter++;
   if (index == 0) {
+      anime({
+        targets: document.getElementsByClassName("upper"),
+        scale: 1.05,
+        easing: 'easeInOutQuad',
+        duration: 200,
+        direction: 'alternate',
+      });
       // Push the value to the lesser array
       this.lesser.push(this.btn1Val)
       //this.transition(0)
   }
   else {
+      anime({
+        targets: document.getElementsByClassName("lower"),
+        scale: 1.05,
+        easing: 'easeInOutQuad',
+        duration: 200,
+        direction: 'alternate',
+      });
       // Push the value to the greater array
       this.greater.push(this.btn1Val)
       //this.transition(1)

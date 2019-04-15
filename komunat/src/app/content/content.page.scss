@@ -1,3 +1,20 @@
+.container
+{
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
+    margin-top:5vh;
+}
+
+ion-col {
+  margin-left:10px;
+  margin-top:10px;
+}
+
+.buttonSection {
+  height: 75vh;
+  width: auto;
+}
+
 .spinner {
     width: 80px;
     height: 80px;
@@ -49,23 +66,31 @@
     }
   }
   
-  .logo {
-    height: 10vh;
-    width: auto;
-    margin: auto;
-    display: block;
-  }
-  
   .upper {
-    height:35vh;
+    height:50%;
+    margin-top: 5px;
+    position: relative;
     text-align: center;
-    vertical-align: middle;
   }
   
   .lower {
-    height: 35vh;
-    vertical-align: middle;
+    height: 50%;
+    position: relative;
     text-align: center;
+  }
+  
+  .beautify {
+    padding-top:10px;
+    padding-bottom:10px;
+    border-top: 1px solid;
+    border-bottom: 2px solid;
+    position: absolute;
+    text-align: center;
+    margin:0px;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
   
   h2 {
@@ -73,7 +98,7 @@
     font-size: 8vw;
     text-align: center; 
   }
-  
+
   h4 {
     height: 5vh;
     font-size: 6vw;
@@ -82,3 +107,28 @@
     text-align: center; 
   }
   
+  .valueImage {
+    height: 50%;
+    margin:0px;
+  }
+
+  h2 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 5vw;
+  }
+  
+  p {
+    font-family: 'Source Sans Pro', sans-serif;
+    color:#59BCED;
+    margin-bottom: 0px;
+  }
+
+  /* iPhone 5 
+You can also target devices with aspect ratio. */                       
+@media screen and (device-aspect-ratio: 40/71) {                              
+  .buttonSection {
+    height: 60vh;
+    width: auto;
+  }               
+}

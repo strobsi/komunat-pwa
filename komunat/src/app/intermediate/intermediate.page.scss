@@ -1,91 +1,41 @@
-.spinner {
-    width: 80px;
-    height: 80px;
-    position: absolute;
-    top:50%;
-    left: 50%;
-    margin-left: -30px;
-  }
-  
-  .cube1, .cube2 {
-    background-color: #333;
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    -webkit-animation: sk-cubemove 1.8s infinite ease-in-out;
-    animation: sk-cubemove 1.8s infinite ease-in-out;
-  }
-  
-  .cube2 {
-    -webkit-animation-delay: -0.9s;
-    animation-delay: -0.9s;
-  }
-  
-  @-webkit-keyframes sk-cubemove {
-    25% { -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5) }
-    50% { -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg) }
-    75% { -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5) }
-    100% { -webkit-transform: rotate(-360deg) }
-  }
-  
-  @keyframes sk-cubemove {
-    25% { 
-      transform: translateX(42px) rotate(-90deg) scale(0.5);
-      -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5);
-    } 50% { 
-      transform: translateX(42px) translateY(42px) rotate(-179deg);
-      -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);
-    } 50.1% { 
-      transform: translateX(42px) translateY(42px) rotate(-180deg);
-      -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg);
-    } 75% { 
-      transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
-      -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
-    } 100% { 
-      transform: rotate(-360deg);
-      -webkit-transform: rotate(-360deg);
-    }
-  }
-  
-  .logo {
-    height: 10vh;
-    width: auto;
-    margin: auto;
-    display: block;
-  }
-  
-  .upper {
-    height:35vh;
-    text-align: center;
-    vertical-align: middle;
-  }
-  
-  .lower {
-    height: 35vh;
-    vertical-align: middle;
-    text-align: center;
-  }
-  
-  h2 {
-    color: #4C4D4F;
-    font-size: 8vw;
-    text-align: center; 
-  }
-  
-  h4 {
-    height: 5vh;
-    font-size: 6vw;
-    margin: 1em;
-    color: #4C4D4F;
-    text-align: center; 
-  }
-  
-  ion-avatar {
-      margin: auto;
-      margin-top: 30px;
-      text-align: center;
-      min-height: 30vh;
-      width:  30vh;
-}
+
+.container {
+  background-color:  #59BCED;
+  height:100vh;
+  max-height: 100vh;
+  width:100%; /* or whatever width you want. */
+  display: inline-block;
+ }
+
+ h1, h2, h3, h4, h5, h6 {
+   color: white;
+   font-family: 'Source Sans Pro', sans-serif;
+   font-weight: bold;
+   margin-bottom:20px;
+ }
+
+ .nextText {
+   position: absolute;
+   top:60vh;
+   width: 100%;
+   padding-left:10px;
+   padding-right: 10px;
+   text-align: center;
+ }
+
+  /* iPhone 5 
+You can also target devices with aspect ratio. */                       
+@media screen and (device-aspect-ratio: 40/71) {                              
+  .nextText {
+   position: absolute;
+   top:40vh;
+   width: 100%;
+   padding-left:10px;
+   padding-right: 10px;
+   text-align: center;
+ }          
+ }
+
+ .blueFont {
+   color: #59BCED;
+ }
