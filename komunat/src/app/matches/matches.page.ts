@@ -51,7 +51,15 @@ export class MatchesPage implements OnInit {
              birthdate: '27.12.1993',
              list: '1',
              list_number: '2',
-             district: 'Untertürkheim' } }
+             district: 'Untertürkheim' } },
+             { distance: 10.954451150103322,
+              uuid: '00ujlsq5ohzh98lEd0h7',
+              candidate:
+               { name: 'Simon Strobel',
+                 birthdate: '27.12.1993',
+                 list: '1',
+                 list_number: '2',
+                 district: 'Untertürkheim' } }
     ];
   
 
@@ -235,15 +243,16 @@ export class MatchesPage implements OnInit {
   backClicked() {
     this.setState(PSTATE.MATCHES)
     var subs = document.querySelector(".substitutesBtn");
-    var team = document.querySelector(".teamBtn");
+    var lbl = document.querySelector(".mainLbl");
     anime({
-      targets: [subs,team],
+      targets: [subs],
       opacity: 1,
       easing: 'easeInOutQuad',
       duration: 200,
       complete: function(){
         var back = document.querySelector(".backBtn");
         var subs = document.querySelector(".substitutesBtn");
+        lbl.removeAttribute("hidden");
         subs.removeAttribute("hidden");
         back.setAttribute("hidden","false");
       }
@@ -255,9 +264,9 @@ export class MatchesPage implements OnInit {
   showSubstitutes() {
     this.setState(PSTATE.SUBS)
     var subs = document.querySelector(".substitutesBtn");
-    var team = document.querySelector(".teamBtn");
+    var lbl = document.querySelector(".mainLbl");
     anime({
-      targets: [subs,team],
+      targets: [subs],
       opacity: 0,
       easing: 'easeInOutQuad',
       duration: 200,
@@ -265,6 +274,7 @@ export class MatchesPage implements OnInit {
         var back = document.querySelector(".backBtn");
         var subs = document.querySelector(".substitutesBtn");
         subs.setAttribute("hidden","true");
+        lbl.setAttribute("hidden","true");
         back.removeAttribute("hidden");
       }
     });

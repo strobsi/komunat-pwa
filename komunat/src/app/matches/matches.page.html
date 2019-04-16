@@ -1,13 +1,132 @@
-    <ion-row>
+<ion-content>
+
+<div class="container">
+  <ion-row class="titleBar">
+      <ion-col size="10">
+      <p class="mainLbl">DEIN TEAM</p>
+      <p hidden class="backBtn" name="filing" (click) = "backClicked()">< DEIN TEAM</p>
+
+      </ion-col>
+      <ion-col size="2">
+        <p text-center class="black">
+        <ion-icon class="substitutesBtn" name="filing" (click) = "showSubstitutes()"></ion-icon>
+      </p>
+      </ion-col>
+  </ion-row>
+
+  <div *ngIf="SHOW_STATE == 1"  class="content">
+  <div @items *ngFor="let match of matches; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }}">
+    <ion-card class="candidateCard" (click) ="selected(0)">
+      <ion-row class="fullHeight">
+        <ion-col class="fullHeight" size="3">
+          <div class="cCardLeft">
+            <div class="percentage">
+              100 %
+            </div>
+              <ion-avatar>
+                  <img src="https://komunat.de/uploads/00uk7chs5hDiBJLyb0h7.png"/>
+                </ion-avatar>
+          </div>
+
+        </ion-col>
+        <ion-col size="1">
+
+        </ion-col>
+
+        <ion-col size="7">
+
+          <div class="cCardRight">
+            <p class="c_name">S. SCHULDIS, <span class="slim">30</span></p>
+            <div class="c_info">
+              <p class="slim c_info_text">Liste: <span class="bold">Unsere Zukunft</span></p>
+              <p class="slim c_info_text">Listenplatz: <span class="bold">79</span></p>
+              <p class="slim c_info_text">Stadtbezirk: <span class="bold">Stuttgart-West</span></p>     
+          </div>       
+          </div>
+
+          <div class="reject" (click) ="reject(i)">
+              <ion-icon name="close-circle"></ion-icon>
+          </div>
+          <div class="detailArrow">
+              <ion-icon name="arrow-dropright"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+</div>
+
+
+
+<!--START SUBSTITUTE-->
+
+<div *ngIf="SHOW_STATE == 2"  class="content">
+    <div @items *ngFor="let s of substitutes; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }}">
+      <ion-card class="candidateCard" (click) ="selected(0)">
+        <ion-row class="fullHeight">
+          <ion-col class="fullHeight" size="3">
+            <div class="cCardLeft">
+              <div class="percentage">
+                100 %
+              </div>
+                <ion-avatar>
+                    <img src="https://komunat.de/uploads/00uk7chs5hDiBJLyb0h7.png"/>
+                  </ion-avatar>
+            </div>
+  
+          </ion-col>
+          <ion-col size="1">
+  
+          </ion-col>
+  
+          <ion-col size="7">
+  
+            <div class="cCardRight">
+              <p class="c_name">S. SCHULDIS, <span class="slim">30</span></p>
+              <div class="c_info">
+                <p class="slim c_info_text">Liste: <span class="bold">Unsere Zukunft</span></p>
+                <p class="slim c_info_text">Listenplatz: <span class="bold">79</span></p>
+                <p class="slim c_info_text">Stadtbezirk: <span class="bold">Stuttgart-West</span></p>     
+            </div>       
+            </div>
+  
+            <div class="readd" (click)="backToMatches(0,i)">
+                <ion-icon name="checkmark-circle"></ion-icon>
+            </div>
+            <div class="detailArrow">
+                <ion-icon name="arrow-dropright"></ion-icon>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+<ion-footer>
+    <h1 class = "footer">Ergebnis per Mail senden</h1>
+</ion-footer>
+
+</ion-content>
+
+<!--
+  <div class="container">
+  <ion-row>
       <ion-col size="2">
         <div text-center>
             <ion-icon hidden class="topIcon backBtn" name="arrow-round-back" (click) = "backClicked()" ></ion-icon>
             <ion-icon text-center class="topIcon substitutesBtn" name="filing" (click) = "showSubstitutes()"></ion-icon>
         </div>
       </ion-col>
-      <ion-col size="8">
-          <h2 class="title" text-center>{{present_title}}</h2>
-      </ion-col>
+  
       <ion-col size="2">
           <div text-center>
               <ion-icon text-center class="topIcon teamBtn" name="people"  (click) = "showTeam()"></ion-icon>
@@ -15,16 +134,6 @@
       </ion-col>
     </ion-row>
     <ion-row>
-   <div class="progressWrapper">
-       <div class="indicatorTxt">
-            0 / 20
-       </div>
-       <div class="progressBg">
-           <div class="progress">
-       
-           </div>
-       </div>
-   </div>
   </ion-row>
    
 <ion-content padding>
@@ -33,10 +142,7 @@
        <div>
          <div class="imageWrapper">
            <img class="candidateImg" src="http://localhost:3000/uploads/{{match.uuid}}.png"/>
-         </div>
-        <!--
-         <div class="candidateInfoContainer" (swiperight)="swipedRight($event,i)" (swipeleft)="swipedLeft($event,i)">
-         -->
+
          <div class="candidateInfoContainer">
            <div class="candidateInfo"> 
                    <ion-grid>
@@ -162,3 +268,7 @@
      </web-social-share>
 
 </ion-content>
+
+</div>
+-->
+
