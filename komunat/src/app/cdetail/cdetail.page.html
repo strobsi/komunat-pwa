@@ -1,0 +1,77 @@
+<ion-content>
+
+  <div class="container">
+    <ion-row class="titleBar">
+        <ion-col size="10">
+        <p class="mainLbl" (click)="back()">< DEIN TEAM</p>
+        <p hidden class="backBtn" name="filing" (click) = "backClicked()">< DEIN TEAM</p>
+        </ion-col>
+
+    </ion-row>
+    <div class="candidateCard" ng-model="candidate">
+      <ion-row class="fullHeight">
+        <ion-col size="5" class="imageCol">
+          <div class="cCardLeft">
+              <ion-avatar>
+                  <img src="https://komunat.de/uploads/00uk7chs5hDiBJLyb0h7.png"/>
+                </ion-avatar>
+          </div>
+        </ion-col>
+
+        <ion-col size="7" class="quoteCol">
+            <div class="vertical-center">
+          <p class="black cursiv"><i>"{{candidate.candidate.motto}}"</i></p>
+          </div>
+          <div class="quoteAuthor small bold">{{candidate.candidate.name}}, <span class="slim">{{candidate.candidate.age}}</span></div>
+        </ion-col>
+
+      </ion-row>
+    </div>    
+    <ion-slides zoom="false" pager="true">
+      <ion-slide>
+          <div class="eventList">
+              <h4>MEINE WERTE UND AUFGABEN</h4>
+              <br>
+              <div class="eventWrapper" @items *ngFor="let e of candidate.values; let i = index">
+                <div class="event">
+                <hr>
+                  <ion-row class="eventTitle bold">
+                    <ion-col size="4">
+                        <p>{{e.name}}</p>
+                    </ion-col>
+                    <ion-col size="8">
+                        <p>{{e.id}}</p>
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </div>
+            </div>
+      </ion-slide>
+      <ion-slide>
+          <div class="eventList">
+              <h4>KOMM VORBEI & TRIFF MICH HIER PERSÖNLICH</h4>
+              <br>
+              <div class="eventWrapper" @items *ngFor="let event of events; let i = index">
+                <div class="event">
+                <hr>
+                  <ion-row class="eventTitle bold">
+                    <p>{{event.title}}</p>
+                  </ion-row>
+                  <ion-row class="eventContent">
+                    <ion-col size=5>
+                    <p class="black"><span class="slim">Datum: </span><span class="bold">{{event.date}}</span> </p>
+                    <p class="black"><span class="slim">Uhrzeit: </span><span class="bold">{{event.time}}</span></p>
+                    </ion-col>
+          
+                    <ion-col size="7">
+                      <p class="black"><span class="slim">Addresse: </span><span class="bold">{{event.location}}</span></p>
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </div>
+            </div>
+      </ion-slide>
+
+    </ion-slides>
+  </div>
+</ion-content>

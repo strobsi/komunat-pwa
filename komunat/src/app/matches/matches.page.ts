@@ -41,25 +41,31 @@ export class MatchesPage implements OnInit {
       candidate:
        { name: 'Steffen Schuldis',
          birthdate: '27.12.1993',
+         age:"30",
          list: '1',
          list_number: '2',
-         district: 'Untertürkheim' } },
+         district: 'Untertürkheim',
+         motto: "Lorem ipsum dolor sit amet" } },
          { distance: 10.954451150103322,
           uuid: '00ujlsq5ohzh98lEd0h7',
           candidate:
            { name: 'Simon Strobel',
              birthdate: '27.12.1993',
+             age:"30",
              list: '1',
              list_number: '2',
-             district: 'Untertürkheim' } },
+             district: 'Untertürkheim',
+             motto: "Lorem ipsum dolor sit amet" } },
              { distance: 10.954451150103322,
               uuid: '00ujlsq5ohzh98lEd0h7',
               candidate:
                { name: 'Simon Strobel',
                  birthdate: '27.12.1993',
+                 age:"30",
                  list: '1',
                  list_number: '2',
-                 district: 'Untertürkheim' } }
+                 district: 'Untertürkheim',
+                 motto: "Lorem ipsum dolor sit amet" } }
     ];
   
 
@@ -298,6 +304,23 @@ export class MatchesPage implements OnInit {
       }
     });
     // TODO: show subs and hide matches
+  }
+
+  public showDetails(i) {
+    // Show details of selected candidate
+    console.log("Show details: "+i)
+    var c;
+    if (this.SHOW_STATE == 1) {
+      c = this.matches[i];      
+    } else if (this.SHOW_STATE == 2) {
+      c = this.substitutes[i];
+    }
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+          candidate: JSON.stringify(c)
+      }
+    };
+    this.navCtrl.navigateForward(['cdetail'], navigationExtras);
   }
 
   public pulseTeam() {

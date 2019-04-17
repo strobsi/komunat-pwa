@@ -16,13 +16,13 @@
 
   <div *ngIf="SHOW_STATE == 1"  class="content">
   <div @items *ngFor="let match of matches; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }}">
-    <ion-card class="candidateCard" (click) ="selected(0)">
+    <ion-card class="candidateCard" (click) ="showDetails(i)">
       <ion-row class="fullHeight">
         <ion-col class="fullHeight" size="3">
           <div class="cCardLeft">
             <div class="percentage">
-              100 %
-            </div>
+              100 % 
+            </div> 
               <ion-avatar>
                   <img src="https://komunat.de/uploads/00uk7chs5hDiBJLyb0h7.png"/>
                 </ion-avatar>
@@ -36,11 +36,11 @@
         <ion-col size="7">
 
           <div class="cCardRight">
-            <p class="c_name">S. SCHULDIS, <span class="slim">30</span></p>
+            <p class="c_name">{{match.candidate.name}}, <span class="slim">30</span></p>
             <div class="c_info">
-              <p class="slim c_info_text">Liste: <span class="bold">Unsere Zukunft</span></p>
-              <p class="slim c_info_text">Listenplatz: <span class="bold">79</span></p>
-              <p class="slim c_info_text">Stadtbezirk: <span class="bold">Stuttgart-West</span></p>     
+              <p class="slim c_info_text">Liste: <span class="bold">{{match.candidate.list}}</span></p>
+              <p class="slim c_info_text">Listenplatz: <span class="bold">{{match.candidate.list_number}}</span></p>
+              <p class="slim c_info_text">Stadtbezirk: <span class="bold">{{match.candidate.district}}</span></p>     
           </div>       
           </div>
 
@@ -62,7 +62,7 @@
 
 <div *ngIf="SHOW_STATE == 2"  class="content">
     <div @items *ngFor="let s of substitutes; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }}">
-      <ion-card class="candidateCard" (click) ="selected(0)">
+      <ion-card class="candidateCard" (click) ="showDetails(i)">
         <ion-row class="fullHeight">
           <ion-col class="fullHeight" size="3">
             <div class="cCardLeft">
