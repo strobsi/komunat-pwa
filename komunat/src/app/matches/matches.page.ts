@@ -114,7 +114,7 @@ export class MatchesPage implements OnInit {
     this.route.queryParams.subscribe(params => {
      var a = JSON.parse(params["matches"]);
      var xhr = new XMLHttpRequest();
-     var url = "http://192.168.178.23:3000/result";
+     var url = "http://komunat.de:3333/result";
      var data = JSON.stringify(a);
      xhr.open("POST", url, true);
      xhr.setRequestHeader("Content-Type", "application/json");

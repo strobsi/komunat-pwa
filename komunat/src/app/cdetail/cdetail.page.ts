@@ -16,7 +16,8 @@ export class CdetailPage implements OnInit {
     birthdate:"",
     values:[],
     contents:[],
-    events:[]
+    events:[],
+    uuid:""
   };
 
   events: [];
