@@ -4,7 +4,7 @@
     <ion-row class="titleBar">
         <ion-col size="10">
         <p class="mainLbl" (click)="back()">< DEIN TEAM</p>
-        <p hidden class="backBtn" name="filing" (click) = "backClicked()">< DEIN TEAM</p>
+        <p hidden class="backBtn" name="filing" (click) = "back()">< DEIN TEAM</p>
         </ion-col>
 
     </ion-row>
@@ -13,16 +13,15 @@
         <ion-col size="5" class="imageCol">
           <div class="cCardLeft">
               <ion-avatar>
-                  <img src="https://komunat.de/uploads/00uk7chs5hDiBJLyb0h7.png"/>
+                  <img src="https://komunat.de/uploads/{{candidate.uuid}}.png"/>
                 </ion-avatar>
           </div>
         </ion-col>
 
         <ion-col size="7" class="quoteCol">
-            <div class="vertical-center">
-          <p class="black cursiv"><i>"{{candidate.candidate.motto}}"</i></p>
+            <div class="">
+          <p class="black cursiv vertical-center"><i>"{{candidate.motto}}"</i></p>
           </div>
-          <div class="quoteAuthor small bold">{{candidate.candidate.name}}, <span class="slim">{{candidate.candidate.age}}</span></div>
         </ion-col>
 
       </ion-row>
@@ -36,10 +35,10 @@
                 <div class="event">
                 <hr>
                   <ion-row class="eventTitle bold">
-                    <ion-col size="1">
+                    <ion-col size="2">
                       <p class="slim black">{{i+1}}</p>
                     </ion-col>
-                    <ion-col size="9">
+                    <ion-col size="8">
                         <p>{{e.name}}</p>
                     </ion-col>
                   </ion-row>
@@ -55,10 +54,10 @@
                 <div class="event">
                 <hr>
                   <ion-row class="eventTitle bold">
-                    <ion-col size="1">
+                    <ion-col size="2">
                       <p class="slim black">{{i+1}}</p>
                     </ion-col>
-                    <ion-col size="9">
+                    <ion-col size="8">
                         <p>{{e.name}}</p>
                     </ion-col>
                   </ion-row>

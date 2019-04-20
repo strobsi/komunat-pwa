@@ -232,7 +232,7 @@ ngOnInit() {
   }
 
 // onClick event of the buttons
-private selected(index) {
+public selected(index) {
   if (this.decisionCounter == 0) {
       this.startedTimeStamp = new Date().getTime()/1000;
       this.startedTimeStamp = parseInt(this.startedTimeStamp.toString())

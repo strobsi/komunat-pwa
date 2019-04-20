@@ -12,6 +12,7 @@ export class SharePage implements OnInit {
 
   team;
   loader;
+  email: string;
 
   constructor(private route: ActivatedRoute, public navCtrl: NavController) {
     
@@ -30,16 +31,22 @@ export class SharePage implements OnInit {
     console.log("Sending mail")
     this.loader.style.opacity = 1.0;
 
+    var res = {
+      receiver:this.email,
+      matches:this.team,
+    }
+
     var xhr = new XMLHttpRequest();
-    var url = "http://localhost:3000/result";
-    //var data = JSON.stringify(a);
+    var url = "http://localhost:3000/result/share";
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = () => {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-              this.loader.style.opacity = 0.0;
-        }
+            // Successfully stored values, continue with animation
+
+          }
     };
-    //xhr.send(data);
+    var data = JSON.stringify(res);
+    xhr.send(data);
   }
 }

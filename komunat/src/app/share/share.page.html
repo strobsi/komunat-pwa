@@ -1,10 +1,10 @@
 <div class="container">
     <div class="nextText">
         <h2 class="black left">Trage hier deine Email Adresse ein und wir senden dir dein Ergebnis zu</h2>
-  <form #form="ngForm" (ngSubmit)="sendMail(form)"  >
+  <form #form="ngForm" (ngSubmit)="sendMail()"  >
         <ion-list lines="full" class="ion-no-margin ion-no-padding list-lines-full hydrated">
           <ion-item class="item">
-            <ion-input name="ion-input-2" placeholder="Deine Email Adresse" required="false"></ion-input>
+            <ion-input (ngModel)="email" name="ion-input-2" placeholder="Deine Email Adresse" required="false"></ion-input>
           </ion-item>
         </ion-list>
         <br>

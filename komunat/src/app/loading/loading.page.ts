@@ -23,49 +23,27 @@ export class LoadingPage implements OnInit {
       this.spinner.style.opacity = "1.0"
       // Send result 
 
-      this.sendResult(r)
+      setTimeout(() => 
+        {
+          this.moveOn(JSON.stringify(r))            
+        },
+        5000);
 
     });
-
   }
-
-// Send the calculated result of the user to the backend
-private sendResult(a) {
-
-  console.log("Showing result")
-  
-  var xhr = new XMLHttpRequest();
-  var url = "http://localhost:3000/result";
-  var data = JSON.stringify(a);
-
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  setTimeout(() => 
-        {
-          this.moveOn(xhr.responseText)            
-        },
-        5000);
-  xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        setTimeout(() => 
-        {
-          this.moveOn(xhr.responseText)            
-        },
-        5000);
-      }
-  };
-  xhr.send(data);
-}
 
 // Moving on to matches
 moveOn(data) {
   console.log("Moving on")
   let navigationExtras: NavigationExtras = {
     queryParams: {
-        vData: data
+        matches: data
     }
   };
-  this.navCtrl.navigateForward(['matches'], navigationExtras);
+  this.navCtrl.navigateForward(['matches'],navigationExtras)
+        .catch(err => {
+            // Handle here
+            console.log("Error here")
+        });
 }
-
 }
