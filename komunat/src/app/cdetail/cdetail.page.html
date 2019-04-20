@@ -27,20 +27,39 @@
 
       </ion-row>
     </div>    
-    <ion-slides zoom="false" pager="true">
+    <ion-slides zoom="false">
       <ion-slide>
           <div class="eventList">
-              <h4>MEINE WERTE UND AUFGABEN</h4>
+              <h4>MEINE WERTE</h4>
               <br>
               <div class="eventWrapper" @items *ngFor="let e of candidate.values; let i = index">
                 <div class="event">
                 <hr>
                   <ion-row class="eventTitle bold">
-                    <ion-col size="4">
+                    <ion-col size="1">
+                      <p class="slim black">{{i+1}}</p>
+                    </ion-col>
+                    <ion-col size="9">
                         <p>{{e.name}}</p>
                     </ion-col>
-                    <ion-col size="8">
-                        <p>{{e.id}}</p>
+                  </ion-row>
+                </div>
+              </div>
+            </div>
+      </ion-slide>
+      <ion-slide>
+          <div class="eventList">
+              <h4>MEINE AUFGABEN</h4>
+              <br>
+              <div class="eventWrapper" @items *ngFor="let e of candidate.contents; let i = index">
+                <div class="event">
+                <hr>
+                  <ion-row class="eventTitle bold">
+                    <ion-col size="1">
+                      <p class="slim black">{{i+1}}</p>
+                    </ion-col>
+                    <ion-col size="9">
+                        <p>{{e.name}}</p>
                     </ion-col>
                   </ion-row>
                 </div>

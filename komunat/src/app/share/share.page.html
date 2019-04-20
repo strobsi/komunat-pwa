@@ -1,6 +1,17 @@
-<ion-row>
-  <ion-col size="12">
-      <h2 class="title" text-center>GLÜCKWUNSCH!</h2>
-      <p>Dein Ergebnis steht fest.</p>
-  </ion-col>
-</ion-row>
+<div class="container">
+    <div class="nextText">
+        <h2 class="black left">Trage hier deine Email Adresse ein und wir senden dir dein Ergebnis zu</h2>
+  <form #form="ngForm" (ngSubmit)="sendMail(form)"  >
+        <ion-list lines="full" class="ion-no-margin ion-no-padding list-lines-full hydrated">
+          <ion-item class="item">
+            <ion-input name="ion-input-2" placeholder="Deine Email Adresse" required="false"></ion-input>
+          </ion-item>
+        </ion-list>
+        <br>
+          <ion-button expand="block" type="submit" class="ion-no-margin ios button button-block button-solid ion-activatable ion-focusable hydrated">Senden</ion-button>
+         <br>
+         <!-- <ion-button expand="block" type="submit" class="disabled ion-no-margin ios button button-block button-solid ion-activatable ion-focusable hydrated">Keine Lust auf Email?</ion-button> -->
+      </form>
+      <ion-spinner class="loader" name="dots"></ion-spinner>
+    </div>
+</div>

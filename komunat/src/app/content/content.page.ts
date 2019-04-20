@@ -24,7 +24,6 @@ export class ContentPage implements OnInit {
   insertIndex = 0;
   decisionCounter = 0;
   startedTimeStamp = 0;
-  spinner;
 
   vData = {
     values:{},
@@ -183,8 +182,6 @@ ngOnInit() {
     console.log(this.vData)
   });
     this.arr = this.initarr
-    this.spinner = document.querySelector(".spinner")
-    this.spinner.style.opacity = "0.0"
     this.newRound()
 }
 
@@ -208,17 +205,17 @@ ngOnInit() {
     } else {
         // Finished overall sorting, since nothing has to be sorted anymore.
         console.log("Finished sorting with " + this.decisionCounter + " decisions")
-        this.spinner.style.opacity = "1.0"
         this.calculateValue()
         const btn0 = document.querySelector(".opt0")
         const btn1 = document.querySelector(".opt1")
         btn0.parentNode.removeChild(btn0);
         btn1.parentNode.removeChild(btn1);
         //this.collapseAndRotate()
-        this.sendResult(this.arr)
         this.btn0Val.name = ""
         this.btn1Val.name = ""
         this.decisionCounter = 0;
+
+        this.showLoading(this.arr)
     }
   }
 
@@ -349,48 +346,27 @@ private calculateValue() {
 }
 
 
-// Send the calculated result of the user to the backend
-private sendResult(a) {
-
-  var finished = new Date().getTime()/1000;
-  finished = parseInt(finished.toString())
- 
-  this.vData.metadata.contentStarted = this.startedTimeStamp
-  this.vData.contents = a
-  this.vData.metadata.contentDecisions = this.decisionCounter;
-  this.vData.metadata.contentStarted = this.startedTimeStamp;
-  this.vData.metadata.contentFinished = finished;
-
-  console.log("Showing result")
-  console.log(this.vData);
-  
-  var xhr = new XMLHttpRequest();
-  var url = "http://localhost:3000/result";
-  var data = JSON.stringify(this.vData);
-
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-          // Successfully stored values, continue with animation
-          console.log("Successfully uploaded result")
-          console.log(JSON.parse(xhr.responseText))
-          //fakeLoad()
-          this.spinner.style.opacity = "0.0"
-          this.moveOn(xhr.responseText)
-      }
-  };
-  xhr.send(data);
+private showLoading(a) {
+  this.moveOn(a)
 }
 
-  moveOn(data) {
-    console.log("Moving on")
+ private moveOn(v) {
+
+    var finished = new Date().getTime()/1000;
+    finished = parseInt(finished.toString())
+  
+    this.vData.metadata.contentStarted = this.startedTimeStamp
+    this.vData.contents = v
+    this.vData.metadata.contentDecisions = this.decisionCounter;
+    this.vData.metadata.contentStarted = this.startedTimeStamp;
+    this.vData.metadata.contentFinished = finished;
+    var data = JSON.stringify(this.vData);
+
     let navigationExtras: NavigationExtras = {
       queryParams: {
-          matches: data
+          result: data
       }
     };
-    this.navCtrl.navigateForward(['matches'], navigationExtras);
-   // this.navCtrl.navigateForward("/matches", { 'data': data });
+    this.navCtrl.navigateForward(['loading'], navigationExtras);
  }
 }

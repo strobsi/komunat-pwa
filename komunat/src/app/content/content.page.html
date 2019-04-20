@@ -3,8 +3,19 @@
             <ion-col size="6">
             <p>Welche Aufgabe ist dir wichtiger?</p>
             </ion-col>
-            <ion-col size="4">
-            <p>AUFGABE</p>
+            <ion-col size="1">
+            </ion-col>
+            <ion-col size="3">
+                <div class="progressContainer">
+                    <div class="progress">
+                      <div class="percent"></div>
+                    </div>
+                    <div class="steps">
+                      <div class="step completed" id="0"></div>
+                      <div class="step selected" id="1"></div>
+                      <div class="step" id="2"></div>
+                    </div>
+                  </div>
             </ion-col>
         </ion-row>
         <div class="buttonSection">
@@ -14,10 +25,6 @@
         <ion-card class="opt1 lower"  (click) ="selected(1)">
                   <h2 class=".opt1 beautify">{{this.btn1Val.name}}</h2>
           </ion-card>
-          <div class="spinner">
-              <div class="cube1"></div>
-              <div class="cube2"></div>
-            </div>
         </div>
     </div>
     

@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonSlides } from '@ionic/angular';
 import { ActivatedRoute } from "@angular/router";
 import anime from 'animejs';
 import 'hammerjs';
 import {PSTATE} from '../utils/pstate';  
 import { NavController } from "@ionic/angular";
 import { NavigationExtras } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-matches',
@@ -34,6 +35,8 @@ import { NavigationExtras } from '@angular/router';
 export class MatchesPage implements OnInit {
 
   SHOW_STATE;
+  NO_TUTORIAL;
+  @ViewChild(IonSlides) slides: IonSlides;
 
   matches = [
     { distance: 10.054451150103322,
@@ -105,7 +108,7 @@ export class MatchesPage implements OnInit {
         }
       }]
     };
-  constructor(private route: ActivatedRoute, public alertController: AlertController, public navCtrl: NavController) {
+  constructor(private route: ActivatedRoute, public alertController: AlertController, public navCtrl: NavController, public storage: Storage) {
     
   }
 
@@ -131,9 +134,22 @@ export class MatchesPage implements OnInit {
         this.updateUI()
     }
   }
-  
 
   ngOnInit() {
+
+    this.storage.ready().then(() => {
+      this.storage.get("tutorial_matches").then( result => {
+        if (!result) {
+            this.storage.set("tutorial_matches", true);
+            this.NO_TUTORIAL = false;
+            // Show tutorial!
+        } else {
+             this.NO_TUTORIAL = true;
+            //
+        }
+    })
+    });
+
     this.setState(PSTATE.MATCHES);
     this.route.queryParams.subscribe(params => {
      this.matches = JSON.parse(params["matches"]);
@@ -375,5 +391,24 @@ export class MatchesPage implements OnInit {
       }
       return 0;
     });
+  }
+
+  public tutorialBtnClicked(i) {
+    if (i == 0 ) {
+      this.slides.slideNext();
+    }
+    else {
+      this.NO_TUTORIAL = true;
+    }
+  }
+
+  public showEmailSend() {
+    console.log("Moving on")
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+          team: JSON.stringify(this.team)
+      }
+    };
+    this.navCtrl.navigateForward(['share'], navigationExtras);
   }
 }

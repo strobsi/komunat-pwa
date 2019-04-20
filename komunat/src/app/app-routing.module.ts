@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'dsgvo', loadChildren: './dsgvo/dsgvo.module#DsgvoPageModule' },
   { path: 'impressum', loadChildren: './impressum/impressum.module#ImpressumPageModule' },
   { path: 'cdetail', loadChildren: './cdetail/cdetail.module#CdetailPageModule' },
+  { path: 'loading', loadChildren: './loading/loading.module#LoadingPageModule' },
 ];
 
 @NgModule({

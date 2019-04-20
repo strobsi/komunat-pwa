@@ -73,3 +73,50 @@ You can also target devices with aspect ratio. */
     color:#59BCED;
     margin-bottom: 0px;
   }
+
+
+
+  // PROGRESS DOTS
+.progressContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.steps {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 25vw;
+}
+.step {
+  width: 15px;
+  height: 15px;
+  background: white;
+  border: 2px solid var(--komunat-blue);
+  border-radius: 50%;
+  transition: background 1s;
+}
+.step.selected {
+  background: var(--komunat-blue);
+}
+.step.completed {
+  background: white;
+}
+
+.progress {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  border-bottom: 2px solid  var(--komunat-blue);
+  z-index: -1;
+}
+.percent {
+  position: absolute;
+  width: 0;
+  height: 100%;
+  border-bottom: 2px solid #4B81BD;
+  z-index: 1;
+  transition: width 1s;
+}

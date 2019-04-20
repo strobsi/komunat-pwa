@@ -1,0 +1,68 @@
+
+.container {
+    height:100vh;
+    max-height: 100vh;
+    top:10vh;
+    width:100%; /* or whatever width you want. */
+    display: inline-block;
+   }
+  
+   h1, h2, h3, h4, h5, h6 p{
+     color: white;
+     font-family: 'Source Sans Pro', sans-serif;
+     font-weight: bold;
+     margin-bottom:20px;
+   }
+  
+   .nextText {
+     position: absolute;
+     top:20vh;
+     width: 100%;
+     padding:20px;
+     text-align: center;
+   }
+
+  .slim {
+    font-weight: lighter;
+    font-family: 'Source Sans Pro Extra Light', sans-serif;
+  }
+  .gray {
+    color: #f4f8ff
+  }
+
+  .left {
+      text-align: left;
+  }
+
+  .black {
+      color: var(--komunat-gray-dark)
+  }
+
+  .oval {
+    position: absolute;
+    width: 180vw;
+    height: 50vh;
+    top:0px;
+    left:50%;
+    background: #74c5ed;
+    border-radius: 180vw / 50vh;
+    -ms-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+  }
+
+  
+    /* iPhone 5 
+  You can also target devices with aspect ratio. */                       
+  @media screen and (device-aspect-ratio: 40/71) {                              
+    .nextText {
+     position: absolute;
+     top:20vh;
+     width: 100%;
+     padding-left:10px;
+     padding-right: 10px;
+     text-align: center;
+   }          
+   }
+   .blueFont {
+     color:var(--komunat-blue);
+   }
