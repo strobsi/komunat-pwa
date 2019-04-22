@@ -15,13 +15,13 @@
   </ion-row>
 
   <div *ngIf="SHOW_STATE == 1"  class="content">
-  <div @items *ngFor="let match of matches; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }}">
-    <ion-card class="candidateCard">
+  <div *ngFor="let match of matches; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }}">
+    <ion-card *ngIf="i < 20" class="candidateCard">
       <ion-row class="iconRow">
         <ion-col size="3">
           <div class="cCardLeft">
               <div class="percentage">
-                {{match.distance}}
+                {{match.show_distance}}
               </div> 
             </div>
         </ion-col>
@@ -54,9 +54,58 @@
 
           <div class="cCardRight">
             <div class="c_info">
-              <p class="slim c_info_text">Liste: <span class="bold">{{match.list}}</span></p>
-              <p class="slim c_info_text">Listenplatz: <span class="bold">{{match.list_number}}</span></p>
-              <p class="slim c_info_text">Stadtbezirk: <span class="bold">{{match.district}}</span></p>     
+              <p class="slim c_info_text">Liste: 
+                <span class="bold" *ngIf="match.list == 1">CDU</span>
+                <span class="bold" *ngIf="match.list == 2">GRÜNE</span>
+                <span class="bold" *ngIf="match.list == 3">SPD</span>
+                <span class="bold" *ngIf="match.list == 4">Freie Wähler</span>
+                <span class="bold" *ngIf="match.list == 5">FDP</span>
+                <span class="bold" *ngIf="match.list == 6">SÖS</span>
+                <span class="bold" *ngIf="match.list == 7">AfD</span>
+                <span class="bold" *ngIf="match.list == 8">DIE LINKE</span>
+                <span class="bold" *ngIf="match.list == 9">PIRATEN</span>
+                <span class="bold" *ngIf="match.list == 10">Stadtisten</span>
+                <span class="bold" *ngIf="match.list == 11">Junge Liste Stuttgart</span>
+                <span class="bold" *ngIf="match.list == 12">ÖDP</span>
+                <span class="bold" *ngIf="match.list == 13">DiB</span>
+                <span class="bold" *ngIf="match.list == 14">Tierschutzpartei</span>
+                <span class="bold" *ngIf="match.list == 15">Die PARTEI</span>
+                <span class="bold" *ngIf="match.list == 16">BIG</span>
+                <span class="bold" *ngIf="match.list == 17">SchUB</span>
+                <span class="bold" *ngIf="match.list == 18">BZS23</span>
+                <span class="bold" *ngIf="match.list == 19">Kein Fahrverbot in Stuttgart</span>
+                <span class="bold" *ngIf="match.list == 20">FeLi</span>
+              </p>
+              <p class="slim c_info_text">Listenplatz: 
+                <span class="bold">{{match.list_number}}</span>
+              
+              </p>
+              <p class="slim c_info_text">Stadtbezirk: 
+                <span class="bold" *ngIf="match.district == 1">Mitte</span>
+                <span class="bold" *ngIf="match.district == 2">Nord</span>
+                <span class="bold" *ngIf="match.district == 3">Ost</span>
+                <span class="bold" *ngIf="match.district == 4">Süd</span>
+                <span class="bold" *ngIf="match.district == 5">West</span>
+                <span class="bold" *ngIf="match.district == 6">Bad Cannstatt</span>
+                <span class="bold" *ngIf="match.district == 7">Birkach</span>
+                <span class="bold" *ngIf="match.district == 8">Botnang</span>
+                <span class="bold" *ngIf="match.district == 9">Degerloch</span>
+                <span class="bold" *ngIf="match.district == 10">Feuerbach</span>
+                <span class="bold" *ngIf="match.district == 11">Hedelfingen</span>
+                <span class="bold" *ngIf="match.district == 12">Möhringen</span>
+                <span class="bold" *ngIf="match.district == 13">Mühlhausen</span>
+                <span class="bold" *ngIf="match.district == 14">Münster</span>
+                <span class="bold" *ngIf="match.district == 15">Obertürkheim</span>
+                <span class="bold" *ngIf="match.district == 16">Plieningen</span>
+                <span class="bold" *ngIf="match.district == 17">Sillenbuch</span>
+                <span class="bold" *ngIf="match.district == 18">Stammheim</span>
+                <span class="bold" *ngIf="match.district == 19">Untertürkheim</span>
+                <span class="bold" *ngIf="match.district == 20">Vaihingen</span>
+                <span class="bold" *ngIf="match.district == 21">Wangen</span>
+                <span class="bold" *ngIf="match.district == 22">Weilimdorf</span>
+                <span class="bold" *ngIf="match.district == 23">Zuffenhausen</span>
+
+              </p>     
           </div>       
           </div>
           <div class="detailArrow">
@@ -72,19 +121,126 @@
   </div>
 </div>
 
+<h4 *ngIf="SHOW_STATE == 1" class="divider">Die folgenden KandidatInnen sind nicht mehr in deinem Team:</h4>
 
+<div *ngIf="SHOW_STATE == 1"  class="content">
+  <div *ngFor="let match of matches | slice:20; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }}">
+    <ion-card class="candidateCard grayed">
+      <ion-row class="iconRow">
+        <ion-col size="3">
+          <div class="cCardLeft">
+              <div class="percentage">
+                {{match.show_distance}}
+              </div> 
+            </div>
+        </ion-col>
+
+        <ion-col size="6">
+
+        </ion-col>
+      </ion-row>
+      <ion-row class="nameRow">
+          <p class="c_name">{{match.name}}, <span class="slim">{{match.birthdate}}</span></p>
+      </ion-row>
+      <ion-row class="fullHeight">
+        <ion-col class="fullHeight" size="3">
+          <div class="cCardLeft">
+              <ion-avatar>
+                  <img src="https://komunat.de/uploads/{{match.uuid}}.png"/>
+                </ion-avatar>
+          </div>
+        </ion-col>
+        <ion-col size="1">
+
+        </ion-col>
+
+        <ion-col size="7">
+
+          <div class="cCardRight">
+            <div class="c_info">
+                <p class="slim c_info_text">Liste: 
+                    <span class="bold" *ngIf="match.list == 1">CDU</span>
+                    <span class="bold" *ngIf="match.list == 2">GRÜNE</span>
+                    <span class="bold" *ngIf="match.list == 3">SPD</span>
+                    <span class="bold" *ngIf="match.list == 4">Freie Wähler</span>
+                    <span class="bold" *ngIf="match.list == 5">FDP</span>
+                    <span class="bold" *ngIf="match.list == 6">SÖS</span>
+                    <span class="bold" *ngIf="match.list == 7">AfD</span>
+                    <span class="bold" *ngIf="match.list == 8">DIE LINKE</span>
+                    <span class="bold" *ngIf="match.list == 9">PIRATEN</span>
+                    <span class="bold" *ngIf="match.list == 10">Stadtisten</span>
+                    <span class="bold" *ngIf="match.list == 11">Junge Liste Stuttgart</span>
+                    <span class="bold" *ngIf="match.list == 12">ÖDP</span>
+                    <span class="bold" *ngIf="match.list == 13">DiB</span>
+                    <span class="bold" *ngIf="match.list == 14">Tierschutzpartei</span>
+                    <span class="bold" *ngIf="match.list == 15">Die PARTEI</span>
+                    <span class="bold" *ngIf="match.list == 16">BIG</span>
+                    <span class="bold" *ngIf="match.list == 17">SchUB</span>
+                    <span class="bold" *ngIf="match.list == 18">BZS23</span>
+                    <span class="bold" *ngIf="match.list == 19">Kein Fahrverbot in Stuttgart</span>
+                    <span class="bold" *ngIf="match.list == 20">FeLi</span>
+                  </p>
+                  <p class="slim c_info_text">Listenplatz: 
+                    <span class="bold">{{match.list_number}}</span>
+                  
+                  </p>
+                  <p class="slim c_info_text">Stadtbezirk: 
+                    <span class="bold" *ngIf="match.district == 1">Mitte</span>
+                    <span class="bold" *ngIf="match.district == 2">Nord</span>
+                    <span class="bold" *ngIf="match.district == 3">Ost</span>
+                    <span class="bold" *ngIf="match.district == 4">Süd</span>
+                    <span class="bold" *ngIf="match.district == 5">West</span>
+                    <span class="bold" *ngIf="match.district == 6">Bad Cannstatt</span>
+                    <span class="bold" *ngIf="match.district == 7">Birkach</span>
+                    <span class="bold" *ngIf="match.district == 8">Botnang</span>
+                    <span class="bold" *ngIf="match.district == 9">Degerloch</span>
+                    <span class="bold" *ngIf="match.district == 10">Feuerbach</span>
+                    <span class="bold" *ngIf="match.district == 11">Hedelfingen</span>
+                    <span class="bold" *ngIf="match.district == 12">Möhringen</span>
+                    <span class="bold" *ngIf="match.district == 13">Mühlhausen</span>
+                    <span class="bold" *ngIf="match.district == 14">Münster</span>
+                    <span class="bold" *ngIf="match.district == 15">Obertürkheim</span>
+                    <span class="bold" *ngIf="match.district == 16">Plieningen</span>
+                    <span class="bold" *ngIf="match.district == 17">Sillenbuch</span>
+                    <span class="bold" *ngIf="match.district == 18">Stammheim</span>
+                    <span class="bold" *ngIf="match.district == 19">Untertürkheim</span>
+                    <span class="bold" *ngIf="match.district == 20">Vaihingen</span>
+                    <span class="bold" *ngIf="match.district == 21">Wangen</span>
+                    <span class="bold" *ngIf="match.district == 22">Weilimdorf</span>
+                    <span class="bold" *ngIf="match.district == 23">Zuffenhausen</span>
+    
+                  </p> 
+          </div>       
+          </div>
+          <div class="detailArrow">
+              <ion-icon name="arrow-dropright"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+      <div class="lefttopclickable" (click) ="showDetails(i)">
+        </div>
+      <div class="clickable" (click) ="showDetails(i)">
+        </div>
+    </ion-card>
+  </div>
+  <br>
+  <ion-card *ngIf="LAST == false" class="loadBtn">
+      <ion-button (click)="loadMore()" expand="block">Mehr laden...</ion-button>
+    </ion-card>
+    <br>
+</div>
 
 <!--START SUBSTITUTE-->
 
 <div *ngIf="SHOW_STATE == 2"  class="content">
-    <div @items *ngFor="let s of substitutes; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }}">
+    <div *ngFor="let s of substitutes; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }}">
       
         <ion-card class="candidateCard">
             <ion-row class="iconRow">
               <ion-col size="3">
                 <div class="cCardLeft">
                     <div class="percentage">
-                        {{s.distance}}
+                        {{s.show_distance}}
                     </div> 
                   </div>
               </ion-col>
@@ -99,13 +255,13 @@
               </ion-col>
             </ion-row>
             <ion-row class="nameRow">
-                <p class="c_name">{{match.candidate.name}}, <span class="slim">30</span></p>
+                <p class="c_name">{{s.name}}, <span class="slim">30</span></p>
             </ion-row>
             <ion-row class="fullHeight">
               <ion-col class="fullHeight" size="3">
                 <div class="cCardLeft">
                     <ion-avatar>
-                        <img src="https://komunat.de/uploads/{{match.uuid}}.png"/>
+                        <img src="https://komunat.de/uploads/{{s.uuid}}.png"/>
                       </ion-avatar>
                 </div>
               </ion-col>
@@ -117,9 +273,58 @@
       
                 <div class="cCardRight">
                   <div class="c_info">
-                    <p class="slim c_info_text">Liste: <span class="bold">{{match.candidate.list}}</span></p>
-                    <p class="slim c_info_text">Listenplatz: <span class="bold">{{match.candidate.list_number}}</span></p>
-                    <p class="slim c_info_text">Stadtbezirk: <span class="bold">{{match.candidate.district}}</span></p>     
+                      <p class="slim c_info_text">Liste: 
+                          <span class="bold" *ngIf="s.list == 1">CDU</span>
+                          <span class="bold" *ngIf="s.list == 2">GRÜNE</span>
+                          <span class="bold" *ngIf="s.list == 3">SPD</span>
+                          <span class="bold" *ngIf="s.list == 4">Freie Wähler</span>
+                          <span class="bold" *ngIf="s.list == 5">FDP</span>
+                          <span class="bold" *ngIf="s.list == 6">SÖS</span>
+                          <span class="bold" *ngIf="s.list == 7">AfD</span>
+                          <span class="bold" *ngIf="s.list == 8">DIE LINKE</span>
+                          <span class="bold" *ngIf="s.list == 9">PIRATEN</span>
+                          <span class="bold" *ngIf="s.list == 10">Stadtisten</span>
+                          <span class="bold" *ngIf="s.list == 11">Junge Liste Stuttgart</span>
+                          <span class="bold" *ngIf="s.list == 12">ÖDP</span>
+                          <span class="bold" *ngIf="s.list == 13">DiB</span>
+                          <span class="bold" *ngIf="s.list == 14">Tierschutzpartei</span>
+                          <span class="bold" *ngIf="s.list == 15">Die PARTEI</span>
+                          <span class="bold" *ngIf="s.list == 16">BIG</span>
+                          <span class="bold" *ngIf="s.list == 17">SchUB</span>
+                          <span class="bold" *ngIf="s.list == 18">BZS23</span>
+                          <span class="bold" *ngIf="s.list == 19">Kein Fahrverbot in Stuttgart</span>
+                          <span class="bold" *ngIf="s.list == 20">FeLi</span>
+                        </p>
+                        <p class="slim c_info_text">Listenplatz: 
+                          <span class="bold">{{s.list_number}}</span>
+                        
+                        </p>
+                        <p class="slim c_info_text">Stadtbezirk: 
+                          <span class="bold" *ngIf="s.district == 1">Mitte</span>
+                          <span class="bold" *ngIf="s.district == 2">Nord</span>
+                          <span class="bold" *ngIf="s.district == 3">Ost</span>
+                          <span class="bold" *ngIf="s.district == 4">Süd</span>
+                          <span class="bold" *ngIf="s.district == 5">West</span>
+                          <span class="bold" *ngIf="s.district == 6">Bad Cannstatt</span>
+                          <span class="bold" *ngIf="s.district == 7">Birkach</span>
+                          <span class="bold" *ngIf="s.district == 8">Botnang</span>
+                          <span class="bold" *ngIf="s.district == 9">Degerloch</span>
+                          <span class="bold" *ngIf="s.district == 10">Feuerbach</span>
+                          <span class="bold" *ngIf="s.district == 11">Hedelfingen</span>
+                          <span class="bold" *ngIf="s.district == 12">Möhringen</span>
+                          <span class="bold" *ngIf="s.district == 13">Mühlhausen</span>
+                          <span class="bold" *ngIf="s.district == 14">Münster</span>
+                          <span class="bold" *ngIf="s.district == 15">Obertürkheim</span>
+                          <span class="bold" *ngIf="s.district == 16">Plieningen</span>
+                          <span class="bold" *ngIf="s.district == 17">Sillenbuch</span>
+                          <span class="bold" *ngIf="s.district == 18">Stammheim</span>
+                          <span class="bold" *ngIf="s.district == 19">Untertürkheim</span>
+                          <span class="bold" *ngIf="s.district == 20">Vaihingen</span>
+                          <span class="bold" *ngIf="s.district == 21">Wangen</span>
+                          <span class="bold" *ngIf="s.district == 22">Weilimdorf</span>
+                          <span class="bold" *ngIf="s.district == 23">Zuffenhausen</span>
+          
+                        </p> 
                 </div>       
                 </div>
                 <div class="detailArrow">
@@ -185,7 +390,7 @@
 </div>
 
 
-<ion-footer *ngIf="NO_TUTORIAL==true">
+<ion-footer padding *ngIf="NO_TUTORIAL==true">
     <h1 (click)="showEmailSend()" class="footer">Ergebnis per Mail senden</h1>
 </ion-footer>
 

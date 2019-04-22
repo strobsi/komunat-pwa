@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, Events } from "@ionic/angular";
+import { NavController, Events, Platform } from "@ionic/angular";
 import { NavigationExtras } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
 import anime from 'animejs';
@@ -12,7 +12,7 @@ import 'hammerjs';
 })
 export class ContentPage implements OnInit {
 
-  constructor(public navCtrl: NavController, private route: ActivatedRoute) {
+  constructor(public navCtrl: NavController, private route: ActivatedRoute, public platform: Platform) {
   }
 
   btn0Val;
@@ -177,6 +177,14 @@ export class ContentPage implements OnInit {
 ]
 
 ngOnInit() {
+  this.platform.ready().then(() => {
+    if (this.platform.is('ios')) {
+       var upper = document.querySelector(".upper");
+       var lower = document.querySelector(".lower");
+       upper.setAttribute("style", "height:45%;");
+       lower.setAttribute("style", "height:45%;");
+    }
+  });
   this.route.queryParams.subscribe(params => {
     this.vData = JSON.parse(params["vData"]);
     console.log(this.vData)

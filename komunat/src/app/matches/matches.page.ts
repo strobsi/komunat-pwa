@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { AlertController, IonSlides } from '@ionic/angular';
 import { ActivatedRoute } from "@angular/router";
 import anime from 'animejs';
@@ -8,6 +8,8 @@ import {PSTATE} from '../utils/pstate';
 import { NavController } from "@ionic/angular";
 import { NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
   selector: 'app-matches',
@@ -40,6 +42,9 @@ export class MatchesPage implements OnInit {
 
 
   matches = [];
+  result = {};
+  page = 1;
+  LAST = false;
   
 
   substitutes = [];
@@ -96,6 +101,35 @@ export class MatchesPage implements OnInit {
     }
   }
 
+  private loadResults(a) {
+  
+     var xhr = new XMLHttpRequest();
+     var url = "https://api.komunat.de/result";
+     a.page = this.page;
+     var data = JSON.stringify(a);
+     xhr.open("POST", url, true);
+     xhr.setRequestHeader("Content-Type", "application/json");
+     xhr.onreadystatechange = () => {
+         if (xhr.readyState === 4 && xhr.status === 200) {
+           var data = JSON.parse(xhr.responseText);
+            if (this.page == 1) {
+              this.matches = data
+            }
+            else {
+              if(data.length < 30) {
+                this.LAST = true;
+              }
+              for (var i = 0; i < data.length; i++) {
+                console.log("Appending to existing")
+                this.matches.push(data[i]);
+              }
+            }
+            this.sortMatches();
+         }
+     };
+     xhr.send(data);
+  }
+
   ngOnInit() {    
     this.storage.ready().then(() => {
       this.storage.get("tutorial_matches").then( result => {
@@ -112,21 +146,13 @@ export class MatchesPage implements OnInit {
     
     this.setState(PSTATE.MATCHES);
     this.route.queryParams.subscribe(params => {
-     var a = JSON.parse(params["matches"]);
-     var xhr = new XMLHttpRequest();
-     var url = "http://komunat.de:3333/result";
-     var data = JSON.stringify(a);
-     xhr.open("POST", url, true);
-     xhr.setRequestHeader("Content-Type", "application/json");
-     xhr.onreadystatechange = () => {
-         if (xhr.readyState === 4 && xhr.status === 200) {
-            this.matches = JSON.parse(xhr.responseText)
-            this.sortMatches();
-         }
-     };
-     xhr.send(data);
+      var a = JSON.parse(params["matches"]);
+      this.result = a;
+      this.page = 1;
+      this.loadResults(a);
     });
   }
+
 
   public reject(i) {
     const element =  document.querySelector('.match_'+i);
@@ -287,8 +313,8 @@ export class MatchesPage implements OnInit {
 
   private sortMatches() {
     this.matches.sort(function (a, b) {
-      a.distance = Math.round(a.distance)
-      b.distance = Math.round(b.distance)
+      a.distance = a.distance
+      b.distance = b.distance
       if (a.distance < b.distance) {
         return 1;
       }
@@ -308,12 +334,22 @@ export class MatchesPage implements OnInit {
     }
   }
 
+  public loadMore() {
+      this.page = this.page+1;
+      this.loadResults(this.result);
+  }
+
   public showEmailSend() {
     var team = this.matches.slice(0, 20);
-    console.log(team.length)
+
+    this.storage.ready().then(() => {
+        this.storage.set("team", JSON.stringify(team));
+        this.storage.set("result",JSON.stringify(this.result));
+    });
+    
     let navigationExtras: NavigationExtras = {
       queryParams: {
-          team: JSON.stringify(team)
+          //team: JSON.stringify(team)
       }
     };
     this.navCtrl.navigateForward(['share'], navigationExtras);

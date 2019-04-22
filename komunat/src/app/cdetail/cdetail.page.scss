@@ -62,16 +62,12 @@ ion-slide {
     
 }
 
-.vertical-center {
-    line-height: 100%;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    top: 50%;
-    vertical-align: middle;
-    -ms-transform: translateY(-50%,-50%);
-    transform: translateY(-50%,-50%);
-  }
+.vertical-center > *
+{
+     display: flex!important;
+     align-content: center!important;
+     align-items: center!important;
+}
 
 h2 {
     color: #4C4D4F;

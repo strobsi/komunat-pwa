@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from "@ionic/angular";
 import { NavigationExtras } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-share',
@@ -10,21 +11,35 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class SharePage implements OnInit {
 
-  team;
+  team = [];
   loader;
   email: string;
+  result = {};
 
-  constructor(private route: ActivatedRoute, public navCtrl: NavController) {
+  constructor(private route: ActivatedRoute, public navCtrl: NavController, public storage: Storage) {
     
   }
 
   ngOnInit() {
     this.loader = document.querySelector(".loader")
     this.loader.style.opacity = 0.0;
-    this.route.queryParams.subscribe(params => {
-      this.team = JSON.parse(params["team"]);
-      console.log(this.team)
-     });
+    this.storage.ready().then(() => {
+      this.storage.get("result").then( result => {
+        if (!result) {
+            
+        } else {
+          this.result = JSON.parse(result);
+          this.storage.get("team").then( team => {
+            if (!result) {
+                
+            } else {
+                this.team = JSON.parse(team);
+                console.log(this.team.length)
+            }
+        })
+        }
+    })
+    });
   }
 
   public sendMail() {
@@ -33,8 +48,11 @@ export class SharePage implements OnInit {
 
     var res = {
       receiver:this.email,
-      matches:this.team,
+      team:this.team,
+      result: this.result,
     }
+
+    console.log(res);
 
     var xhr = new XMLHttpRequest();
     var url = "http://localhost:3000/result/share";

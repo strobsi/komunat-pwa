@@ -23,18 +23,19 @@ You can also target devices with aspect ratio. */
     width: auto;
   }                
 }
-.upper {
-    height:50%;
-    margin-top: 5px;
-    position: relative;
-    text-align: center;
-  }
-  
-  .lower {
-    height: 50%;
-    position: relative;
-    text-align: center;
-  }
+
+ .upper {
+  height:50%;
+  margin-top: 5px;
+  position: relative;
+  text-align: center;
+}
+
+ .lower {
+  height: 50%;
+  position: relative;
+  text-align: center;
+}
   
   .beautify {
     padding-top:10px;

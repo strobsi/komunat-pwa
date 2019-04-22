@@ -31,7 +31,7 @@
           <div class="eventList">
               <h4>MEINE WERTE</h4>
               <br>
-              <div class="eventWrapper" @items *ngFor="let e of candidate.values; let i = index">
+              <div class="eventWrapper" *ngFor="let e of candidate.values; let i = index">
                 <div class="event">
                 <hr>
                   <ion-row class="eventTitle bold">
@@ -50,7 +50,7 @@
           <div class="eventList">
               <h4>MEINE AUFGABEN</h4>
               <br>
-              <div class="eventWrapper" @items *ngFor="let e of candidate.contents; let i = index">
+              <div class="eventWrapper" *ngFor="let e of candidate.contents; let i = index">
                 <div class="event">
                 <hr>
                   <ion-row class="eventTitle bold">
@@ -69,7 +69,7 @@
           <div class="eventList">
               <h4>KOMM VORBEI & TRIFF MICH HIER PERSÖNLICH</h4>
               <br>
-              <div class="eventWrapper" @items *ngFor="let event of events; let i = index">
+              <div class="eventWrapper" *ngFor="let event of events; let i = index">
                 <div class="event">
                 <hr>
                   <ion-row class="eventTitle bold">

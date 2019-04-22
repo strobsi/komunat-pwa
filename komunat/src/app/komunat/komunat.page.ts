@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, Events } from "@ionic/angular";
+import { NavController, Events, Platform } from "@ionic/angular";
 import { NavigationExtras } from '@angular/router';
 import anime from 'animejs';
 import 'hammerjs';
@@ -11,11 +11,19 @@ import 'hammerjs';
 })
 export class KomunatPage implements OnInit {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public platform: Platform) {
 
   }
 
   ngOnInit() {
+    this.platform.ready().then(() => {
+      if (this.platform.is('ios')) {
+         var upper = document.querySelector(".upper");
+         var lower = document.querySelector(".lower");
+         upper.setAttribute("style", "height:45%;");
+         lower.setAttribute("style", "height:45%;");
+      }
+    });
     console.log("init")
       this.arr = this.initarr
       this.newRound()

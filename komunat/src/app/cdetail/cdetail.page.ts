@@ -28,6 +28,28 @@ export class CdetailPage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
      this.candidate = JSON.parse(params["candidate"]);
+     this.candidate.values.sort(function (a, b) {
+      a.rating = Math.round(a.rating)
+      b.rating = Math.round(b.rating)
+      if (a.rating < b.rating) {
+        return 1;
+      }
+      if (a.rating > b.rating) {
+        return -1;
+      }
+      return 0;
+    });
+    this.candidate.contents.sort(function (a, b) {
+      a.rating = Math.round(a.rating)
+      b.rating = Math.round(b.rating)
+      if (a.rating < b.rating) {
+        return 1;
+      }
+      if (a.rating > b.rating) {
+        return -1;
+      }
+      return 0;
+    });
      console.log(this.candidate)
     });
   }
