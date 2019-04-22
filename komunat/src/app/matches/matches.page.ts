@@ -104,7 +104,7 @@ export class MatchesPage implements OnInit {
   private loadResults(a) {
   
      var xhr = new XMLHttpRequest();
-     var url = "https://api.komunat.de/result";
+     var url = "https://komunat.de/api/result";
      a.page = this.page;
      var data = JSON.stringify(a);
      xhr.open("POST", url, true);
