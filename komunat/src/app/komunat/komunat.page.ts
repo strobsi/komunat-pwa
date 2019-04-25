@@ -400,8 +400,11 @@ private sendResult(a) {
 }
 
   moveOn(data) {
+    console.log("Moving on")
     this.storage.ready().then(() => {
+      console.log("Moving on 2")
       this.storage.set("values", data);
+      console.log("Moving on 3")
       let navigationExtras: NavigationExtras = {
         queryParams: {
         }
