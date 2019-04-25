@@ -350,13 +350,14 @@ export class MatchesPage implements OnInit {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
     const div = document.getElementById("teamList");
+    const options = {background:"white",height :div.clientHeight , width : div.clientWidth  };
     html2canvas(div).then((canvas)=>{
       console.log("Finished rendering")
       var data = canvas.toDataURL();
       var docDefinition = {
           content: [{
               image: data,
-              width: 500,
+              width: div.clientWidth,
           }]
       };
       pdfMake.createPdf(docDefinition).download();    
