@@ -351,7 +351,7 @@ export class MatchesPage implements OnInit {
 
     const div = document.getElementById("teamList");
     const options = {background:"white",height :div.clientHeight , width : div.clientWidth  };
-    html2canvas(div).then((canvas)=>{
+    html2canvas(div,options).then((canvas)=>{
       console.log("Finished rendering")
       var data = canvas.toDataURL();
       var docDefinition = {
