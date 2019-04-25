@@ -13,9 +13,9 @@ import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
-//import pdfMake from 'pdfmake/build/pdfMake';
-//import pdfFonts from 'pdfmake/build/vfs_fonts';
-//pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import pdfMake from 'pdfmake/build/pdfMake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-matches',
@@ -358,7 +358,7 @@ export class MatchesPage implements OnInit {
               width: 500,
           }]
       };
-      //this.pdfObj = pdfMake.createPdf(docDefinition);
+      this.pdfObj = pdfMake.createPdf(docDefinition);
       this.pdfObj.download();
     });
   }
