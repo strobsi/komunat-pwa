@@ -77,16 +77,6 @@ ion-col {
     font-size:3vw;
   }
 
-  /* iPhone 5 
-You can also target devices with aspect ratio. */                       
-@media screen and (device-aspect-ratio: 40/71) {                              
-  .buttonSection {
-    height: 60vh;
-    width: auto;
-  }               
-}
-
-
 // PROGRESS DOTS
 .progressContainer {
   position: absolute;

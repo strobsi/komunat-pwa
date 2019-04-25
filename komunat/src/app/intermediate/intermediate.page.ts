@@ -19,17 +19,13 @@ export class IntermediatePage implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.vData = JSON.parse(params["vData"]);
-      console.log(this.vData)
-     });
-  }
 
+  }
+  
   public toContent() {
     console.log("To the content");
     let navigationExtras: NavigationExtras = {
       queryParams: {
-          vData: JSON.stringify(this.vData),
       }
     };
     this.navCtrl.navigateForward(['content'], navigationExtras);

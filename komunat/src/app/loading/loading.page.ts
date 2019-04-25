@@ -16,34 +16,20 @@ export class LoadingPage implements OnInit {
   spinner;
 
   ngOnInit() {
-
-    this.route.queryParams.subscribe(params => {
-      var r = JSON.parse(params["result"]);
-      this.spinner = document.querySelector(".spinner")
-      this.spinner.style.opacity = "1.0"
-      // Send result 
-
       setTimeout(() => 
         {
-          this.moveOn(JSON.stringify(r))            
+          this.moveOn()            
         },
         5000);
-
-    });
   }
 
 // Moving on to matches
-moveOn(data) {
+moveOn() {
   console.log("Moving on")
   let navigationExtras: NavigationExtras = {
     queryParams: {
-        matches: data
     }
   };
-  this.navCtrl.navigateForward(['matches'],navigationExtras)
-        .catch(err => {
-            // Handle here
-            console.log("Error here")
-        });
+  this.navCtrl.navigateForward(['matches'],navigationExtras);
 }
 }

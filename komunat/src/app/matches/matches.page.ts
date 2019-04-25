@@ -9,7 +9,11 @@ import { NavController } from "@ionic/angular";
 import { NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-
+import * as jsPDF from 'jspdf';
+import * as html2canvas from 'html2canvas';
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import pdfMake from 'pdfmake/build/pdfMake';
 
 @Component({
   selector: 'app-matches',
@@ -45,6 +49,7 @@ export class MatchesPage implements OnInit {
   result = {};
   page = 1;
   LAST = false;
+  pdfObj = null;
   
 
   substitutes = [];
@@ -81,7 +86,7 @@ export class MatchesPage implements OnInit {
         }
       }]
     };
-  constructor(private route: ActivatedRoute, public alertController: AlertController, public navCtrl: NavController, public storage: Storage) {
+  constructor(private route: ActivatedRoute, public alertController: AlertController, public navCtrl: NavController, public storage: Storage, private file: File, private fileopener: FileOpener) {
     
   }
 
@@ -96,8 +101,17 @@ export class MatchesPage implements OnInit {
   backToMatches(t,i) {
     if (t == 0) {
       // Coming from subs
+      const element =  document.querySelector('.match_'+i);
       this.matches.push(this.substitutes[i])
       this.substitutes.splice(i,1)
+      this.pulseTeam();
+      anime({
+        targets: element,
+        translateX: "150vw",
+        rotate: 40,
+        easing: 'easeInOutQuad',
+        duration: 400
+      });
     }
   }
 
@@ -130,29 +144,20 @@ export class MatchesPage implements OnInit {
      xhr.send(data);
   }
 
-  ngOnInit() {    
-    this.storage.ready().then(() => {
-      this.storage.get("tutorial_matches").then( result => {
-        if (!result) {
-            this.storage.set("tutorial_matches", true);
-            this.NO_TUTORIAL = false;
-            // Show tutorial!
-        } else {
-             this.NO_TUTORIAL = true;
-            //
-        }
-    })
-    });
-    
+  ngOnInit() {        
     this.setState(PSTATE.MATCHES);
-    this.route.queryParams.subscribe(params => {
-      var a = JSON.parse(params["matches"]);
-      this.result = a;
-      this.page = 1;
-      this.loadResults(a);
-    });
-  }
 
+    this.storage.get("values").then( result => {
+      if (!result) {
+      } else {
+        var a = JSON.parse(result);
+       this.NO_TUTORIAL = false;
+       this.result = a;
+       this.page = 1;
+       this.loadResults(a);
+      }
+  })
+  }
 
   public reject(i) {
     const element =  document.querySelector('.match_'+i);
@@ -339,7 +344,25 @@ export class MatchesPage implements OnInit {
       this.loadResults(this.result);
   }
 
+  private generatePdf(){
+    const div = document.getElementById("teamList");
+    const options = {background:"white",height :div.clientHeight , width : div.clientWidth  };
+    html2canvas(div,options).then((canvas)=>{
+      console.log("Finished rendering")
+      var data = canvas.toDataURL();
+      var docDefinition = {
+          content: [{
+              image: data,
+              width: 500,
+          }]
+      };
+      this.pdfObj = pdfMake.createPdf(docDefinition);
+      this.pdfObj.download();
+    });
+  }
+
   public showEmailSend() {
+    this.generatePdf();
     var team = this.matches.slice(0, 20);
 
     this.storage.ready().then(() => {

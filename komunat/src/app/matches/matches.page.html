@@ -1,6 +1,6 @@
 <ion-content>
 
-<div class="container">
+<div class="container" id="teamList">
   <ion-row class="titleBar">
       <ion-col size="10">
       <p class="mainLbl">DEIN TEAM</p>
@@ -217,9 +217,9 @@
           </div>
         </ion-col>
       </ion-row>
-      <div class="lefttopclickable" (click) ="showDetails(i)">
+      <div class="lefttopclickable" (click) ="showDetails(i+20)">
         </div>
-      <div class="clickable" (click) ="showDetails(i)">
+      <div class="clickable" (click) ="showDetails(i+20)">
         </div>
     </ion-card>
   </div>
@@ -246,7 +246,6 @@
               </ion-col>
       
               <ion-col size="6">
-      
               </ion-col>
               <ion-col size="1">
                   <div class="readd" (click)="backToMatches(0,i)">
@@ -346,18 +345,15 @@
         <ion-slide>
           <div class="tutorialContent">
             <h5 class="left blue bold">Nur noch kurz</h5>
-            <br>
-            <div class="exampleBox">
-              
-            </div>
             <div class="tutorialText">
                 <h5 class="white">
-                    Schiebe die Karte nach rechts oder links um den Kandidat aus deinem Team zu entfernen.
-                    <br>
-                    Oder Klicke auf <ion-icon class="red rejectIcon" name="close-circle"></ion-icon>
+                    Klicke auf <ion-icon class="red rejectIcon" name="close-circle"></ion-icon> 
                     <br>
                     <br>
-                    Der nächste Kandidat rutscht automatisch in dein Team
+                    um den/die KandidatIn aus deinem Team zu entfernen.
+                    <br>
+                    <br>
+                    Der/die nächste KandidatIn rutscht automatisch in dein Team
                     <br>
                     <br>
                 </h5>
@@ -376,7 +372,7 @@
               <h5 class="left blue bold">Nur noch kurz</h5>
               <br>
                   <h5 class="white">
-                      Den entfernten Kandidat kannst du auf der Ersatzbank wiederfinden.
+                      Den entfernten Kandidat kannst du rechts oben auf der Ersatzbank wiederfinden.
                   </h5>
                 <ion-row class="tutBtn">
                     <ion-col size=12>

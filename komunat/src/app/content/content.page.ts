@@ -4,6 +4,7 @@ import { NavigationExtras } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
 import anime from 'animejs';
 import 'hammerjs';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-content',
@@ -12,7 +13,7 @@ import 'hammerjs';
 })
 export class ContentPage implements OnInit {
 
-  constructor(public navCtrl: NavController, private route: ActivatedRoute, public platform: Platform) {
+  constructor(public navCtrl: NavController, private route: ActivatedRoute, public platform: Platform, public storage: Storage) {
   }
 
   btn0Val;
@@ -181,16 +182,61 @@ ngOnInit() {
     if (this.platform.is('ios')) {
        var upper = document.querySelector(".upper");
        var lower = document.querySelector(".lower");
-       upper.setAttribute("style", "height:45%;");
-       lower.setAttribute("style", "height:45%;");
+      if(this.iPhoneVersion() == "X-Xs") {
+        upper.setAttribute("style", "height:43%;");
+        lower.setAttribute("style", "height:43%;");
+      } else if(this.iPhoneVersion() == "Xmax-Xr") {
+        upper.setAttribute("style", "height:45%;");
+        lower.setAttribute("style", "height:45%;");
+      } else if(this.iPhoneVersion() == "5") {
+        upper.setAttribute("style", "height:40%;");
+        lower.setAttribute("style", "height:40%;");
+      }
+        else {
+        upper.setAttribute("style", "height:43%;");
+        lower.setAttribute("style", "height:43%;");
+      }
     }
   });
-  this.route.queryParams.subscribe(params => {
-    this.vData = JSON.parse(params["vData"]);
-    console.log(this.vData)
+
+  this.storage.ready().then(() => {
+    this.storage.get("values").then( result => {
+      if (!result) {
+      } else {
+        this.vData = JSON.parse(result);
+        this.arr = this.initarr
+        this.newRound()
+      }
+  })
   });
-    this.arr = this.initarr
-    this.newRound()
+}
+
+private iPhoneVersion() {
+  var iHeight = window.screen.height;
+  var iWidth = window.screen.width;
+
+  if (iWidth === 414 && iHeight === 896) {
+    return "Xmax-Xr";
+  }
+  else if (iWidth === 375 && iHeight === 812) {
+    return "X-Xs";
+  }
+  else if (iWidth === 320 && iHeight === 480) {
+    return "4";
+  }
+  else if (iWidth === 375 && iHeight === 667) {
+    return "6";
+  }
+  else if (iWidth === 414 && iHeight === 736) {
+    return "6+";
+  }
+  else if (iWidth === 320 && iHeight === 568) {
+    return "5";
+  }
+  else if (iHeight <= 480) {
+    return "2-3";
+  }
+  return 'none';
 }
 
   private newRound(): void {
@@ -370,11 +416,13 @@ private showLoading(a) {
     this.vData.metadata.contentFinished = finished;
     var data = JSON.stringify(this.vData);
 
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-          result: data
-      }
-    };
-    this.navCtrl.navigateForward(['loading'], navigationExtras);
+    this.storage.ready().then(() => {
+      this.storage.set("matches", data);
+      let navigationExtras: NavigationExtras = {
+        queryParams: {
+        }
+      };
+      this.navCtrl.navigateForward(['loading'], navigationExtras);
+    });
  }
 }

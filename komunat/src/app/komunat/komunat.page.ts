@@ -3,6 +3,7 @@ import { NavController, Events, Platform } from "@ionic/angular";
 import { NavigationExtras } from '@angular/router';
 import anime from 'animejs';
 import 'hammerjs';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-komunat',
@@ -11,7 +12,7 @@ import 'hammerjs';
 })
 export class KomunatPage implements OnInit {
 
-  constructor(public navCtrl: NavController, public platform: Platform) {
+  constructor(public navCtrl: NavController, public platform: Platform, public storage: Storage) {
 
   }
 
@@ -20,8 +21,20 @@ export class KomunatPage implements OnInit {
       if (this.platform.is('ios')) {
          var upper = document.querySelector(".upper");
          var lower = document.querySelector(".lower");
-         upper.setAttribute("style", "height:45%;");
-         lower.setAttribute("style", "height:45%;");
+        if(this.iPhoneVersion() == "X-Xs") {
+          upper.setAttribute("style", "height:43%;");
+          lower.setAttribute("style", "height:43%;");
+        } else if(this.iPhoneVersion() == "Xmax-Xr") {
+          upper.setAttribute("style", "height:45%;");
+          lower.setAttribute("style", "height:45%;");
+        } else if(this.iPhoneVersion() == "5") {
+          upper.setAttribute("style", "height:40%;");
+          lower.setAttribute("style", "height:40%;");
+        }
+          else {
+          upper.setAttribute("style", "height:43%;");
+          lower.setAttribute("style", "height:43%;");
+        }
       }
     });
     console.log("init")
@@ -171,6 +184,33 @@ export class KomunatPage implements OnInit {
     ]
 ]
 
+private iPhoneVersion() {
+  var iHeight = window.screen.height;
+  var iWidth = window.screen.width;
+
+  if (iWidth === 414 && iHeight === 896) {
+    return "Xmax-Xr";
+  }
+  else if (iWidth === 375 && iHeight === 812) {
+    return "X-Xs";
+  }
+  else if (iWidth === 320 && iHeight === 480) {
+    return "4";
+  }
+  else if (iWidth === 375 && iHeight === 667) {
+    return "6";
+  }
+  else if (iWidth === 414 && iHeight === 736) {
+    return "6+";
+  }
+  else if (iWidth === 320 && iHeight === 568) {
+    return "5";
+  }
+  else if (iHeight <= 480) {
+    return "2-3";
+  }
+  return 'none';
+}
   private newRound(): void {
     var needsToBeSorted = false
     // We iterate over the whole array and check if we have to sort sth. 
@@ -360,14 +400,13 @@ private sendResult(a) {
 }
 
   moveOn(data) {
-    console.log("Moving on")
-
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-          vData: data
-      }
-    };
-    this.navCtrl.navigateForward(['intermediate'], navigationExtras);
-   // this.navCtrl.navigateForward("/matches", { 'data': data });
+    this.storage.ready().then(() => {
+      this.storage.set("values", data);
+      let navigationExtras: NavigationExtras = {
+        queryParams: {
+        }
+      };
+      this.navCtrl.navigateForward(['intermediate'], navigationExtras);
+    });
 }
 }
