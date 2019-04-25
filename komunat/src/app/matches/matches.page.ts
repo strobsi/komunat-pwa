@@ -149,7 +149,7 @@ export class MatchesPage implements OnInit {
   ngOnInit() {        
     this.setState(PSTATE.MATCHES);
 
-    this.storage.get("values").then( result => {
+    this.storage.get("matches").then( result => {
       if (!result) {
       } else {
         var a = JSON.parse(result);

@@ -415,6 +415,7 @@ private showLoading(a) {
     this.vData.metadata.contentStarted = this.startedTimeStamp;
     this.vData.metadata.contentFinished = finished;
     var data = JSON.stringify(this.vData);
+    console.log(data);
 
     this.storage.ready().then(() => {
       this.storage.set("matches", data);
