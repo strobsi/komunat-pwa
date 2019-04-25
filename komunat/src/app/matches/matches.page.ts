@@ -347,9 +347,10 @@ export class MatchesPage implements OnInit {
   }
 
   private generatePdf(){
+    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
     const div = document.getElementById("teamList");
-    const options = {background:"white",height :div.clientHeight , width : div.clientWidth  };
-    html2canvas(div,options).then((canvas)=>{
+    html2canvas(div).then((canvas)=>{
       console.log("Finished rendering")
       var data = canvas.toDataURL();
       var docDefinition = {
@@ -358,8 +359,7 @@ export class MatchesPage implements OnInit {
               width: 500,
           }]
       };
-      this.pdfObj = pdfMake.createPdf(docDefinition);
-      this.pdfObj.download();
+      pdfMake.createPdf(docDefinition).download();    
     });
   }
 
