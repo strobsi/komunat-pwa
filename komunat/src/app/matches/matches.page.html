@@ -1,6 +1,6 @@
-<ion-content id="teamList">
+<ion-content>
 
-<div class="container" id="teamList">
+<div class="container">
   <ion-row class="titleBar">
       <ion-col size="10">
       <p class="mainLbl">DEIN TEAM</p>
@@ -14,7 +14,7 @@
       </ion-col>
   </ion-row>
 
-  <div *ngIf="SHOW_STATE == 1"  class="content">
+  <div *ngIf="SHOW_STATE == 1"  class="content" id="teamList">
   <div *ngFor="let match of matches; let i = index" class="animated fadeInRight delay-{{ i }}s match_{{ i }}">
     <ion-card *ngIf="i < 20" class="candidateCard">
       <ion-row class="iconRow">
