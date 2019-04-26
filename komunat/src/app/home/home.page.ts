@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Events, IonSlides } from "@ionic/angular";
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +11,13 @@ export class HomePage {
 
   @ViewChild(IonSlides) slides: IonSlides;
 
-  constructor(public navCtrl: NavController) {
+  local = null;
 
+  constructor(public navCtrl: NavController, public storage: Storage) {
+
+    this.storage.ready().then(() => {
+      this.storage.clear();
+    });
   }
   goToKomunat(e): void{
     console.log("Clicked on button ")
