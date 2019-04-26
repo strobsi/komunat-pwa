@@ -128,13 +128,13 @@ export class MatchesPage implements OnInit {
       })
      };
     let _URL = "https://komunat.de/result";
-    this.http.post(_URL,a,ParseHeaders).subscribe((res) => {
+    this.http.post(_URL,JSON.stringify(a),ParseHeaders).subscribe((res) => {
       console.log("response")
         console.log(res);
     });
 
     this.http.post("https://komunat.de/result",
-    a,ParseHeaders)
+    JSON.stringify(a),ParseHeaders)
     .subscribe(
         (val) => {
             console.log("POST call successful value returned in body", 
