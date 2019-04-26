@@ -399,8 +399,8 @@ export class MatchesPage implements OnInit {
           var t =  { text: match.name, style: 'subheader' }
           var m = { text: match.motto }
           console.log(match);
-          var list = this.getList(match.list);
-          var district = this.getDistrict(match.district);
+          var list = this.getList(parseInt(match.list,10));
+          var district = this.getDistrict(parseInt(match.district,10));
           console.log(list);
           console.log(district);
 
