@@ -322,10 +322,10 @@ export class MatchesPage implements OnInit {
     this.matches.sort(function (a, b) {
       a.distance = a.distance
       b.distance = b.distance
-      if (a.distance < b.distance) {
+      if (a.distance > b.distance) {
         return 1;
       }
-      if (a.distance > b.distance) {
+      if (a.distance < b.distance) {
         return -1;
       }
       return 0;
@@ -362,7 +362,17 @@ export class MatchesPage implements OnInit {
               body: [
                 ['Platz', 'Wert'],
               ]
-            }
+            },
+            pageBreak: 'after',
+          },
+          { text: 'Inhalte', style: 'subheader' },  
+          {
+            table: {
+              body: [
+                ['Platz', 'Inhalt'],
+              ]
+            },
+            pageBreak: 'after',
           },
         ],
         styles: {
@@ -381,9 +391,15 @@ export class MatchesPage implements OnInit {
 
       for(var i = 0; i < this.result.values.length; i++) {
         docDefinition.content[5].table.body.push(
-          [ ""+i, this.result.values[i] ],
+          [ ""+i, this.result.values[i].name ],
           )
       }
+      for(var i = 0; i < this.result.contents.length; i++) {
+        docDefinition.content[7].table.body.push(
+          [ ""+i, this.result.contents[i].name ],
+          )
+      }
+
       this.pdfObj = pdfMake.createPdf(docDefinition).download("Komunat.pdf");
 
 /*
