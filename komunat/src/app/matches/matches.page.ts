@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { AlertController, IonSlides } from '@ionic/angular';
 import { ActivatedRoute } from "@angular/router";
@@ -95,7 +95,15 @@ export class MatchesPage implements OnInit {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    
+    this.setState(PSTATE.MATCHES);
+    this.storage.ready().then(() => {
+    this.storage.get("matches").then( result => {
+      if (!result) {
+      } else {
+       console.log(result);
+      }
+  })
+  });
   }
 
   ngAfterViewInit(): void {
