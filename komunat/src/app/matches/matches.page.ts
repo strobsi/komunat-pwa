@@ -148,7 +148,6 @@ export class MatchesPage implements OnInit {
 
   ngOnInit() {        
     this.setState(PSTATE.MATCHES);
-
     this.storage.get("matches").then( result => {
       if (!result) {
       } else {
@@ -395,11 +394,13 @@ export class MatchesPage implements OnInit {
 
       for(var x = 0; x < 20; x++) {
 
-          var t =  { text: this.matches[x].name, style: 'subheader' }
-          var m = { text: this.matches[x].motto }
-          console.log(this.matches[x]);
-          var list = this.getList(this.matches[x].list);
-          var district = this.getDistrict(this.matches[x].district);
+          var match = this.matches[x];
+
+          var t =  { text: match.name, style: 'subheader' }
+          var m = { text: match.motto }
+          console.log(match);
+          var list = this.getList(match.list);
+          var district = this.getDistrict(match.district);
           console.log(list);
           console.log(district);
 
@@ -408,13 +409,13 @@ export class MatchesPage implements OnInit {
                 alignment: 'justify',
                 columns: [
                   {
-                    text:"Liste: " + this.matches[x].list
+                    text:"Liste: " + list
                   },
                   {
-                    text:"Listenplatz: " +this.matches[x].list_number
+                    text:"Listenplatz: " + match.list_number
                   },
                   {
-                    text:"Wahlbezirk: " +this.matches[x].district
+                    text:"Wahlbezirk: " + district
                   }
                 ]
           }
@@ -463,7 +464,7 @@ export class MatchesPage implements OnInit {
     */
   }
 
-  private getList(l) {
+  public getList(l) {
     switch(l) { 
       case 1: { return "CDU"; } 
       case 2: { return "GRÜNE"; } 
@@ -488,7 +489,7 @@ export class MatchesPage implements OnInit {
    } 
   }
 
-  private getDistrict(l) {
+  public getDistrict(l) {
     switch(l) { 
       case 1: { return "Mitte"; } 
       case 2: { return "Nord"; } 
