@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { AlertController, IonSlides } from '@ionic/angular';
 import { ActivatedRoute } from "@angular/router";
