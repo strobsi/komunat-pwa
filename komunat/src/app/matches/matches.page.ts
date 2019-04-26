@@ -48,7 +48,7 @@ export class MatchesPage implements OnInit {
 
 
   matches = [];
-  result = {};
+  result = {values:{},contents:{}};
   page = 1;
   LAST = false;
   pdfObj = null;
