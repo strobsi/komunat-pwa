@@ -348,7 +348,38 @@ export class MatchesPage implements OnInit {
 
   private generatePdf(){
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    var docDefinition = {
+        content: [
+          { text: 'KOMUNAT - Ergebnis', style: 'header' },
+          { text: new Date().toJSON().slice(0,10).replace(/-/g,'-') , alignment: 'right' },
+   
+          { text: 'Deine Ergebnisse', style: 'subheader' },
+          { text: "Hier werden deine Ergebnisse, sowie die deines Teams (Top 20 KandidatInnen) angezeigt" },
+   
+          { text: 'Werte', style: 'subheader' },  
+        ],
+        styles: {
+          header: {
+            fontSize: 18,
+            bold: true,
+          },
+          subheader: {
+            fontSize: 14,
+            bold: true,
+            margin: [0, 15, 0, 0]
+          }
+        }
+      } 
 
+      for(var i = 1; i < this.result.values-1; i++) {
+          docDefinition.content.push(
+            { text: "Platz "+ i + " : "+this.result.values[i]},
+          )
+      }
+      docDefinition.content.push();
+      this.pdfObj = pdfMake.createPdf(docDefinition);
+
+/*
     const div = document.getElementById("teamList");
     const options = {background:"white",height :div.clientHeight , width : div.clientWidth  };
     html2canvas(div,options).then((canvas)=>{
@@ -362,6 +393,7 @@ export class MatchesPage implements OnInit {
       };
       pdfMake.createPdf(docDefinition).download();    
     });
+    */
   }
 
   public showEmailSend() {
