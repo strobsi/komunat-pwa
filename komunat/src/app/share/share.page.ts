@@ -33,12 +33,12 @@ export class SharePage implements OnInit {
     this.storage.ready().then(() => {
       this.storage.get("result").then( result => {
         if (!result) {
-            
+            console.log("error reading")
         } else {
           this.result = JSON.parse(result);
           this.storage.get("team").then( team => {
             if (!result) {
-                
+              console.log("error reading 2")
             } else {
                 this.team = JSON.parse(team);
             }
