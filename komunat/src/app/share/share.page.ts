@@ -104,24 +104,24 @@ export class SharePage implements OnInit {
       for(var x = 0; x < 20; x++) {
 
           this.matches[x].values.sort(function (a, b) {
-            a.ranking = a.ranking
-            b.ranking = b.ranking
-            if (a.ranking < b.ranking) {
+            a.rating = a.rating
+            b.rating = b.rating
+            if (a.rating < b.rating) {
               return 1;
             }
-            if (a.ranking > b.ranking) {
+            if (a.rating > b.rating) {
               return -1;
             }
             return 0;
           });
 
           this.matches[x].contents.sort(function (a, b) {
-            a.ranking = a.ranking
-            b.ranking = b.ranking
-            if (a.ranking < b.ranking) {
+            a.rating = a.rating
+            b.rating = b.rating
+            if (a.rating < b.rating) {
               return 1;
             }
-            if (a.ranking > b.ranking) {
+            if (a.rating > b.rating) {
               return -1;
             }
             return 0;
