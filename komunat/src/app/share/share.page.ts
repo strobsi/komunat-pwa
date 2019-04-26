@@ -41,7 +41,6 @@ export class SharePage implements OnInit {
               console.log("error reading 2")
             } else {
                 this.matches = JSON.parse(team);
-                console.log(this.matches);
             }
         })
         }
@@ -50,11 +49,10 @@ export class SharePage implements OnInit {
   }
 
   public download() {
-    console.log("Download");
     this.spinnerVisible = true;
     this.generatePdf();
   }
-
+  
   private generatePdf(){
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
     var docDefinition = {
