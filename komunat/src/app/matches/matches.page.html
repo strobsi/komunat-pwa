@@ -350,10 +350,10 @@
                     Klicke auf <ion-icon class="red rejectIcon" name="close-circle"></ion-icon> 
                     <br>
                     <br>
-                    um den/die KandidatIn aus deinem Team zu entfernen.
+                    um KandidatInnen aus deinem Team zu entfernen
                     <br>
                     <br>
-                    Der/die nächste KandidatIn rutscht automatisch in dein Team
+                    Es rutschen dann automatisch KandidatInnen von unten nach.
                     <br>
                     <br>
                 </h5>
@@ -372,7 +372,8 @@
               <h5 class="left blue bold">Nur noch kurz</h5>
               <br>
                   <h5 class="white">
-                      Den entfernten Kandidat kannst du rechts oben auf der Ersatzbank wiederfinden.
+                    Die entfernten KandidatInnen findest du nach dem Aussortieren auf der Ersatzbank wieder.<br>
+                    Du kannst sie jederzeit mit <ion-icon class="blue rejectIcon" name="git-compare"></ion-icon>  wieder hinzufügen. Dabei rutschen die unteren KandidatInnen wieder aus deiner Liste.
                   </h5>
                 <ion-row class="tutBtn">
                     <ion-col size=12>
@@ -387,7 +388,7 @@
 
 
 <ion-footer padding *ngIf="NO_TUTORIAL==true">
-    <h1 (click)="showEmailSend()" class="footer">Ergebnis per Mail senden</h1>
+    <h1 (click)="showEmailSend()" class="footer">Ergebnis herunterladen</h1>
 </ion-footer>
 
 </ion-content>
