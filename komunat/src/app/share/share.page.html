@@ -1,17 +1,14 @@
 <div class="container">
-    <div class="nextText">
-        <h2 class="black left">Trage hier deine Email Adresse ein und wir senden dir dein Ergebnis zu</h2>
-  <form #form="ngForm" (ngSubmit)="sendMail()"  >
-        <ion-list lines="full" class="ion-no-margin ion-no-padding list-lines-full hydrated">
-          <ion-item class="item">
-            <ion-input (ngModel)="email" name="ion-input-2" placeholder="Deine Email Adresse" required="false"></ion-input>
-          </ion-item>
-        </ion-list>
-        <br>
-          <ion-button expand="block" type="submit" class="ion-no-margin ios button button-block button-solid ion-activatable ion-focusable hydrated">Senden</ion-button>
-         <br>
-         <!-- <ion-button expand="block" type="submit" class="disabled ion-no-margin ios button button-block button-solid ion-activatable ion-focusable hydrated">Keine Lust auf Email?</ion-button> -->
-      </form>
-      <ion-spinner class="loader" name="dots"></ion-spinner>
+  <div class="oval">
+      
+  </div>
+  <div class="nextText">
+      <h2 class="slim">Geschafft!</h2>
+      <h2>Lade dein Ergebnis herunter und geh wählen!</h2>
+      <ion-button (click) ="download()" color="light" expand="block" class="goBtn">Herunterladen</ion-button>
+      </div>
+  <div class="spinner" [style.display]="spinnerVisible ? 'block' : 'none'">
+      <div class="cube1"></div>
+      <div class="cube2"></div>
     </div>
 </div>
