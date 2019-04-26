@@ -391,6 +391,35 @@ export class MatchesPage implements OnInit {
           )
         }
       }
+
+      for(var x = 0; x < 20; x++) {
+
+          var t =  { text: this.matches[x].name, style: 'subheader' }
+          var m = { text: this.matches[x].motto }
+          var ta = {
+            table: {
+              body: [
+                ['Platz', 'Wert',"Inhalt"],
+              ]
+            },
+            pageBreak: 'after',
+          }
+        
+        for(var i = 0; i < this.matches[x].contents.length; i++) {
+          if(i >= 12) {
+            ta.table.body.push(
+              [ ""+i, "" ,this.matches[x].contents[i].name],
+              )
+          } else {
+            ta.table.body.push(
+            [ ""+i, this.matches[x].values[i].name, this.matches[x].contents[i].name],
+            )
+          }
+        }
+        docDefinition.content.push(t);
+        docDefinition.content.push(m);
+        docDefinition.content.push(ta);
+      }
       this.pdfObj = pdfMake.createPdf(docDefinition).download("Komunat.pdf");
 
 /*

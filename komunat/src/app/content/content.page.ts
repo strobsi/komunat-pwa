@@ -265,11 +265,10 @@ private iPhoneVersion() {
         btn0.parentNode.removeChild(btn0);
         btn1.parentNode.removeChild(btn1);
         //this.collapseAndRotate()
+        this.showLoading(this.arr)
         this.btn0Val.name = ""
         this.btn1Val.name = ""
         this.decisionCounter = 0;
-
-        this.showLoading(this.arr)
     }
   }
 
