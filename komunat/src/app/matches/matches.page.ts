@@ -13,6 +13,7 @@ import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { HttpClient } from '@angular/common/http';
 
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -88,7 +89,7 @@ export class MatchesPage implements OnInit {
         }
       }]
     };
-  constructor(private route: ActivatedRoute, public alertController: AlertController, public navCtrl: NavController, public storage: Storage, private file: File, private fileopener: FileOpener) {
+  constructor(private route: ActivatedRoute, public alertController: AlertController, public navCtrl: NavController, public storage: Storage, private file: File, private fileopener: FileOpener, private http: HttpClient) {
     
   }
 
@@ -119,38 +120,11 @@ export class MatchesPage implements OnInit {
     }
   }
 
-  private sendPostRequest() {
-    var headers = new Headers();
-    headers.append("Accept", 'application/json');
-    headers.append('Content-Type', 'application/json' );
-    const requestOptions = new RequestOptions({ headers: headers });
-
-    let postData = {
-            "name": "Customer004",
-            "email": "customer004@email.com",
-            "tel": "0000252525"
-    }
-
-    this.http.post("http://127.0.0.1:3000/customers", postData, requestOptions)
-      .subscribe(data => {
-        console.log(data['_body']);
-       }, error => {
-        console.log(error);
-      });
-  }
-
   private loadResults(a) {
-  
-     var xhr = new XMLHttpRequest();
-     var url = "https://komunat.de/result";
-     a.page = this.page;
-     var data = JSON.stringify(a);
-     xhr.open("POST", url, true);
-     xhr.setRequestHeader("Content-Type", "application/json");
-     xhr.onreadystatechange = () => {
-         alert("Ready: " + xhr.status);
-         if (xhr.readyState === 4) {
-           var data = JSON.parse(xhr.responseText);
+    this.http.post('https://komunat.de/result', a).subscribe((response) => {
+          var data = response;
+          console.log(data);
+          /*
             if (this.page == 1) {
               this.matches = data
             }
@@ -164,9 +138,8 @@ export class MatchesPage implements OnInit {
               }
             }
             this.sortMatches();
-         }
-     };
-     xhr.send(data);
+            */
+         });
   }
 
   ngOnInit(): void {
