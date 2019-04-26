@@ -103,8 +103,7 @@ export class SharePage implements OnInit {
 
       for(var x = 0; x < 20; x++) {
 
-          var match = this.matches[x];
-          match.values.sort(function (a, b) {
+          this.matches[x].values.sort(function (a, b) {
             a.ranking = a.ranking
             b.ranking = b.ranking
             if (a.ranking < b.ranking) {
@@ -116,7 +115,7 @@ export class SharePage implements OnInit {
             return 0;
           });
 
-          match.contents.sort(function (a, b) {
+          this.matches[x].contents.sort(function (a, b) {
             a.ranking = a.ranking
             b.ranking = b.ranking
             if (a.ranking < b.ranking) {
@@ -128,13 +127,10 @@ export class SharePage implements OnInit {
             return 0;
           });
 
-          var t =  { text: match.name+"\n\n", style: 'subheader' }
-          var m = { text: match.motto+"\n\n" }
-          var list = this.getList(parseInt(match.list,10));
-          var district = this.getDistrict(parseInt(match.district,10));
-          console.log(list);
-          console.log(district);
-
+          var t =  { text: this.matches[x].name+"\n\n", style: 'subheader' }
+          var m = { text: this.matches[x].motto+"\n\n" }
+          var list = this.getList(parseInt(this.matches[x].list,10));
+          var district = this.getDistrict(parseInt(this.matches[x].district,10));
           var d = {
                 text: "",
                 alignment: 'justify',
@@ -143,7 +139,7 @@ export class SharePage implements OnInit {
                     text:"Liste: " + list
                   },
                   {
-                    text:"Listenplatz: " + match.list_number
+                    text:"Listenplatz: " + this.matches[x].list_number
                   },
                   {
                     text:"Wahlbezirk: " + district +"\n\n"
@@ -161,14 +157,14 @@ export class SharePage implements OnInit {
           }
           
       
-        for(var i = 0; i < match.contents.length; i++) {
+        for(var i = 0; i < this.matches[x].contents.length; i++) {
           if(i >= 12) {
             ta.table.body.push(
-              [ ""+this.increase(i), "" ,match.contents[i].name],
+              [ ""+this.increase(i), "" ,this.matches[x].contents[i].name],
               )
           } else {
             ta.table.body.push(
-            [ ""+this.increase(i), match.values[i].name, match.contents[i].name],
+            [ ""+this.increase(i), this.matches[x].values[i].name, this.matches[x].contents[i].name],
             )
           }
         }
