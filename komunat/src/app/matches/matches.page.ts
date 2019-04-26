@@ -351,13 +351,12 @@ export class MatchesPage implements OnInit {
     this.storage.ready().then(() => {
         this.storage.set("team", JSON.stringify(team));
         this.storage.set("result",JSON.stringify(this.result));
+        let navigationExtras: NavigationExtras = {
+          queryParams: {
+              //team: JSON.stringify(team)
+          }
+        };
+        this.navCtrl.navigateForward(['share'], navigationExtras);
     });
-    
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-          //team: JSON.stringify(team)
-      }
-    };
-    this.navCtrl.navigateForward(['share'], navigationExtras);
   }
 }

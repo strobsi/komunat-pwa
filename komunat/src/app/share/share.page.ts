@@ -35,12 +35,15 @@ export class SharePage implements OnInit {
         if (!result) {
             
         } else {
+          
           this.result = JSON.parse(result);
+          console.log(this.result);
           this.storage.get("team").then( team => {
             if (!result) {
                 
             } else {
                 this.team = JSON.parse(team);
+                console.log(this.team);
                 this.generatePdf();
             }
         })
