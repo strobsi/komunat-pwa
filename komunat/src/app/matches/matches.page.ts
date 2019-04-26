@@ -383,11 +383,11 @@ export class MatchesPage implements OnInit {
       for(var i = 0; i < this.result.contents.length; i++) {
         if(i >= 12) {
           docDefinition.content[5].table.body.push(
-            [ ""+i, "" ,this.result.contents[i].name],
+            [ ""+this.increase(i), "" ,this.result.contents[i].name],
             )
         } else {
         docDefinition.content[5].table.body.push(
-          [ ""+i, this.result.values[i].name ,this.result.contents[i].name],
+          [ ""+this.increase(i), this.result.values[i].name ,this.result.contents[i].name],
           )
         }
       }
@@ -431,11 +431,11 @@ export class MatchesPage implements OnInit {
         for(var i = 0; i < this.matches[x].contents.length; i++) {
           if(i >= 12) {
             ta.table.body.push(
-              [ ""+i, "" ,this.matches[x].contents[i].name],
+              [ ""+this.increase(i), "" ,this.matches[x].contents[i].name],
               )
           } else {
             ta.table.body.push(
-            [ ""+i, this.matches[x].values[i].name, this.matches[x].contents[i].name],
+            [ ""+this.increase(i), this.matches[x].values[i].name, this.matches[x].contents[i].name],
             )
           }
         }
@@ -461,6 +461,11 @@ export class MatchesPage implements OnInit {
       pdfMake.createPdf(docDefinition).download();    
     });
     */
+  }
+
+  public increase(i) {
+    var iPlus = i+1;
+    return iPlus;
   }
 
   public getList(l) {
