@@ -103,6 +103,30 @@ export class SharePage implements OnInit {
       for(var x = 0; x < 20; x++) {
 
           var match = this.matches[x];
+          match.values.sort(function (a, b) {
+            a.ranking = a.ranking
+            b.ranking = b.ranking
+            if (a.ranking < b.ranking) {
+              return 1;
+            }
+            if (a.ranking > b.ranking) {
+              return -1;
+            }
+            return 0;
+          });
+
+          match.contents.sort(function (a, b) {
+            a.ranking = a.ranking
+            b.ranking = b.ranking
+            if (a.ranking < b.ranking) {
+              return 1;
+            }
+            if (a.ranking > b.ranking) {
+              return -1;
+            }
+            return 0;
+          });
+
           var t =  { text: match.name+"\n\n", style: 'subheader' }
           var m = { text: match.motto+"\n\n" }
           var list = this.getList(parseInt(match.list,10));
@@ -134,7 +158,10 @@ export class SharePage implements OnInit {
             },
             pageBreak: 'after',
           }
+          
         
+        
+
         for(var i = 0; i < this.matches[x].contents.length; i++) {
           if(i >= 12) {
             ta.table.body.push(
