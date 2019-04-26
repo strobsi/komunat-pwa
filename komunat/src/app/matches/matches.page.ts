@@ -120,11 +120,7 @@ export class MatchesPage implements OnInit {
        this.NO_TUTORIAL = false;
        this.result = a;
        this.page = 1;
-       setTimeout(() => 
-        {
-          this.loadResults(a);
-        },
-        2000);
+       this.loadResults(a);
       }
   })
   }

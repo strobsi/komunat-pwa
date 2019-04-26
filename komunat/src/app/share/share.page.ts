@@ -103,7 +103,6 @@ export class SharePage implements OnInit {
       for(var x = 0; x < 20; x++) {
 
           var match = this.matches[x];
-
           var t =  { text: match.name+"\n\n", style: 'subheader' }
           var m = { text: match.motto+"\n\n" }
           var list = this.getList(parseInt(match.list,10));
