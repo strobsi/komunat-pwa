@@ -121,7 +121,8 @@ export class MatchesPage implements OnInit {
   }
 
   private loadResults(a) {
-    this.http.post('https://komunat.de/result', a).subscribe((response) => {
+    alert(a);
+    this.http.post('https://komunat.de/result', JSON.stringify(a)).subscribe((response) => {
           var data = response;
           console.log(data);
           /*
