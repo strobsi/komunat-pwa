@@ -359,7 +359,7 @@ export class MatchesPage implements OnInit {
           {
             table: {
               body: [
-                ['Platz', 'Wert',"Inhalt"],
+                ['Ranking', 'Wert',"Inhalt"],
               ]
             },
             pageBreak: 'after',
@@ -396,9 +396,8 @@ export class MatchesPage implements OnInit {
 
           var match = this.matches[x];
 
-          var t =  { text: match.name, style: 'subheader' }
-          var m = { text: match.motto }
-          console.log(match);
+          var t =  { text: match.name+"\n\n", style: 'subheader' }
+          var m = { text: match.motto+"\n\n" }
           var list = this.getList(parseInt(match.list,10));
           var district = this.getDistrict(parseInt(match.district,10));
           console.log(list);
@@ -415,7 +414,7 @@ export class MatchesPage implements OnInit {
                     text:"Listenplatz: " + match.list_number
                   },
                   {
-                    text:"Wahlbezirk: " + district
+                    text:"Wahlbezirk: " + district +"\n\n"
                   }
                 ]
           }
@@ -423,7 +422,7 @@ export class MatchesPage implements OnInit {
           var ta = {
             table: {
               body: [
-                ['Platz', 'Wert',"Inhalt"],
+                ['Ranking', 'Wert',"Inhalt"],
               ]
             },
             pageBreak: 'after',
