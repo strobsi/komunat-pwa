@@ -41,6 +41,7 @@ export class SharePage implements OnInit {
               console.log("error reading 2")
             } else {
                 this.matches = JSON.parse(team);
+                console.log(this.matches);
             }
         })
         }

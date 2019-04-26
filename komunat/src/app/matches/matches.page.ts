@@ -312,6 +312,7 @@ export class MatchesPage implements OnInit {
 
   public showEmailSend() {
     var team = this.matches.slice(0, 20);
+    console.log(team);
 
     this.storage.ready().then(() => {
         this.storage.set("team", JSON.stringify(team));
