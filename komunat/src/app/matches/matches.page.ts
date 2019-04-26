@@ -398,18 +398,19 @@ export class MatchesPage implements OnInit {
           var t =  { text: this.matches[x].name, style: 'subheader' }
           var m = { text: this.matches[x].motto }
           var d = {
-            alignment: 'justify',
-            columns: [
-              {
-                text:"Liste: " + this.getList(this.matches[x].list)
-              },
-              {
-                text:"Listenplatz: " +this.matches[x].list_number
-              },
-              {
-                text:"Wahlbezirk: " +this.getDistrict(this.matches[x].district)
-              }
-            ]
+                text: "",
+                alignment: 'justify',
+                columns: [
+                  {
+                    text:"Liste: " + this.getList(this.matches[x].list)
+                  },
+                  {
+                    text:"Listenplatz: " +this.matches[x].list_number
+                  },
+                  {
+                    text:"Wahlbezirk: " +this.getDistrict(this.matches[x].district)
+                  }
+                ]
           }
 
           var ta = {
@@ -434,6 +435,7 @@ export class MatchesPage implements OnInit {
         }
         docDefinition.content.push(t);
         docDefinition.content.push(m);
+        docDefinition.content.push(d);
         docDefinition.content.push(ta);
       }
       this.pdfObj = pdfMake.createPdf(docDefinition).download("Komunat.pdf");
