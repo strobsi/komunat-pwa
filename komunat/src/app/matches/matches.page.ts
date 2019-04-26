@@ -360,16 +360,7 @@ export class MatchesPage implements OnInit {
           {
             table: {
               body: [
-                ['Platz', 'Wert'],
-              ]
-            },
-            pageBreak: 'after',
-          },
-          { text: 'Inhalte', style: 'subheader' },  
-          {
-            table: {
-              body: [
-                ['Platz', 'Inhalt'],
+                ['Platz', 'Wert',"Inhalt"],
               ]
             },
             pageBreak: 'after',
@@ -389,17 +380,17 @@ export class MatchesPage implements OnInit {
       } 
 
 
-      for(var i = 0; i < this.result.values.length; i++) {
-        docDefinition.content[5].table.body.push(
-          [ ""+i, this.result.values[i].name ],
-          )
-      }
       for(var i = 0; i < this.result.contents.length; i++) {
-        docDefinition.content[7].table.body.push(
-          [ ""+i, this.result.contents[i].name ],
+        if(i >= 12) {
+          docDefinition.content[5].table.body.push(
+            [ ""+i, "" ,this.result.contents[i].name],
+            )
+        } else {
+        docDefinition.content[5].table.body.push(
+          [ ""+i, this.result.values[i].name ,this.result.contents[i].name],
           )
+        }
       }
-
       this.pdfObj = pdfMake.createPdf(docDefinition).download("Komunat.pdf");
 
 /*

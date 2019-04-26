@@ -203,6 +203,7 @@ ngOnInit() {
     this.storage.get("values").then( result => {
       if (!result) {
       } else {
+        console.log(JSON.parse(result));
         this.vData = JSON.parse(result);
         this.arr = this.initarr
         this.newRound()
@@ -258,7 +259,6 @@ private iPhoneVersion() {
         this.sort(v0[0])
     } else {
         // Finished overall sorting, since nothing has to be sorted anymore.
-        console.log("Finished sorting with " + this.decisionCounter + " decisions")
         this.calculateValue()
         const btn0 = document.querySelector(".opt0")
         const btn1 = document.querySelector(".opt1")
@@ -290,7 +290,6 @@ public selected(index) {
   if (this.decisionCounter == 0) {
       this.startedTimeStamp = new Date().getTime()/1000;
       this.startedTimeStamp = parseInt(this.startedTimeStamp.toString())
-      console.log(this.startedTimeStamp)
   }
   this.decisionCounter++;
   if (index == 0) {
@@ -396,7 +395,6 @@ private calculateValue() {
       this.arr[i]["rating"] = rank
       rank--
   }
-  console.log(this.arr)
 }
 
 
@@ -415,7 +413,6 @@ private showLoading(a) {
     this.vData.metadata.contentStarted = this.startedTimeStamp;
     this.vData.metadata.contentFinished = finished;
     var data = JSON.stringify(this.vData);
-    console.log(data);
 
     this.storage.ready().then(() => {
       this.storage.set("matches", data);
