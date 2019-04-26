@@ -100,7 +100,7 @@ export class MatchesPage implements OnInit {
     this.storage.get("matches").then( result => {
       if (!result) {
       } else {
-       console.log(result);
+       alert(result);
       }
   })
   });
@@ -117,6 +117,7 @@ export class MatchesPage implements OnInit {
        this.result = a;
        this.page = 1;
        this.loadResults(a);
+       alert(result);
       }
   })
   });
