@@ -121,11 +121,16 @@ export class MatchesPage implements OnInit {
   }
 
   private loadResults(a) {
-    alert(a);
-    this.http.post('https://komunat.de/result', JSON.stringify(a)).subscribe((response) => {
-          var data = response;
-          console.log(data);
-          /*
+  
+     var xhr = new XMLHttpRequest();
+     var url = "https://komunat.de/result";
+     a.page = this.page;
+     var data = JSON.stringify(a);
+     xhr.open("POST", url, true);
+     xhr.setRequestHeader("Content-Type", "application/json");
+     xhr.onreadystatechange = () => {
+         if (xhr.readyState === 4) {
+           var data = JSON.parse(xhr.responseText);
             if (this.page == 1) {
               this.matches = data
             }
@@ -139,8 +144,11 @@ export class MatchesPage implements OnInit {
               }
             }
             this.sortMatches();
-            */
-         });
+         } else if(xhr.readyState === 0) { 
+            xhr.send(data);
+         }
+     };
+     xhr.send(data);
   }
 
   ngOnInit(): void {
@@ -152,7 +160,11 @@ export class MatchesPage implements OnInit {
        this.NO_TUTORIAL = false;
        this.result = a;
        this.page = 1;
-       this.loadResults(a);
+       setTimeout(() => 
+        {
+          this.loadResults(a);
+        },
+        2000);
       }
   })
   }
