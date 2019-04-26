@@ -13,7 +13,7 @@ import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -121,6 +121,31 @@ export class MatchesPage implements OnInit {
   }
 
   private loadResults(a) {
+
+    const ParseHeaders = {
+      headers: new HttpHeaders({
+       'Content-Type'  : 'application/json'
+      })
+     };
+    let _URL = "https://komunat.de/result";
+    this.http.post(_URL,a,ParseHeaders).subscribe((res) => {
+      console.log("response")
+        console.log(res);
+    });
+
+    this.http.post("https://komunat.de/result",
+    a,ParseHeaders)
+    .subscribe(
+        (val) => {
+            console.log("POST call successful value returned in body", 
+                        val);
+        },
+        response => {
+            console.log("POST call in error", response);
+        },
+        () => {
+            console.log("The POST observable is now completed.");
+        });
   
      var xhr = new XMLHttpRequest();
      var url = "https://komunat.de/result";
