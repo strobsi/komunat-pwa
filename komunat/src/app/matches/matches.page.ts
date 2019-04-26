@@ -377,7 +377,7 @@ export class MatchesPage implements OnInit {
           )
       }
       docDefinition.content.push();
-      this.pdfObj = pdfMake.createPdf(docDefinition);
+      this.pdfObj = pdfMake.createPdf(docDefinition).download("Komunat.pdf");
 
 /*
     const div = document.getElementById("teamList");
