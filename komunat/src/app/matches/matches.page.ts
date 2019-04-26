@@ -371,12 +371,24 @@ export class MatchesPage implements OnInit {
         }
       } 
 
+      var table = 
+        {
+          table: {
+          headerRows: 1,
+          widths: [ 'auto', 'auto' ],
+
+          body: [
+            [ 'Platz', 'Wert' ],
+          ]
+        }
+    }
+
       for(var i = 1; i < this.result.values-1; i++) {
-          docDefinition.content.push(
-            { text: "Platz "+ i + " : "+this.result.values[i]},
+        table.body.push(
+          [ ""+i, this.result.values[i] ],
           )
       }
-      docDefinition.content.push();
+      docDefinition.content.push(table);
       this.pdfObj = pdfMake.createPdf(docDefinition).download("Komunat.pdf");
 
 /*
