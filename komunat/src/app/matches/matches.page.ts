@@ -397,18 +397,24 @@ export class MatchesPage implements OnInit {
 
           var t =  { text: this.matches[x].name, style: 'subheader' }
           var m = { text: this.matches[x].motto }
+          console.log(this.matches[x]);
+          var list = this.getList(this.matches[x].list);
+          var district = this.getDistrict(this.matches[x].district);
+          console.log(list);
+          console.log(district);
+
           var d = {
                 text: "",
                 alignment: 'justify',
                 columns: [
                   {
-                    text:"Liste: " + this.getList(this.matches[x].list)
+                    text:"Liste: " + this.matches[x].list
                   },
                   {
                     text:"Listenplatz: " +this.matches[x].list_number
                   },
                   {
-                    text:"Wahlbezirk: " +this.getDistrict(this.matches[x].district)
+                    text:"Wahlbezirk: " +this.matches[x].district
                   }
                 ]
           }
