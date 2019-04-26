@@ -48,7 +48,7 @@ export class MatchesPage implements OnInit {
 
 
   matches = [];
-  result = {values:{},contents:{}};
+  result = {values:[],contents:[]};
   page = 1;
   LAST = false;
   pdfObj = null;
@@ -357,6 +357,13 @@ export class MatchesPage implements OnInit {
           { text: "Hier werden deine Ergebnisse, sowie die deines Teams (Top 20 KandidatInnen) angezeigt" },
    
           { text: 'Werte', style: 'subheader' },  
+          {
+            table: {
+              body: [
+                ['Platz', 'Wert'],
+              ]
+            }
+          },
         ],
         styles: {
           header: {
@@ -371,24 +378,12 @@ export class MatchesPage implements OnInit {
         }
       } 
 
-      var table = 
-        {
-          table: {
-          headerRows: 1,
-          widths: [ 'auto', 'auto' ],
 
-          body: [
-            [ 'Platz', 'Wert' ],
-          ]
-        }
-    }
-
-      for(var i = 1; i < this.result.values-1; i++) {
-        table.body.push(
+      for(var i = 0; i < this.result.values.length; i++) {
+        docDefinition.content[5].table.body.push(
           [ ""+i, this.result.values[i] ],
           )
       }
-      docDefinition.content.push(table);
       this.pdfObj = pdfMake.createPdf(docDefinition).download("Komunat.pdf");
 
 /*
