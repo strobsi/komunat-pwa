@@ -128,6 +128,7 @@ export class MatchesPage implements OnInit {
      xhr.open("POST", url, true);
      xhr.setRequestHeader("Content-Type", "application/json");
      xhr.onreadystatechange = () => {
+         alert("Ready: " + xhr.status);
          if (xhr.readyState === 4 && xhr.status === 200) {
            var data = JSON.parse(xhr.responseText);
             if (this.page == 1) {
