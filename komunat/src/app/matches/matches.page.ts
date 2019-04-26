@@ -8,15 +8,9 @@ import {PSTATE} from '../utils/pstate';
 import { NavController } from "@ionic/angular";
 import { NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import * as jsPDF from 'jspdf';
-import * as html2canvas from 'html2canvas';
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
 @Component({
   selector: 'app-matches',
@@ -58,42 +52,9 @@ export class MatchesPage implements OnInit {
   substitutes = [];
   present_title = "DEIN ERGEBNIS";
   
-    // Share options
-    share = {
-      displayNames: true,
-      config: [{
-        facebook: {
-          socialShareUrl: 'https://fluster.io',
-          socialSharePopupWidth: 400,
-          socialSharePopupHeight: 400
-        }
-      },{
-        twitter: {
-          socialShareUrl: 'https://fluster.io',
-          socialSharePopupWidth: 300,
-          socialSharePopupHeight: 400
-        }
-      },{
-        linkedin: {
-          socialShareUrl: 'https://fluster.io'
-        }
-      },{
-        email: {
-          socialShareTo: '',
-          socialShareBody: 'https://fluster.io'
-        }
-      }, {
-        whatsapp: {
-          socialShareText: 'Mein Komunat Ergebnis',
-          socialShareUrl: 'https://fluster.io'
-        }
-      }]
-    };
-  constructor(private route: ActivatedRoute, public alertController: AlertController, public navCtrl: NavController, public storage: Storage, private file: File, private fileopener: FileOpener, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, public alertController: AlertController, public navCtrl: NavController, public storage: Storage, private http: HttpClient) {
     
   }
-
-
 
   swipedRight(e,i) {
     this.accept(i);
@@ -120,33 +81,7 @@ export class MatchesPage implements OnInit {
     }
   }
 
-  private loadResults(a) {
-
-    const ParseHeaders = {
-      headers: new HttpHeaders({
-       'Content-Type'  : 'application/json'
-      })
-     };
-    let _URL = "https://komunat.de/result";
-    this.http.post(_URL,JSON.stringify(a),ParseHeaders).subscribe((res) => {
-      console.log("response")
-        console.log(res);
-    });
-
-    this.http.post("https://komunat.de/result",
-    JSON.stringify(a),ParseHeaders)
-    .subscribe(
-        (val) => {
-            console.log("POST call successful value returned in body", 
-                        val);
-        },
-        response => {
-            console.log("POST call in error", response);
-        },
-        () => {
-            console.log("The POST observable is now completed.");
-        });
-  
+  private loadResults(a) {  
      var xhr = new XMLHttpRequest();
      var url = "https://komunat.de/result";
      a.page = this.page;

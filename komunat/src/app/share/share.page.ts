@@ -41,7 +41,6 @@ export class SharePage implements OnInit {
                 
             } else {
                 this.team = JSON.parse(team);
-                this.generatePdf();
             }
         })
         }
