@@ -377,8 +377,9 @@ export class MatchesPage implements OnInit {
             margin: [0, 15, 0, 0]
           }
         }
-      } 
-
+      }
+      
+    
 
       for(var i = 0; i < this.result.contents.length; i++) {
         if(i >= 12) {
@@ -396,6 +397,21 @@ export class MatchesPage implements OnInit {
 
           var t =  { text: this.matches[x].name, style: 'subheader' }
           var m = { text: this.matches[x].motto }
+          var d = {
+            alignment: 'justify',
+            columns: [
+              {
+                text:"Liste: " + this.getList(this.matches[x].list)
+              },
+              {
+                text:"Listenplatz: " +this.matches[x].list_number
+              },
+              {
+                text:"Wahlbezirk: " +this.getDistrict(this.matches[x].district)
+              }
+            ]
+          }
+
           var ta = {
             table: {
               body: [
@@ -437,6 +453,59 @@ export class MatchesPage implements OnInit {
       pdfMake.createPdf(docDefinition).download();    
     });
     */
+  }
+
+  private getList(l) {
+    switch(l) { 
+      case 1: { return "CDU"; } 
+      case 2: { return "GRÜNE"; } 
+      case 3: { return "SPD"; } 
+      case 4: { return "Freie Wähler"; } 
+      case 5: { return "FDP"; } 
+      case 6: { return "SÖS"; } 
+      case 7: { return "AfD"; } 
+      case 8: { return "DIE LINKE"; } 
+      case 9: { return "PIRATEN"; } 
+      case 10: { return "Stadtisten"; } 
+      case 11: { return "Junge Liste Stuttgart"; } 
+      case 12: { return "ÖDP"; } 
+      case 13: { return "DiB"; } 
+      case 14: { return "Tierschutzpartei"; } 
+      case 15: { return "Die PARTEI"; } 
+      case 16: { return "BIG"; } 
+      case 17: { return "SchUB"; } 
+      case 18: { return "BZS23"; } 
+      case 19: { return "Kein Fahrverbot in Stuttgart"; } 
+      case 20: { return "FeLi"; }  
+   } 
+  }
+
+  private getDistrict(l) {
+    switch(l) { 
+      case 1: { return "Mitte"; } 
+      case 2: { return "Nord"; } 
+      case 3: { return "Ost"; } 
+      case 4: { return "Süd"; } 
+      case 5: { return "West"; } 
+      case 6: { return "Bad Cannstatt"; } 
+      case 7: { return "Birkach"; } 
+      case 8: { return "Botnang"; } 
+      case 9: { return "Degerloch"; } 
+      case 10: { return "Feuerbach"; } 
+      case 11: { return "Hedelfingen"; } 
+      case 12: { return "Möhringen"; } 
+      case 13: { return "Mühlhausen"; } 
+      case 14: { return "Münster"; } 
+      case 15: { return "Obertürkheim"; } 
+      case 16: { return "Plieningen"; } 
+      case 17: { return "Sillenbuch"; } 
+      case 18: { return "Stammheim"; } 
+      case 19: { return "Untertürkheim"; } 
+      case 20: { return "Vaihingen"; }  
+      case 21: { return "Wangen"; }  
+      case 22: { return "Weilimdorf"; }  
+      case 23: { return "Zuffenhausen"; }  
+   } 
   }
 
   public showEmailSend() {
