@@ -93,19 +93,23 @@ export class MatchesPage implements OnInit {
   }
 
   ngOnInit() {        
-    this.setState(PSTATE.MATCHES);
-    this.storage.ready().then(() => {
-    this.storage.get("matches").then( result => {
-      if (!result) {
-      } else {
-        var a = JSON.parse(result);
-       this.NO_TUTORIAL = false;
-       this.result = a;
-       this.page = 1;
-       this.loadResults(a);
+    setTimeout(() => 
+        {
+          this.setState(PSTATE.MATCHES);
+          this.storage.ready().then(() => {
+          this.storage.get("matches").then( result => {
+            if (!result) {
+            } else {
+              var a = JSON.parse(result);
+            this.NO_TUTORIAL = false;
+            this.result = a;
+            this.page = 1;
+            this.loadResults(a);
       }
   })
-  });
+  });     
+        },
+        2000);
   }
 
   swipedRight(e,i) {
