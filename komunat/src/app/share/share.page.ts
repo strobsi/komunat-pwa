@@ -160,17 +160,15 @@ export class SharePage implements OnInit {
             pageBreak: 'after',
           }
           
-        
-        
-
-        for(var i = 0; i < this.matches[x].contents.length; i++) {
+      
+        for(var i = 0; i < match.contents.length; i++) {
           if(i >= 12) {
             ta.table.body.push(
-              [ ""+this.increase(i), "" ,this.matches[x].contents[i].name],
+              [ ""+this.increase(i), "" ,match.contents[i].name],
               )
           } else {
             ta.table.body.push(
-            [ ""+this.increase(i), this.matches[x].values[i].name, this.matches[x].contents[i].name],
+            [ ""+this.increase(i), match.values[i].name, match.contents[i].name],
             )
           }
         }
