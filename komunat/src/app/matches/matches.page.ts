@@ -8,14 +8,6 @@ import {PSTATE} from '../utils/pstate';
 import { NavController } from "@ionic/angular";
 import { NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import * as jsPDF from 'jspdf';
-import * as html2canvas from 'html2canvas';
-import { File } from '@ionic-native/file/ngx';
-import { FileOpener } from '@ionic-native/file-opener/ngx';
-
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
 @Component({
   selector: 'app-matches',
