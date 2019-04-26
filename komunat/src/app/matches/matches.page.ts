@@ -119,6 +119,26 @@ export class MatchesPage implements OnInit {
     }
   }
 
+  private sendPostRequest() {
+    var headers = new Headers();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/json' );
+    const requestOptions = new RequestOptions({ headers: headers });
+
+    let postData = {
+            "name": "Customer004",
+            "email": "customer004@email.com",
+            "tel": "0000252525"
+    }
+
+    this.http.post("http://127.0.0.1:3000/customers", postData, requestOptions)
+      .subscribe(data => {
+        console.log(data['_body']);
+       }, error => {
+        console.log(error);
+      });
+  }
+
   private loadResults(a) {
   
      var xhr = new XMLHttpRequest();
@@ -129,7 +149,7 @@ export class MatchesPage implements OnInit {
      xhr.setRequestHeader("Content-Type", "application/json");
      xhr.onreadystatechange = () => {
          alert("Ready: " + xhr.status);
-         if (xhr.readyState === 4 && xhr.status === 200) {
+         if (xhr.readyState === 4) {
            var data = JSON.parse(xhr.responseText);
             if (this.page == 1) {
               this.matches = data
