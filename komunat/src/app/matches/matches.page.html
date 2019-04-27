@@ -36,7 +36,7 @@
         </ion-col>
       </ion-row>
       <ion-row class="nameRow">
-          <p class="c_name">{{match.name}}, <span class="slim">{{match.birthdate}}</span></p>
+          <p class="c_name">{{match.name}}<span class="slim" ng-if="match.birthdate > 0">, {{match.birthdate}}</span></p>
       </ion-row>
       <ion-row class="fullHeight">
         <ion-col class="fullHeight" size="3">
