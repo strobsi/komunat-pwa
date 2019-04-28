@@ -228,7 +228,6 @@ var KomunatPage = /** @class */ (function () {
                 }
             }
         });
-        console.log("init");
         this.arr = this.initarr;
         this.newRound();
     };
@@ -278,7 +277,6 @@ var KomunatPage = /** @class */ (function () {
         }
         else {
             // Finished overall sorting, since nothing has to be sorted anymore.
-            console.log("Finished sorting with " + this.decisionCounter + " decisions");
             this.calculateValue();
             var btn0 = document.querySelector(".opt0");
             var btn1 = document.querySelector(".opt1");
@@ -307,7 +305,6 @@ var KomunatPage = /** @class */ (function () {
         if (this.decisionCounter == 0) {
             this.startedTimeStamp = new Date().getTime() / 1000;
             this.startedTimeStamp = parseInt(this.startedTimeStamp.toString());
-            console.log(this.startedTimeStamp);
         }
         this.decisionCounter++;
         if (index == 0) {
@@ -408,7 +405,6 @@ var KomunatPage = /** @class */ (function () {
             this.arr[i]["rating"] = rank;
             rank--;
         }
-        console.log(this.arr);
     };
     // Send the calculated result of the user to the backend
     KomunatPage.prototype.sendResult = function (a) {
@@ -436,11 +432,8 @@ var KomunatPage = /** @class */ (function () {
     };
     KomunatPage.prototype.moveOn = function (data) {
         var _this = this;
-        console.log("Moving on");
         this.storage.ready().then(function () {
-            console.log("Moving on 2");
             _this.storage.set("values", data);
-            console.log("Moving on 3");
             var navigationExtras = {
                 queryParams: {}
             };

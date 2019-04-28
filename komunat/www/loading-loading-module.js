@@ -58,7 +58,7 @@ var LoadingPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n    <div class=\"oval\">\n        \n    </div>\n    <div class=\"nextText\">\n        <p class=\"gray slim\">Mach dich bereit!</p>\n        <br>\n        <h2 class=\"slim\">We proudly present</h2>\n\n        <h2>Dein Team mit deinen Top 20 KandidatInnen</h2>\n        </div>\n    <div class=\"spinner\">\n        <div class=\"cube1\"></div>\n        <div class=\"cube2\"></div>\n      </div>\n</div>"
+module.exports = "<div class=\"container\">\n    <div class=\"oval\">\n        \n    </div>\n    <div class=\"nextText\">\n        <p class=\"gray slim\">Geschafft!</p>\n        <br>\n        <h2>Schau dir jetzt dein Team für den Gemeinderat genauer an.</h2>\n        </div>\n    <div class=\"spinner\">\n        <div class=\"cube1\"></div>\n        <div class=\"cube2\"></div>\n      </div>\n</div>"
 
 /***/ }),
 

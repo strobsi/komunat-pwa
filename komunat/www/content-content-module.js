@@ -254,6 +254,7 @@ var ContentPage = /** @class */ (function () {
                 if (!result) {
                 }
                 else {
+                    console.log(JSON.parse(result));
                     _this.vData = JSON.parse(result);
                     _this.arr = _this.initarr;
                     _this.newRound();
@@ -307,17 +308,16 @@ var ContentPage = /** @class */ (function () {
         }
         else {
             // Finished overall sorting, since nothing has to be sorted anymore.
-            console.log("Finished sorting with " + this.decisionCounter + " decisions");
             this.calculateValue();
             var btn0 = document.querySelector(".opt0");
             var btn1 = document.querySelector(".opt1");
             btn0.parentNode.removeChild(btn0);
             btn1.parentNode.removeChild(btn1);
             //this.collapseAndRotate()
+            this.showLoading(this.arr);
             this.btn0Val.name = "";
             this.btn1Val.name = "";
             this.decisionCounter = 0;
-            this.showLoading(this.arr);
         }
     };
     // Sort will be called after triggering a new round adn after each decision
@@ -336,7 +336,6 @@ var ContentPage = /** @class */ (function () {
         if (this.decisionCounter == 0) {
             this.startedTimeStamp = new Date().getTime() / 1000;
             this.startedTimeStamp = parseInt(this.startedTimeStamp.toString());
-            console.log(this.startedTimeStamp);
         }
         this.decisionCounter++;
         if (index == 0) {
@@ -437,7 +436,6 @@ var ContentPage = /** @class */ (function () {
             this.arr[i]["rating"] = rank;
             rank--;
         }
-        console.log(this.arr);
     };
     ContentPage.prototype.showLoading = function (a) {
         this.moveOn(a);

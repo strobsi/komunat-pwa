@@ -843,7 +843,7 @@ var map = {
 	],
 	"./content/content.module": [
 		"./src/app/content/content.module.ts",
-		"default~content-content-module~komunat-komunat-module~matches-matches-module~share-share-module",
+		"default~content-content-module~home-home-module~komunat-komunat-module~matches-matches-module~share-~2473a99d",
 		"default~content-content-module~komunat-komunat-module~matches-matches-module",
 		"common",
 		"content-content-module"
@@ -854,6 +854,8 @@ var map = {
 	],
 	"./home/home.module": [
 		"./src/app/home/home.module.ts",
+		"default~content-content-module~home-home-module~komunat-komunat-module~matches-matches-module~share-~2473a99d",
+		"common",
 		"home-home-module"
 	],
 	"./impressum/impressum.module": [
@@ -866,7 +868,7 @@ var map = {
 	],
 	"./komunat/komunat.module": [
 		"./src/app/komunat/komunat.module.ts",
-		"default~content-content-module~komunat-komunat-module~matches-matches-module~share-share-module",
+		"default~content-content-module~home-home-module~komunat-komunat-module~matches-matches-module~share-~2473a99d",
 		"default~content-content-module~komunat-komunat-module~matches-matches-module",
 		"common",
 		"komunat-komunat-module"
@@ -877,14 +879,14 @@ var map = {
 	],
 	"./matches/matches.module": [
 		"./src/app/matches/matches.module.ts",
-		"default~content-content-module~komunat-komunat-module~matches-matches-module~share-share-module",
+		"default~content-content-module~home-home-module~komunat-komunat-module~matches-matches-module~share-~2473a99d",
 		"default~content-content-module~komunat-komunat-module~matches-matches-module",
 		"common",
 		"matches-matches-module"
 	],
 	"./share/share.module": [
 		"./src/app/share/share.module.ts",
-		"default~content-content-module~komunat-komunat-module~matches-matches-module~share-share-module",
+		"default~content-content-module~home-home-module~komunat-komunat-module~matches-matches-module~share-~2473a99d",
 		"common",
 		"share-share-module"
 	]

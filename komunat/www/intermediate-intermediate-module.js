@@ -58,7 +58,7 @@ var IntermediatePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n        <div class=\"oval\">\n        \n        </div>\n        <div class=\"nextText\">\n        <h2>Super!</h2>\n        <h2>Dein Team<br>ist fast fertig!</h2>\n        <ion-button (click) =\"toContent()\" color=\"light\" expand=\"block\" class=\"goBtn\"><p class=\"blueFont\">Weiter mit den Aufgaben</p></ion-button>\n        </div>\n</div>"
+module.exports = "<div class=\"container\">\n        <div class=\"oval\">\n        \n        </div>\n        <div class=\"nextText\">\n        <h2>Super!</h2>\n        <h2>Dein Team<br>für den Gemeinderat ist fast fertig.</h2>\n        <ion-button (click) =\"toContent()\" color=\"light\" expand=\"block\" class=\"goBtn\"><p class=\"blueFont\">Weiter mit den Aufgaben</p></ion-button>\n        </div>\n</div>"
 
 /***/ }),
 
