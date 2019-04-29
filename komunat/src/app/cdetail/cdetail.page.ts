@@ -51,9 +51,22 @@ export class CdetailPage implements OnInit {
       return 0;
     });
      console.log(this.candidate)
+
+     var xhr = new XMLHttpRequest();
+     var url = "https://komunat.de/result/event";
+     var data = JSON.stringify({candidate: this.candidate.uuid});
+     xhr.open("POST", url, true);
+     xhr.setRequestHeader("Content-Type", "application/json");
+     xhr.onreadystatechange = () => {
+         if (xhr.readyState === 4) {
+           var response = JSON.parse(xhr.responseText);
+           this.events = response;
+         }
+     };
+     xhr.send(data);
     });
   }
-
+  
   public back() {
     console.log("Clicked back")
     this.navCtrl.pop();

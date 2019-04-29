@@ -66,18 +66,27 @@
             </div>
       </ion-slide>
       <ion-slide>
-          <div class="eventList">
-              <h4>KOMM VORBEI & TRIFF MICH HIER PERSÖNLICH</h4>
-              <br>
-              <div class="eventWrapper">
-                <div class="event">
-                <hr>
-                  <ion-row class="eventTitle bold">
-                    <p>Bald verfügbar</p>
-                  </ion-row>
-                </div>
-              </div>
+        <div class="eventList">
+          <h4>KOMM VORBEI & TRIFF MICH HIER PERSÖNLICH</h4>
+          <br>
+          <div class="eventWrapper" *ngFor="let event of events; let i = index">
+            <div class="event">
+            <hr>
+              <ion-row class="eventTitle bold">
+                <p>{{event.title}}</p>
+              </ion-row>
+              <ion-row class="eventContent">
+                <ion-col size=5>
+                <p class="black"><span class="slim">Beginn: </span><span class="bold">{{event.startDate}}</span> </p>
+                <p class="black"><span class="slim">Ende: </span><span class="bold">{{event.endDate}}</span></p>
+                </ion-col>
+                <ion-col size="7">
+                  <p class="black"><span class="slim">Addresse: </span><span class="bold">{{event.location}}</span></p>
+                </ion-col>
+              </ion-row>
             </div>
+          </div>
+        </div>
       </ion-slide>
 
     </ion-slides>
