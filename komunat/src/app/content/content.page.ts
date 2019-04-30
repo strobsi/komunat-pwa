@@ -177,8 +177,11 @@ export class ContentPage implements OnInit {
         */
     ]
 ]
-
 ngOnInit() {
+  this.ga.trackEvent('userflow', 'Reached Content')
+  .then(() => {
+  })
+  .catch(e => console.log(e));
   this.platform.ready().then(() => {
     if (this.platform.is('ios')) {
        var upper = document.querySelector(".upper");
@@ -198,10 +201,6 @@ ngOnInit() {
         lower.setAttribute("style", "height:43%;");
       }
     }
-    this.ga.startTrackerWithId('UA-139304420-1')
-      .then(() => {
-          this.ga.trackView('contents');
-      })
   });
 
   this.storage.ready().then(() => {
@@ -216,7 +215,6 @@ ngOnInit() {
   })
   });
 }
-
 private iPhoneVersion() {
   var iHeight = window.screen.height;
   var iWidth = window.screen.width;

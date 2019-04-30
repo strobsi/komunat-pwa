@@ -89,15 +89,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+/* harmony import */ var _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/google-analytics/ngx */ "./node_modules/@ionic-native/google-analytics/ngx/index.js");
+
 
 
 
 
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, storage) {
+    function HomePage(navCtrl, storage, ga) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.storage = storage;
+        this.ga = ga;
         this.local = null;
         this.storage.ready().then(function () {
             _this.storage.clear();
@@ -109,6 +112,18 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.slideToNext = function () {
         this.slides.slideNext();
+    };
+    HomePage.prototype.ngOnInit = function () {
+        var _this = this;
+        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+        //Add 'implements OnInit' to the class.
+        this.ga.trackView('home')
+            .then(function () {
+            _this.ga.trackEvent('userflow', 'Entered Komunat')
+                .then(function () {
+            });
+        })
+            .catch(function (e) { return console.log(e); });
     };
     HomePage.prototype.ngAfterViewInit = function () {
         var isiOSSafari = (navigator.userAgent.match(/like Mac OS X/i)) ? true : false;
@@ -129,7 +144,7 @@ var HomePage = /** @class */ (function () {
             template: __webpack_require__(/*! ./home.page.html */ "./src/app/home/home.page.html"),
             styles: [__webpack_require__(/*! ./home.page.scss */ "./src/app/home/home.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _ionic_storage__WEBPACK_IMPORTED_MODULE_3__["Storage"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _ionic_storage__WEBPACK_IMPORTED_MODULE_3__["Storage"], _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_4__["GoogleAnalytics"]])
     ], HomePage);
     return HomePage;
 }());

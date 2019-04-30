@@ -16,8 +16,12 @@ export class KomunatPage implements OnInit {
   constructor(public navCtrl: NavController, public platform: Platform, public storage: Storage, private ga: GoogleAnalytics) {
 
   }
-
   ngOnInit() {
+    this.ga.trackEvent('userflow', 'Started Komunat')
+    .then(() => {
+    })
+    .catch(e => console.log(e));
+
     this.platform.ready().then(() => {
       if (this.platform.is('ios')) {
          var upper = document.querySelector(".upper");
@@ -37,10 +41,6 @@ export class KomunatPage implements OnInit {
           lower.setAttribute("style", "height:43%;");
         }
       }
-      this.ga.startTrackerWithId('UA-139304420-1')
-      .then(() => {
-          this.ga.trackView('values');
-      })
     });
       this.arr = this.initarr
       this.newRound()

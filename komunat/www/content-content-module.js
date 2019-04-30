@@ -94,6 +94,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! hammerjs */ "./node_modules/hammerjs/hammer.js");
 /* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(hammerjs__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+/* harmony import */ var _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/google-analytics/ngx */ "./node_modules/@ionic-native/google-analytics/ngx/index.js");
+
 
 
 
@@ -102,11 +104,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ContentPage = /** @class */ (function () {
-    function ContentPage(navCtrl, route, platform, storage) {
+    function ContentPage(navCtrl, route, platform, storage, ga) {
         this.navCtrl = navCtrl;
         this.route = route;
         this.platform = platform;
         this.storage = storage;
+        this.ga = ga;
         this.lesser = [];
         this.greater = [];
         this.comparer = [];
@@ -227,6 +230,10 @@ var ContentPage = /** @class */ (function () {
     }
     ContentPage.prototype.ngOnInit = function () {
         var _this = this;
+        this.ga.trackEvent('userflow', 'Reached Content')
+            .then(function () {
+        })
+            .catch(function (e) { return console.log(e); });
         this.platform.ready().then(function () {
             if (_this.platform.is('ios')) {
                 var upper = document.querySelector(".upper");
@@ -464,7 +471,7 @@ var ContentPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./content.page.html */ "./src/app/content/content.page.html"),
             styles: [__webpack_require__(/*! ./content.page.scss */ "./src/app/content/content.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"], _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"], _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"], _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_7__["GoogleAnalytics"]])
     ], ContentPage);
     return ContentPage;
 }());

@@ -259,9 +259,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-@ionic-native/google-analytics
-MIT
-
 localforage
 Apache-2.0
 Copyright 2014 Mozilla
@@ -352,6 +349,9 @@ MIT
 MIT
 
 loader
+
+@ionic-native/google-analytics
+MIT
 
 tslib
 Apache-2.0

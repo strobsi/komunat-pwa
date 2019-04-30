@@ -29,6 +29,18 @@ export class HomePage {
       this.slides.slideNext();
   }
 
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.ga.trackView('home')
+    .then(() => { 
+      this.ga.trackEvent('userflow', 'Entered Komunat')
+      .then(() => {
+      })
+    })
+    .catch(e => console.log(e));
+  }
+
   ngAfterViewInit(): void {
     var isiOSSafari = (navigator.userAgent.match(/like Mac OS X/i)) ? true: false;
     console.log("On iOS: " + isiOSSafari)
@@ -37,11 +49,5 @@ export class HomePage {
     let vh = window.innerHeight * 0.01;
     // Then we set the value in the --vh custom property to the root of the document
     document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-    this.ga.startTrackerWithId('UA-139304420-1')
-   .then(() => {
-      this.ga.trackView('home');
-   })
-   .catch(e => console.log('Error starting GoogleAnalytics', e));
   }
 }

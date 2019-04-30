@@ -62420,16 +62420,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
-/* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/file/ngx */ "./node_modules/@ionic-native/file/ngx/index.js");
-/* harmony import */ var _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/file-opener/ngx */ "./node_modules/@ionic-native/file-opener/ngx/index.js");
-/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! pdfmake/build/pdfmake */ "./node_modules/pdfmake/build/pdfmake.js");
-/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! pdfmake/build/vfs_fonts */ "./node_modules/pdfmake/build/vfs_fonts.js");
-/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_8__);
-
-
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+/* harmony import */ var _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/google-analytics/ngx */ "./node_modules/@ionic-native/google-analytics/ngx/index.js");
+/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pdfmake/build/pdfmake */ "./node_modules/pdfmake/build/pdfmake.js");
+/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! pdfmake/build/vfs_fonts */ "./node_modules/pdfmake/build/vfs_fonts.js");
+/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -62438,12 +62434,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var SharePage = /** @class */ (function () {
-    function SharePage(route, navCtrl, storage, file, fileopener) {
-        this.route = route;
+    function SharePage(navCtrl, storage, ga) {
         this.navCtrl = navCtrl;
         this.storage = storage;
-        this.file = file;
-        this.fileopener = fileopener;
+        this.ga = ga;
         this.team = [];
         this.matches = [];
         this.result = { values: [], contents: [] };
@@ -62452,6 +62446,9 @@ var SharePage = /** @class */ (function () {
     }
     SharePage.prototype.ngOnInit = function () {
         var _this = this;
+        this.ga.trackEvent('userflow', 'Reached Share')
+            .then(function () {
+        });
         this.spinnerVisible = false;
         this.storage.ready().then(function () {
             _this.storage.get("result").then(function (result) {
@@ -62477,7 +62474,7 @@ var SharePage = /** @class */ (function () {
         this.generatePdf();
     };
     SharePage.prototype.generatePdf = function () {
-        pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_7__["vfs"] = pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_8__["pdfMake"].vfs;
+        pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5__["vfs"] = pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_6__["pdfMake"].vfs;
         var docDefinition = {
             content: [
                 { text: 'KOMUNAT - Ergebnis', style: 'header' },
@@ -62577,7 +62574,7 @@ var SharePage = /** @class */ (function () {
             docDefinition.content.push(d);
             docDefinition.content.push(ta);
         }
-        this.pdfObj = pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_7__["createPdf"](docDefinition).download("Komunat.pdf");
+        this.pdfObj = pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_5__["createPdf"](docDefinition).download("Komunat.pdf");
         this.spinnerVisible = false;
         /*
             const div = document.getElementById("teamList");
@@ -62742,7 +62739,7 @@ var SharePage = /** @class */ (function () {
             template: __webpack_require__(/*! ./share.page.html */ "./src/app/share/share.page.html"),
             styles: [__webpack_require__(/*! ./share.page.scss */ "./src/app/share/share.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _ionic_storage__WEBPACK_IMPORTED_MODULE_4__["Storage"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_5__["File"], _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_6__["FileOpener"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _ionic_storage__WEBPACK_IMPORTED_MODULE_3__["Storage"], _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_4__["GoogleAnalytics"]])
     ], SharePage);
     return SharePage;
 }());

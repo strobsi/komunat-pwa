@@ -28,7 +28,11 @@ export class SharePage implements OnInit {
     
   }
 
+
   ngOnInit() {
+    this.ga.trackEvent('userflow', 'Reached Share')
+    .then(() => {
+    })
     this.spinnerVisible = false;
     this.storage.ready().then(() => {
       this.storage.get("result").then( result => {
@@ -45,10 +49,6 @@ export class SharePage implements OnInit {
         })
         }
     })
-    this.ga.startTrackerWithId('UA-139304420-1')
-      .then(() => {
-          this.ga.trackView('share');
-      })
     });
   }
 

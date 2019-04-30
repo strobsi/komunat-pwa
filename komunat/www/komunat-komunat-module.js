@@ -93,6 +93,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! hammerjs */ "./node_modules/hammerjs/hammer.js");
 /* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(hammerjs__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+/* harmony import */ var _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/google-analytics/ngx */ "./node_modules/@ionic-native/google-analytics/ngx/index.js");
+
 
 
 
@@ -100,10 +102,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var KomunatPage = /** @class */ (function () {
-    function KomunatPage(navCtrl, platform, storage) {
+    function KomunatPage(navCtrl, platform, storage, ga) {
         this.navCtrl = navCtrl;
         this.platform = platform;
         this.storage = storage;
+        this.ga = ga;
         this.lesser = [];
         this.greater = [];
         this.comparer = [];
@@ -206,6 +209,10 @@ var KomunatPage = /** @class */ (function () {
     }
     KomunatPage.prototype.ngOnInit = function () {
         var _this = this;
+        this.ga.trackEvent('userflow', 'Started Komunat')
+            .then(function () {
+        })
+            .catch(function (e) { return console.log(e); });
         this.platform.ready().then(function () {
             if (_this.platform.is('ios')) {
                 var upper = document.querySelector(".upper");
@@ -446,7 +453,7 @@ var KomunatPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./komunat.page.html */ "./src/app/komunat/komunat.page.html"),
             styles: [__webpack_require__(/*! ./komunat.page.scss */ "./src/app/komunat/komunat.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"], _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"], _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"], _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_6__["GoogleAnalytics"]])
     ], KomunatPage);
     return KomunatPage;
 }());

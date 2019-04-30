@@ -3048,14 +3048,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/animations */ "./node_modules/@angular/animations/@angular/animations.es5.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var animejs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! animejs */ "./node_modules/animejs/lib/anime.es.js");
-/* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! hammerjs */ "./node_modules/hammerjs/hammer.js");
-/* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(hammerjs__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _utils_pstate__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/pstate */ "./src/app/utils/pstate.ts");
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-
+/* harmony import */ var animejs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! animejs */ "./node_modules/animejs/lib/anime.es.js");
+/* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! hammerjs */ "./node_modules/hammerjs/hammer.js");
+/* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(hammerjs__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _utils_pstate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/pstate */ "./src/app/utils/pstate.ts");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+/* harmony import */ var _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/google-analytics/ngx */ "./node_modules/@ionic-native/google-analytics/ngx/index.js");
 
 
 
@@ -3067,12 +3065,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var MatchesPage = /** @class */ (function () {
-    function MatchesPage(route, alertController, navCtrl, storage, http) {
-        this.route = route;
-        this.alertController = alertController;
+    function MatchesPage(navCtrl, storage, ga) {
         this.navCtrl = navCtrl;
         this.storage = storage;
-        this.http = http;
+        this.ga = ga;
         this.matches = [];
         this.result = { values: [], contents: [] };
         this.page = 1;
@@ -3094,7 +3090,7 @@ var MatchesPage = /** @class */ (function () {
             this.matches.push(this.substitutes[i]);
             this.substitutes.splice(i, 1);
             this.pulseTeam();
-            Object(animejs__WEBPACK_IMPORTED_MODULE_5__["default"])({
+            Object(animejs__WEBPACK_IMPORTED_MODULE_4__["default"])({
                 targets: element,
                 translateX: "150vw",
                 rotate: 40,
@@ -3136,7 +3132,10 @@ var MatchesPage = /** @class */ (function () {
     };
     MatchesPage.prototype.ngOnInit = function () {
         var _this = this;
-        this.setState(_utils_pstate__WEBPACK_IMPORTED_MODULE_7__["PSTATE"].MATCHES);
+        this.ga.trackEvent('userflow', 'Reached Matches')
+            .then(function () {
+        });
+        this.setState(_utils_pstate__WEBPACK_IMPORTED_MODULE_6__["PSTATE"].MATCHES);
         this.storage.get("matches").then(function (result) {
             if (!result) {
             }
@@ -3159,7 +3158,7 @@ var MatchesPage = /** @class */ (function () {
     };
     MatchesPage.prototype.swipeOutLeft = function (elem, i) {
         this.pulseSubstitute();
-        Object(animejs__WEBPACK_IMPORTED_MODULE_5__["default"])({
+        Object(animejs__WEBPACK_IMPORTED_MODULE_4__["default"])({
             targets: elem,
             translateX: "-150vw",
             rotate: -40,
@@ -3175,7 +3174,7 @@ var MatchesPage = /** @class */ (function () {
     };
     MatchesPage.prototype.swipeOutRight = function (elem, i) {
         this.pulseTeam();
-        Object(animejs__WEBPACK_IMPORTED_MODULE_5__["default"])({
+        Object(animejs__WEBPACK_IMPORTED_MODULE_4__["default"])({
             targets: elem,
             translateX: "150vw",
             rotate: 40,
@@ -3188,10 +3187,10 @@ var MatchesPage = /** @class */ (function () {
         }), 220);
     };
     MatchesPage.prototype.backClicked = function () {
-        this.setState(_utils_pstate__WEBPACK_IMPORTED_MODULE_7__["PSTATE"].MATCHES);
+        this.setState(_utils_pstate__WEBPACK_IMPORTED_MODULE_6__["PSTATE"].MATCHES);
         var subs = document.querySelector(".substitutesBtn");
         var lbl = document.querySelector(".mainLbl");
-        Object(animejs__WEBPACK_IMPORTED_MODULE_5__["default"])({
+        Object(animejs__WEBPACK_IMPORTED_MODULE_4__["default"])({
             targets: [subs],
             opacity: 1,
             easing: 'easeInOutQuad',
@@ -3207,10 +3206,10 @@ var MatchesPage = /** @class */ (function () {
         // TODO hide subs and show matches
     };
     MatchesPage.prototype.showSubstitutes = function () {
-        this.setState(_utils_pstate__WEBPACK_IMPORTED_MODULE_7__["PSTATE"].SUBS);
+        this.setState(_utils_pstate__WEBPACK_IMPORTED_MODULE_6__["PSTATE"].SUBS);
         var subs = document.querySelector(".substitutesBtn");
         var lbl = document.querySelector(".mainLbl");
-        Object(animejs__WEBPACK_IMPORTED_MODULE_5__["default"])({
+        Object(animejs__WEBPACK_IMPORTED_MODULE_4__["default"])({
             targets: [subs],
             opacity: 0,
             easing: 'easeInOutQuad',
@@ -3226,10 +3225,10 @@ var MatchesPage = /** @class */ (function () {
         // TODO: show subs and hide matches
     };
     MatchesPage.prototype.showTeam = function () {
-        this.setState(_utils_pstate__WEBPACK_IMPORTED_MODULE_7__["PSTATE"].TEAM);
+        this.setState(_utils_pstate__WEBPACK_IMPORTED_MODULE_6__["PSTATE"].TEAM);
         var subs = document.querySelector(".substitutesBtn");
         var team = document.querySelector(".teamBtn");
-        Object(animejs__WEBPACK_IMPORTED_MODULE_5__["default"])({
+        Object(animejs__WEBPACK_IMPORTED_MODULE_4__["default"])({
             targets: [subs, team],
             opacity: 0,
             easing: 'easeInOutQuad',
@@ -3261,7 +3260,7 @@ var MatchesPage = /** @class */ (function () {
     };
     MatchesPage.prototype.pulseTeam = function () {
         var elem = document.querySelector(".teamBtn");
-        Object(animejs__WEBPACK_IMPORTED_MODULE_5__["default"])({
+        Object(animejs__WEBPACK_IMPORTED_MODULE_4__["default"])({
             targets: elem,
             scale: 1.1,
             color: "#59BCED",
@@ -3273,7 +3272,7 @@ var MatchesPage = /** @class */ (function () {
     };
     MatchesPage.prototype.pulseSubstitute = function () {
         var elem = document.querySelector(".substitutesBtn");
-        Object(animejs__WEBPACK_IMPORTED_MODULE_5__["default"])({
+        Object(animejs__WEBPACK_IMPORTED_MODULE_4__["default"])({
             targets: elem,
             scale: 1.1,
             color: "#59BCED",
@@ -3285,11 +3284,11 @@ var MatchesPage = /** @class */ (function () {
     };
     MatchesPage.prototype.setState = function (s) {
         this.SHOW_STATE = s;
-        if (s == _utils_pstate__WEBPACK_IMPORTED_MODULE_7__["PSTATE"].MATCHES) {
+        if (s == _utils_pstate__WEBPACK_IMPORTED_MODULE_6__["PSTATE"].MATCHES) {
             this.present_title = "DEIN ERGEBNIS";
             this.sortMatches();
         }
-        else if (s == _utils_pstate__WEBPACK_IMPORTED_MODULE_7__["PSTATE"].SUBS) {
+        else if (s == _utils_pstate__WEBPACK_IMPORTED_MODULE_6__["PSTATE"].SUBS) {
             this.present_title = "DEINE ERSATZBANK";
         }
         else {
@@ -3361,7 +3360,7 @@ var MatchesPage = /** @class */ (function () {
             ],
             styles: [__webpack_require__(/*! ./matches.page.scss */ "./src/app/matches/matches.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_storage__WEBPACK_IMPORTED_MODULE_8__["Storage"], _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClient"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_storage__WEBPACK_IMPORTED_MODULE_7__["Storage"], _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_8__["GoogleAnalytics"]])
     ], MatchesPage);
     return MatchesPage;
 }());
