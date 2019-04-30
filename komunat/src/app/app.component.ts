@@ -44,6 +44,6 @@ export class AppComponent {
       this.splashScreen.hide();
     });
     this.ga.startTrackerWithId('UA-139304420-1')
-      .then(() => {}).catch(e => alert('Error starting GoogleAnalytics == '+ e));
+      .then(() => {}).catch(e => console.log('Error starting GoogleAnalytics == '+ e));
   }
 }
