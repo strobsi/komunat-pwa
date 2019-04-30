@@ -259,6 +259,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
+@ionic-native/google-analytics
+MIT
+
 localforage
 Apache-2.0
 Copyright 2014 Mozilla
@@ -409,16 +412,16 @@ If the Work includes a "NOTICE" text file as part of its distribution, then any 
 END OF TERMS AND CONDITIONS
 
 
-@ionic-native/file
-MIT
-
-@ionic-native/file-opener
-MIT
-
 @ionic-native/splash-screen
 MIT
 
 @ionic-native/status-bar
+MIT
+
+@ionic-native/file
+MIT
+
+@ionic-native/file-opener
 MIT
 
 zone.js

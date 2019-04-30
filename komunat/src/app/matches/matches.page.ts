@@ -1,16 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { AlertController, IonSlides } from '@ionic/angular';
-import { ActivatedRoute } from "@angular/router";
+import { IonSlides } from '@ionic/angular';
 import anime from 'animejs';
 import 'hammerjs';
 import {PSTATE} from '../utils/pstate';  
 import { NavController } from "@ionic/angular";
 import { NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { File } from '@ionic-native/file/ngx';
-import { FileOpener } from '@ionic-native/file-opener/ngx';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @Component({
   selector: 'app-matches',
@@ -52,7 +49,7 @@ export class MatchesPage implements OnInit {
   substitutes = [];
   present_title = "DEIN ERGEBNIS";
   
-  constructor(private route: ActivatedRoute, public alertController: AlertController, public navCtrl: NavController, public storage: Storage, private http: HttpClient) {
+  constructor(public navCtrl: NavController, public storage: Storage, private ga: GoogleAnalytics) {
     
   }
 
@@ -122,6 +119,10 @@ export class MatchesPage implements OnInit {
        this.page = 1;
        this.loadResults(a);
       }
+      this.ga.startTrackerWithId('UA-139304420-1')
+      .then(() => {
+          this.ga.trackView('matches');
+      })
   })
   }
 

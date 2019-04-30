@@ -4,6 +4,7 @@ import { NavigationExtras } from '@angular/router';
 import anime from 'animejs';
 import 'hammerjs';
 import { Storage } from '@ionic/storage';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @Component({
   selector: 'app-komunat',
@@ -12,7 +13,7 @@ import { Storage } from '@ionic/storage';
 })
 export class KomunatPage implements OnInit {
 
-  constructor(public navCtrl: NavController, public platform: Platform, public storage: Storage) {
+  constructor(public navCtrl: NavController, public platform: Platform, public storage: Storage, private ga: GoogleAnalytics) {
 
   }
 
@@ -36,6 +37,10 @@ export class KomunatPage implements OnInit {
           lower.setAttribute("style", "height:43%;");
         }
       }
+      this.ga.startTrackerWithId('UA-139304420-1')
+      .then(() => {
+          this.ga.trackView('values');
+      })
     });
       this.arr = this.initarr
       this.newRound()

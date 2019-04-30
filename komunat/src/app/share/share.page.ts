@@ -5,10 +5,10 @@ import { ActivatedRoute } from "@angular/router";
 import { Storage } from '@ionic/storage';
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
-
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import { generate } from 'rxjs';
+
 @Component({
   selector: 'app-share',
   templateUrl: './share.page.html',
@@ -24,7 +24,7 @@ export class SharePage implements OnInit {
   pdfObj = null;
   spinnerVisible = false;
 
-  constructor(private route: ActivatedRoute, public navCtrl: NavController, public storage: Storage, private file: File, private fileopener: FileOpener) {
+  constructor(public navCtrl: NavController, public storage: Storage, private ga: GoogleAnalytics) {
     
   }
 
@@ -45,6 +45,10 @@ export class SharePage implements OnInit {
         })
         }
     })
+    this.ga.startTrackerWithId('UA-139304420-1')
+      .then(() => {
+          this.ga.trackView('share');
+      })
     });
   }
 

@@ -5,6 +5,7 @@ import { ActivatedRoute } from "@angular/router";
 import anime from 'animejs';
 import 'hammerjs';
 import { Storage } from '@ionic/storage';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @Component({
   selector: 'app-content',
@@ -13,7 +14,7 @@ import { Storage } from '@ionic/storage';
 })
 export class ContentPage implements OnInit {
 
-  constructor(public navCtrl: NavController, private route: ActivatedRoute, public platform: Platform, public storage: Storage) {
+  constructor(public navCtrl: NavController, private route: ActivatedRoute, public platform: Platform, public storage: Storage, private ga: GoogleAnalytics) {
   }
 
   btn0Val;
@@ -197,6 +198,10 @@ ngOnInit() {
         lower.setAttribute("style", "height:43%;");
       }
     }
+    this.ga.startTrackerWithId('UA-139304420-1')
+      .then(() => {
+          this.ga.trackView('contents');
+      })
   });
 
   this.storage.ready().then(() => {

@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Events, IonSlides } from "@ionic/angular";
 import { Storage } from '@ionic/storage';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomePage {
 
   local = null;
 
-  constructor(public navCtrl: NavController, public storage: Storage) {
+  constructor(public navCtrl: NavController, public storage: Storage, private ga: GoogleAnalytics) {
 
     this.storage.ready().then(() => {
       this.storage.clear();
@@ -36,5 +37,11 @@ export class HomePage {
     let vh = window.innerHeight * 0.01;
     // Then we set the value in the --vh custom property to the root of the document
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+    this.ga.startTrackerWithId('UA-139304420-1')
+   .then(() => {
+      this.ga.trackView('home');
+   })
+   .catch(e => console.log('Error starting GoogleAnalytics', e));
   }
 }
