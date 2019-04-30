@@ -10,3 +10,5 @@ WORKDIR /home/alpine/app/
 
 RUN npm rebuild node-sass && npm install
 
+RUN ionic cordova build browser --minify --prod
+
