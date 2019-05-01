@@ -4,7 +4,7 @@ import { IonSlides } from '@ionic/angular';
 import anime from 'animejs';
 import 'hammerjs';
 import {PSTATE} from '../utils/pstate';  
-import { NavController } from "@ionic/angular";
+import { NavController, Platform } from "@ionic/angular";
 import { NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
@@ -49,7 +49,7 @@ export class MatchesPage implements OnInit {
   substitutes = [];
   present_title = "DEIN ERGEBNIS";
   
-  constructor(public navCtrl: NavController, public storage: Storage, private ga: GoogleAnalytics) {
+  constructor(public navCtrl: NavController, public storage: Storage, private ga: GoogleAnalytics, public platform: Platform) {
     
   }
 
@@ -109,13 +109,15 @@ export class MatchesPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ga.trackView('matches')
+    this.platform.ready().then(() => {
+      this.ga.trackView('matches')
     .then(() => { 
       this.ga.trackEvent('userflow', 'Reached Matches')
       .then(() => {
       })
     })
     .catch(e => console.log(e));
+    });
 
     this.setState(PSTATE.MATCHES);
     this.storage.get("matches").then( result => {

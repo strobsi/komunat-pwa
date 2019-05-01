@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, Events, Platform } from "@ionic/angular";
+import { NavController, Platform } from "@ionic/angular";
 import { NavigationExtras } from '@angular/router';
 import anime from 'animejs';
 import 'hammerjs';
@@ -17,15 +17,14 @@ export class KomunatPage implements OnInit {
 
   }
   ngOnInit() {
-    this.ga.trackView('values')
-    .then(() => { 
-      this.ga.trackEvent('userflow', 'Started Komunat')
-      .then(() => {
-      })
-    })
-    .catch(e => console.log(e));
-
     this.platform.ready().then(() => {
+      this.ga.trackView('values')
+      .then(() => { 
+        this.ga.trackEvent('userflow', 'Started Komunat')
+        .then(() => {
+        })
+      })
+      .catch(e => console.log(e));
       if (this.platform.is('ios')) {
          var upper = document.querySelector(".upper");
          var lower = document.querySelector(".lower");

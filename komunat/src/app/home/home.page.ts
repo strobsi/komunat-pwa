@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Events, IonSlides } from "@ionic/angular";
+import { NavController, Platform, IonSlides } from "@ionic/angular";
 import { Storage } from '@ionic/storage';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
@@ -15,7 +15,7 @@ export class HomePage {
   local = null;
   resultLength = 0;
 
-  constructor(public navCtrl: NavController, public storage: Storage, private ga: GoogleAnalytics) {
+  constructor(public navCtrl: NavController, public storage: Storage, private ga: GoogleAnalytics, public platform: Platform) {
 
     this.storage.ready().then(() => {
       this.storage.clear();
@@ -47,14 +47,16 @@ export class HomePage {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.ga.trackView('home')
-    .then(() => { 
-      this.ga.trackEvent('userflow', 'Entered Komunat')
-      .then(() => {
+    this.platform.ready().then((readySource) => {
+      this.ga.trackView('home')
+      .then(() => { 
+        this.ga.trackEvent('userflow', 'Entered Komunat')
+        .then(() => {
+        })
       })
-    })
-    .catch(e => console.log(e));
-    this.loadResultLength();
+      .catch(e => console.log(e));
+    });
+    //this.loadResultLength();
   }
 
   ngAfterViewInit(): void {

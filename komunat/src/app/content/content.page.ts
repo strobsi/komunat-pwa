@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, Events, Platform } from "@ionic/angular";
+import { NavController, Platform } from "@ionic/angular";
 import { NavigationExtras } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
 import anime from 'animejs';
@@ -178,14 +178,14 @@ export class ContentPage implements OnInit {
     ]
 ]
 ngOnInit() {
-  this.ga.trackView('content')
+  this.platform.ready().then(() => {
+    this.ga.trackView('content')
     .then(() => { 
       this.ga.trackEvent('userflow', 'Reached Content')
       .then(() => {
       })
     })
     .catch(e => console.log(e));
-  this.platform.ready().then(() => {
     if (this.platform.is('ios')) {
        var upper = document.querySelector(".upper");
        var lower = document.querySelector(".lower");
