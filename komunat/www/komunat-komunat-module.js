@@ -209,8 +209,11 @@ var KomunatPage = /** @class */ (function () {
     }
     KomunatPage.prototype.ngOnInit = function () {
         var _this = this;
-        this.ga.trackEvent('userflow', 'Started Komunat')
+        this.ga.trackView('values')
             .then(function () {
+            _this.ga.trackEvent('userflow', 'Started Komunat')
+                .then(function () {
+            });
         })
             .catch(function (e) { return console.log(e); });
         this.platform.ready().then(function () {

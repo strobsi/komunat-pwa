@@ -1030,7 +1030,7 @@ var AppComponent = /** @class */ (function () {
             _this.splashScreen.hide();
         });
         this.ga.startTrackerWithId('UA-139304420-1')
-            .then(function () { }).catch(function (e) { return alert('Error starting GoogleAnalytics == ' + e); });
+            .then(function () { }).catch(function (e) { return console.log('Error starting GoogleAnalytics == ' + e); });
     };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1067,11 +1067,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
-/* harmony import */ var _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/google-analytics/ngx */ "./node_modules/@ionic-native/google-analytics/ngx/index.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/file/ngx */ "./node_modules/@ionic-native/file/ngx/index.js");
-/* harmony import */ var _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/file-opener/ngx */ "./node_modules/@ionic-native/file-opener/ngx/index.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/file/ngx */ "./node_modules/@ionic-native/file/ngx/index.js");
+/* harmony import */ var _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/file-opener/ngx */ "./node_modules/@ionic-native/file-opener/ngx/index.js");
+/* harmony import */ var _providers_delay_google_analytics__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./providers/delay-google-analytics */ "./src/app/providers/delay-google-analytics.ts");
+/* harmony import */ var _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/google-analytics/ngx */ "./node_modules/@ionic-native/google-analytics/ngx/index.js");
+
 
 
 
@@ -1089,22 +1091,22 @@ var AppModule = /** @class */ (function () {
     }
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-            declarations: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]],
+            declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]],
             entryComponents: [],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
                 _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(),
-                _app_routing_module__WEBPACK_IMPORTED_MODULE_9__["AppRoutingModule"],
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"],
             ],
             providers: [
-                _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_10__["File"],
-                _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_11__["FileOpener"],
-                _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_7__["GoogleAnalytics"],
+                _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_9__["File"],
+                _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_10__["FileOpener"],
+                { provide: _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_12__["GoogleAnalytics"], useClass: _providers_delay_google_analytics__WEBPACK_IMPORTED_MODULE_11__["DelayedGoogleAnalytics"] },
                 _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
                 _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
                 { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
             ],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -1122,6 +1124,65 @@ var AppModule = /** @class */ (function () {
 /***/ (function(module, exports) {
 
 module.exports = ".logo {\n  width: 40vw;\n  margin: auto;\n  margin-top: 1vh;\n  margin-bottom: 1vh; }\n\n.menu {\n  margin-right: 3vw; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zdHJvYnNpL1Byb2plY3RzL2tvbXVuYXQtcHdhL2tvbXVuYXQvc3JjL2FwcC9hcHAuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFdBQVc7RUFDWCxZQUFZO0VBQ1osZUFBZTtFQUNmLGtCQUFrQixFQUFBOztBQUV0QjtFQUNJLGlCQUFpQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvYXBwLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubG9nbyB7XG4gICAgd2lkdGg6IDQwdnc7XG4gICAgbWFyZ2luOiBhdXRvO1xuICAgIG1hcmdpbi10b3A6IDF2aDtcbiAgICBtYXJnaW4tYm90dG9tOiAxdmg7XG59XG4ubWVudSB7XG4gICAgbWFyZ2luLXJpZ2h0OiAzdnc7XG59Il19 */"
+
+/***/ }),
+
+/***/ "./src/app/providers/delay-google-analytics.ts":
+/*!*****************************************************!*\
+  !*** ./src/app/providers/delay-google-analytics.ts ***!
+  \*****************************************************/
+/*! exports provided: DelayedGoogleAnalytics */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DelayedGoogleAnalytics", function() { return DelayedGoogleAnalytics; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic-native/google-analytics/ngx */ "./node_modules/@ionic-native/google-analytics/ngx/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+
+var DelayedGoogleAnalytics = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](DelayedGoogleAnalytics, _super);
+    function DelayedGoogleAnalytics() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.trackerReady = new Promise(function (resolve, reject) {
+            _this.resolveReadyFn = resolve;
+            _this.rejectReadyFn = reject;
+        });
+        return _this;
+        // wrappers for all other functions implemented by following the trackview example
+    }
+    DelayedGoogleAnalytics.prototype.startTrackerWithId = function (id, interval) {
+        var _this = this;
+        return _super.prototype.startTrackerWithId.call(this, id, interval).then(function () {
+            _super.prototype.debugMode.call(_this).then(function () {
+                _this.resolveReadyFn();
+            });
+        }).catch(function (reason) {
+            _this.rejectReadyFn(reason);
+        });
+    };
+    DelayedGoogleAnalytics.prototype.trackView = function (title, campaignUrl, newSession) {
+        var _this = this;
+        return this.trackerReady.then(function () {
+            return _super.prototype.trackView.call(_this, title, campaignUrl, newSession);
+        });
+    };
+    DelayedGoogleAnalytics.prototype.trackEvent = function (category, action, label, value, newSession) {
+        var _this = this;
+        return this.trackerReady.then(function () {
+            return _super.prototype.trackEvent.call(_this, category, action, label, value, newSession);
+        });
+    };
+    DelayedGoogleAnalytics = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])()
+    ], DelayedGoogleAnalytics);
+    return DelayedGoogleAnalytics;
+}(_ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_1__["GoogleAnalytics"]));
+
+
 
 /***/ }),
 

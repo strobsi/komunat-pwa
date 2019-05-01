@@ -230,8 +230,11 @@ var ContentPage = /** @class */ (function () {
     }
     ContentPage.prototype.ngOnInit = function () {
         var _this = this;
-        this.ga.trackEvent('userflow', 'Reached Content')
+        this.ga.trackView('content')
             .then(function () {
+            _this.ga.trackEvent('userflow', 'Reached Content')
+                .then(function () {
+            });
         })
             .catch(function (e) { return console.log(e); });
         this.platform.ready().then(function () {

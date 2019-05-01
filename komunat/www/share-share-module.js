@@ -62446,9 +62446,13 @@ var SharePage = /** @class */ (function () {
     }
     SharePage.prototype.ngOnInit = function () {
         var _this = this;
-        this.ga.trackEvent('userflow', 'Reached Share')
+        this.ga.trackView('share')
             .then(function () {
-        });
+            _this.ga.trackEvent('userflow', 'Reached Share')
+                .then(function () {
+            });
+        })
+            .catch(function (e) { return console.log(e); });
         this.spinnerVisible = false;
         this.storage.ready().then(function () {
             _this.storage.get("result").then(function (result) {

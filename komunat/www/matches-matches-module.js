@@ -3132,9 +3132,13 @@ var MatchesPage = /** @class */ (function () {
     };
     MatchesPage.prototype.ngOnInit = function () {
         var _this = this;
-        this.ga.trackEvent('userflow', 'Reached Matches')
+        this.ga.trackView('matches')
             .then(function () {
-        });
+            _this.ga.trackEvent('userflow', 'Reached Matches')
+                .then(function () {
+            });
+        })
+            .catch(function (e) { return console.log(e); });
         this.setState(_utils_pstate__WEBPACK_IMPORTED_MODULE_6__["PSTATE"].MATCHES);
         this.storage.get("matches").then(function (result) {
             if (!result) {
