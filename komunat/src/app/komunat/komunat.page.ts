@@ -17,8 +17,11 @@ export class KomunatPage implements OnInit {
 
   }
   ngOnInit() {
-    this.ga.trackEvent('userflow', 'Started Komunat')
-    .then(() => {
+    this.ga.trackView('values')
+    .then(() => { 
+      this.ga.trackEvent('userflow', 'Started Komunat')
+      .then(() => {
+      })
     })
     .catch(e => console.log(e));
 

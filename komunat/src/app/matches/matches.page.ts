@@ -109,9 +109,14 @@ export class MatchesPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ga.trackEvent('userflow', 'Reached Matches')
-    .then(() => {
+    this.ga.trackView('matches')
+    .then(() => { 
+      this.ga.trackEvent('userflow', 'Reached Matches')
+      .then(() => {
+      })
     })
+    .catch(e => console.log(e));
+
     this.setState(PSTATE.MATCHES);
     this.storage.get("matches").then( result => {
       if (!result) {

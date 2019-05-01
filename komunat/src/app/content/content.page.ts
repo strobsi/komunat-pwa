@@ -178,10 +178,13 @@ export class ContentPage implements OnInit {
     ]
 ]
 ngOnInit() {
-  this.ga.trackEvent('userflow', 'Reached Content')
-  .then(() => {
-  })
-  .catch(e => console.log(e));
+  this.ga.trackView('content')
+    .then(() => { 
+      this.ga.trackEvent('userflow', 'Reached Content')
+      .then(() => {
+      })
+    })
+    .catch(e => console.log(e));
   this.platform.ready().then(() => {
     if (this.platform.is('ios')) {
        var upper = document.querySelector(".upper");

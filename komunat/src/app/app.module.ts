@@ -5,12 +5,13 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 
+import { DelayedGoogleAnalytics } from './providers/delay-google-analytics';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +24,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
   providers: [
     File,
     FileOpener,
-    GoogleAnalytics,
+    {provide: GoogleAnalytics, useClass: DelayedGoogleAnalytics},
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
