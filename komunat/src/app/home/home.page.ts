@@ -13,6 +13,7 @@ export class HomePage {
   @ViewChild(IonSlides) slides: IonSlides;
 
   local = null;
+  resultLength = 0;
 
   constructor(public navCtrl: NavController, public storage: Storage, private ga: GoogleAnalytics) {
 
@@ -29,6 +30,20 @@ export class HomePage {
       this.slides.slideNext();
   }
 
+  private loadResultLength() {  
+    var xhr = new XMLHttpRequest();
+    var url = "https://komunat.de/api/results";
+    xhr.open("GET", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          var data = JSON.parse(xhr.responseText);
+          this.resultLength = data.count;
+        }
+    };
+    xhr.send();
+ }
+
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -39,6 +54,7 @@ export class HomePage {
       })
     })
     .catch(e => console.log(e));
+    this.loadResultLength();
   }
 
   ngAfterViewInit(): void {

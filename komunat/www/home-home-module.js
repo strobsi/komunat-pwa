@@ -60,7 +60,7 @@ var HomePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n <ion-slides zoom=\"false\" pager=\"true\">\n   <ion-slide>\n     <div class=\"swiper\">\n       <h2>Dein Team für den Stuttgarter Gemeinderat!</h2>\n       <p>\n        Finde mit dem KOMUNAT heraus, wer deine TOP-KandidatInnen für die Gemeinderatswahl in Stuttgart am 26. Mai 2019 sind.\n       </p>\n         <ion-button (click) =\"slideToNext()\" color=\"primary\" expand=\"block\" class=\"goBtn\">Weiter</ion-button>\n         <br>\n         <br>\n     </div>\n   </ion-slide>\n   <ion-slide>\n       <div class=\"swiper\">\n        <h2>Jetzt geht´s los!</h2>\n        <p>\n          Vergleiche die Werte und kommunalpolitischen Aufgaben, die dir wichtig sind, mit den Antworten der KandidatInnen.\n        </p>\n          <ion-button (click) =\"goToKomunat($event)\" color=\"primary\" expand=\"block\" class=\"goBtn\">Los geht's</ion-button>\n          <br>\n      </div>\n   </ion-slide>\n </ion-slides>\n</div>"
+module.exports = "<div class=\"container\">\n <ion-slides zoom=\"false\" pager=\"true\">\n   <ion-slide>\n     <div class=\"swiper\">\n       <h2>Dein Team für den Stuttgarter Gemeinderat!</h2>\n       <p>\n        <span *ngIf=\"resultLength > 0\">Schon <b>{{resultLength}}</b> haben mitgemacht.</span>\n        Finde auch du mit dem KOMUNAT heraus, wer deine TOP-KandidatInnen für die Gemeinderatswahl in Stuttgart am 26. Mai 2019 sind.\n       </p>\n         <ion-button (click) =\"slideToNext()\" color=\"primary\" expand=\"block\" class=\"goBtn\">Weiter</ion-button>\n         <br>\n         <br>\n     </div>\n   </ion-slide>\n   <ion-slide>\n       <div class=\"swiper\">\n        <h2>Jetzt geht´s los!</h2>\n        <p>\n          Vergleiche die Werte und kommunalpolitischen Aufgaben, die dir wichtig sind, mit den Antworten der KandidatInnen.\n        </p>\n          <ion-button (click) =\"goToKomunat($event)\" color=\"primary\" expand=\"block\" class=\"goBtn\">Los geht's</ion-button>\n          <br>\n      </div>\n   </ion-slide>\n </ion-slides>\n</div>"
 
 /***/ }),
 
@@ -102,6 +102,7 @@ var HomePage = /** @class */ (function () {
         this.storage = storage;
         this.ga = ga;
         this.local = null;
+        this.resultLength = 0;
         this.storage.ready().then(function () {
             _this.storage.clear();
         });
@@ -112,6 +113,20 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.slideToNext = function () {
         this.slides.slideNext();
+    };
+    HomePage.prototype.loadResultLength = function () {
+        var _this = this;
+        var xhr = new XMLHttpRequest();
+        var url = "https://komunat.de/api/results";
+        xhr.open("GET", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                var data = JSON.parse(xhr.responseText);
+                _this.resultLength = data.count;
+            }
+        };
+        xhr.send();
     };
     HomePage.prototype.ngOnInit = function () {
         var _this = this;
@@ -124,6 +139,7 @@ var HomePage = /** @class */ (function () {
             });
         })
             .catch(function (e) { return console.log(e); });
+        this.loadResultLength();
     };
     HomePage.prototype.ngAfterViewInit = function () {
         var isiOSSafari = (navigator.userAgent.match(/like Mac OS X/i)) ? true : false;
