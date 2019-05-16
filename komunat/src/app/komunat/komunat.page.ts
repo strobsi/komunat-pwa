@@ -20,14 +20,17 @@ export class KomunatPage implements OnInit {
     this.platform.ready().then(() => {
 
       var version = this.detectIE();
+      var top = document.querySelector(".top");
+
       if (version === false) {
         console.log('<s>IE/Edge</s>');
       } else if (version >= 12) {
+        top.setAttribute("style", "margin-top: 60px;")
         console.log('<s>Edge '+version);
       } else {
+        top.setAttribute("style", "margin-top: 60px;")
         console.log('<s>IE '+version);
       }
-      
       this.ga.trackView('values')
       .then(() => { 
         this.ga.trackEvent('userflow', 'Started Komunat')

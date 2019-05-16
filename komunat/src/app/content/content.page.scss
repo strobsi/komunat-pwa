@@ -11,7 +11,7 @@ ion-col {
 }
 
 .buttonSection {
-  height: 75vh;
+  height: 65vh;
   width: auto;
 }
 
@@ -77,12 +77,20 @@ ion-col {
     font-size:3vw;
   }
 
-// PROGRESS DOTS
+  .top {
+    margin-top:30px;
+  }
+
+  .middle {
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+  // PROGRESS DOTS
 .progressContainer {
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -30%);
 }
 
 .steps {

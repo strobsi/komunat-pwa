@@ -179,6 +179,20 @@ export class ContentPage implements OnInit {
 ]
 ngOnInit() {
   this.platform.ready().then(() => {
+    var version = this.detectIE();
+    var top = document.querySelector(".top");
+
+      if (version === false) {
+        console.log('<s>IE/Edge</s>');
+      } else if (version >= 12) {
+        top.setAttribute("style", "margin-top: 60px;")
+        console.log('<s>Edge '+version);
+      } else {
+        top.setAttribute("style", "margin-top: 60px;")
+        console.log('<s>IE '+version);
+      }
+
+
     this.ga.trackView('content')
     .then(() => { 
       this.ga.trackEvent('userflow', 'Reached Content')
@@ -428,4 +442,28 @@ private showLoading(a) {
       this.navCtrl.navigateForward(['loading'], navigationExtras);
     });
  }
+ detectIE() {
+  var ua = window.navigator.userAgent;
+  var msie = ua.indexOf('MSIE ');
+  if (msie > 0) {
+    // IE 10 or older => return version number
+    return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+  }
+
+  var trident = ua.indexOf('Trident/');
+  if (trident > 0) {
+    // IE 11 => return version number
+    var rv = ua.indexOf('rv:');
+    return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+  }
+
+  var edge = ua.indexOf('Edge/');
+  if (edge > 0) {
+    // Edge (IE 12+) => return version number
+    return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+  }
+
+  // other browser
+  return false;
+}
 }
