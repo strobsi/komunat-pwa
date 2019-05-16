@@ -178,9 +178,9 @@ export class ContentPage implements OnInit {
     ]
 ]
 ngOnInit() {
-  this.platform.ready().then(() => {
-    var version = this.detectIE();
-    var top = document.querySelector(".top");
+  
+  var version = this.detectIE();
+    var top = document.querySelector(".topContent");
 
       if (version === false) {
         console.log('<s>IE/Edge</s>');
@@ -192,6 +192,8 @@ ngOnInit() {
         console.log('<s>IE '+version);
       }
 
+ 
+  this.platform.ready().then(() => {
 
     this.ga.trackView('content')
     .then(() => { 
