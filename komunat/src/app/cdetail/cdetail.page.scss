@@ -8,6 +8,7 @@
 
 .titleBar {
   margin-left:10px;
+  margin-top:60px;
   font-size: 7vw;
 }
 
@@ -22,6 +23,10 @@
     vertical-align: middle;
     text-align: center;
 }
+
+.center {
+   text-align: center;
+  }
 
 ion-avatar {
     width: 35vw;

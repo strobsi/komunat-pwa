@@ -11,6 +11,7 @@ import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { DelayedGoogleAnalytics } from './providers/delay-google-analytics';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { IonicImageLoader } from 'ionic-image-loader';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    IonicImageLoader.forRoot(),
     AppRoutingModule,
   ],
   providers: [
