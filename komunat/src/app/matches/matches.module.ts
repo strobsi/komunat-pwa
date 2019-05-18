@@ -6,7 +6,6 @@ import { IonicModule } from '@ionic/angular';
 import { MatchesPage } from './matches.page';
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
-import { IonicImageLoader } from 'ionic-image-loader';
 
 const routes: Routes = [
   {
@@ -22,7 +21,6 @@ const routes: Routes = [
     HttpClientModule,
     IonicModule,
     IonicStorageModule.forRoot(),
-    IonicImageLoader,
     RouterModule.forChild(routes)
   ],
   declarations: [MatchesPage],
