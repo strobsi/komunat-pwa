@@ -62434,10 +62434,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var SharePage = /** @class */ (function () {
-    function SharePage(navCtrl, storage, ga) {
+    function SharePage(navCtrl, storage, ga, platform) {
         this.navCtrl = navCtrl;
         this.storage = storage;
         this.ga = ga;
+        this.platform = platform;
         this.team = [];
         this.matches = [];
         this.result = { values: [], contents: [] };
@@ -62446,13 +62447,15 @@ var SharePage = /** @class */ (function () {
     }
     SharePage.prototype.ngOnInit = function () {
         var _this = this;
-        this.ga.trackView('share')
-            .then(function () {
-            _this.ga.trackEvent('userflow', 'Reached Share')
+        this.platform.ready().then(function () {
+            _this.ga.trackView('share')
                 .then(function () {
-            });
-        })
-            .catch(function (e) { return console.log(e); });
+                _this.ga.trackEvent('userflow', 'Reached Share')
+                    .then(function () {
+                });
+            })
+                .catch(function (e) { return console.log(e); });
+        });
         this.spinnerVisible = false;
         this.storage.ready().then(function () {
             _this.storage.get("result").then(function (result) {
@@ -62743,7 +62746,7 @@ var SharePage = /** @class */ (function () {
             template: __webpack_require__(/*! ./share.page.html */ "./src/app/share/share.page.html"),
             styles: [__webpack_require__(/*! ./share.page.scss */ "./src/app/share/share.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _ionic_storage__WEBPACK_IMPORTED_MODULE_3__["Storage"], _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_4__["GoogleAnalytics"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _ionic_storage__WEBPACK_IMPORTED_MODULE_3__["Storage"], _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_4__["GoogleAnalytics"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"]])
     ], SharePage);
     return SharePage;
 }());

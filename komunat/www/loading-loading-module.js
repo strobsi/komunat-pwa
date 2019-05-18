@@ -100,7 +100,7 @@ var LoadingPage = /** @class */ (function () {
         var _this = this;
         setTimeout(function () {
             _this.moveOn();
-        }, 5000);
+        }, 2000);
     };
     // Moving on to matches
     LoadingPage.prototype.moveOn = function () {

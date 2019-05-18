@@ -60,7 +60,7 @@ var HomePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n <ion-slides zoom=\"false\" pager=\"true\">\n   <ion-slide>\n     <div class=\"swiper\">\n       <h2>Dein Team für den Stuttgarter Gemeinderat!</h2>\n       <p>\n        <span *ngIf=\"resultLength > 0\">Schon <b>{{resultLength}}</b> haben mitgemacht.</span>\n        Finde auch du mit dem KOMUNAT heraus, wer deine TOP-KandidatInnen für die Gemeinderatswahl in Stuttgart am 26. Mai 2019 sind.\n       </p>\n         <ion-button (click) =\"slideToNext()\" color=\"primary\" expand=\"block\" class=\"goBtn\">Weiter</ion-button>\n         <br>\n         <br>\n     </div>\n   </ion-slide>\n   <ion-slide>\n       <div class=\"swiper\">\n        <h2>Jetzt geht´s los!</h2>\n        <p>\n          Vergleiche die Werte und kommunalpolitischen Aufgaben, die dir wichtig sind, mit den Antworten der KandidatInnen.\n        </p>\n          <ion-button (click) =\"goToKomunat($event)\" color=\"primary\" expand=\"block\" class=\"goBtn\">Los geht's</ion-button>\n          <br>\n      </div>\n   </ion-slide>\n </ion-slides>\n</div>"
+module.exports = "<div class=\"container\">\n <ion-slides zoom=\"false\" pager=\"true\">\n   <ion-slide>\n     <div class=\"swiper\">\n       <img class=\"logo\" src=\"https://komunat.de/start.png\"/>\n       <h2 id=\"headline\">Dein Team für den Stuttgarter Gemeinderat!</h2>\n       <p id=\"text\">\n        <!--<span *ngIf=\"resultLength > 0\">Schon <b>{{resultLength}}</b> haben mitgemacht.</span>-->\n        Finde mit dem KOMUNAT heraus, wer deine TOP-KandidatInnen für die Gemeinderatswahl in Stuttgart am 26. Mai 2019 sind.\n       </p>\n         <ion-button (click) =\"slideToNext()\" color=\"primary\" expand=\"block\" class=\"goBtn\">Weiter</ion-button>\n         <br>\n         <br>\n     </div>\n   </ion-slide>\n   <ion-slide>\n       <div class=\"swiper\">\n        <img class=\"logo\" src=\"https://komunat.de/values_contents.png\"/>\n        <h2 id=\"headline\">Was ist den KandidatInnen wichtig?</h2>\n        <p id=\"text\">\n          Über 300 KandidatInnen haben mithilfe des KOMUNAT ihre Werte und kommunalpolitischen Aufgaben in eine Reihenfolge gebracht.\n        </p>\n        <ion-button (click) =\"slideToNext()\" color=\"primary\" expand=\"block\" class=\"goBtn\">Weiter</ion-button>\n        <br>\n      </div>\n   </ion-slide>\n   <ion-slide>\n      <div class=\"swiper\">\n       <img class=\"logo\" src=\"https://komunat.de/values_contents.png\"/>\n       <h2 id=\"headline\">Und jetzt du!</h2>\n       <p id=\"text\">\n           Mache das gleiche Spiel wie die KandidatInnen: Finde ganz einfach heraus, welche Werte und Aufgaben dir wichtig sind. \n         </p>\n       <ion-button (click) =\"slideToNext()\" color=\"primary\" expand=\"block\" class=\"goBtn\">Weiter</ion-button>\n       <br>\n     </div>\n  </ion-slide>\n   <ion-slide>\n      <div class=\"swiper\">\n       <img class=\"logo\" src=\"https://komunat.de/match.png\"/>\n       <h2 id=\"headline\">Dein Ergebnis für die Wahl in Stuttgart</h2>\n       <p id=\"text\">\n         Wir vergleichen dein Ergebnis mit der Reihenfolge der KandidatInnen und zeigen dir, welche 20 der 300 KandidatInnen am besten zu dir passen. Mit dem Ergebnis aus dem KOMUNAT kannst du dann ganz einfach den Stimmzettel ausfüllen.\n       </p>\n         <ion-button (click) =\"goToKomunat($event)\" color=\"primary\" expand=\"block\" class=\"goBtn small-margin\">Los geht's</ion-button>\n         <br>\n     </div>\n  </ion-slide>\n </ion-slides>\n</div>"
 
 /***/ }),
 
@@ -71,7 +71,7 @@ module.exports = "<div class=\"container\">\n <ion-slides zoom=\"false\" pager=\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\n  height: 80vh;\n  max-height: 80vh;\n  width: 100%;\n  /* or whatever width you want. */\n  display: inline-block;\n  margin-top: 10vh; }\n\n.goBtn {\n  margin-top: 10vh;\n  bottom: 10vh;\n  height: 8vh;\n  margin: 25px; }\n\n.instruction {\n  height: 30vh;\n  width: auto; }\n\nh2 {\n  font-family: 'Source Sans Pro', sans-serif;\n  font-weight: bold; }\n\np {\n  font-family: 'Source Sans Pro', sans-serif;\n  margin-bottom: 10vh;\n  margin-right: 2vw;\n  margin-left: 2vw; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zdHJvYnNpL1Byb2plY3RzL2tvbXVuYXQtcHdhL2tvbXVuYXQvc3JjL2FwcC9ob21lL2hvbWUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBRUcsWUFBVztFQUNYLGdCQUFnQjtFQUNoQixXQUFVO0VBQUUsZ0NBQUE7RUFDWixxQkFBcUI7RUFDckIsZ0JBQWUsRUFBQTs7QUFHbEI7RUFFRSxnQkFBZTtFQUNmLFlBQVk7RUFDWixXQUFXO0VBQ1gsWUFBWSxFQUFBOztBQUdkO0VBQ0UsWUFBVztFQUNYLFdBQVUsRUFBQTs7QUFHWjtFQUNFLDBDQUEwQztFQUMxQyxpQkFBaUIsRUFBQTs7QUFHbkI7RUFDRSwwQ0FBMEM7RUFDMUMsbUJBQW1CO0VBQ25CLGlCQUFnQjtFQUNoQixnQkFBZ0IsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2hvbWUvaG9tZS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGFpbmVyXG57XG4gICBoZWlnaHQ6ODB2aDtcbiAgIG1heC1oZWlnaHQ6IDgwdmg7XG4gICB3aWR0aDoxMDAlOyAvKiBvciB3aGF0ZXZlciB3aWR0aCB5b3Ugd2FudC4gKi9cbiAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgIG1hcmdpbi10b3A6MTB2aDtcbn1cblxuLmdvQnRuXG57XG4gIG1hcmdpbi10b3A6MTB2aDtcbiAgYm90dG9tOiAxMHZoO1xuICBoZWlnaHQ6IDh2aDtcbiAgbWFyZ2luOiAyNXB4O1xufVxuXG4uaW5zdHJ1Y3Rpb24ge1xuICBoZWlnaHQ6MzB2aDtcbiAgd2lkdGg6YXV0bztcbn1cblxuaDIge1xuICBmb250LWZhbWlseTogJ1NvdXJjZSBTYW5zIFBybycsIHNhbnMtc2VyaWY7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuXG5wIHtcbiAgZm9udC1mYW1pbHk6ICdTb3VyY2UgU2FucyBQcm8nLCBzYW5zLXNlcmlmO1xuICBtYXJnaW4tYm90dG9tOiAxMHZoO1xuICBtYXJnaW4tcmlnaHQ6MnZ3O1xuICBtYXJnaW4tbGVmdDogMnZ3O1xufSJdfQ== */"
+module.exports = ".container {\n  height: 80vh;\n  max-height: 80vh;\n  width: 100%;\n  /* or whatever width you want. */\n  display: inline-block;\n  margin-top: 10vh; }\n\n.logo {\n  height: 30vh; }\n\n.goBtn {\n  margin-top: 10vh;\n  bottom: 10vh;\n  height: 8vh;\n  margin: 25px; }\n\n.small-margin {\n  margin-top: 5vh;\n  margin: 15px; }\n\n.instruction {\n  height: 30vh;\n  width: auto; }\n\nh2 {\n  font-family: 'Source Sans Pro', sans-serif;\n  font-weight: bold;\n  font-size: 20px; }\n\np {\n  font-family: 'Source Sans Pro', sans-serif;\n  margin-bottom: 10vh;\n  margin-right: 2vw;\n  margin-left: 2vw;\n  font-size: 14px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zdHJvYnNpL1Byb2plY3RzL2tvbXVuYXQtcHdhL2tvbXVuYXQvc3JjL2FwcC9ob21lL2hvbWUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBRUcsWUFBVztFQUNYLGdCQUFnQjtFQUNoQixXQUFVO0VBQUUsZ0NBQUE7RUFDWixxQkFBcUI7RUFDckIsZ0JBQWUsRUFBQTs7QUFHbEI7RUFDRSxZQUFXLEVBQUE7O0FBR2I7RUFFRSxnQkFBZTtFQUNmLFlBQVk7RUFDWixXQUFXO0VBQ1gsWUFBWSxFQUFBOztBQUdkO0VBQ0UsZUFBYztFQUNkLFlBQVksRUFBQTs7QUFHZDtFQUNFLFlBQVc7RUFDWCxXQUFVLEVBQUE7O0FBR1o7RUFDRSwwQ0FBMEM7RUFDMUMsaUJBQWlCO0VBQ2pCLGVBQWUsRUFBQTs7QUFHakI7RUFDRSwwQ0FBMEM7RUFDMUMsbUJBQW1CO0VBQ25CLGlCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsZUFBZSxFQUFBIiwiZmlsZSI6InNyYy9hcHAvaG9tZS9ob21lLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXJcbntcbiAgIGhlaWdodDo4MHZoO1xuICAgbWF4LWhlaWdodDogODB2aDtcbiAgIHdpZHRoOjEwMCU7IC8qIG9yIHdoYXRldmVyIHdpZHRoIHlvdSB3YW50LiAqL1xuICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICAgbWFyZ2luLXRvcDoxMHZoO1xufVxuXG4ubG9nbyB7XG4gIGhlaWdodDozMHZoO1xufVxuXG4uZ29CdG5cbntcbiAgbWFyZ2luLXRvcDoxMHZoO1xuICBib3R0b206IDEwdmg7XG4gIGhlaWdodDogOHZoO1xuICBtYXJnaW46IDI1cHg7XG59XG5cbi5zbWFsbC1tYXJnaW4ge1xuICBtYXJnaW4tdG9wOjV2aDtcbiAgbWFyZ2luOiAxNXB4O1xufVxuXG4uaW5zdHJ1Y3Rpb24ge1xuICBoZWlnaHQ6MzB2aDtcbiAgd2lkdGg6YXV0bztcbn1cblxuaDIge1xuICBmb250LWZhbWlseTogJ1NvdXJjZSBTYW5zIFBybycsIHNhbnMtc2VyaWY7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBmb250LXNpemU6IDIwcHg7XG59XG5cbnAge1xuICBmb250LWZhbWlseTogJ1NvdXJjZSBTYW5zIFBybycsIHNhbnMtc2VyaWY7XG4gIG1hcmdpbi1ib3R0b206IDEwdmg7XG4gIG1hcmdpbi1yaWdodDoydnc7XG4gIG1hcmdpbi1sZWZ0OiAydnc7XG4gIGZvbnQtc2l6ZTogMTRweDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -96,11 +96,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, storage, ga) {
+    function HomePage(navCtrl, storage, ga, platform) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.storage = storage;
         this.ga = ga;
+        this.platform = platform;
         this.local = null;
         this.resultLength = 0;
         this.storage.ready().then(function () {
@@ -132,14 +133,28 @@ var HomePage = /** @class */ (function () {
         var _this = this;
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements OnInit' to the class.
-        this.ga.trackView('home')
-            .then(function () {
-            _this.ga.trackEvent('userflow', 'Entered Komunat')
+        this.platform.ready().then(function (readySource) {
+            _this.ga.trackView('home')
                 .then(function () {
-            });
-        })
-            .catch(function (e) { return console.log(e); });
-        this.loadResultLength();
+                _this.ga.trackEvent('userflow', 'Entered Komunat')
+                    .then(function () {
+                });
+            })
+                .catch(function (e) { return console.log(e); });
+            if (_this.platform.is('ios')) {
+                if (_this.iPhoneVersion() == "5") {
+                    var heads = document.querySelectorAll("#headline");
+                    var texts = document.querySelectorAll("#text");
+                    for (var i = 0; i < heads.length; i++) {
+                        heads[i].setAttribute("style", "font-size:14px;");
+                    }
+                    for (var i = 0; i < texts.length; i++) {
+                        texts[i].setAttribute("style", "font-size:11px;");
+                    }
+                }
+            }
+        });
+        //this.loadResultLength();
     };
     HomePage.prototype.ngAfterViewInit = function () {
         var isiOSSafari = (navigator.userAgent.match(/like Mac OS X/i)) ? true : false;
@@ -149,6 +164,32 @@ var HomePage = /** @class */ (function () {
         var vh = window.innerHeight * 0.01;
         // Then we set the value in the --vh custom property to the root of the document
         document.documentElement.style.setProperty('--vh', vh + "px");
+    };
+    HomePage.prototype.iPhoneVersion = function () {
+        var iHeight = window.screen.height;
+        var iWidth = window.screen.width;
+        if (iWidth === 414 && iHeight === 896) {
+            return "Xmax-Xr";
+        }
+        else if (iWidth === 375 && iHeight === 812) {
+            return "X-Xs";
+        }
+        else if (iWidth === 320 && iHeight === 480) {
+            return "4";
+        }
+        else if (iWidth === 375 && iHeight === 667) {
+            return "6";
+        }
+        else if (iWidth === 414 && iHeight === 736) {
+            return "6+";
+        }
+        else if (iWidth === 320 && iHeight === 568) {
+            return "5";
+        }
+        else if (iHeight <= 480) {
+            return "2-3";
+        }
+        return 'none';
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonSlides"]),
@@ -160,7 +201,7 @@ var HomePage = /** @class */ (function () {
             template: __webpack_require__(/*! ./home.page.html */ "./src/app/home/home.page.html"),
             styles: [__webpack_require__(/*! ./home.page.scss */ "./src/app/home/home.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _ionic_storage__WEBPACK_IMPORTED_MODULE_3__["Storage"], _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_4__["GoogleAnalytics"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _ionic_storage__WEBPACK_IMPORTED_MODULE_3__["Storage"], _ionic_native_google_analytics_ngx__WEBPACK_IMPORTED_MODULE_4__["GoogleAnalytics"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"]])
     ], HomePage);
     return HomePage;
 }());
