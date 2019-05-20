@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'impressum', loadChildren: './impressum/impressum.module#ImpressumPageModule' },
   { path: 'cdetail', loadChildren: './cdetail/cdetail.module#CdetailPageModule' },
   { path: 'loading', loadChildren: './loading/loading.module#LoadingPageModule' },
+  { path: 'feedback', loadChildren: './feedback/feedback.module#FeedbackPageModule' },
 ];
 
 @NgModule({

@@ -1,0 +1,67 @@
+<ion-content>
+<div class="container">
+    <div class="oval">
+        
+    </div>
+    <ion-card id="feedbackFormContainer">
+        <ion-card-header>
+          <ion-card-title>Feedback</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <form id="feedbackForm">
+                <ion-item>
+                  <ion-label position="floating" color="primary">Alter</ion-label>
+                  <ion-input [(ngModel)]="fAge" name="fAge" type="number"></ion-input>
+                </ion-item>
+                <br>
+                <ion-radio-group lines="full" [(ngModel)]="fGender" name="fGender">
+                  <ion-list-header>
+                    Geschlecht
+                  </ion-list-header>
+                    <ion-item>
+                      <ion-label>Männlich</ion-label>
+                      <ion-radio value="m"></ion-radio>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Weiblich</ion-label>
+                        <ion-radio value="w"></ion-radio>
+                      </ion-item>
+                    <ion-item>
+                          <ion-label>Divers</ion-label>
+                          <ion-radio value="d"></ion-radio>
+                      </ion-item>
+                </ion-radio-group>
+                <ion-item>
+                    <ion-label position="floating" color="primary">Postleitzahl</ion-label>
+                    <ion-input [(ngModel)]="fZip" name="fZip" type="number"></ion-input>
+                  </ion-item>
+                  <br>
+                  <ion-item>
+                      <ion-label position="floating" color="primary" rows="10">Kommentar</ion-label>
+                      <ion-textarea [(ngModel)]="fComment" name="fComment"></ion-textarea>
+                  </ion-item>
+                  <br>
+                  <br>
+                <ion-button color="primary" class="submit-btn" expand="full" (click)="submitFeedback()" >Feedback senden</ion-button>
+              </form>
+        </ion-card-content>
+      </ion-card>
+      <!--
+      <ion-card id="newsletterFormContainer">
+          <ion-card-header>
+            <ion-card-title>Newsletter abonnieren</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+              <form id="feedbackForm">
+                  <ion-item>
+                      <ion-label position="floating" color="primary">Email Adresse</ion-label>
+                      <ion-input [(ngModel)]="fMail" name="fMail" type="email"></ion-input>
+                  </ion-item>
+                  <ion-button color="primary" class="submit-btn" expand="full" (click)="submitNewsletter()" >Newsletter abonnieren</ion-button>
+                </form>
+          </ion-card-content>
+        </ion-card>
+      -->
+
+  </div>
+</ion-content>

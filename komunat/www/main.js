@@ -848,6 +848,10 @@ var map = {
 		"./src/app/dsgvo/dsgvo.module.ts",
 		"dsgvo-dsgvo-module"
 	],
+	"./feedback/feedback.module": [
+		"./src/app/feedback/feedback.module.ts",
+		"feedback-feedback-module"
+	],
 	"./home/home.module": [
 		"./src/app/home/home.module.ts",
 		"default~content-content-module~home-home-module~komunat-komunat-module~matches-matches-module~share-~2473a99d",
@@ -944,6 +948,7 @@ var routes = [
     { path: 'impressum', loadChildren: './impressum/impressum.module#ImpressumPageModule' },
     { path: 'cdetail', loadChildren: './cdetail/cdetail.module#CdetailPageModule' },
     { path: 'loading', loadChildren: './loading/loading.module#LoadingPageModule' },
+    { path: 'feedback', loadChildren: './feedback/feedback.module#FeedbackPageModule' },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {

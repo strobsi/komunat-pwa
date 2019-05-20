@@ -4,6 +4,8 @@ import { Storage } from '@ionic/storage';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { NavigationExtras } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-share',
@@ -20,7 +22,7 @@ export class SharePage implements OnInit {
   pdfObj = null;
   spinnerVisible = false;
 
-  constructor(public navCtrl: NavController, public storage: Storage, private ga: GoogleAnalytics, public platform: Platform) {
+  constructor(public navCtrl: NavController, public storage: Storage, private ga: GoogleAnalytics, public platform: Platform, public alertController: AlertController) {
     
   }
 
@@ -28,6 +30,8 @@ export class SharePage implements OnInit {
   ngOnInit() {
     this.platform.ready().then(() => {
 
+    this.presentAlertConfirm();
+    
     this.ga.trackView('share')
     .then(() => { 
       this.ga.trackEvent('userflow', 'Reached Share')
@@ -54,6 +58,37 @@ export class SharePage implements OnInit {
         }
     })
     });
+  }
+
+  feedback() {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+      }
+    };
+    this.navCtrl.navigateForward(['feedback'], navigationExtras);
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Feedback?',
+      message: 'Willst du uns noch ein kurzes Feedback da lassen, damit wir uns für das nächste mal verbessern können?',
+      buttons: [
+        {
+          text: 'Nein, kein Feedback',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Ja, gerne',
+          handler: () => {
+            this.feedback()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   public download() {

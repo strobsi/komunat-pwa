@@ -17,6 +17,7 @@ export class ContentPage implements OnInit {
   constructor(public navCtrl: NavController, private route: ActivatedRoute, public platform: Platform, public storage: Storage, private ga: GoogleAnalytics) {
   }
 
+
   btn0Val;
   btn1Val;
 
@@ -194,7 +195,6 @@ ngOnInit() {
 
  
   this.platform.ready().then(() => {
-
     this.ga.trackView('content')
     .then(() => { 
       this.ga.trackEvent('userflow', 'Reached Content')
@@ -234,6 +234,7 @@ ngOnInit() {
   })
   });
 }
+
 private iPhoneVersion() {
   var iHeight = window.screen.height;
   var iWidth = window.screen.width;
