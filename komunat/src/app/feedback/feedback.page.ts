@@ -34,10 +34,12 @@ export class FeedbackPage implements OnInit {
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          alert("Vielen Dank für dein Feedback!");
-        } else {
-          alert("Ups, da ging was schief")
+        if (xhr.readyState === 4) {
+          if(xhr.status === 200) {
+            alert("Vielen Dank für dein Feedback!");
+          } else {
+            alert("Ups, da ging was schief")
+          }
         }
     };
     xhr.send(data);
