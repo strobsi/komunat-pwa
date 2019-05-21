@@ -1,16 +1,34 @@
-<div class="container">
-  <div class="oval">
-      
-  </div>
-  <div class="nextText">
-      <h2 class="slim">Geschafft!</h2>
-      <h2>Lade dein Ergebnis herunter und geh wählen!</h2>
-      <ion-button (click) ="download()" color="light" expand="block" class="goBtn">Herunterladen</ion-button>
+<ion-content padding>
+  <div class="container">
+  <h4>Wie geht es weiter?</h4>
+  <p>
+    1. Eine Woche vor der Wahl bekommst du deine <b>Stimmzettel per Post</b> zugeschickt.
+  </p>
+  <p>
+      2. Lege dein <b>KOMUNAT-Ergebnis mit deinen Top-20 KandidatInnen</b> auf die eine Seite neben dich und deine Stimmzettel auf die andere. 
+  </p>
+  <p>
+      3. Gehe alle 20 KandidatInnen einen nach dem anderen durch und suche sie auf einer der 20 Listen. <b>Trage in das Kästchen hinter dem Namen jeweils die Zahl "3" ein.</b>
+  </p>
+  <p>
+      4. Am <b>26.05.2019 gehst du in dein Wahllokal.</b> Folgendes musst du mitnehmen: Die ausgefüllten Stimmzettel, deinen Ausweis und deine Wahlbenachrichtigung auf der du den Standort deines Wahllokals findest.
+  </p>
+  <p>
+      5. Dann wirfst du deine <b>Stimmzettel in die Wahlurne und hast gewählt!</b>
+  </p>
+  <ion-button (click) ="download()" color="primary" expand="block" class="goBtn"><b>Ergebnis herunterladen</b></ion-button>
+  <br>
+  <ion-button (click) ="feedback()" color="primary" fill="outline" expand="block" class="goBtn">
+      <ion-icon slot="start" name="heart-empty"></ion-icon>
+      <b>Bewerte den Komunat</b></ion-button>
+</div>
+<!--      
+  <h2>Lade dein Ergebnis herunter und geh wählen!</h2>
       <ion-button href="http://komunat.de" color="light" expand="block" class="goBtn">Neue Runde</ion-button>
       <ion-button (click) ="feedback()" color="light" expand="block" class="goBtn">Feedback geben</ion-button>
-      </div>
   <div class="spinner" [style.display]="spinnerVisible ? 'block' : 'none'">
       <div class="cube1"></div>
       <div class="cube2"></div>
     </div>
-</div>
+  -->
+</ion-content>

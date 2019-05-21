@@ -30,6 +30,11 @@ export class SharePage implements OnInit {
   ngOnInit() {
     this.platform.ready().then(() => {
 
+      if (this.platform.is('ios')) {
+          var container = document.querySelector(".container");
+          container.setAttribute("style", "margin-top: 5vh;")
+      }
+      
     this.presentAlertConfirm();
     
     this.ga.trackView('share')

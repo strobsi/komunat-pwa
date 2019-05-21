@@ -1,16 +1,18 @@
 
 .container {
-  background-color:var(--komunat-blue);
-  height:100vh;
-  max-height: 100vh;
-  width:100%; /* or whatever width you want. */
   display: inline-block;
+  margin-top:10vh;
+  margin-left:10px;
+  margin-right:10px;
  }
- h1, h2, h3, h4, h5, h6 p{
-   color: white;
-   font-family: 'Source Sans Pro', sans-serif;
-   font-weight: bold;
-   margin-bottom:20px;
+  h4 {
+   color:black;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: bold;
+ }
+
+ p {
+   color: var(--komunat-gray-dark)
  }
 
  .nextText {
@@ -29,20 +31,6 @@
 .gray {
   color: #f4f8ff
 }
-
-.oval {
-  position: absolute;
-  width: 180vw;
-  height: 50vh;
-  top:0px;
-  left:50%;
-  background: #74c5ed;
-  border-radius: 180vw / 50vh;
-  -ms-transform: translate(-50%, 0%);
-  transform: translate(-50%, 0%);
-}
-
-
   /* iPhone 5 
 You can also target devices with aspect ratio. */                       
 @media screen and (device-aspect-ratio: 40/71) {                              
