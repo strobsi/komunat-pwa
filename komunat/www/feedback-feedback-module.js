@@ -101,6 +101,7 @@ var FeedbackPage = /** @class */ (function () {
     FeedbackPage.prototype.ngOnInit = function () {
     };
     FeedbackPage.prototype.submitFeedback = function () {
+        var _this = this;
         console.log("Feedback");
         var xhr = new XMLHttpRequest();
         var url = "https://komunat.de/api/feedback";
@@ -114,11 +115,15 @@ var FeedbackPage = /** @class */ (function () {
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                alert("Vielen Dank für dein Feedback!");
-            }
-            else {
-                alert("Ups, da ging was schief");
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    alert("Vielen Dank für dein Feedback!");
+                    _this.navCtrl.back();
+                }
+                else {
+                    alert("Ups, da ging was schief");
+                    _this.navCtrl.back();
+                }
             }
         };
         xhr.send(data);
