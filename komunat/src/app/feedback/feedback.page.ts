@@ -37,8 +37,10 @@ export class FeedbackPage implements OnInit {
         if (xhr.readyState === 4) {
           if(xhr.status === 200) {
             alert("Vielen Dank für dein Feedback!");
+            this.navCtrl.back();
           } else {
             alert("Ups, da ging was schief")
+            this.navCtrl.back();
           }
         }
     };
