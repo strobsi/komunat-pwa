@@ -6446,10 +6446,7 @@
           }
         },
         "graceful-fs": {
-          "version": "1.2.3",
-          "resolved": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-1.2.3.tgz",
-          "integrity": "sha1-FaSAaldUfLLS2/J/QuiajDRRs2Q=",
-          "dev": true
+          "version": "4.2.3"
         },
         "inherits": {
           "version": "1.0.2",
