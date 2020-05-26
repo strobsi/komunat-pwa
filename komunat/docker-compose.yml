@@ -1,0 +1,21 @@
+version: "3.3"
+
+services:
+  demo:
+    build: ./
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.demo.rule=Host(`demo.komunat.de`, `www.demo.komunat.de`)"
+      - "traefik.http.routers.demo.entrypoints=https"
+      - "traefik.http.routers.demo.tls=true"
+      - "traefik.http.routers.demo.tls.certresolver=mytlschallenge"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.demo-redirs.rule=hostregexp(`{host:.+}`)"
+      - "traefik.http.routers.demo-redirs.entrypoints=http"
+      - "traefik.http.routers.demo-redirs.middlewares=redirect-to-https"
+    networks:
+      - traefik_websecure
+networks:
+  traefik_websecure:
+    external: true

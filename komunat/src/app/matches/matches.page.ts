@@ -1,234 +1,3189 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
-import { IonSlides } from '@ionic/angular';
-import anime from 'animejs';
-import 'hammerjs';
-import {PSTATE} from '../utils/pstate';  
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { trigger, style, animate, transition } from "@angular/animations";
+import { IonSlides } from "@ionic/angular";
+import anime from "animejs";
+import "hammerjs";
+import { PSTATE } from "../utils/pstate";
 import { NavController, Platform } from "@ionic/angular";
-import { NavigationExtras } from '@angular/router';
-import { Storage } from '@ionic/storage';
-import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { NavigationExtras } from "@angular/router";
+import { Storage } from "@ionic/storage";
+import { GoogleAnalytics } from "@ionic-native/google-analytics/ngx";
 
 @Component({
-  selector: 'app-matches',
-  templateUrl: './matches.page.html',
-  styleUrls: ['./matches.page.scss'],
+  selector: "app-matches",
+  templateUrl: "./matches.page.html",
+  styleUrls: ["./matches.page.scss"],
   animations: [
-    trigger('items', [
-      transition(':enter', [
-        style({ transform: 'scale(0.5)', opacity: 0 }),  // initial
-        animate('0.6s cubic-bezier(.4, -0.6, 0.2, 1.5)', 
-          style({ transform: 'scale(1)', opacity: 1 }))  // final
+    trigger("items", [
+      transition(":enter", [
+        style({ transform: "scale(0.5)", opacity: 0 }), // initial
+        animate(
+          "0.6s cubic-bezier(.4, -0.6, 0.2, 1.5)",
+          style({ transform: "scale(1)", opacity: 1 })
+        ), // final
       ]),
-      transition(':leave', [
-        style({ transform: 'translateY(-10in)', opacity: 0, height: '*' }),
-        animate('0.4s cubic-bezier(.4, -0.6, 0.2, 0.6)', 
-         style({ 
-           transform: 'scale(0.5)', opacity: 0, 
-           height: '0px', margin: '0px' 
-         })) 
-      ])
-    ])
-  ]
+      transition(":leave", [
+        style({ transform: "translateY(-10in)", opacity: 0, height: "*" }),
+        animate(
+          "0.4s cubic-bezier(.4, -0.6, 0.2, 0.6)",
+          style({
+            transform: "scale(0.5)",
+            opacity: 0,
+            height: "0px",
+            margin: "0px",
+          })
+        ),
+      ]),
+    ]),
+  ],
 })
-
 export class MatchesPage implements OnInit {
-
   SHOW_STATE;
   NO_TUTORIAL;
   @ViewChild(IonSlides) slides: IonSlides;
 
+  matches = [
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+    {
+      show_distance: 10,
+      distance: 10.0,
+      name: "Thomas Müller",
+      birthdate: "01.01.1970",
+      uuid: "12343",
+      list: "1",
+      list_number: "1",
+      district: "5",
+      phone: "+1234567890",
+      motto: "Lorem ipsum dolor",
+      values: [
+        { id: 0, name: "Sicherheit", rating: 11 },
+        { id: 7, name: "Nachhaltigkeit", rating: 10 },
+        { id: 1, name: "Solidarität", rating: 9 },
+        { id: 10, name: "Tradition", rating: 8 },
+        { id: 3, name: "Gerechtigkeit", rating: 7 },
+        { id: 2, name: "Menschenwürde", rating: 6 },
+        { id: 9, name: "Selbstbestimmung", rating: 5 },
+        { id: 11, name: "Rechtsstaatlichkeit", rating: 4 },
+        { id: 5, name: "Meinungsfreiheit", rating: 3 },
+        { id: 6, name: "Pressefreiheit", rating: 2 },
+        { id: 4, name: "Toleranz", rating: 1 },
+        { id: 8, name: "Wohlstand", rating: 0 },
+      ],
+      contents: [
+        { id: 0, name: "Bezahlbaren Wohnraum schaffen", rating: 12 },
+        { id: 11, name: "Eine klimaneutrale Stadt gestalten", rating: 11 },
+        { id: 2, name: "Alternativen zum Auto fördern", rating: 10 },
+        {
+          id: 5,
+          name: "Für mehr Sicherheit im öffentlichen Raum sorgen",
+          rating: 9,
+        },
+        { id: 10, name: "Die regionale Wirtschaft fördern", rating: 8 },
+        { id: 1, name: "Preise für Bus und Bahn senken", rating: 7 },
+        { id: 3, name: "Die Kinderbetreuung ausbauen", rating: 6 },
+        {
+          id: 6,
+          name:
+            "Langfristige Integration und das Zusammenleben in der Stadt fördern",
+          rating: 5,
+        },
+        { id: 7, name: "Schulen sanieren", rating: 4 },
+        {
+          id: 9,
+          name:
+            "Soziale und kulturelle Teilhabe trotz kleinem Geldbeutel ermöglichen",
+          rating: 3,
+        },
+        { id: 12, name: "Kommunalpolitik transparenter machen", rating: 2 },
+        { id: 8, name: "Subkultur fördern", rating: 1 },
+        {
+          id: 4,
+          name: "Keine neuen Schulden für die Stadt machen",
+          rating: 0,
+        },
+      ],
+    },
+  ];
 
-  matches = [];
-  result = {values:[],contents:[]};
+  result = { values: [], contents: [] };
   page = 1;
   LAST = false;
   pdfObj = null;
-  
 
   substitutes = [];
   present_title = "DEIN ERGEBNIS";
-  
-  constructor(public navCtrl: NavController, public storage: Storage, private ga: GoogleAnalytics, public platform: Platform) {
-    
+
+  constructor(
+    public navCtrl: NavController,
+    public storage: Storage,
+    private ga: GoogleAnalytics,
+    public platform: Platform
+  ) {}
+
+  swipedRight(e, i) {
+    this.accept(i);
   }
 
-  swipedRight(e,i) {
-    this.accept(i);
-  } 
-
-  swipedLeft(e,i) {
+  swipedLeft(e, i) {
     this.reject(i);
-  } 
+  }
 
-  backToMatches(t,i) {
+  backToMatches(t, i) {
     if (t == 0) {
       // Coming from subs
-      const element =  document.querySelector('.match_'+i);
-      this.matches.push(this.substitutes[i])
-      this.substitutes.splice(i,1)
+      const element = document.querySelector(".match_" + i);
+      this.matches.push(this.substitutes[i]);
+      this.substitutes.splice(i, 1);
       this.pulseTeam();
       anime({
         targets: element,
         translateX: "150vw",
         rotate: 40,
-        easing: 'easeInOutQuad',
-        duration: 400
+        easing: "easeInOutQuad",
+        duration: 400,
       });
     }
   }
 
-  private loadResults(a) {  
-     var xhr = new XMLHttpRequest();
-     var url = "https://komunat.de/result";
-     a.page = this.page;
-     var data = JSON.stringify(a);
-     xhr.open("POST", url, true);
-     xhr.setRequestHeader("Content-Type", "application/json");
-     xhr.onreadystatechange = () => {
-         if (xhr.readyState === 4) {
-           var data = JSON.parse(xhr.responseText);
-            if (this.page == 1) {
-              this.matches = data
-            }
-            else {
-              if(data.length < 30) {
-                this.LAST = true;
-              }
-              for (var i = 0; i < data.length; i++) {
-                console.log("Appending to existing")
-                this.matches.push(data[i]);
-              }
-            }
-            this.sortMatches();
-         } else if(xhr.readyState === 0) { 
-            xhr.send(data);
-         }
-     };
-     xhr.send(data);
+  private loadResults(a) {
+    var xhr = new XMLHttpRequest();
+    var url = "https://komunat.de/result";
+    a.page = this.page;
+    var data = JSON.stringify(a);
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        var data = JSON.parse(xhr.responseText);
+        if (this.page == 1) {
+          this.matches = data;
+        } else {
+          if (data.length < 30) {
+            this.LAST = true;
+          }
+          for (var i = 0; i < data.length; i++) {
+            console.log("Appending to existing");
+            this.matches.push(data[i]);
+          }
+        }
+        this.sortMatches();
+      } else if (xhr.readyState === 0) {
+        xhr.send(data);
+      }
+    };
+    xhr.send(data);
   }
 
   ngOnInit(): void {
     this.platform.ready().then(() => {
-      this.ga.trackView('matches')
-    .then(() => { 
-      this.ga.trackEvent('userflow', 'Reached Matches')
-      .then(() => {
-      })
-    })
-    .catch(e => console.log(e));
+      this.ga
+        .trackView("matches")
+        .then(() => {
+          this.ga.trackEvent("userflow", "Reached Matches").then(() => {});
+        })
+        .catch((e) => console.log(e));
     });
 
     this.setState(PSTATE.MATCHES);
-    this.storage.get("matches").then( result => {
+    this.storage.get("matches").then((result) => {
       if (!result) {
       } else {
         var a = JSON.parse(result);
-       this.NO_TUTORIAL = false;
-       this.result = a;
-       this.page = 1;
-       this.loadResults(a);
+        this.NO_TUTORIAL = false;
+        this.result = a;
+        this.page = 1;
+        this.loadResults(a);
       }
-  })
+    });
   }
 
   public reject(i) {
-    const element =  document.querySelector('.match_'+i);
-    this.swipeOutLeft(element,i)
+    const element = document.querySelector(".match_" + i);
+    this.swipeOutLeft(element, i);
   }
 
   public accept(i) {
-    const element =  document.querySelector('.match_'+i);
-    this.swipeOutRight(element,i)
+    const element = document.querySelector(".match_" + i);
+    this.swipeOutRight(element, i);
   }
 
-  private swipeOutLeft(elem,i) {
+  private swipeOutLeft(elem, i) {
     this.pulseSubstitute();
     anime({
       targets: elem,
       translateX: "-150vw",
       rotate: -40,
-      easing: 'easeInOutQuad',
-      duration: 400
+      easing: "easeInOutQuad",
+      duration: 400,
     });
     var m = this.matches;
     var s = this.substitutes;
-    setTimeout((function() {
-      s.push(m[i])
-      m.splice(i,1)
-    }),220);
-}
+    setTimeout(function () {
+      s.push(m[i]);
+      m.splice(i, 1);
+    }, 220);
+  }
 
-  private swipeOutRight(elem,i) {
-      this.pulseTeam();
-      anime({
-        targets: elem,
-        translateX: "150vw",
-        rotate: 40,
-        easing: 'easeInOutQuad',
-        duration: 400
-      });
-      var m = this.matches;
-      setTimeout((function() {
-        m.splice(i,1)
-      }),220);
+  private swipeOutRight(elem, i) {
+    this.pulseTeam();
+    anime({
+      targets: elem,
+      translateX: "150vw",
+      rotate: 40,
+      easing: "easeInOutQuad",
+      duration: 400,
+    });
+    var m = this.matches;
+    setTimeout(function () {
+      m.splice(i, 1);
+    }, 220);
   }
 
   backClicked() {
-    this.setState(PSTATE.MATCHES)
+    this.setState(PSTATE.MATCHES);
     var subs = document.querySelector(".substitutesBtn");
     var lbl = document.querySelector(".mainLbl");
     anime({
       targets: [subs],
       opacity: 1,
-      easing: 'easeInOutQuad',
+      easing: "easeInOutQuad",
       duration: 200,
-      complete: function(){
+      complete: function () {
         var back = document.querySelector(".backBtn");
         var subs = document.querySelector(".substitutesBtn");
         lbl.removeAttribute("hidden");
         subs.removeAttribute("hidden");
-        back.setAttribute("hidden","false");
-      }
+        back.setAttribute("hidden", "false");
+      },
     });
     // TODO hide subs and show matches
   }
 
   showSubstitutes() {
-    this.setState(PSTATE.SUBS)
+    this.setState(PSTATE.SUBS);
     var subs = document.querySelector(".substitutesBtn");
     var lbl = document.querySelector(".mainLbl");
     anime({
       targets: [subs],
       opacity: 0,
-      easing: 'easeInOutQuad',
+      easing: "easeInOutQuad",
       duration: 200,
-      complete: function(){
+      complete: function () {
         var back = document.querySelector(".backBtn");
         var subs = document.querySelector(".substitutesBtn");
-        subs.setAttribute("hidden","true");
-        lbl.setAttribute("hidden","true");
+        subs.setAttribute("hidden", "true");
+        lbl.setAttribute("hidden", "true");
         back.removeAttribute("hidden");
-      }
+      },
     });
     // TODO: show subs and hide matches
   }
 
   showTeam() {
-    this.setState(PSTATE.TEAM)
+    this.setState(PSTATE.TEAM);
     var subs = document.querySelector(".substitutesBtn");
     var team = document.querySelector(".teamBtn");
     anime({
-      targets: [subs,team],
+      targets: [subs, team],
       opacity: 0,
-      easing: 'easeInOutQuad',
+      easing: "easeInOutQuad",
       duration: 200,
-      complete: function(){
+      complete: function () {
         var back = document.querySelector(".backBtn");
         var subs = document.querySelector(".substitutesBtn");
-        subs.setAttribute("hidden","true");
+        subs.setAttribute("hidden", "true");
         back.removeAttribute("hidden");
-      }
+      },
     });
     // TODO: show subs and hide matches
   }
@@ -237,62 +3192,60 @@ export class MatchesPage implements OnInit {
     // Show details of selected candidate
     var c;
     if (this.SHOW_STATE == 1) {
-      c = this.matches[i];      
+      c = this.matches[i];
     } else if (this.SHOW_STATE == 2) {
       c = this.substitutes[i];
     }
     let navigationExtras: NavigationExtras = {
       queryParams: {
-          candidate: JSON.stringify(c)
-      }
+        candidate: JSON.stringify(c),
+      },
     };
-    this.navCtrl.navigateForward(['cdetail'], navigationExtras);
+    this.navCtrl.navigateForward(["cdetail"], navigationExtras);
   }
 
   public pulseTeam() {
-    var elem = document.querySelector(".teamBtn")
+    var elem = document.querySelector(".teamBtn");
     anime({
       targets: elem,
       scale: 1.1,
       color: "#59BCED",
-      easing: 'easeInOutQuad',
+      easing: "easeInOutQuad",
       translateY: "-1vh",
       duration: 200,
-      direction: 'alternate',
+      direction: "alternate",
     });
   }
 
   public pulseSubstitute() {
-    var elem = document.querySelector(".substitutesBtn")
+    var elem = document.querySelector(".substitutesBtn");
     anime({
       targets: elem,
       scale: 1.1,
       color: "#59BCED",
       translateY: "-1vh",
-      easing: 'easeInOutQuad',
+      easing: "easeInOutQuad",
       duration: 200,
-      direction: 'alternate',
+      direction: "alternate",
     });
   }
 
   private setState(s) {
     this.SHOW_STATE = s;
     if (s == PSTATE.MATCHES) {
-      this.present_title = "DEIN ERGEBNIS"
+      this.present_title = "DEIN ERGEBNIS";
       this.sortMatches();
-    }
-    else if (s == PSTATE.SUBS) {
-      this.present_title = "DEINE ERSATZBANK"
-    }
-    else {
-      this.present_title = "DEIN TEAM"
+    } else if (s == PSTATE.SUBS) {
+      this.present_title = "DEINE ERSATZBANK";
+    } else {
+      this.present_title = "DEIN TEAM";
     }
   }
 
   private sortMatches() {
     this.matches.sort(function (a, b) {
-      a.distance = a.distance
-      b.distance = b.distance
+      a.distance = a.distance;
+      b.distance = b.distance;
       if (a.distance > b.distance) {
         return 1;
       }
@@ -304,17 +3257,16 @@ export class MatchesPage implements OnInit {
   }
 
   public tutorialBtnClicked(i) {
-    if (i == 0 ) {
+    if (i == 0) {
       this.slides.slideNext();
-    }
-    else {
+    } else {
       this.NO_TUTORIAL = true;
     }
   }
 
   public loadMore() {
-      this.page = this.page+1;
-      this.loadResults(this.result);
+    this.page = this.page + 1;
+    this.loadResults(this.result);
   }
 
   public showEmailSend() {
@@ -322,14 +3274,14 @@ export class MatchesPage implements OnInit {
     console.log(team);
 
     this.storage.ready().then(() => {
-        this.storage.set("team", JSON.stringify(team));
-        this.storage.set("result",JSON.stringify(this.result));
-        let navigationExtras: NavigationExtras = {
-          queryParams: {
-              //team: JSON.stringify(team)
-          }
-        };
-        this.navCtrl.navigateForward(['share'], navigationExtras);
+      this.storage.set("team", JSON.stringify(team));
+      this.storage.set("result", JSON.stringify(this.result));
+      let navigationExtras: NavigationExtras = {
+        queryParams: {
+          //team: JSON.stringify(team)
+        },
+      };
+      this.navCtrl.navigateForward(["share"], navigationExtras);
     });
   }
 }

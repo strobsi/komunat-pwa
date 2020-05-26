@@ -4,52 +4,142 @@
 /*!*********************************************************************!*\
   !*** ./node_modules/@angular/animations/@angular/animations.es5.js ***!
   \*********************************************************************/
-/*! exports provided: AUTO_STYLE, animate, group, keyframes, sequence, state, style, transition, trigger, AnimationPlayer, NoopAnimationPlayer, ɵAnimationGroupPlayer */
+/*! exports provided: AnimationBuilder, AnimationFactory, AUTO_STYLE, animate, animateChild, animation, group, keyframes, query, sequence, stagger, state, style, transition, trigger, useAnimation, NoopAnimationPlayer, ɵAnimationGroupPlayer, ɵPRE_STYLE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnimationBuilder", function() { return AnimationBuilder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnimationFactory", function() { return AnimationFactory; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AUTO_STYLE", function() { return AUTO_STYLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "animate", function() { return animate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "animateChild", function() { return animateChild; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "animation", function() { return animation; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "group", function() { return group; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "keyframes", function() { return keyframes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "query", function() { return query; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sequence", function() { return sequence; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stagger", function() { return stagger; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "state", function() { return state; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "style", function() { return style; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transition", function() { return transition; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "trigger", function() { return trigger; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnimationPlayer", function() { return AnimationPlayer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useAnimation", function() { return useAnimation; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NoopAnimationPlayer", function() { return NoopAnimationPlayer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵAnimationGroupPlayer", function() { return AnimationGroupPlayer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵPRE_STYLE", function() { return ɵPRE_STYLE; });
 /**
- * @license Angular v4.0.0
+ * @license Angular v4.4.7
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * AnimationBuilder is an injectable service that is available when the {\@link
+ * BrowserAnimationsModule BrowserAnimationsModule} or {\@link NoopAnimationsModule
+ * NoopAnimationsModule} modules are used within an application.
+ *
+ * The purpose if this service is to produce an animation sequence programmatically within an
+ * angular component or directive.
+ *
+ * Programmatic animations are first built and then a player is created when the build animation is
+ * attached to an element.
+ *
+ * ```ts
+ * // remember to include the BrowserAnimationsModule module for this to work...
+ * import {AnimationBuilder} from '\@angular/animations';
+ *
+ * class MyCmp {
+ *   constructor(private _builder: AnimationBuilder) {}
+ *
+ *   makeAnimation(element: any) {
+ *     // first build the animation
+ *     const myAnimation = this._builder.build([
+ *       style({ width: 0 }),
+ *       animate(1000, style({ width: '100px' }))
+ *     ]);
+ *
+ *     // then create a player from it
+ *     const player = myAnimation.create(element);
+ *
+ *     player.play();
+ *   }
+ * }
+ * ```
+ *
+ * When an animation is built an instance of {\@link AnimationFactory AnimationFactory} will be
+ * returned. Using that an {\@link AnimationPlayer AnimationPlayer} can be created which can then be
+ * used to start the animation.
+ *
+ * \@experimental Animation support is experimental.
+ * @abstract
+ */
+var AnimationBuilder = (function () {
+    function AnimationBuilder() {
+    }
+    /**
+     * @abstract
+     * @param {?} animation
+     * @return {?}
+     */
+    AnimationBuilder.prototype.build = function (animation) { };
+    return AnimationBuilder;
+}());
+/**
+ * An instance of `AnimationFactory` is returned from {\@link AnimationBuilder#build
+ * AnimationBuilder.build}.
+ *
+ * \@experimental Animation support is experimental.
+ * @abstract
+ */
+var AnimationFactory = (function () {
+    function AnimationFactory() {
+    }
+    /**
+     * @abstract
+     * @param {?} element
+     * @param {?=} options
+     * @return {?}
+     */
+    AnimationFactory.prototype.create = function (element, options) { };
+    return AnimationFactory;
+}());
 /**
  * \@experimental Animation support is experimental.
  */
 var AUTO_STYLE = '*';
 /**
- * `trigger` is an animation-specific function that is designed to be used inside of Angular2's
- * animation DSL language. If this information is new, please navigate to the {\@link
- * Component#animations-anchor component animations metadata page} to gain a better understanding of
- * how animations in Angular2 are used.
+ * `trigger` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. If this information is new, please navigate to the
+ * {\@link Component#animations component animations metadata page} to gain a better
+ * understanding of how animations in Angular are used.
  *
- * `trigger` Creates an animation trigger which will a list of {\@link state state} and {\@link
- * transition transition} entries that will be evaluated when the expression bound to the trigger
- * changes.
+ * `trigger` Creates an animation trigger which will a list of {\@link state state} and
+ * {\@link transition transition} entries that will be evaluated when the expression
+ * bound to the trigger changes.
  *
- * Triggers are registered within the component annotation data under the {\@link
- * Component#animations-anchor animations section}. An animation trigger can be placed on an element
- * within a template by referencing the name of the trigger followed by the expression value that the
+ * Triggers are registered within the component annotation data under the
+ * {\@link Component#animations animations section}. An animation trigger can be placed on an element
+ * within a template by referencing the name of the trigger followed by the expression value that
+ * the
  * trigger is bound to (in the form of `[\@triggerName]="expression"`.
+ *
+ * Animation trigger bindings strigify values and then match the previous and current values against
+ * any linked transitions. If a boolean value is provided into the trigger binding then it will both
+ * be represented as `1` or `true` and `0` or `false` for a true and false boolean values
+ * respectively.
  *
  * ### Usage
  *
  * `trigger` will create an animation trigger reference based on the provided `name` value. The
- * provided `animation` value is expected to be an array consisting of {\@link state state} and {\@link
- * transition transition} declarations.
+ * provided `animation` value is expected to be an array consisting of {\@link state state} and
+ * {\@link transition transition} declarations.
  *
  * ```typescript
  * \@Component({
@@ -75,9 +165,66 @@ var AUTO_STYLE = '*';
  * ```html
  * <!-- somewhere inside of my-component-tpl.html -->
  * <div [\@myAnimationTrigger]="myStatusExp">...</div>
- * tools/gulp-tasks/validate-commit-message.js ```
+ * ```
  *
- * {\@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ * ## Disable Animations
+ * A special animation control binding called `\@.disabled` can be placed on an element which will
+ * then disable animations for any inner animation triggers situated within the element as well as
+ * any animations on the element itself.
+ *
+ * When true, the `\@.disabled` binding will prevent all animations from rendering. The example
+ * below shows how to use this feature:
+ *
+ * ```ts
+ * \@Component({
+ *   selector: 'my-component',
+ *   template: `
+ *     <div [\@.disabled]="isDisabled">
+ *       <div [\@childAnimation]="exp"></div>
+ *     </div>
+ *   `,
+ *   animations: [
+ *     trigger("childAnimation", [
+ *       // ...
+ *     ])
+ *   ]
+ * })
+ * class MyComponent {
+ *   isDisabled = true;
+ *   exp = '...';
+ * }
+ * ```
+ *
+ * The `\@childAnimation` trigger will not animate because `\@.disabled` prevents it from happening
+ * (when true).
+ *
+ * Note that `\@.disbled` will only disable all animations (this means any animations running on
+ * the same element will also be disabled).
+ *
+ * ### Disabling Animations Application-wide
+ * When an area of the template is set to have animations disabled, **all** inner components will
+ * also have their animations disabled as well. This means that all animations for an angular
+ * application can be disabled by placing a host binding set on `\@.disabled` on the topmost Angular
+ * component.
+ *
+ * ```ts
+ * import {Component, HostBinding} from '\@angular/core';
+ *
+ * \@Component({
+ *   selector: 'app-component',
+ *   templateUrl: 'app.component.html',
+ * })
+ * class AppComponent {
+ *   \@HostBinding('\@.disabled')
+ *   public animationsDisabled = true;
+ * }
+ * ```
+ *
+ * ### What about animations that us `query()` and `animateChild()`?
+ * Despite inner animations being disabled, a parent animation can {\@link query query} for inner
+ * elements located in disabled areas of the template and still animate them as it sees fit. This is
+ * also the case for when a sub animation is queried by a parent and then later animated using {\@link
+ * animateChild animateChild}.
  *
  * \@experimental Animation support is experimental.
  * @param {?} name
@@ -85,13 +232,13 @@ var AUTO_STYLE = '*';
  * @return {?}
  */
 function trigger(name, definitions) {
-    return { name: name, definitions: definitions };
+    return { type: 7 /* Trigger */, name: name, definitions: definitions, options: {} };
 }
 /**
- * `animate` is an animation-specific function that is designed to be used inside of Angular2's
+ * `animate` is an animation-specific function that is designed to be used inside of Angular's
  * animation DSL language. If this information is new, please navigate to the {\@link
- * Component#animations-anchor component animations metadata page} to gain a better understanding of
- * how animations in Angular2 are used.
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
  *
  * `animate` specifies an animation step that will apply the provided `styles` data for a given
  * amount of time based on the provided `timing` expression value. Calls to `animate` are expected
@@ -140,13 +287,13 @@ function animate(timings, styles) {
     return { type: 4 /* Animate */, styles: styles, timings: timings };
 }
 /**
- * `group` is an animation-specific function that is designed to be used inside of Angular2's
+ * `group` is an animation-specific function that is designed to be used inside of Angular's
  * animation DSL language. If this information is new, please navigate to the {\@link
- * Component#animations-anchor component animations metadata page} to gain a better understanding of
- * how animations in Angular2 are used.
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
  *
  * `group` specifies a list of animation steps that are all run in parallel. Grouped animations are
- * useful when a series of styles must be animated/closed off at different statrting/ending times.
+ * useful when a series of styles must be animated/closed off at different starting/ending times.
  *
  * The `group` function can either be used within a {\@link sequence sequence} or a {\@link transition
  * transition} and it will only continue to the next instruction once all of the inner animation
@@ -170,16 +317,18 @@ function animate(timings, styles) {
  *
  * \@experimental Animation support is experimental.
  * @param {?} steps
+ * @param {?=} options
  * @return {?}
  */
-function group(steps) {
-    return { type: 3 /* Group */, steps: steps };
+function group(steps, options) {
+    if (options === void 0) { options = null; }
+    return { type: 3 /* Group */, steps: steps, options: options };
 }
 /**
- * `sequence` is an animation-specific function that is designed to be used inside of Angular2's
+ * `sequence` is an animation-specific function that is designed to be used inside of Angular's
  * animation DSL language. If this information is new, please navigate to the {\@link
- * Component#animations-anchor component animations metadata page} to gain a better understanding of
- * how animations in Angular2 are used.
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
  *
  * `sequence` Specifies a list of animation steps that are run one by one. (`sequence` is used by
  * default when an array is passed as animation data into {\@link transition transition}.)
@@ -209,16 +358,18 @@ function group(steps) {
  *
  * \@experimental Animation support is experimental.
  * @param {?} steps
+ * @param {?=} options
  * @return {?}
  */
-function sequence(steps) {
-    return { type: 2 /* Sequence */, steps: steps };
+function sequence(steps, options) {
+    if (options === void 0) { options = null; }
+    return { type: 2 /* Sequence */, steps: steps, options: options };
 }
 /**
- * `style` is an animation-specific function that is designed to be used inside of Angular2's
+ * `style` is an animation-specific function that is designed to be used inside of Angular's
  * animation DSL language. If this information is new, please navigate to the {\@link
- * Component#animations-anchor component animations metadata page} to gain a better understanding of
- * how animations in Angular2 are used.
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
  *
  * `style` declares a key/value object containing CSS properties/styles that can then be used for
  * {\@link state animation states}, within an {\@link sequence animation sequence}, or as styling data
@@ -259,13 +410,13 @@ function sequence(steps) {
  * @return {?}
  */
 function style(tokens) {
-    return { type: 6 /* Style */, styles: tokens };
+    return { type: 6 /* Style */, styles: tokens, offset: null };
 }
 /**
- * `state` is an animation-specific function that is designed to be used inside of Angular2's
+ * `state` is an animation-specific function that is designed to be used inside of Angular's
  * animation DSL language. If this information is new, please navigate to the {\@link
- * Component#animations-anchor component animations metadata page} to gain a better understanding of
- * how animations in Angular2 are used.
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
  *
  * `state` declares an animation state within the given trigger. When a state is active within a
  * component then its associated styles will persist on the element that the trigger is attached to
@@ -310,16 +461,17 @@ function style(tokens) {
  * \@experimental Animation support is experimental.
  * @param {?} name
  * @param {?} styles
+ * @param {?=} options
  * @return {?}
  */
-function state(name, styles) {
-    return { type: 0 /* State */, name: name, styles: styles };
+function state(name, styles, options) {
+    return { type: 0 /* State */, name: name, styles: styles, options: options };
 }
 /**
- * `keyframes` is an animation-specific function that is designed to be used inside of Angular2's
+ * `keyframes` is an animation-specific function that is designed to be used inside of Angular's
  * animation DSL language. If this information is new, please navigate to the {\@link
- * Component#animations-anchor component animations metadata page} to gain a better understanding of
- * how animations in Angular2 are used.
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
  *
  * `keyframes` specifies a collection of {\@link style style} entries each optionally characterized
  * by an `offset` value.
@@ -363,13 +515,13 @@ function state(name, styles) {
  * @return {?}
  */
 function keyframes(steps) {
-    return { type: 5 /* KeyframeSequence */, steps: steps };
+    return { type: 5 /* Keyframes */, steps: steps };
 }
 /**
- * `transition` is an animation-specific function that is designed to be used inside of Angular2's
+ * `transition` is an animation-specific function that is designed to be used inside of Angular's
  * animation DSL language. If this information is new, please navigate to the {\@link
- * Component#animations-anchor component animations metadata page} to gain a better understanding of
- * how animations in Angular2 are used.
+ * Component#animations component animations metadata page} to gain a better understanding of
+ * how animations in Angular are used.
  *
  * `transition` declares the {\@link sequence sequence of animation steps} that will be run when the
  * provided `stateChangeExpr` value is satisfied. The `stateChangeExpr` consists of a `state1 =>
@@ -468,15 +620,375 @@ function keyframes(steps) {
  * ])
  * ```
  *
+ * ### Boolean values
+ * if a trigger binding value is a boolean value then it can be matched using a transition
+ * expression that compares `true` and `false` or `1` and `0`.
+ *
+ * ```
+ * // in the template
+ * <div [\@openClose]="open ? true : false">...</div>
+ *
+ * // in the component metadata
+ * trigger('openClose', [
+ *   state('true', style({ height: '*' })),
+ *   state('false', style({ height: '0px' })),
+ *   transition('false <=> true', animate(500))
+ * ])
+ * ```
  * {\@example core/animation/ts/dsl/animation_example.ts region='Component'}
  *
  * \@experimental Animation support is experimental.
  * @param {?} stateChangeExpr
  * @param {?} steps
+ * @param {?=} options
  * @return {?}
  */
-function transition(stateChangeExpr, steps) {
-    return { type: 1 /* Transition */, expr: stateChangeExpr, animation: steps };
+function transition(stateChangeExpr, steps, options) {
+    if (options === void 0) { options = null; }
+    return { type: 1 /* Transition */, expr: stateChangeExpr, animation: steps, options: options };
+}
+/**
+ * `animation` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language.
+ *
+ * `var myAnimation = animation(...)` is designed to produce a reusable animation that can be later
+ * invoked in another animation or sequence. Reusable animations are designed to make use of
+ * animation parameters and the produced animation can be used via the `useAnimation` method.
+ *
+ * ```
+ * var fadeAnimation = animation([
+ *   style({ opacity: '{{ start }}' }),
+ *   animate('{{ time }}',
+ *     style({ opacity: '{{ end }}'}))
+ * ], { params: { time: '1000ms', start: 0, end: 1 }});
+ * ```
+ *
+ * If parameters are attached to an animation then they act as **default parameter values**. When an
+ * animation is invoked via `useAnimation` then parameter values are allowed to be passed in
+ * directly. If any of the passed in parameter values are missing then the default values will be
+ * used.
+ *
+ * ```
+ * useAnimation(fadeAnimation, {
+ *   params: {
+ *     time: '2s',
+ *     start: 1,
+ *     end: 0
+ *   }
+ * })
+ * ```
+ *
+ * If one or more parameter values are missing before animated then an error will be thrown.
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} steps
+ * @param {?=} options
+ * @return {?}
+ */
+function animation(steps, options) {
+    if (options === void 0) { options = null; }
+    return { type: 8 /* Reference */, animation: steps, options: options };
+}
+/**
+ * `animateChild` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. It works by allowing a queried element to execute its own
+ * animation within the animation sequence.
+ *
+ * Each time an animation is triggered in angular, the parent animation
+ * will always get priority and any child animations will be blocked. In order
+ * for a child animation to run, the parent animation must query each of the elements
+ * containing child animations and then allow the animations to run using `animateChild`.
+ *
+ * The example HTML code below shows both parent and child elements that have animation
+ * triggers that will execute at the same time.
+ *
+ * ```html
+ * <!-- parent-child.component.html -->
+ * <button (click)="exp =! exp">Toggle</button>
+ * <hr>
+ *
+ * <div [\@parentAnimation]="exp">
+ *   <header>Hello</header>
+ *   <div [\@childAnimation]="exp">
+ *       one
+ *   </div>
+ *   <div [\@childAnimation]="exp">
+ *       two
+ *   </div>
+ *   <div [\@childAnimation]="exp">
+ *       three
+ *   </div>
+ * </div>
+ * ```
+ *
+ * Now when the `exp` value changes to true, only the `parentAnimation` animation will animate
+ * because it has priority. However, using `query` and `animateChild` each of the inner animations
+ * can also fire:
+ *
+ * ```ts
+ * // parent-child.component.ts
+ * import {trigger, transition, animate, style, query, animateChild} from '\@angular/animations';
+ * \@Component({
+ *   selector: 'parent-child-component',
+ *   animations: [
+ *     trigger('parentAnimation', [
+ *       transition('false => true', [
+ *         query('header', [
+ *           style({ opacity: 0 }),
+ *           animate(500, style({ opacity: 1 }))
+ *         ]),
+ *         query('\@childAnimation', [
+ *           animateChild()
+ *         ])
+ *       ])
+ *     ]),
+ *     trigger('childAnimation', [
+ *       transition('false => true', [
+ *         style({ opacity: 0 }),
+ *         animate(500, style({ opacity: 1 }))
+ *       ])
+ *     ])
+ *   ]
+ * })
+ * class ParentChildCmp {
+ *   exp: boolean = false;
+ * }
+ * ```
+ *
+ * In the animation code above, when the `parentAnimation` transition kicks off it first queries to
+ * find the header element and fades it in. It then finds each of the sub elements that contain the
+ * `\@childAnimation` trigger and then allows for their animations to fire.
+ *
+ * This example can be further extended by using stagger:
+ *
+ * ```ts
+ * query('\@childAnimation', stagger(100, [
+ *   animateChild()
+ * ]))
+ * ```
+ *
+ * Now each of the sub animations start off with respect to the `100ms` staggering step.
+ *
+ * ## The first frame of child animations
+ * When sub animations are executed using `animateChild` the animation engine will always apply the
+ * first frame of every sub animation immediately at the start of the animation sequence. This way
+ * the parent animation does not need to set any initial styling data on the sub elements before the
+ * sub animations kick off.
+ *
+ * In the example above the first frame of the `childAnimation`'s `false => true` transition
+ * consists of a style of `opacity: 0`. This is applied immediately when the `parentAnimation`
+ * animation transition sequence starts. Only then when the `\@childAnimation` is queried and called
+ * with `animateChild` will it then animate to its destination of `opacity: 1`.
+ *
+ * Note that this feature designed to be used alongside {\@link query query()} and it will only work
+ * with animations that are assigned using the Angular animation DSL (this means that CSS keyframes
+ * and transitions are not handled by this API).
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?=} options
+ * @return {?}
+ */
+function animateChild(options) {
+    if (options === void 0) { options = null; }
+    return { type: 9 /* AnimateChild */, options: options };
+}
+/**
+ * `useAnimation` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. It is used to kick off a reusable animation that is created using {\@link
+ * animation animation()}.
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} animation
+ * @param {?=} options
+ * @return {?}
+ */
+function useAnimation(animation, options) {
+    if (options === void 0) { options = null; }
+    return { type: 10 /* AnimateRef */, animation: animation, options: options };
+}
+/**
+ * `query` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language.
+ *
+ * query() is used to find one or more inner elements within the current element that is
+ * being animated within the sequence. The provided animation steps are applied
+ * to the queried element (by default, an array is provided, then this will be
+ * treated as an animation sequence).
+ *
+ * ### Usage
+ *
+ * query() is designed to collect mutiple elements and works internally by using
+ * `element.querySelectorAll`. An additional options object can be provided which
+ * can be used to limit the total amount of items to be collected.
+ *
+ * ```js
+ * query('div', [
+ *   animate(...),
+ *   animate(...)
+ * ], { limit: 1 })
+ * ```
+ *
+ * query(), by default, will throw an error when zero items are found. If a query
+ * has the `optional` flag set to true then this error will be ignored.
+ *
+ * ```js
+ * query('.some-element-that-may-not-be-there', [
+ *   animate(...),
+ *   animate(...)
+ * ], { optional: true })
+ * ```
+ *
+ * ### Special Selector Values
+ *
+ * The selector value within a query can collect elements that contain angular-specific
+ * characteristics
+ * using special pseudo-selectors tokens.
+ *
+ * These include:
+ *
+ *  - Querying for newly inserted/removed elements using `query(":enter")`/`query(":leave")`
+ *  - Querying all currently animating elements using `query(":animating")`
+ *  - Querying elements that contain an animation trigger using `query("\@triggerName")`
+ *  - Querying all elements that contain an animation triggers using `query("\@*")`
+ *  - Including the current element into the animation sequence using `query(":self")`
+ *
+ *
+ *  Each of these pseudo-selector tokens can be merged together into a combined query selector
+ * string:
+ *
+ *  ```
+ *  query(':self, .record:enter, .record:leave, \@subTrigger', [...])
+ *  ```
+ *
+ * ### Demo
+ *
+ * ```
+ * \@Component({
+ *   selector: 'inner',
+ *   template: `
+ *     <div [\@queryAnimation]="exp">
+ *       <h1>Title</h1>
+ *       <div class="content">
+ *         Blah blah blah
+ *       </div>
+ *     </div>
+ *   `,
+ *   animations: [
+ *    trigger('queryAnimation', [
+ *      transition('* => goAnimate', [
+ *        // hide the inner elements
+ *        query('h1', style({ opacity: 0 })),
+ *        query('.content', style({ opacity: 0 })),
+ *
+ *        // animate the inner elements in, one by one
+ *        query('h1', animate(1000, style({ opacity: 1 })),
+ *        query('.content', animate(1000, style({ opacity: 1 })),
+ *      ])
+ *    ])
+ *  ]
+ * })
+ * class Cmp {
+ *   exp = '';
+ *
+ *   goAnimate() {
+ *     this.exp = 'goAnimate';
+ *   }
+ * }
+ * ```
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} selector
+ * @param {?} animation
+ * @param {?=} options
+ * @return {?}
+ */
+function query(selector, animation, options) {
+    if (options === void 0) { options = null; }
+    return { type: 11 /* Query */, selector: selector, animation: animation, options: options };
+}
+/**
+ * `stagger` is an animation-specific function that is designed to be used inside of Angular's
+ * animation DSL language. It is designed to be used inside of an animation {\@link query query()}
+ * and works by issuing a timing gap between after each queried item is animated.
+ *
+ * ### Usage
+ *
+ * In the example below there is a container element that wraps a list of items stamped out
+ * by an ngFor. The container element contains an animation trigger that will later be set
+ * to query for each of the inner items.
+ *
+ * ```html
+ * <!-- list.component.html -->
+ * <button (click)="toggle()">Show / Hide Items</button>
+ * <hr />
+ * <div [\@listAnimation]="items.length">
+ *   <div *ngFor="let item of items">
+ *     {{ item }}
+ *   </div>
+ * </div>
+ * ```
+ *
+ * The component code for this looks as such:
+ *
+ * ```ts
+ * import {trigger, transition, style, animate, query, stagger} from '\@angular/animations';
+ * \@Component({
+ *   templateUrl: 'list.component.html',
+ *   animations: [
+ *     trigger('listAnimation', [
+ *        //...
+ *     ])
+ *   ]
+ * })
+ * class ListComponent {
+ *   items = [];
+ *
+ *   showItems() {
+ *     this.items = [0,1,2,3,4];
+ *   }
+ *
+ *   hideItems() {
+ *     this.items = [];
+ *   }
+ *
+ *   toggle() {
+ *     this.items.length ? this.hideItems() : this.showItems();
+ *   }
+ * }
+ * ```
+ *
+ * And now for the animation trigger code:
+ *
+ * ```ts
+ * trigger('listAnimation', [
+ *   transition('* => *', [ // each time the binding value changes
+ *     query(':leave', [
+ *       stagger(100, [
+ *         animate('0.5s', style({ opacity: 0 }))
+ *       ])
+ *     ]),
+ *     query(':enter', [
+ *       style({ opacity: 0 }),
+ *       stagger(100, [
+ *         animate('0.5s', style({ opacity: 1 }))
+ *       ])
+ *     ])
+ *   ])
+ * ])
+ * ```
+ *
+ * Now each time the items are added/removed then either the opacity
+ * fade-in animation will run or each removed item will be faded out.
+ * When either of these animations occur then a stagger effect will be
+ * applied after each item's animation is started.
+ *
+ * \@experimental Animation support is experimental.
+ * @param {?} timings
+ * @param {?} animation
+ * @return {?}
+ */
+function stagger(timings, animation) {
+    return { type: 12 /* Stagger */, timings: timings, animation: animation };
 }
 /**
  * @license
@@ -499,97 +1011,6 @@ function scheduleMicroTask(cb) {
  */
 /**
  * \@experimental Animation support is experimental.
- * @abstract
- */
-var AnimationPlayer = (function () {
-    function AnimationPlayer() {
-    }
-    /**
-     * @abstract
-     * @param {?} fn
-     * @return {?}
-     */
-    AnimationPlayer.prototype.onDone = function (fn) { };
-    /**
-     * @abstract
-     * @param {?} fn
-     * @return {?}
-     */
-    AnimationPlayer.prototype.onStart = function (fn) { };
-    /**
-     * @abstract
-     * @param {?} fn
-     * @return {?}
-     */
-    AnimationPlayer.prototype.onDestroy = function (fn) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    AnimationPlayer.prototype.init = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    AnimationPlayer.prototype.hasStarted = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    AnimationPlayer.prototype.play = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    AnimationPlayer.prototype.pause = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    AnimationPlayer.prototype.restart = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    AnimationPlayer.prototype.finish = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    AnimationPlayer.prototype.destroy = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    AnimationPlayer.prototype.reset = function () { };
-    /**
-     * @abstract
-     * @param {?} p
-     * @return {?}
-     */
-    AnimationPlayer.prototype.setPosition = function (p) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    AnimationPlayer.prototype.getPosition = function () { };
-    Object.defineProperty(AnimationPlayer.prototype, "parentPlayer", {
-        /**
-         * @return {?}
-         */
-        get: function () { throw new Error('NOT IMPLEMENTED: Base Class'); },
-        /**
-         * @param {?} player
-         * @return {?}
-         */
-        set: function (player) { throw new Error('NOT IMPLEMENTED: Base Class'); },
-        enumerable: true,
-        configurable: true
-    });
-    return AnimationPlayer;
-}());
-/**
- * \@experimental Animation support is experimental.
  */
 var NoopAnimationPlayer = (function () {
     function NoopAnimationPlayer() {
@@ -600,6 +1021,7 @@ var NoopAnimationPlayer = (function () {
         this._destroyed = false;
         this._finished = false;
         this.parentPlayer = null;
+        this.totalTime = 0;
     }
     /**
      * @return {?}
@@ -638,12 +1060,18 @@ var NoopAnimationPlayer = (function () {
      * @return {?}
      */
     NoopAnimationPlayer.prototype.play = function () {
-        var _this = this;
         if (!this.hasStarted()) {
-            scheduleMicroTask(function () { return _this._onFinish(); });
+            this.triggerMicrotask();
             this._onStart();
         }
         this._started = true;
+    };
+    /**
+     * @return {?}
+     */
+    NoopAnimationPlayer.prototype.triggerMicrotask = function () {
+        var _this = this;
+        scheduleMicroTask(function () { return _this._onFinish(); });
     };
     /**
      * @return {?}
@@ -714,7 +1142,10 @@ var AnimationGroupPlayer = (function () {
         this._destroyed = false;
         this._onDestroyFns = [];
         this.parentPlayer = null;
-        var count = 0;
+        this.totalTime = 0;
+        var doneCount = 0;
+        var destroyCount = 0;
+        var startCount = 0;
         var total = this._players.length;
         if (total == 0) {
             scheduleMicroTask(function () { return _this._onFinish(); });
@@ -723,12 +1154,23 @@ var AnimationGroupPlayer = (function () {
             this._players.forEach(function (player) {
                 player.parentPlayer = _this;
                 player.onDone(function () {
-                    if (++count >= total) {
+                    if (++doneCount >= total) {
                         _this._onFinish();
+                    }
+                });
+                player.onDestroy(function () {
+                    if (++destroyCount >= total) {
+                        _this._onDestroy();
+                    }
+                });
+                player.onStart(function () {
+                    if (++startCount >= total) {
+                        _this._onStart();
                     }
                 });
             });
         }
+        this.totalTime = this._players.reduce(function (time, player) { return Math.max(time, player.totalTime); }, 0);
     }
     /**
      * @return {?}
@@ -750,6 +1192,16 @@ var AnimationGroupPlayer = (function () {
      */
     AnimationGroupPlayer.prototype.onStart = function (fn) { this._onStartFns.push(fn); };
     /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype._onStart = function () {
+        if (!this.hasStarted()) {
+            this._onStartFns.forEach(function (fn) { return fn(); });
+            this._onStartFns = [];
+            this._started = true;
+        }
+    };
+    /**
      * @param {?} fn
      * @return {?}
      */
@@ -770,11 +1222,7 @@ var AnimationGroupPlayer = (function () {
         if (!this.parentPlayer) {
             this.init();
         }
-        if (!this.hasStarted()) {
-            this._onStartFns.forEach(function (fn) { return fn(); });
-            this._onStartFns = [];
-            this._started = true;
-        }
+        this._onStart();
         this._players.forEach(function (player) { return player.play(); });
     };
     /**
@@ -795,11 +1243,15 @@ var AnimationGroupPlayer = (function () {
     /**
      * @return {?}
      */
-    AnimationGroupPlayer.prototype.destroy = function () {
+    AnimationGroupPlayer.prototype.destroy = function () { this._onDestroy(); };
+    /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype._onDestroy = function () {
         if (!this._destroyed) {
+            this._destroyed = true;
             this._onFinish();
             this._players.forEach(function (player) { return player.destroy(); });
-            this._destroyed = true;
             this._onDestroyFns.forEach(function (fn) { return fn(); });
             this._onDestroyFns = [];
         }
@@ -818,7 +1270,11 @@ var AnimationGroupPlayer = (function () {
      * @return {?}
      */
     AnimationGroupPlayer.prototype.setPosition = function (p) {
-        this._players.forEach(function (player) { player.setPosition(p); });
+        var /** @type {?} */ timeAtPosition = p * this.totalTime;
+        this._players.forEach(function (player) {
+            var /** @type {?} */ position = player.totalTime ? Math.min(1, timeAtPosition / player.totalTime) : 1;
+            player.setPosition(position);
+        });
     };
     /**
      * @return {?}
@@ -839,6 +1295,16 @@ var AnimationGroupPlayer = (function () {
         enumerable: true,
         configurable: true
     });
+    /**
+     * @return {?}
+     */
+    AnimationGroupPlayer.prototype.beforeDestroy = function () {
+        this.players.forEach(function (player) {
+            if (player.beforeDestroy) {
+                player.beforeDestroy();
+            }
+        });
+    };
     return AnimationGroupPlayer;
 }());
 /**
@@ -848,12 +1314,18 @@ var AnimationGroupPlayer = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+var ɵPRE_STYLE = '!';
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all animation APIs of the animation package.
  */
 /**
  * @license
@@ -921,7 +1393,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /**
- * @license Angular v7.2.7
+ * @license Angular v7.2.16
  * (c) 2010-2019 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -1211,8 +1683,10 @@ var HttpHeaders = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
- * serialize and parse URL parameter keys and values.
+ * A class that uses `encodeURIComponent` and `decodeURIComponent` to
+ * serialize and parse URL parameter keys and values. If you pass URL query parameters
+ * without encoding, the query parameters can get misinterpreted at the receiving end.
+ * Use the `HttpParameterCodec` class to encode and decode the query-string values.
  *
  * @publicApi
  */
@@ -1385,7 +1859,7 @@ var HttpParams = /** @class */ (function () {
                         }
                 }
             });
-            this.cloneFrom = null;
+            this.cloneFrom = this.updates = null;
         }
     };
     return HttpParams;
@@ -3030,7 +3504,7 @@ module.exports = "<ion-content>\n\n<div class=\"container\">\n  <ion-row class=\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\n  height: 100vh;\n  /* Fallback for browsers that do not support Custom Properties */\n  height: calc(var(--vh, 1vh) * 100);\n  margin-top: 5vh; }\n\n.titleBar {\n  margin-left: 10px;\n  font-size: 7vw; }\n\n.subsIcon {\n  margin: 0px;\n  padding: 0px;\n  font-size: 12px; }\n\n.candidateCard {\n  height: 180px; }\n\n.grayed {\n  background-color: var(--komunat-gray-light); }\n\n.clickable {\n  position: absolute;\n  top: 25%;\n  left: 0px;\n  width: 100%;\n  height: 80%; }\n\n.lefttopclickable {\n  position: absolute;\n  top: 0%;\n  left: 0px;\n  width: 80%;\n  height: 25%; }\n\n.fullHeight {\n  height: 100%; }\n\n.black {\n  color: var(--komunat-gray-dark); }\n\n.nameRow {\n  margin-top: 5px;\n  margin-left: 10px;\n  margin-bottom: 5px; }\n\n.iconRow {\n  margin-left: -10px;\n  margin-top: 0px; }\n\n.cCardLeft {\n  width: 100%;\n  height: 100%;\n  vertical-align: middle;\n  text-align: center; }\n\n.cCardLeft ion-avatar {\n  width: 25vw;\n  height: 25vw;\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  margin-left: 10px;\n  position: absolute;\n  top: 30%;\n  left: 55%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  border-radius: 50%; }\n\n.percentage {\n  background-color: #59BCED;\n  border-radius: 0px 10px 10px 0px;\n  height: 5vw;\n  line-height: 5vw;\n  vertical-align: middle;\n  width: 15vw;\n  position: absolute;\n  color: white;\n  font-weight: bold;\n  padding: 2px; }\n\n/* iPhone 5 \nYou can also target devices with aspect ratio. */\n\n@media screen and (device-aspect-ratio: 40 / 71) {\n  .percentage {\n    background-color: #59BCED;\n    border-radius: 0px 10px 10px 0px;\n    height: 5vw;\n    line-height: 5vw;\n    vertical-align: middle;\n    width: 15vw;\n    position: absolute;\n    color: white;\n    font-weight: bold;\n    font-size: 10px;\n    padding: 2px; } }\n\n.cCardRight {\n  width: 100%;\n  height: 100%;\n  padding-left: 10px; }\n\nh2 {\n  color: #4C4D4F;\n  font-size: 8vw;\n  text-align: center;\n  font-family: 'Source Sans Pro', sans-serif;\n  font-weight: bold; }\n\nh4 {\n  height: 5vh;\n  font-size: 6vw;\n  margin: 1em;\n  color: #4C4D4F;\n  text-align: center;\n  font-family: 'Source Sans Pro', sans-serif;\n  font-weight: bold; }\n\nh5 {\n  margin-top: 20px;\n  font-size: 5vw;\n  font-family: 'Source Sans Pro', sans-serif;\n  font-weight: bold; }\n\np {\n  font-family: 'Source Sans Pro', sans-serif;\n  color: var(--komunat-blue);\n  margin-bottom: 0px; }\n\n.c_name {\n  color: var(--komunat-gray-dark);\n  font-weight: bold;\n  font-size: 5vw; }\n\n.c_info {\n  margin-top: 10px; }\n\n.bold {\n  font-weight: bold; }\n\n.c_info_text {\n  margin-bottom: 4px;\n  margin-top: 4px;\n  color: var(--komunat-gray-dark); }\n\n.slim {\n  font-weight: lighter; }\n\n.blue {\n  color: var(--komunat-blue); }\n\n.white {\n  color: white; }\n\n.red {\n  color: var(--komunat-red); }\n\n.left {\n  text-align: left; }\n\n.reject {\n  position: absolute;\n  top: 0px;\n  right: -35px;\n  width: 8vw;\n  border-radius: 50%;\n  text-align: center;\n  font-size: 12vw;\n  color: var(--komunat-red); }\n\n.rejectIcon {\n  -webkit-transform: translate(0%, 35%);\n          transform: translate(0%, 35%);\n  font-size: 12vw; }\n\n.readd {\n  position: absolute;\n  top: 0px;\n  right: -10px;\n  width: 8vw;\n  border-radius: 50%;\n  text-align: center;\n  font-size: 12vw;\n  color: var(--ion-color-success); }\n\n.detailArrow {\n  position: absolute;\n  right: -10px;\n  top: 20%;\n  left: 100%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  font-size: 5vw; }\n\n.content {\n  margin-bottom: 100px; }\n\n.loadBtn {\n  margin-bottom: 100px; }\n\n.divider {\n  border-color: var(--komunat-gray-dark);\n  margin-top: -60px;\n  margin-bottom: 80px; }\n\n.footer {\n  background-color: var(--komunat-blue);\n  margin: 0px;\n  padding: 0px;\n  height: 60px;\n  line-height: 60px;\n  color: white;\n  font-weight: bold;\n  font-size: 5vw;\n  font-family: 'Source Sans Pro', sans-serif;\n  text-align: center;\n  position: fixed;\n  bottom: 0px;\n  left: 0px;\n  right: 0px; }\n\n.tutorial {\n  position: fixed;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.8); }\n\n.tutorialContent {\n  width: 100vw;\n  height: 93vh;\n  margin-top: 8vh;\n  margin-left: 20px;\n  margin-right: 20px; }\n\n.exampleBox {\n  position: absolute;\n  height: 23vh;\n  width: 90%;\n  border-radius: 5px;\n  border: 2px solid;\n  border-color: white; }\n\n.tutorialText {\n  margin-top: 5vh;\n  text-align: left;\n  width: 90%; }\n\n.platform-android .tutBtn {\n  position: absolute;\n  bottom: 20%;\n  width: 90vw; }\n\n.platform-ios .tutBtn {\n  position: absolute;\n  bottom: 10%;\n  width: 90vw; }\n\n.finishIcon {\n  display: inline-block;\n  vertical-align: middle;\n  font-size: 40px; }\n\n.finishText {\n  display: inline-block;\n  vertical-align: middle; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zdHJvYnNpL1Byb2plY3RzL2tvbXVuYXQtcHdhL2tvbXVuYXQvc3JjL2FwcC9tYXRjaGVzL21hdGNoZXMucGFnZS5zY3NzIiwic3JjL2FwcC9tYXRjaGVzL21hdGNoZXMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBRUksYUFBYTtFQUFFLGdFQUFBO0VBQ2Ysa0NBQWtDO0VBQ2xDLGVBQWMsRUFBQTs7QUFJbEI7RUFDRSxpQkFBZ0I7RUFDaEIsY0FBYyxFQUFBOztBQUdoQjtFQUNJLFdBQVU7RUFDVixZQUFZO0VBQ1osZUFBYyxFQUFBOztBQUdsQjtFQUNJLGFBQVksRUFBQTs7QUFJaEI7RUFDRSwyQ0FBMkMsRUFBQTs7QUFHN0M7RUFDRSxrQkFBa0I7RUFDbEIsUUFBTztFQUNQLFNBQVE7RUFDUixXQUFVO0VBQ1YsV0FBVSxFQUFBOztBQUdaO0VBQ0Usa0JBQWtCO0VBQ2xCLE9BQU07RUFDTixTQUFRO0VBQ1IsVUFBUztFQUNULFdBQVUsRUFBQTs7QUFHWjtFQUNJLFlBQVksRUFBQTs7QUFHaEI7RUFDSSwrQkFBOEIsRUFBQTs7QUFHbEM7RUFDRSxlQUFjO0VBQ2QsaUJBQWdCO0VBQ2hCLGtCQUFpQixFQUFBOztBQUduQjtFQUNFLGtCQUFpQjtFQUNqQixlQUFjLEVBQUE7O0FBR2hCO0VBQ0ksV0FBVztFQUNYLFlBQVc7RUFDWCxzQkFBc0I7RUFDdEIsa0JBQWtCLEVBQUE7O0FBR3RCO0VBQ0ksV0FBVztFQUNYLFlBQVk7RUFDWixvQkFBaUI7S0FBakIsaUJBQWlCO0VBQ2pCLGNBQWM7RUFDZCxpQkFBaUI7RUFDakIsa0JBQWtCO0VBQ2xCLFFBQVE7RUFDUixTQUFTO0VBRVQsd0NBQWdDO1VBQWhDLGdDQUFnQztFQUNoQyxrQkFBa0IsRUFBQTs7QUFHdEI7RUFDSSx5QkFBeUI7RUFDekIsZ0NBQWdDO0VBQ2hDLFdBQVU7RUFDVixnQkFBZ0I7RUFDaEIsc0JBQXNCO0VBQ3RCLFdBQVU7RUFDVixrQkFBa0I7RUFD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cUI7RUFDckIsc0JBQXNCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9tYXRjaGVzL21hdGNoZXMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRhaW5lclxue1xuICAgIGhlaWdodDogMTAwdmg7IC8qIEZhbGxiYWNrIGZvciBicm93c2VycyB0aGF0IGRvIG5vdCBzdXBwb3J0IEN1c3RvbSBQcm9wZXJ0aWVzICovXG4gICAgaGVpZ2h0OiBjYWxjKHZhcigtLXZoLCAxdmgpICogMTAwKTtcbiAgICBtYXJnaW4tdG9wOjV2aDtcbn1cblxuXG4udGl0bGVCYXIge1xuICBtYXJnaW4tbGVmdDoxMHB4O1xuICBmb250LXNpemU6IDd2dztcbn1cblxuLnN1YnNJY29uIHtcbiAgICBtYXJnaW46MHB4O1xuICAgIHBhZGRpbmc6IDBweDtcbiAgICBmb250LXNpemU6MTJweDtcbn1cblxuLmNhbmRpZGF0ZUNhcmQge1xuICAgIGhlaWdodDoxODBweDtcbiAgICBcbn1cblxuLmdyYXllZCB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWtvbXVuYXQtZ3JheS1saWdodCk7XG59XG5cbi5jbGlja2FibGUge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDoyNSU7XG4gIGxlZnQ6MHB4O1xuICB3aWR0aDoxMDAlO1xuICBoZWlnaHQ6ODAlO1xufVxuXG4ubGVmdHRvcGNsaWNrYWJsZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOjAlO1xuICBsZWZ0OjBweDtcbiAgd2lkdGg6ODAlO1xuICBoZWlnaHQ6MjUlO1xufVxuXG4uZnVsbEhlaWdodCB7XG4gICAgaGVpZ2h0OiAxMDAlO1xufVxuXG4uYmxhY2sge1xuICAgIGNvbG9yOnZhcigtLWtvbXVuYXQtZ3JheS1kYXJrKVxufVxuXG4ubmFtZVJvdyB7XG4gIG1hcmdpbi10b3A6NXB4O1xuICBtYXJnaW4tbGVmdDoxMHB4O1xuICBtYXJnaW4tYm90dG9tOjVweDtcbn1cblxuLmljb25Sb3cge1xuICBtYXJnaW4tbGVmdDotMTBweDtcbiAgbWFyZ2luLXRvcDowcHg7XG59XG5cbi5jQ2FyZExlZnQge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDoxMDAlO1xuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuXG4uY0NhcmRMZWZ0IGlvbi1hdmF0YXIge1xuICAgIHdpZHRoOiAyNXZ3O1xuICAgIGhlaWdodDogMjV2dztcbiAgICBvYmplY3QtZml0OiBjb3ZlcjtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBtYXJnaW4tbGVmdDogMTBweDtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAzMCU7XG4gICAgbGVmdDogNTUlO1xuICAgIC1tcy10cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XG59XG5cbi5wZXJjZW50YWdlIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjNTlCQ0VEO1xuICAgIGJvcmRlci1yYWRpdXM6IDBweCAxMHB4IDEwcHggMHB4O1xuICAgIGhlaWdodDo1dnc7XG4gICAgbGluZS1oZWlnaHQ6IDV2dztcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgIHdpZHRoOjE1dnc7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIGNvbG9yOndoaXRlO1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIHBhZGRpbmc6MnB4O1xufVxuXG4vKiBpUGhvbmUgNSBcbllvdSBjYW4gYWxzbyB0YXJnZXQgZGV2aWNlcyB3aXRoIGFzcGVjdCByYXRpby4gKi8gICAgICAgICAgICAgICAgICAgICAgIFxuQG1lZGlhIHNjcmVlbiBhbmQgKGRldmljZS1hc3BlY3QtcmF0aW86IDQwLzcxKSB7ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIC5wZXJjZW50YWdlIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjNTlCQ0VEO1xuICAgIGJvcmRlci1yYWRpdXM6IDBweCAxMHB4IDEwcHggMHB4O1xuICAgIGhlaWdodDo1dnc7XG4gICAgbGluZS1oZWlnaHQ6IDV2dztcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgIHdpZHRoOjE1dnc7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIGNvbG9yOndoaXRlO1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIGZvbnQtc2l6ZToxMHB4O1xuICAgIHBhZGRpbmc6MnB4O1xuICB9ICAgICAgICAgICAgICAgIFxufVxuXG4uY0NhcmRSaWdodCB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OjEwMCU7XG4gICAgcGFkZGluZy1sZWZ0OjEwcHg7XG59XG4gIGgyIHtcbiAgICBjb2xvcjogIzRDNEQ0RjtcbiAgICBmb250LXNpemU6IDh2dztcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7IFxuICAgIGZvbnQtZmFtaWx5OiAnU291cmNlIFNhbnMgUHJvJywgc2Fucy1zZXJpZjtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgfVxuICBcbiAgaDQge1xuICAgIGhlaWdodDogNXZoO1xuICAgIGZvbnQtc2l6ZTogNnZ3O1xuICAgIG1hcmdpbjogMWVtO1xuICAgIGNvbG9yOiAjNEM0RDRGO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjsgXG4gICAgZm9udC1mYW1pbHk6ICdTb3VyY2UgU2FucyBQcm8nLCBzYW5zLXNlcmlmO1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICB9XG5cbiAgaDUge1xuICAgIG1hcmdpbi10b3A6MjBweDtcbiAgICBmb250LXNpemU6IDV2dztcbiAgICBmb250LWZhbWlseTogJ1NvdXJjZSBTYW5zIFBybycsIHNhbnMtc2VyaWY7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIH1cblxuICBwIHtcbiAgICBmb250LWZhbWlseTogJ1NvdXJjZSBTYW5zIFBybycsIHNhbnMtc2VyaWY7XG4gICAgY29sb3I6dmFyKC0ta29tdW5hdC1ibHVlKTtcbiAgICBtYXJnaW4tYm90dG9tOiAwcHg7XG4gIH1cblxuICAuY19uYW1lIHtcbiAgICBjb2xvcjogdmFyKC0ta29tdW5hdC1ncmF5LWRhcmspO1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIGZvbnQtc2l6ZTogNXZ3O1xuICB9XG5cbiAgLmNfaW5mbyB7XG4gICAgbWFyZ2luLXRvcDogMTBweDtcbiAgfVxuXG4gIC5ib2xkIHtcbiAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICB9XG5cbiAgLmNfaW5mb190ZXh0IHtcbiAgICAgIG1hcmdpbi1ib3R0b206IDRweDtcbiAgICAgIG1hcmdpbi10b3A6NHB4O1xuICAgICAgY29sb3I6dmFyKC0ta29tdW5hdC1ncmF5LWRhcmspXG4gIH1cblxuICAuc2xpbSB7XG4gICAgZm9udC13ZWlnaHQ6IGxpZ2h0ZXI7XG4gIH1cblxuICAuYmx1ZSB7XG4gICAgY29sb3I6dmFyKC0ta29tdW5hdC1ibHVlKVxuICB9XG5cbiAgLndoaXRlIHtcbiAgICBjb2xvcjp3aGl0ZTtcbiAgfVxuXG4gIC5yZWQge1xuICAgIGNvbG9yOiB2YXIoLS1rb211bmF0LXJlZClcbiAgfVxuXG4gIC5sZWZ0IHtcbiAgICB0ZXh0LWFsaWduOiBsZWZ0O1xuICB9XG5cbiAgLnJlamVjdCB7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDowcHg7XG4gICAgcmlnaHQ6LTM1cHg7XG4gICAgd2lkdGg6OHZ3O1xuICAgIGJvcmRlci1yYWRpdXM6NTAlO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBmb250LXNpemU6IDEydnc7XG4gICAgY29sb3I6IHZhcigtLWtvbXVuYXQtcmVkKVxufVxuXG4ucmVqZWN0SWNvbiB7XG4gIC1tcy10cmFuc2Zvcm06IHRyYW5zbGF0ZSgwJSwgMzUlKTtcbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoMCUsIDM1JSk7XG4gIGZvbnQtc2l6ZTogMTJ2dztcbn1cblxuLnJlYWRkIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOjBweDtcbiAgICByaWdodDotMTBweDtcbiAgICB3aWR0aDo4dnc7XG4gICAgYm9yZGVyLXJhZGl1czo1MCU7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIGZvbnQtc2l6ZTogMTJ2dztcbiAgICBjb2xvcjogdmFyKC0taW9uLWNvbG9yLXN1Y2Nlc3MpXG59XG5cbi5kZXRhaWxBcnJvdyB7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHJpZ2h0Oi0xMHB4O1xuICAgIHRvcDoyMCU7XG4gICAgbGVmdDogMTAwJTtcbiAgICAtbXMtdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgZm9udC1zaXplOiA1dnc7XG59XG5cbi5jb250ZW50IHtcbiAgICBtYXJnaW4tYm90dG9tOiAxMDBweDtcbn1cblxuLmxvYWRCdG4ge1xuICBtYXJnaW4tYm90dG9tOiAxMDBweDtcbn1cblxuLmRpdmlkZXIge1xuICBib3JkZXItY29sb3I6IHZhcigtLWtvbXVuYXQtZ3JheS1kYXJrKTtcbiAgbWFyZ2luLXRvcDogLTYwcHg7XG4gIG1hcmdpbi1ib3R0b206IDgwcHg7XG59XG5cbi5mb290ZXIge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWtvbXVuYXQtYmx1ZSk7XG4gICAgbWFyZ2luOjBweDtcbiAgICBwYWRkaW5nOjBweDtcbiAgICBoZWlnaHQ6NjBweDtcbiAgICBsaW5lLWhlaWdodDogNjBweDtcbiAgICBjb2xvcjp3aGl0ZTtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBmb250LXNpemU6IDV2dztcbiAgICBmb250LWZhbWlseTogJ1NvdXJjZSBTYW5zIFBybycsIHNhbnMtc2VyaWY7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICBib3R0b206MHB4O1xuICAgIGxlZnQ6MHB4O1xuICAgIHJpZ2h0OjBweDtcbn1cblxuLnR1dG9yaWFsIHtcbiAgcG9zaXRpb246Zml4ZWQ7XG4gIGxlZnQ6MDtcbiAgdG9wOjA7XG4gIHdpZHRoOjEwMCU7XG4gIGhlaWdodDoxMDAlO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsMCwwLC44KTsgXG59XG5cbi50dXRvcmlhbENvbnRlbnQge1xuICB3aWR0aDoxMDB2dztcbiAgaGVpZ2h0Ojkzdmg7XG4gIG1hcmdpbi10b3A6OHZoO1xuICBtYXJnaW4tbGVmdDoyMHB4O1xuICBtYXJnaW4tcmlnaHQ6MjBweDtcbn1cblxuLmV4YW1wbGVCb3gge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGhlaWdodDoyM3ZoO1xuICB3aWR0aDo5MCU7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgYm9yZGVyOiAycHggc29saWQ7XG4gIGJvcmRlci1jb2xvcjogd2hpdGU7XG59XG5cbi50dXRvcmlhbFRleHQge1xuICBtYXJnaW4tdG9wOjV2aDtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbiAgd2lkdGg6OTAlO1xufVxuXG4ucGxhdGZvcm0tYW5kcm9pZCAudHV0QnRue1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGJvdHRvbTogMjAlO1xuICB3aWR0aDogOTB2dztcbn1cblxuLnBsYXRmb3JtLWlvcyAudHV0QnRue1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGJvdHRvbTogMTAlO1xuICB3aWR0aDogOTB2dztcbn1cblxuXG4uZmluaXNoSWNvbiB7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbiAgZm9udC1zaXplOiA0MHB4O1xuIH1cbiBcbiAuZmluaXNoVGV4dHtcbiAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG4gfVxuXG5cbiIsIi5jb250YWluZXIge1xuICBoZWlnaHQ6IDEwMHZoO1xuICAvKiBGYWxsYmFjayBmb3IgYnJvd3NlcnMgdGhhdCBkbyBub3Qgc3VwcG9ydCBDdXN0b20gUHJvcGVydGllcyAqL1xuICBoZWlnaHQ6IGNhbGModmFyKC0tdmgsIDF2aCkgKiAxMDApO1xuICBtYXJnaW4tdG9wOiA1dmg7IH1cblxuLnRpdGxlQmFyIHtcbiAgbWFyZ2luLWxlZnQ6IDEwcHg7XG4gIGZvbnQtc2l6ZTogN3Z3OyB9XG5cbi5zdWJzSWNvbiB7XG4gIG1hcmdpbjogMHB4O1xuICBwYWRkaW5nOiAwcHg7XG4gIGZvbnQtc2l6ZTogMTJweDsgfVxuXG4uY2FuZGlkYXRlQ2FyZCB7XG4gIGhlaWdodDogMTgwcHg7IH1cblxuLmdyYXllZCB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWtvbXVuYXQtZ3JheS1saWdodCk7IH1cblxuLmNsaWNrYWJsZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAyNSU7XG4gIGxlZnQ6IDBweDtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogODAlOyB9XG5cbi5sZWZ0dG9wY2xpY2thYmxlIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDAlO1xuICBsZWZ0OiAwcHg7XG4gIHdpZHRoOiA4MCU7XG4gIGhlaWdodDogMjUlOyB9XG5cbi5mdWxsSGVpZ2h0IHtcbiAgaGVpZ2h0OiAxMDAlOyB9XG5cbi5ibGFjayB7XG4gIGNvbG9yOiB2YXIoLS1rb211bmF0LWdyYXktZGFyayk7IH1cblxuLm5hbWVSb3cge1xuICBtYXJnaW4tdG9wOiA1cHg7XG4gIG1hcmdpbi1sZWZ0OiAxMHB4O1xuICBtYXJnaW4tYm90dG9tOiA1cHg7IH1cblxuLmljb25Sb3cge1xuICBtYXJnaW4tbGVmdDogLTEwcHg7XG4gIG1hcmdpbi10b3A6IDBweDsgfVxuXG4uY0NhcmRMZWZ0IHtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbiAgdGV4dC1hbGlnbjogY2VudGVyOyB9XG5cbi5jQ2FyZExlZnQgaW9uLWF2YXRhciB7XG4gIHdpZHRoOiAyNXZ3O1xuICBoZWlnaHQ6IDI1dnc7XG4gIG9iamVjdC1maXQ6IGNvdmVyO1xuICBkaXNwbGF5OiBibG9jaztcbiAgbWFyZ2luLWxlZnQ6IDEwcHg7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAzMCU7XG4gIGxlZnQ6IDU1JTtcbiAgLW1zLXRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpO1xuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgYm9yZGVyLXJhZGl1czogNTAlOyB9XG5cbi5wZXJjZW50YWdlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzU5QkNFRDtcbiAgYm9yZGVyLXJhZGl1czogMHB4IDEwcHggMTBweCAwcHg7XG4gIGhlaWdodDogNXZ3O1xuICBsaW5lLWhlaWdodDogNXZ3O1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICB3aWR0aDogMTV2dztcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBjb2xvcjogd2hpdGU7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBwYWRkaW5nOiAycHg7IH1cblxuLyogaVBob25lIDUgXG5Zb3UgY2FuIGFsc28gdGFyZ2V0IGRldmljZXMgd2l0aCBhc3BlY3QgcmF0aW8uICovXG5AbWVkaWEgc2NyZWVuIGFuZCAoZGV2aWNlLWFzcGVjdC1yYXRpbzogNDAgLyA3MSkge1xuICAucGVyY2VudGFnZSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzU5QkNFRDtcbiAgICBib3JkZXItcmFkaXVzOiAwcHggMTBweCAxMHB4IDBweDtcbiAgICBoZWlnaHQ6IDV2dztcbiAgICBsaW5lLWhlaWdodDogNXZ3O1xuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG4gICAgd2lkdGg6IDE1dnc7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIGNvbG9yOiB3aGl0ZTtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBmb250LXNpemU6IDEwcHg7XG4gICAgcGFkZGluZzogMnB4OyB9IH1cblxuLmNDYXJkUmlnaHQge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBwYWRkaW5nLWxlZnQ6IDEwcHg7IH1cblxuaDIge1xuICBjb2xvcjogIzRDNEQ0RjtcbiAgZm9udC1zaXplOiA4dnc7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1mYW1pbHk6ICdTb3VyY2UgU2FucyBQcm8nLCBzYW5zLXNlcmlmO1xuICBmb250LXdlaWdodDogYm9sZDsgfVxuXG5oNCB7XG4gIGhlaWdodDogNXZoO1xuICBmb250LXNpemU6IDZ2dztcbiAgbWFyZ2luOiAxZW07XG4gIGNvbG9yOiAjNEM0RDRGO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIGZvbnQtZmFtaWx5OiAnU291cmNlIFNhbnMgUHJvJywgc2Fucy1zZXJpZjtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7IH1cblxuaDUge1xuICBtYXJnaW4tdG9wOiAyMHB4O1xuICBmb250LXNpemU6IDV2dztcbiAgZm9udC1mYW1pbHk6ICdTb3VyY2UgU2FucyBQcm8nLCBzYW5zLXNlcmlmO1xuICBmb250LXdlaWdodDogYm9sZDsgfVxuXG5wIHtcbiAgZm9udC1mYW1pbHk6ICdTb3VyY2UgU2FucyBQcm8nLCBzYW5zLXNlcmlmO1xuICBjb2xvcjogdmFyKC0ta29tdW5hdC1ibHVlKTtcbiAgbWFyZ2luLWJvdHRvbTogMHB4OyB9XG5cbi5jX25hbWUge1xuICBjb2xvcjogdmFyKC0ta29tdW5hdC1ncmF5LWRhcmspO1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgZm9udC1zaXplOiA1dnc7IH1cblxuLmNfaW5mbyB7XG4gIG1hcmdpbi10b3A6IDEwcHg7IH1cblxuLmJvbGQge1xuICBmb250LXdlaWdodDogYm9sZDsgfVxuXG4uY19pbmZvX3RleHQge1xuICBtYXJnaW4tYm90dG9tOiA0cHg7XG4gIG1hcmdpbi10b3A6IDRweDtcbiAgY29sb3I6IHZhcigtLWtvbXVuYXQtZ3JheS1kYXJrKTsgfVxuXG4uc2xpbSB7XG4gIGZvbnQtd2VpZ2h0OiBsaWdodGVyOyB9XG5cbi5ibHVlIHtcbiAgY29sb3I6IHZhcigtLWtvbXVuYXQtYmx1ZSk7IH1cblxuLndoaXRlIHtcbiAgY29sb3I6IHdoaXRlOyB9XG5cbi5yZWQge1xuICBjb2xvcjogdmFyKC0ta29tdW5hdC1yZWQpOyB9XG5cbi5sZWZ0IHtcbiAgdGV4dC1hbGlnbjogbGVmdDsgfVxuXG4ucmVqZWN0IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDBweDtcbiAgcmlnaHQ6IC0zNXB4O1xuICB3aWR0aDogOHZ3O1xuICBib3JkZXItcmFkaXVzOiA1MCU7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1zaXplOiAxMnZ3O1xuICBjb2xvcjogdmFyKC0ta29tdW5hdC1yZWQpOyB9XG5cbi5yZWplY3RJY29uIHtcbiAgLW1zLXRyYW5zZm9ybTogdHJhbnNsYXRlKDAlLCAzNSUpO1xuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgwJSwgMzUlKTtcbiAgZm9udC1zaXplOiAxMnZ3OyB9XG5cbi5yZWFkZCB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwcHg7XG4gIHJpZ2h0OiAtMTBweDtcbiAgd2lkdGg6IDh2dztcbiAgYm9yZGVyLXJhZGl1czogNTAlO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIGZvbnQtc2l6ZTogMTJ2dztcbiAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1zdWNjZXNzKTsgfVxuXG4uZGV0YWlsQXJyb3cge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHJpZ2h0OiAtMTBweDtcbiAgdG9wOiAyMCU7XG4gIGxlZnQ6IDEwMCU7XG4gIC1tcy10cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gIGZvbnQtc2l6ZTogNXZ3OyB9XG5cbi5jb250ZW50IHtcbiAgbWFyZ2luLWJvdHRvbTogMTAwcHg7IH1cblxuLmxvYWRCdG4ge1xuICBtYXJnaW4tYm90dG9tOiAxMDBweDsgfVxuXG4uZGl2aWRlciB7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0ta29tdW5hdC1ncmF5LWRhcmspO1xuICBtYXJnaW4tdG9wOiAtNjBweDtcbiAgbWFyZ2luLWJvdHRvbTogODBweDsgfVxuXG4uZm9vdGVyIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0ta29tdW5hdC1ibHVlKTtcbiAgbWFyZ2luOiAwcHg7XG4gIHBhZGRpbmc6IDBweDtcbiAgaGVpZ2h0OiA2MHB4O1xuICBsaW5lLWhlaWdodDogNjBweDtcbiAgY29sb3I6IHdoaXRlO1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgZm9udC1zaXplOiA1dnc7XG4gIGZvbnQtZmFtaWx5OiAnU291cmNlIFNhbnMgUHJvJywgc2Fucy1zZXJpZjtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIGJvdHRvbTogMHB4O1xuICBsZWZ0OiAwcHg7XG4gIHJpZ2h0OiAwcHg7IH1cblxuLnR1dG9yaWFsIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC44KTsgfVxuXG4udHV0b3JpYWxDb250ZW50IHtcbiAgd2lkdGg6IDEwMHZ3O1xuICBoZWlnaHQ6IDkzdmg7XG4gIG1hcmdpbi10b3A6IDh2aDtcbiAgbWFyZ2luLWxlZnQ6IDIwcHg7XG4gIG1hcmdpbi1yaWdodDogMjBweDsgfVxuXG4uZXhhbXBsZUJveCB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgaGVpZ2h0OiAyM3ZoO1xuICB3aWR0aDogOTAlO1xuICBib3JkZXItcmFkaXVzOiA1cHg7XG4gIGJvcmRlcjogMnB4IHNvbGlkO1xuICBib3JkZXItY29sb3I6IHdoaXRlOyB9XG5cbi50dXRvcmlhbFRleHQge1xuICBtYXJnaW4tdG9wOiA1dmg7XG4gIHRleHQtYWxpZ246IGxlZnQ7XG4gIHdpZHRoOiA5MCU7IH1cblxuLnBsYXRmb3JtLWFuZHJvaWQgLnR1dEJ0biB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgYm90dG9tOiAyMCU7XG4gIHdpZHRoOiA5MHZ3OyB9XG5cbi5wbGF0Zm9ybS1pb3MgLnR1dEJ0biB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgYm90dG9tOiAxMCU7XG4gIHdpZHRoOiA5MHZ3OyB9XG5cbi5maW5pc2hJY29uIHtcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICBmb250LXNpemU6IDQwcHg7IH1cblxuLmZpbmlzaFRleHQge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7IH1cbiJdfQ== */"
+module.exports = ".container {\n  height: 100vh;\n  /* Fallback for browsers that do not support Custom Properties */\n  height: calc(var(--vh, 1vh) * 100);\n  margin-top: 5vh; }\n\n.titleBar {\n  margin-left: 10px;\n  font-size: 7vw; }\n\n.subsIcon {\n  margin: 0px;\n  padding: 0px;\n  font-size: 12px; }\n\n.candidateCard {\n  height: 180px; }\n\n.grayed {\n  background-color: var(--komunat-gray-light); }\n\n.clickable {\n  position: absolute;\n  top: 25%;\n  left: 0px;\n  width: 100%;\n  height: 80%; }\n\n.lefttopclickable {\n  position: absolute;\n  top: 0%;\n  left: 0px;\n  width: 80%;\n  height: 25%; }\n\n.fullHeight {\n  height: 100%; }\n\n.black {\n  color: var(--komunat-gray-dark); }\n\n.nameRow {\n  margin-top: 5px;\n  margin-left: 10px;\n  margin-bottom: 5px; }\n\n.iconRow {\n  margin-left: -10px;\n  margin-top: 0px; }\n\n.cCardLeft {\n  width: 100%;\n  height: 100%;\n  vertical-align: middle;\n  text-align: center; }\n\n.cCardLeft ion-avatar {\n  width: 25vw;\n  height: 25vw;\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  margin-left: 10px;\n  position: absolute;\n  top: 30%;\n  left: 55%;\n  transform: translate(-50%, -50%);\n  border-radius: 50%; }\n\n.percentage {\n  background-color: #59BCED;\n  border-radius: 0px 10px 10px 0px;\n  height: 5vw;\n  line-height: 5vw;\n  vertical-align: middle;\n  width: 15vw;\n  position: absolute;\n  color: white;\n  font-weight: bold;\n  padding: 2px; }\n\n/* iPhone 5 \nYou can also target devices with aspect ratio. */\n\n@media screen and (device-aspect-ratio: 40 / 71) {\n  .percentage {\n    background-color: #59BCED;\n    border-radius: 0px 10px 10px 0px;\n    height: 5vw;\n    line-height: 5vw;\n    vertical-align: middle;\n    width: 15vw;\n    position: absolute;\n    color: white;\n    font-weight: bold;\n    font-size: 10px;\n    padding: 2px; } }\n\n.cCardRight {\n  width: 100%;\n  height: 100%;\n  padding-left: 10px; }\n\nh2 {\n  color: #4C4D4F;\n  font-size: 8vw;\n  text-align: center;\n  font-family: 'Source Sans Pro', sans-serif;\n  font-weight: bold; }\n\nh4 {\n  height: 5vh;\n  font-size: 6vw;\n  margin: 1em;\n  color: #4C4D4F;\n  text-align: center;\n  font-family: 'Source Sans Pro', sans-serif;\n  font-weight: bold; }\n\nh5 {\n  margin-top: 20px;\n  font-size: 5vw;\n  font-family: 'Source Sans Pro', sans-serif;\n  font-weight: bold; }\n\np {\n  font-family: 'Source Sans Pro', sans-serif;\n  color: var(--komunat-blue);\n  margin-bottom: 0px; }\n\n.c_name {\n  color: var(--komunat-gray-dark);\n  font-weight: bold;\n  font-size: 5vw; }\n\n.c_info {\n  margin-top: 10px; }\n\n.bold {\n  font-weight: bold; }\n\n.c_info_text {\n  margin-bottom: 4px;\n  margin-top: 4px;\n  color: var(--komunat-gray-dark); }\n\n.slim {\n  font-weight: lighter; }\n\n.blue {\n  color: var(--komunat-blue); }\n\n.white {\n  color: white; }\n\n.red {\n  color: var(--komunat-red); }\n\n.left {\n  text-align: left; }\n\n.reject {\n  position: absolute;\n  top: 0px;\n  right: -35px;\n  width: 8vw;\n  border-radius: 50%;\n  text-align: center;\n  font-size: 12vw;\n  color: var(--komunat-red); }\n\n.rejectIcon {\n  transform: translate(0%, 35%);\n  font-size: 12vw; }\n\n.readd {\n  position: absolute;\n  top: 0px;\n  right: -10px;\n  width: 8vw;\n  border-radius: 50%;\n  text-align: center;\n  font-size: 12vw;\n  color: var(--ion-color-success); }\n\n.detailArrow {\n  position: absolute;\n  right: -10px;\n  top: 20%;\n  left: 100%;\n  transform: translate(-50%, -50%);\n  font-size: 5vw; }\n\n.content {\n  margin-bottom: 100px; }\n\n.loadBtn {\n  margin-bottom: 100px; }\n\n.divider {\n  border-color: var(--komunat-gray-dark);\n  margin-top: -60px;\n  margin-bottom: 80px; }\n\n.footer {\n  background-color: var(--komunat-blue);\n  margin: 0px;\n  padding: 0px;\n  height: 60px;\n  line-height: 60px;\n  color: white;\n  font-weight: bold;\n  font-size: 5vw;\n  font-family: 'Source Sans Pro', sans-serif;\n  text-align: center;\n  position: fixed;\n  bottom: 0px;\n  left: 0px;\n  right: 0px; }\n\n.tutorial {\n  position: fixed;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.8); }\n\n.tutorialContent {\n  width: 100vw;\n  height: 93vh;\n  margin-top: 8vh;\n  margin-left: 20px;\n  margin-right: 20px; }\n\n.exampleBox {\n  position: absolute;\n  height: 23vh;\n  width: 90%;\n  border-radius: 5px;\n  border: 2px solid;\n  border-color: white; }\n\n.tutorialText {\n  margin-top: 5vh;\n  text-align: left;\n  width: 90%; }\n\n.platform-android .tutBtn {\n  position: absolute;\n  bottom: 20%;\n  width: 90vw; }\n\n.platform-ios .tutBtn {\n  position: absolute;\n  bottom: 10%;\n  width: 90vw; }\n\n.finishIcon {\n  display: inline-block;\n  vertical-align: middle;\n  font-size: 40px; }\n\n.finishText {\n  display: inline-block;\n  vertical-align: middle; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zdHJvYnNpL1Byb2plY3RzL3RlYW10b21vcnJvdy9rb211bmF0LXB3YS9rb211bmF0L3NyYy9hcHAvbWF0Y2hlcy9tYXRjaGVzLnBhZ2Uuc2NzcyIsInNyYy9hcHAvbWF0Y2hlcy9tYXRjaGVzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUVJLGFBQWE7RUFBRSxnRUFBQTtFQUNmLGtDQUFrQztFQUNsQyxlQUFjLEVBQUE7O0FBSWxCO0VBQ0UsaUJBQWdCO0VBQ2hCLGNBQWMsRUFBQTs7QUFHaEI7RUFDSSxXQUFVO0VBQ1YsWUFBWTtFQUNaLGVBQWMsRUFBQTs7QUFHbEI7RUFDSSxhQUFZLEVBQUE7O0FBSWhCO0VBQ0UsMkNBQTJDLEVBQUE7O0FBRzdDO0VBQ0Usa0JBQWtCO0VBQ2xCLFFBQU87RUFDUCxTQUFRO0VBQ1IsV0FBVTtFQUNWLFdBQVUsRUFBQTs7QUFHWjtFQUNFLGtCQUFrQjtFQUNsQixPQUFNO0VBQ04sU0FBUTtFQUNSLFVBQVM7RUFDVCxXQUFVLEVBQUE7O0FBR1o7RUFDSSxZQUFZLEVBQUE7O0FBR2hCO0VBQ0ksK0JBQThCLEVBQUE7O0FBR2xDO0VBQ0UsZUFBYztFQUNkLGlCQUFnQjtFQUNoQixrQkFBaUIsRUFBQTs7QUFHbkI7RUFDRSxrQkFBaUI7RUFDakIsZUFBYyxFQUFBOztBQUdoQjtFQUNJLFdBQVc7RUFDWCxZQUFXO0VBQ1gsc0JBQXNCO0VBQ3RCLGtCQUFrQixFQUFBOztBQUd0QjtFQUNJLFdBQVc7RUFDWCxZQUFZO0VBQ1osb0JBQWlCO0tBQWpCLGlCQUFpQjtFQUNqQixjQUFjO0VBQ2QsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixRQUFRO0VBQ1IsU0FBUztFQUVULGdDQUFnQztFQUNoQyxrQkFBa0IsRUFBQTs7QUFHdEI7RUFDSSx5QkFBeUI7RUFDekIsZ0NBQWdDO0VBQ2hDLFdBQVU7RUFDVixnQkFBZ0I7RUFDaEIsc0JBQXNCO0VBQ3RCLFdBQVU7RUFDVixrQkFBa0I7RUFD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ZSI6InNyYy9hcHAvbWF0Y2hlcy9tYXRjaGVzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXJcbntcbiAgICBoZWlnaHQ6IDEwMHZoOyAvKiBGYWxsYmFjayBmb3IgYnJvd3NlcnMgdGhhdCBkbyBub3Qgc3VwcG9ydCBDdXN0b20gUHJvcGVydGllcyAqL1xuICAgIGhlaWdodDogY2FsYyh2YXIoLS12aCwgMXZoKSAqIDEwMCk7XG4gICAgbWFyZ2luLXRvcDo1dmg7XG59XG5cblxuLnRpdGxlQmFyIHtcbiAgbWFyZ2luLWxlZnQ6MTBweDtcbiAgZm9udC1zaXplOiA3dnc7XG59XG5cbi5zdWJzSWNvbiB7XG4gICAgbWFyZ2luOjBweDtcbiAgICBwYWRkaW5nOiAwcHg7XG4gICAgZm9udC1zaXplOjEycHg7XG59XG5cbi5jYW5kaWRhdGVDYXJkIHtcbiAgICBoZWlnaHQ6MTgwcHg7XG4gICAgXG59XG5cbi5ncmF5ZWQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1rb211bmF0LWdyYXktbGlnaHQpO1xufVxuXG4uY2xpY2thYmxlIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6MjUlO1xuICBsZWZ0OjBweDtcbiAgd2lkdGg6MTAwJTtcbiAgaGVpZ2h0OjgwJTtcbn1cblxuLmxlZnR0b3BjbGlja2FibGUge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDowJTtcbiAgbGVmdDowcHg7XG4gIHdpZHRoOjgwJTtcbiAgaGVpZ2h0OjI1JTtcbn1cblxuLmZ1bGxIZWlnaHQge1xuICAgIGhlaWdodDogMTAwJTtcbn1cblxuLmJsYWNrIHtcbiAgICBjb2xvcjp2YXIoLS1rb211bmF0LWdyYXktZGFyaylcbn1cblxuLm5hbWVSb3cge1xuICBtYXJnaW4tdG9wOjVweDtcbiAgbWFyZ2luLWxlZnQ6MTBweDtcbiAgbWFyZ2luLWJvdHRvbTo1cHg7XG59XG5cbi5pY29uUm93IHtcbiAgbWFyZ2luLWxlZnQ6LTEwcHg7XG4gIG1hcmdpbi10b3A6MHB4O1xufVxuXG4uY0NhcmRMZWZ0IHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6MTAwJTtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cblxuLmNDYXJkTGVmdCBpb24tYXZhdGFyIHtcbiAgICB3aWR0aDogMjV2dztcbiAgICBoZWlnaHQ6IDI1dnc7XG4gICAgb2JqZWN0LWZpdDogY292ZXI7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgbWFyZ2luLWxlZnQ6IDEwcHg7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDogMzAlO1xuICAgIGxlZnQ6IDU1JTtcbiAgICAtbXMtdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xufVxuXG4ucGVyY2VudGFnZSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzU5QkNFRDtcbiAgICBib3JkZXItcmFkaXVzOiAwcHggMTBweCAxMHB4IDBweDtcbiAgICBoZWlnaHQ6NXZ3O1xuICAgIGxpbmUtaGVpZ2h0OiA1dnc7XG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbiAgICB3aWR0aDoxNXZ3O1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICBjb2xvcjp3aGl0ZTtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBwYWRkaW5nOjJweDtcbn1cblxuLyogaVBob25lIDUgXG5Zb3UgY2FuIGFsc28gdGFyZ2V0IGRldmljZXMgd2l0aCBhc3BlY3QgcmF0aW8uICovICAgICAgICAgICAgICAgICAgICAgICBcbkBtZWRpYSBzY3JlZW4gYW5kIChkZXZpY2UtYXNwZWN0LXJhdGlvOiA0MC83MSkgeyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICAucGVyY2VudGFnZSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzU5QkNFRDtcbiAgICBib3JkZXItcmFkaXVzOiAwcHggMTBweCAxMHB4IDBweDtcbiAgICBoZWlnaHQ6NXZ3O1xuICAgIGxpbmUtaGVpZ2h0OiA1dnc7XG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbiAgICB3aWR0aDoxNXZ3O1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICBjb2xvcjp3aGl0ZTtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBmb250LXNpemU6MTBweDtcbiAgICBwYWRkaW5nOjJweDtcbiAgfSAgICAgICAgICAgICAgICBcbn1cblxuLmNDYXJkUmlnaHQge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDoxMDAlO1xuICAgIHBhZGRpbmctbGVmdDoxMHB4O1xufVxuICBoMiB7XG4gICAgY29sb3I6ICM0QzRENEY7XG4gICAgZm9udC1zaXplOiA4dnc7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyOyBcbiAgICBmb250LWZhbWlseTogJ1NvdXJjZSBTYW5zIFBybycsIHNhbnMtc2VyaWY7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIH1cbiAgXG4gIGg0IHtcbiAgICBoZWlnaHQ6IDV2aDtcbiAgICBmb250LXNpemU6IDZ2dztcbiAgICBtYXJnaW46IDFlbTtcbiAgICBjb2xvcjogIzRDNEQ0RjtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7IFxuICAgIGZvbnQtZmFtaWx5OiAnU291cmNlIFNhbnMgUHJvJywgc2Fucy1zZXJpZjtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgfVxuXG4gIGg1IHtcbiAgICBtYXJnaW4tdG9wOjIwcHg7XG4gICAgZm9udC1zaXplOiA1dnc7XG4gICAgZm9udC1mYW1pbHk6ICdTb3VyY2UgU2FucyBQcm8nLCBzYW5zLXNlcmlmO1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICB9XG5cbiAgcCB7XG4gICAgZm9udC1mYW1pbHk6ICdTb3VyY2UgU2FucyBQcm8nLCBzYW5zLXNlcmlmO1xuICAgIGNvbG9yOnZhcigtLWtvbXVuYXQtYmx1ZSk7XG4gICAgbWFyZ2luLWJvdHRvbTogMHB4O1xuICB9XG5cbiAgLmNfbmFtZSB7XG4gICAgY29sb3I6IHZhcigtLWtvbXVuYXQtZ3JheS1kYXJrKTtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBmb250LXNpemU6IDV2dztcbiAgfVxuXG4gIC5jX2luZm8ge1xuICAgIG1hcmdpbi10b3A6IDEwcHg7XG4gIH1cblxuICAuYm9sZCB7XG4gICAgICBmb250LXdlaWdodDogYm9sZDtcbiAgfVxuXG4gIC5jX2luZm9fdGV4dCB7XG4gICAgICBtYXJnaW4tYm90dG9tOiA0cHg7XG4gICAgICBtYXJnaW4tdG9wOjRweDtcbiAgICAgIGNvbG9yOnZhcigtLWtvbXVuYXQtZ3JheS1kYXJrKVxuICB9XG5cbiAgLnNsaW0ge1xuICAgIGZvbnQtd2VpZ2h0OiBsaWdodGVyO1xuICB9XG5cbiAgLmJsdWUge1xuICAgIGNvbG9yOnZhcigtLWtvbXVuYXQtYmx1ZSlcbiAgfVxuXG4gIC53aGl0ZSB7XG4gICAgY29sb3I6d2hpdGU7XG4gIH1cblxuICAucmVkIHtcbiAgICBjb2xvcjogdmFyKC0ta29tdW5hdC1yZWQpXG4gIH1cblxuICAubGVmdCB7XG4gICAgdGV4dC1hbGlnbjogbGVmdDtcbiAgfVxuXG4gIC5yZWplY3Qge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6MHB4O1xuICAgIHJpZ2h0Oi0zNXB4O1xuICAgIHdpZHRoOjh2dztcbiAgICBib3JkZXItcmFkaXVzOjUwJTtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgZm9udC1zaXplOiAxMnZ3O1xuICAgIGNvbG9yOiB2YXIoLS1rb211bmF0LXJlZClcbn1cblxuLnJlamVjdEljb24ge1xuICAtbXMtdHJhbnNmb3JtOiB0cmFuc2xhdGUoMCUsIDM1JSk7XG4gIHRyYW5zZm9ybTogdHJhbnNsYXRlKDAlLCAzNSUpO1xuICBmb250LXNpemU6IDEydnc7XG59XG5cbi5yZWFkZCB7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDowcHg7XG4gICAgcmlnaHQ6LTEwcHg7XG4gICAgd2lkdGg6OHZ3O1xuICAgIGJvcmRlci1yYWRpdXM6NTAlO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBmb250LXNpemU6IDEydnc7XG4gICAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1zdWNjZXNzKVxufVxuXG4uZGV0YWlsQXJyb3cge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICByaWdodDotMTBweDtcbiAgICB0b3A6MjAlO1xuICAgIGxlZnQ6IDEwMCU7XG4gICAgLW1zLXRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpO1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpO1xuICAgIGZvbnQtc2l6ZTogNXZ3O1xufVxuXG4uY29udGVudCB7XG4gICAgbWFyZ2luLWJvdHRvbTogMTAwcHg7XG59XG5cbi5sb2FkQnRuIHtcbiAgbWFyZ2luLWJvdHRvbTogMTAwcHg7XG59XG5cbi5kaXZpZGVyIHtcbiAgYm9yZGVyLWNvbG9yOiB2YXIoLS1rb211bmF0LWdyYXktZGFyayk7XG4gIG1hcmdpbi10b3A6IC02MHB4O1xuICBtYXJnaW4tYm90dG9tOiA4MHB4O1xufVxuXG4uZm9vdGVyIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1rb211bmF0LWJsdWUpO1xuICAgIG1hcmdpbjowcHg7XG4gICAgcGFkZGluZzowcHg7XG4gICAgaGVpZ2h0OjYwcHg7XG4gICAgbGluZS1oZWlnaHQ6IDYwcHg7XG4gICAgY29sb3I6d2hpdGU7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgZm9udC1zaXplOiA1dnc7XG4gICAgZm9udC1mYW1pbHk6ICdTb3VyY2UgU2FucyBQcm8nLCBzYW5zLXNlcmlmO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgYm90dG9tOjBweDtcbiAgICBsZWZ0OjBweDtcbiAgICByaWdodDowcHg7XG59XG5cbi50dXRvcmlhbCB7XG4gIHBvc2l0aW9uOmZpeGVkO1xuICBsZWZ0OjA7XG4gIHRvcDowO1xuICB3aWR0aDoxMDAlO1xuICBoZWlnaHQ6MTAwJTtcbiAgYmFja2dyb3VuZDogcmdiYSgwLDAsMCwuOCk7IFxufVxuXG4udHV0b3JpYWxDb250ZW50IHtcbiAgd2lkdGg6MTAwdnc7XG4gIGhlaWdodDo5M3ZoO1xuICBtYXJnaW4tdG9wOjh2aDtcbiAgbWFyZ2luLWxlZnQ6MjBweDtcbiAgbWFyZ2luLXJpZ2h0OjIwcHg7XG59XG5cbi5leGFtcGxlQm94IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBoZWlnaHQ6MjN2aDtcbiAgd2lkdGg6OTAlO1xuICBib3JkZXItcmFkaXVzOiA1cHg7XG4gIGJvcmRlcjogMnB4IHNvbGlkO1xuICBib3JkZXItY29sb3I6IHdoaXRlO1xufVxuXG4udHV0b3JpYWxUZXh0IHtcbiAgbWFyZ2luLXRvcDo1dmg7XG4gIHRleHQtYWxpZ246IGxlZnQ7XG4gIHdpZHRoOjkwJTtcbn1cblxuLnBsYXRmb3JtLWFuZHJvaWQgLnR1dEJ0bntcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBib3R0b206IDIwJTtcbiAgd2lkdGg6IDkwdnc7XG59XG5cbi5wbGF0Zm9ybS1pb3MgLnR1dEJ0bntcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBib3R0b206IDEwJTtcbiAgd2lkdGg6IDkwdnc7XG59XG5cblxuLmZpbmlzaEljb24ge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG4gIGZvbnQtc2l6ZTogNDBweDtcbiB9XG4gXG4gLmZpbmlzaFRleHR7XG4gICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuIH1cblxuXG4iLCIuY29udGFpbmVyIHtcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgLyogRmFsbGJhY2sgZm9yIGJyb3dzZXJzIHRoYXQgZG8gbm90IHN1cHBvcnQgQ3VzdG9tIFByb3BlcnRpZXMgKi9cbiAgaGVpZ2h0OiBjYWxjKHZhcigtLXZoLCAxdmgpICogMTAwKTtcbiAgbWFyZ2luLXRvcDogNXZoOyB9XG5cbi50aXRsZUJhciB7XG4gIG1hcmdpbi1sZWZ0OiAxMHB4O1xuICBmb250LXNpemU6IDd2dzsgfVxuXG4uc3Vic0ljb24ge1xuICBtYXJnaW46IDBweDtcbiAgcGFkZGluZzogMHB4O1xuICBmb250LXNpemU6IDEycHg7IH1cblxuLmNhbmRpZGF0ZUNhcmQge1xuICBoZWlnaHQ6IDE4MHB4OyB9XG5cbi5ncmF5ZWQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1rb211bmF0LWdyYXktbGlnaHQpOyB9XG5cbi5jbGlja2FibGUge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMjUlO1xuICBsZWZ0OiAwcHg7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDgwJTsgfVxuXG4ubGVmdHRvcGNsaWNrYWJsZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwJTtcbiAgbGVmdDogMHB4O1xuICB3aWR0aDogODAlO1xuICBoZWlnaHQ6IDI1JTsgfVxuXG4uZnVsbEhlaWdodCB7XG4gIGhlaWdodDogMTAwJTsgfVxuXG4uYmxhY2sge1xuICBjb2xvcjogdmFyKC0ta29tdW5hdC1ncmF5LWRhcmspOyB9XG5cbi5uYW1lUm93IHtcbiAgbWFyZ2luLXRvcDogNXB4O1xuICBtYXJnaW4tbGVmdDogMTBweDtcbiAgbWFyZ2luLWJvdHRvbTogNXB4OyB9XG5cbi5pY29uUm93IHtcbiAgbWFyZ2luLWxlZnQ6IC0xMHB4O1xuICBtYXJnaW4tdG9wOiAwcHg7IH1cblxuLmNDYXJkTGVmdCB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG4gIHRleHQtYWxpZ246IGNlbnRlcjsgfVxuXG4uY0NhcmRMZWZ0IGlvbi1hdmF0YXIge1xuICB3aWR0aDogMjV2dztcbiAgaGVpZ2h0OiAyNXZ3O1xuICBvYmplY3QtZml0OiBjb3ZlcjtcbiAgZGlzcGxheTogYmxvY2s7XG4gIG1hcmdpbi1sZWZ0OiAxMHB4O1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMzAlO1xuICBsZWZ0OiA1NSU7XG4gIC1tcy10cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gIGJvcmRlci1yYWRpdXM6IDUwJTsgfVxuXG4ucGVyY2VudGFnZSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICM1OUJDRUQ7XG4gIGJvcmRlci1yYWRpdXM6IDBweCAxMHB4IDEwcHggMHB4O1xuICBoZWlnaHQ6IDV2dztcbiAgbGluZS1oZWlnaHQ6IDV2dztcbiAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbiAgd2lkdGg6IDE1dnc7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgY29sb3I6IHdoaXRlO1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgcGFkZGluZzogMnB4OyB9XG5cbi8qIGlQaG9uZSA1IFxuWW91IGNhbiBhbHNvIHRhcmdldCBkZXZpY2VzIHdpdGggYXNwZWN0IHJhdGlvLiAqL1xuQG1lZGlhIHNjcmVlbiBhbmQgKGRldmljZS1hc3BlY3QtcmF0aW86IDQwIC8gNzEpIHtcbiAgLnBlcmNlbnRhZ2Uge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICM1OUJDRUQ7XG4gICAgYm9yZGVyLXJhZGl1czogMHB4IDEwcHggMTBweCAwcHg7XG4gICAgaGVpZ2h0OiA1dnc7XG4gICAgbGluZS1oZWlnaHQ6IDV2dztcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgIHdpZHRoOiAxNXZ3O1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICBjb2xvcjogd2hpdGU7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgZm9udC1zaXplOiAxMHB4O1xuICAgIHBhZGRpbmc6IDJweDsgfSB9XG5cbi5jQ2FyZFJpZ2h0IHtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgcGFkZGluZy1sZWZ0OiAxMHB4OyB9XG5cbmgyIHtcbiAgY29sb3I6ICM0QzRENEY7XG4gIGZvbnQtc2l6ZTogOHZ3O1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIGZvbnQtZmFtaWx5OiAnU291cmNlIFNhbnMgUHJvJywgc2Fucy1zZXJpZjtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7IH1cblxuaDQge1xuICBoZWlnaHQ6IDV2aDtcbiAgZm9udC1zaXplOiA2dnc7XG4gIG1hcmdpbjogMWVtO1xuICBjb2xvcjogIzRDNEQ0RjtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBmb250LWZhbWlseTogJ1NvdXJjZSBTYW5zIFBybycsIHNhbnMtc2VyaWY7XG4gIGZvbnQtd2VpZ2h0OiBib2xkOyB9XG5cbmg1IHtcbiAgbWFyZ2luLXRvcDogMjBweDtcbiAgZm9udC1zaXplOiA1dnc7XG4gIGZvbnQtZmFtaWx5OiAnU291cmNlIFNhbnMgUHJvJywgc2Fucy1zZXJpZjtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7IH1cblxucCB7XG4gIGZvbnQtZmFtaWx5OiAnU291cmNlIFNhbnMgUHJvJywgc2Fucy1zZXJpZjtcbiAgY29sb3I6IHZhcigtLWtvbXVuYXQtYmx1ZSk7XG4gIG1hcmdpbi1ib3R0b206IDBweDsgfVxuXG4uY19uYW1lIHtcbiAgY29sb3I6IHZhcigtLWtvbXVuYXQtZ3JheS1kYXJrKTtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIGZvbnQtc2l6ZTogNXZ3OyB9XG5cbi5jX2luZm8ge1xuICBtYXJnaW4tdG9wOiAxMHB4OyB9XG5cbi5ib2xkIHtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7IH1cblxuLmNfaW5mb190ZXh0IHtcbiAgbWFyZ2luLWJvdHRvbTogNHB4O1xuICBtYXJnaW4tdG9wOiA0cHg7XG4gIGNvbG9yOiB2YXIoLS1rb211bmF0LWdyYXktZGFyayk7IH1cblxuLnNsaW0ge1xuICBmb250LXdlaWdodDogbGlnaHRlcjsgfVxuXG4uYmx1ZSB7XG4gIGNvbG9yOiB2YXIoLS1rb211bmF0LWJsdWUpOyB9XG5cbi53aGl0ZSB7XG4gIGNvbG9yOiB3aGl0ZTsgfVxuXG4ucmVkIHtcbiAgY29sb3I6IHZhcigtLWtvbXVuYXQtcmVkKTsgfVxuXG4ubGVmdCB7XG4gIHRleHQtYWxpZ246IGxlZnQ7IH1cblxuLnJlamVjdCB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwcHg7XG4gIHJpZ2h0OiAtMzVweDtcbiAgd2lkdGg6IDh2dztcbiAgYm9yZGVyLXJhZGl1czogNTAlO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIGZvbnQtc2l6ZTogMTJ2dztcbiAgY29sb3I6IHZhcigtLWtvbXVuYXQtcmVkKTsgfVxuXG4ucmVqZWN0SWNvbiB7XG4gIC1tcy10cmFuc2Zvcm06IHRyYW5zbGF0ZSgwJSwgMzUlKTtcbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoMCUsIDM1JSk7XG4gIGZvbnQtc2l6ZTogMTJ2dzsgfVxuXG4ucmVhZGQge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMHB4O1xuICByaWdodDogLTEwcHg7XG4gIHdpZHRoOiA4dnc7XG4gIGJvcmRlci1yYWRpdXM6IDUwJTtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBmb250LXNpemU6IDEydnc7XG4gIGNvbG9yOiB2YXIoLS1pb24tY29sb3Itc3VjY2Vzcyk7IH1cblxuLmRldGFpbEFycm93IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICByaWdodDogLTEwcHg7XG4gIHRvcDogMjAlO1xuICBsZWZ0OiAxMDAlO1xuICAtbXMtdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gIHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpO1xuICBmb250LXNpemU6IDV2dzsgfVxuXG4uY29udGVudCB7XG4gIG1hcmdpbi1ib3R0b206IDEwMHB4OyB9XG5cbi5sb2FkQnRuIHtcbiAgbWFyZ2luLWJvdHRvbTogMTAwcHg7IH1cblxuLmRpdmlkZXIge1xuICBib3JkZXItY29sb3I6IHZhcigtLWtvbXVuYXQtZ3JheS1kYXJrKTtcbiAgbWFyZ2luLXRvcDogLTYwcHg7XG4gIG1hcmdpbi1ib3R0b206IDgwcHg7IH1cblxuLmZvb3RlciB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWtvbXVuYXQtYmx1ZSk7XG4gIG1hcmdpbjogMHB4O1xuICBwYWRkaW5nOiAwcHg7XG4gIGhlaWdodDogNjBweDtcbiAgbGluZS1oZWlnaHQ6IDYwcHg7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIGZvbnQtc2l6ZTogNXZ3O1xuICBmb250LWZhbWlseTogJ1NvdXJjZSBTYW5zIFBybycsIHNhbnMtc2VyaWY7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBib3R0b206IDBweDtcbiAgbGVmdDogMHB4O1xuICByaWdodDogMHB4OyB9XG5cbi50dXRvcmlhbCB7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuOCk7IH1cblxuLnR1dG9yaWFsQ29udGVudCB7XG4gIHdpZHRoOiAxMDB2dztcbiAgaGVpZ2h0OiA5M3ZoO1xuICBtYXJnaW4tdG9wOiA4dmg7XG4gIG1hcmdpbi1sZWZ0OiAyMHB4O1xuICBtYXJnaW4tcmlnaHQ6IDIwcHg7IH1cblxuLmV4YW1wbGVCb3gge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGhlaWdodDogMjN2aDtcbiAgd2lkdGg6IDkwJTtcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xuICBib3JkZXI6IDJweCBzb2xpZDtcbiAgYm9yZGVyLWNvbG9yOiB3aGl0ZTsgfVxuXG4udHV0b3JpYWxUZXh0IHtcbiAgbWFyZ2luLXRvcDogNXZoO1xuICB0ZXh0LWFsaWduOiBsZWZ0O1xuICB3aWR0aDogOTAlOyB9XG5cbi5wbGF0Zm9ybS1hbmRyb2lkIC50dXRCdG4ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGJvdHRvbTogMjAlO1xuICB3aWR0aDogOTB2dzsgfVxuXG4ucGxhdGZvcm0taW9zIC50dXRCdG4ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGJvdHRvbTogMTAlO1xuICB3aWR0aDogOTB2dzsgfVxuXG4uZmluaXNoSWNvbiB7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbiAgZm9udC1zaXplOiA0MHB4OyB9XG5cbi5maW5pc2hUZXh0IHtcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlOyB9XG4iXX0= */"
 
 /***/ }),
 

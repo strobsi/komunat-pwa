@@ -1,50 +1,80 @@
 <div class="container">
- <ion-slides zoom="false" pager="true">
-   <ion-slide>
-     <div class="swiper">
-       <img class="logo" src="https://komunat.de/start.png"/>
-       <h2 id="headline">Dein Team für den Stuttgarter Gemeinderat!</h2>
-       <p id="text">
-        <!--<span *ngIf="resultLength > 0">Schon <b>{{resultLength}}</b> haben mitgemacht.</span>-->
-        Finde mit dem KOMUNAT heraus, wer deine TOP-KandidatInnen für die Gemeinderatswahl in Stuttgart am 26. Mai 2019 sind.
-       </p>
-         <ion-button (click) ="slideToNext()" color="primary" expand="block" class="goBtn">Weiter</ion-button>
-         <br>
-         <br>
-     </div>
-   </ion-slide>
-   <ion-slide>
-       <div class="swiper">
-        <img class="logo" src="https://komunat.de/values_contents.png"/>
+  <ion-slides zoom="false" pager="true">
+    <ion-slide>
+      <div class="swiper">
+        <img class="logo" src="http://localhost:8100/start.png" />
+        <h2 id="headline">Dein Team für den Stuttgarter Gemeinderat!</h2>
+        <p id="text">
+          <!--<span *ngIf="resultLength > 0">Schon <b>{{resultLength}}</b> haben mitgemacht.</span>-->
+          Finde mit dem KOMUNAT heraus, wer deine TOP-KandidatInnen für die
+          Gemeinderatswahl in Stuttgart am 26. Mai 2019 sind.
+        </p>
+        <ion-button
+          (click)="slideToNext()"
+          color="primary"
+          expand="block"
+          class="goBtn"
+          >Weiter</ion-button
+        >
+        <br />
+        <br />
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="swiper">
+        <img class="logo" src="http://localhost:8100/values_contents.png" />
         <h2 id="headline">Was ist den KandidatInnen wichtig?</h2>
         <p id="text">
-          Über 300 KandidatInnen haben mithilfe des KOMUNAT ihre Werte und kommunalpolitischen Aufgaben in eine Reihenfolge gebracht.
+          Über 300 KandidatInnen haben mithilfe des KOMUNAT ihre Werte und
+          kommunalpolitischen Aufgaben in eine Reihenfolge gebracht.
         </p>
-        <ion-button (click) ="slideToNext()" color="primary" expand="block" class="goBtn">Weiter</ion-button>
-        <br>
+        <ion-button
+          (click)="slideToNext()"
+          color="primary"
+          expand="block"
+          class="goBtn"
+          >Weiter</ion-button
+        >
+        <br />
       </div>
-   </ion-slide>
-   <ion-slide>
+    </ion-slide>
+    <ion-slide>
       <div class="swiper">
-       <img class="logo" src="https://komunat.de/values_contents.png"/>
-       <h2 id="headline">Und jetzt du!</h2>
-       <p id="text">
-           Mache das gleiche Spiel wie die KandidatInnen: Finde ganz einfach heraus, welche Werte und Aufgaben dir wichtig sind. 
-         </p>
-       <ion-button (click) ="slideToNext()" color="primary" expand="block" class="goBtn">Weiter</ion-button>
-       <br>
-     </div>
-  </ion-slide>
-   <ion-slide>
+        <img class="logo" src="https://komunat.de/values_contents.png" />
+        <h2 id="headline">Und jetzt du!</h2>
+        <p id="text">
+          Mache das gleiche Spiel wie die KandidatInnen: Finde ganz einfach
+          heraus, welche Werte und Aufgaben dir wichtig sind.
+        </p>
+        <ion-button
+          (click)="slideToNext()"
+          color="primary"
+          expand="block"
+          class="goBtn"
+          >Weiter</ion-button
+        >
+        <br />
+      </div>
+    </ion-slide>
+    <ion-slide>
       <div class="swiper">
-       <img class="logo" src="https://komunat.de/match.png"/>
-       <h2 id="headline">Dein Ergebnis für die Wahl in Stuttgart</h2>
-       <p id="text">
-         Wir vergleichen dein Ergebnis mit der Reihenfolge der KandidatInnen und zeigen dir, welche 20 der 300 KandidatInnen am besten zu dir passen. Mit dem Ergebnis aus dem KOMUNAT kannst du dann ganz einfach den Stimmzettel ausfüllen.
-       </p>
-         <ion-button (click) ="goToKomunat($event)" color="primary" expand="block" class="goBtn small-margin">Los geht's</ion-button>
-         <br>
-     </div>
-  </ion-slide>
- </ion-slides>
+        <img class="logo" src="https://komunat.de/match.png" />
+        <h2 id="headline">Dein Ergebnis für die Wahl in Stuttgart</h2>
+        <p id="text">
+          Wir vergleichen dein Ergebnis mit der Reihenfolge der KandidatInnen
+          und zeigen dir, welche 20 der 300 KandidatInnen am besten zu dir
+          passen. Mit dem Ergebnis aus dem KOMUNAT kannst du dann ganz einfach
+          den Stimmzettel ausfüllen.
+        </p>
+        <ion-button
+          (click)="goToKomunat($event)"
+          color="primary"
+          expand="block"
+          class="goBtn small-margin"
+          >Los geht's</ion-button
+        >
+        <br />
+      </div>
+    </ion-slide>
+  </ion-slides>
 </div>

@@ -1,14 +1,15 @@
 <ion-app>
   <ion-header>
-      <ion-toolbar>
-          <ion-buttons slot="primary">
-          </ion-buttons>
-          <ion-title><img class="logo" src="https://komunat.de/app/assets/img/logo.png"/></ion-title>
-          <ion-buttons slot="end">
-            <ion-menu-button class="menu" autoHide="false"></ion-menu-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="primary"> </ion-buttons>
+      <ion-title
+        ><img class="logo" src="http://localhost:8100/assets/img/logo.png"
+      /></ion-title>
+      <ion-buttons slot="end">
+        <ion-menu-button class="menu" autoHide="false"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
   <ion-split-pane>
     <ion-menu swipe-gesture="false" type="overlay">
       <ion-header>
@@ -22,7 +23,7 @@
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
-                {{p.title}}
+                {{ p.title }}
               </ion-label>
             </ion-item>
           </ion-menu-toggle>

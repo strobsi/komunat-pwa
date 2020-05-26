@@ -1,92 +1,108 @@
 <ion-content>
-
   <div class="container">
     <ion-row class="titleBar">
-        <ion-col size="12">
-        <ion-button expand="block" fill="outline" class="" (click)="back()"><ion-icon name="arrow-round-back"></ion-icon>Zurück</ion-button>
-        </ion-col>
+      <ion-col size="12">
+        <ion-button expand="block" fill="outline" class="" (click)="back()"
+          ><ion-icon name="arrow-round-back"></ion-icon>Zurück</ion-button
+        >
+      </ion-col>
     </ion-row>
     <div class="candidateCard" ng-model="candidate">
       <ion-row class="fullHeight">
         <ion-col size="5" class="imageCol">
           <div class="cCardLeft">
-              <ion-avatar>
-                  <img src="https://komunat.de/uploads/{{candidate.uuid}}.png"/>
-                </ion-avatar>
+            <ion-avatar>
+              <img src="http://localhost:8100/assets/img/avatar.png" />
+            </ion-avatar>
           </div>
         </ion-col>
 
         <ion-col size="7" class="quoteCol">
-            <div class="">
-          <p class="black cursiv vertical-center"><i>"{{candidate.motto}}"</i></p>
+          <div class="">
+            <p class="black cursiv vertical-center">
+              <i>"{{candidate.motto}}"</i>
+            </p>
           </div>
         </ion-col>
-
       </ion-row>
-    </div>    
+    </div>
     <ion-slides zoom="false">
       <ion-slide>
-          <div class="eventList">
-              <h4>MEINE WERTE</h4>
-              <br>
-              <div class="eventWrapper" *ngFor="let e of candidate.values; let i = index">
-                <div class="event">
-                <hr>
-                  <ion-row class="eventTitle bold">
-                    <ion-col size="2">
-                      <p class="slim black">{{i+1}}</p>
-                    </ion-col>
-                    <ion-col size="8">
-                        <p>{{e.name}}</p>
-                    </ion-col>
-                  </ion-row>
-                </div>
-              </div>
-            </div>
-      </ion-slide>
-      <ion-slide>
-          <div class="eventList">
-              <h4>MEINE AUFGABEN</h4>
-              <br>
-              <div class="eventWrapper" *ngFor="let e of candidate.contents; let i = index">
-                <div class="event">
-                <hr>
-                  <ion-row class="eventTitle bold">
-                    <ion-col size="2">
-                      <p class="slim black">{{i+1}}</p>
-                    </ion-col>
-                    <ion-col size="8">
-                        <p>{{e.name}}</p>
-                    </ion-col>
-                  </ion-row>
-                </div>
-              </div>
-            </div>
-      </ion-slide>
-      <ion-slide>
         <div class="eventList">
-          <h4>KOMM VORBEI & TRIFF MICH HIER PERSÖNLICH</h4>
-          <br>
-          <div class="eventWrapper" *ngFor="let event of events; let i = index">
+          <h4>MEINE WERTE</h4>
+          <br />
+          <div
+            class="eventWrapper"
+            *ngFor="let e of candidate.values; let i = index"
+          >
             <div class="event">
-            <hr>
+              <hr />
               <ion-row class="eventTitle bold">
-                <p>{{event.title}}</p>
-              </ion-row>
-              <ion-row class="eventContent">
-                <ion-col size=5>
-                <p class="black"><span class="slim">Beginn: </span><span class="bold">{{event.startDate}}</span> </p>
-                <p class="black"><span class="slim">Ende: </span><span class="bold">{{event.endDate}}</span></p>
+                <ion-col size="2">
+                  <p class="slim black">{{i+1}}</p>
                 </ion-col>
-                <ion-col size="7">
-                  <p class="black"><span class="slim">Addresse: </span><span class="bold">{{event.location}}</span></p>
+                <ion-col size="8">
+                  <p>{{e.name}}</p>
                 </ion-col>
               </ion-row>
             </div>
           </div>
         </div>
       </ion-slide>
-
+      <ion-slide>
+        <div class="eventList">
+          <h4>MEINE AUFGABEN</h4>
+          <br />
+          <div
+            class="eventWrapper"
+            *ngFor="let e of candidate.contents; let i = index"
+          >
+            <div class="event">
+              <hr />
+              <ion-row class="eventTitle bold">
+                <ion-col size="2">
+                  <p class="slim black">{{i+1}}</p>
+                </ion-col>
+                <ion-col size="8">
+                  <p>{{e.name}}</p>
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="eventList">
+          <h4>KOMM VORBEI & TRIFF MICH HIER PERSÖNLICH</h4>
+          <br />
+          <div class="eventWrapper" *ngFor="let event of events; let i = index">
+            <div class="event">
+              <hr />
+              <ion-row class="eventTitle bold">
+                <p>{{event.title}}</p>
+              </ion-row>
+              <ion-row class="eventContent">
+                <ion-col size="5">
+                  <p class="black">
+                    <span class="slim">Beginn: </span
+                    ><span class="bold">{{event.startDate}}</span>
+                  </p>
+                  <p class="black">
+                    <span class="slim">Ende: </span
+                    ><span class="bold">{{event.endDate}}</span>
+                  </p>
+                </ion-col>
+                <ion-col size="7">
+                  <p class="black">
+                    <span class="slim">Addresse: </span
+                    ><span class="bold">{{event.location}}</span>
+                  </p>
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
+        </div>
+      </ion-slide>
     </ion-slides>
   </div>
 </ion-content>

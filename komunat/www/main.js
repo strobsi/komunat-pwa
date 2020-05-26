@@ -1,806 +1,399 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["main"],{
 
-/***/ "./node_modules/@ionic/core/dist/esm/es5/build lazy recursive ^\\.\\/.*\\.entry\\.js$ include: \\.entry\\.js$":
-/*!*********************************************************************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm/es5/build lazy ^\.\/.*\.entry\.js$ include: \.entry\.js$ namespace object ***!
-  \*********************************************************************************************************************/
+/***/ "./node_modules/@ionic/core/dist/esm-es5 lazy recursive ^\\.\\/.*\\.entry\\.js$ include: \\.entry\\.js$ exclude: \\.system\\.entry\\.js$":
+/*!*********************************************************************************************************************************************!*\
+  !*** ./node_modules/@ionic/core/dist/esm-es5 lazy ^\.\/.*\.entry\.js$ include: \.entry\.js$ exclude: \.system\.entry\.js$ namespace object ***!
+  \*********************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./0negksux.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/0negksux.entry.js",
-		0,
-		"common",
-		128
-	],
-	"./0negksux.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/0negksux.sc.entry.js",
-		0,
-		"common",
-		129
-	],
-	"./0tqlwsdt.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/0tqlwsdt.entry.js",
-		0,
-		"common",
-		130
-	],
-	"./0tqlwsdt.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/0tqlwsdt.sc.entry.js",
-		0,
-		"common",
-		131
-	],
-	"./5esrbynz.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/5esrbynz.entry.js",
-		"common",
-		102
-	],
-	"./5esrbynz.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/5esrbynz.sc.entry.js",
-		"common",
-		103
-	],
-	"./5ptcnpes.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/5ptcnpes.entry.js",
-		"common",
-		10
-	],
-	"./5ptcnpes.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/5ptcnpes.sc.entry.js",
-		"common",
-		11
-	],
-	"./5pwuvxkr.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/5pwuvxkr.entry.js",
-		"common",
-		54
-	],
-	"./5pwuvxkr.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/5pwuvxkr.sc.entry.js",
-		"common",
-		55
-	],
-	"./5vxaf0jn.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/5vxaf0jn.entry.js",
-		"common",
-		56
-	],
-	"./5vxaf0jn.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/5vxaf0jn.sc.entry.js",
-		"common",
-		57
-	],
-	"./5y1t3u06.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/5y1t3u06.entry.js",
-		0,
-		"common",
-		132
-	],
-	"./5y1t3u06.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/5y1t3u06.sc.entry.js",
-		0,
-		"common",
-		133
-	],
-	"./6kgso7pq.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/6kgso7pq.entry.js",
+	"./ion-action-sheet-controller_8.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-action-sheet-controller_8.entry.js",
 		"common",
 		12
 	],
-	"./6kgso7pq.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/6kgso7pq.sc.entry.js",
+	"./ion-action-sheet-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-action-sheet-ios.entry.js",
 		"common",
 		13
 	],
-	"./760enb6s.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/760enb6s.entry.js",
+	"./ion-action-sheet-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-action-sheet-md.entry.js",
 		"common",
 		14
 	],
-	"./760enb6s.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/760enb6s.sc.entry.js",
+	"./ion-alert-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-alert-ios.entry.js",
 		"common",
 		15
 	],
-	"./7mjltlqo.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/7mjltlqo.entry.js",
+	"./ion-alert-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-alert-md.entry.js",
 		"common",
 		16
 	],
-	"./7mjltlqo.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/7mjltlqo.sc.entry.js",
+	"./ion-app_8-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-app_8-ios.entry.js",
+		0,
 		"common",
 		17
 	],
-	"./admmxern.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/admmxern.entry.js",
-		"common",
-		58
-	],
-	"./admmxern.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/admmxern.sc.entry.js",
-		"common",
-		59
-	],
-	"./apfh3flu.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/apfh3flu.entry.js",
+	"./ion-app_8-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-app_8-md.entry.js",
+		0,
 		"common",
 		18
 	],
-	"./apfh3flu.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/apfh3flu.sc.entry.js",
+	"./ion-avatar_3-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-avatar_3-ios.entry.js",
 		"common",
 		19
 	],
-	"./b3nyp0te.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/b3nyp0te.entry.js",
-		"common",
-		104
-	],
-	"./b3nyp0te.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/b3nyp0te.sc.entry.js",
-		"common",
-		105
-	],
-	"./b8qia1ip.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/b8qia1ip.entry.js",
-		"common",
-		106
-	],
-	"./b8qia1ip.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/b8qia1ip.sc.entry.js",
-		"common",
-		107
-	],
-	"./bngjpe45.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/bngjpe45.entry.js",
+	"./ion-avatar_3-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-avatar_3-md.entry.js",
 		"common",
 		20
 	],
-	"./bngjpe45.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/bngjpe45.sc.entry.js",
+	"./ion-back-button-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-back-button-ios.entry.js",
 		"common",
 		21
 	],
-	"./czp4dy0u.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/czp4dy0u.entry.js",
-		0,
-		"common",
-		136
-	],
-	"./czp4dy0u.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/czp4dy0u.sc.entry.js",
-		0,
-		"common",
-		137
-	],
-	"./d4uqnmsi.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/d4uqnmsi.entry.js",
-		2,
-		"common",
-		138
-	],
-	"./d4uqnmsi.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/d4uqnmsi.sc.entry.js",
-		2,
-		"common",
-		139
-	],
-	"./dq0i6hqg.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/dq0i6hqg.entry.js",
-		"common",
-		94
-	],
-	"./dq0i6hqg.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/dq0i6hqg.sc.entry.js",
-		"common",
-		95
-	],
-	"./dsb5jv5r.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/dsb5jv5r.entry.js",
+	"./ion-back-button-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-back-button-md.entry.js",
 		"common",
 		22
 	],
-	"./dsb5jv5r.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/dsb5jv5r.sc.entry.js",
-		"common",
+	"./ion-backdrop-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-backdrop-ios.entry.js",
 		23
 	],
-	"./ejapjnva.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ejapjnva.entry.js",
-		"common",
-		60
-	],
-	"./ejapjnva.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ejapjnva.sc.entry.js",
-		"common",
-		61
-	],
-	"./emuc9tqd.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/emuc9tqd.entry.js",
-		"common",
+	"./ion-backdrop-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-backdrop-md.entry.js",
 		24
 	],
-	"./emuc9tqd.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/emuc9tqd.sc.entry.js",
+	"./ion-button_2-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-button_2-ios.entry.js",
 		"common",
 		25
 	],
-	"./f4ov2fgy.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/f4ov2fgy.entry.js",
-		"common",
-		62
-	],
-	"./f4ov2fgy.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/f4ov2fgy.sc.entry.js",
-		"common",
-		63
-	],
-	"./fkzdmlip.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/fkzdmlip.entry.js",
-		140
-	],
-	"./fkzdmlip.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/fkzdmlip.sc.entry.js",
-		141
-	],
-	"./ftij5hee.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ftij5hee.entry.js",
-		0,
-		"common",
-		108
-	],
-	"./ftij5hee.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ftij5hee.sc.entry.js",
-		0,
-		"common",
-		109
-	],
-	"./fwzyk2t9.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/fwzyk2t9.entry.js",
+	"./ion-button_2-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-button_2-md.entry.js",
 		"common",
 		26
 	],
-	"./fwzyk2t9.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/fwzyk2t9.sc.entry.js",
+	"./ion-card_5-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-card_5-ios.entry.js",
 		"common",
 		27
 	],
-	"./gbcxupo7.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/gbcxupo7.entry.js",
-		"common",
-		64
-	],
-	"./gbcxupo7.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/gbcxupo7.sc.entry.js",
-		"common",
-		65
-	],
-	"./ggbyzsii.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ggbyzsii.entry.js",
-		0,
-		"common",
-		142
-	],
-	"./ggbyzsii.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ggbyzsii.sc.entry.js",
-		0,
-		"common",
-		143
-	],
-	"./he63oefa.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/he63oefa.entry.js",
-		"common",
-		96
-	],
-	"./he63oefa.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/he63oefa.sc.entry.js",
-		"common",
-		97
-	],
-	"./helxzsef.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/helxzsef.entry.js",
-		144
-	],
-	"./helxzsef.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/helxzsef.sc.entry.js",
-		145
-	],
-	"./hg9mfbbd.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/hg9mfbbd.entry.js",
-		"common",
-		66
-	],
-	"./hg9mfbbd.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/hg9mfbbd.sc.entry.js",
-		"common",
-		67
-	],
-	"./htwkhopr.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/htwkhopr.entry.js",
-		"common",
-		98
-	],
-	"./htwkhopr.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/htwkhopr.sc.entry.js",
-		"common",
-		99
-	],
-	"./hxnvegpa.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/hxnvegpa.entry.js",
-		0,
-		"common",
-		146
-	],
-	"./hxnvegpa.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/hxnvegpa.sc.entry.js",
-		0,
-		"common",
-		147
-	],
-	"./i4lkxzhp.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/i4lkxzhp.entry.js",
-		0,
-		"common",
-		148
-	],
-	"./i4lkxzhp.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/i4lkxzhp.sc.entry.js",
-		0,
-		"common",
-		149
-	],
-	"./i5bu78vq.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/i5bu78vq.entry.js",
-		"common",
-		68
-	],
-	"./i5bu78vq.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/i5bu78vq.sc.entry.js",
-		"common",
-		69
-	],
-	"./ibsc94yw.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ibsc94yw.entry.js",
-		"common",
-		110
-	],
-	"./ibsc94yw.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ibsc94yw.sc.entry.js",
-		"common",
-		111
-	],
-	"./iqlhkurd.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/iqlhkurd.entry.js",
-		"common",
-		70
-	],
-	"./iqlhkurd.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/iqlhkurd.sc.entry.js",
-		"common",
-		71
-	],
-	"./isuxxasv.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/isuxxasv.entry.js",
-		"common",
-		72
-	],
-	"./isuxxasv.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/isuxxasv.sc.entry.js",
-		"common",
-		73
-	],
-	"./j241fzpw.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/j241fzpw.entry.js",
+	"./ion-card_5-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-card_5-md.entry.js",
 		"common",
 		28
 	],
-	"./j241fzpw.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/j241fzpw.sc.entry.js",
+	"./ion-checkbox-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-checkbox-ios.entry.js",
 		"common",
 		29
 	],
-	"./j9sczdb9.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/j9sczdb9.entry.js",
+	"./ion-checkbox-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-checkbox-md.entry.js",
 		"common",
 		30
 	],
-	"./j9sczdb9.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/j9sczdb9.sc.entry.js",
+	"./ion-chip-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-chip-ios.entry.js",
 		"common",
 		31
 	],
-	"./jpkvsu5y.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/jpkvsu5y.entry.js",
-		"common",
-		114
-	],
-	"./jpkvsu5y.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/jpkvsu5y.sc.entry.js",
-		"common",
-		115
-	],
-	"./jtlohgvo.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/jtlohgvo.entry.js",
+	"./ion-chip-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-chip-md.entry.js",
 		"common",
 		32
 	],
-	"./jtlohgvo.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/jtlohgvo.sc.entry.js",
-		"common",
+	"./ion-col_3.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-col_3.entry.js",
 		33
 	],
-	"./k4hoilf4.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/k4hoilf4.entry.js",
-		"common",
-		74
-	],
-	"./k4hoilf4.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/k4hoilf4.sc.entry.js",
-		"common",
-		75
-	],
-	"./ksgex3rj.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ksgex3rj.entry.js",
+	"./ion-datetime_3-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-datetime_3-ios.entry.js",
 		"common",
 		34
 	],
-	"./ksgex3rj.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ksgex3rj.sc.entry.js",
+	"./ion-datetime_3-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-datetime_3-md.entry.js",
 		"common",
 		35
 	],
-	"./mdhtqfpy.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/mdhtqfpy.entry.js",
-		0,
-		"common",
-		150
-	],
-	"./mdhtqfpy.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/mdhtqfpy.sc.entry.js",
-		0,
-		"common",
-		151
-	],
-	"./mri9bdlj.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/mri9bdlj.entry.js",
-		152
-	],
-	"./mri9bdlj.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/mri9bdlj.sc.entry.js",
-		153
-	],
-	"./ni878jk5.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ni878jk5.entry.js",
-		0,
-		"common",
-		154
-	],
-	"./ni878jk5.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ni878jk5.sc.entry.js",
-		0,
-		"common",
-		155
-	],
-	"./o6zsuoqi.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/o6zsuoqi.entry.js",
-		"common",
-		76
-	],
-	"./o6zsuoqi.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/o6zsuoqi.sc.entry.js",
-		"common",
-		77
-	],
-	"./oiqlagn3.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/oiqlagn3.entry.js",
-		"common",
-		78
-	],
-	"./oiqlagn3.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/oiqlagn3.sc.entry.js",
-		"common",
-		79
-	],
-	"./okzvvz1s.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/okzvvz1s.entry.js",
+	"./ion-fab_3-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-fab_3-ios.entry.js",
 		"common",
 		36
 	],
-	"./okzvvz1s.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/okzvvz1s.sc.entry.js",
+	"./ion-fab_3-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-fab_3-md.entry.js",
 		"common",
 		37
 	],
-	"./p49hrwqk.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/p49hrwqk.entry.js",
-		0,
-		"common",
-		112
-	],
-	"./p49hrwqk.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/p49hrwqk.sc.entry.js",
-		0,
-		"common",
-		113
-	],
-	"./q3pkc1ix.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/q3pkc1ix.entry.js",
-		"common",
-		116
-	],
-	"./q3pkc1ix.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/q3pkc1ix.sc.entry.js",
-		"common",
-		117
-	],
-	"./qjwxr7dv.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/qjwxr7dv.entry.js",
-		"common",
+	"./ion-img.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-img.entry.js",
 		38
 	],
-	"./qjwxr7dv.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/qjwxr7dv.sc.entry.js",
+	"./ion-infinite-scroll_2-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-infinite-scroll_2-ios.entry.js",
 		"common",
 		39
 	],
-	"./qqusykhh.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/qqusykhh.entry.js",
-		"common",
-		80
-	],
-	"./qqusykhh.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/qqusykhh.sc.entry.js",
-		"common",
-		81
-	],
-	"./rkecsmgc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/rkecsmgc.entry.js",
-		"common",
-		118
-	],
-	"./rkecsmgc.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/rkecsmgc.sc.entry.js",
-		"common",
-		119
-	],
-	"./rrpxfm2a.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/rrpxfm2a.entry.js",
-		156
-	],
-	"./rrpxfm2a.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/rrpxfm2a.sc.entry.js",
-		157
-	],
-	"./rtzpmome.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/rtzpmome.entry.js",
+	"./ion-infinite-scroll_2-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-infinite-scroll_2-md.entry.js",
 		"common",
 		40
 	],
-	"./rtzpmome.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/rtzpmome.sc.entry.js",
+	"./ion-input-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-input-ios.entry.js",
 		"common",
 		41
 	],
-	"./tlbladaf.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/tlbladaf.entry.js",
+	"./ion-input-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-input-md.entry.js",
 		"common",
 		42
 	],
-	"./tlbladaf.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/tlbladaf.sc.entry.js",
+	"./ion-item-option_3-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-item-option_3-ios.entry.js",
 		"common",
 		43
 	],
-	"./tlg9i3ly.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/tlg9i3ly.entry.js",
-		"common",
-		100
-	],
-	"./tlg9i3ly.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/tlg9i3ly.sc.entry.js",
-		"common",
-		101
-	],
-	"./txpe5bol.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/txpe5bol.entry.js",
-		"common",
-		82
-	],
-	"./txpe5bol.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/txpe5bol.sc.entry.js",
-		"common",
-		83
-	],
-	"./uwkxwzih.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/uwkxwzih.entry.js",
+	"./ion-item-option_3-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-item-option_3-md.entry.js",
 		"common",
 		44
 	],
-	"./uwkxwzih.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/uwkxwzih.sc.entry.js",
+	"./ion-item_8-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-item_8-ios.entry.js",
 		"common",
 		45
 	],
-	"./vb7zan3s.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/vb7zan3s.entry.js",
-		"common",
-		84
-	],
-	"./vb7zan3s.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/vb7zan3s.sc.entry.js",
-		"common",
-		85
-	],
-	"./vhwyavqm.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/vhwyavqm.entry.js",
+	"./ion-item_8-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-item_8-md.entry.js",
 		"common",
 		46
 	],
-	"./vhwyavqm.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/vhwyavqm.sc.entry.js",
+	"./ion-loading-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-loading-ios.entry.js",
 		"common",
 		47
 	],
-	"./vl7mbywk.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/vl7mbywk.entry.js",
-		0,
-		"common",
-		158
-	],
-	"./vl7mbywk.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/vl7mbywk.sc.entry.js",
-		0,
-		"common",
-		159
-	],
-	"./vxahkmyw.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/vxahkmyw.entry.js",
+	"./ion-loading-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-loading-md.entry.js",
 		"common",
 		48
 	],
-	"./vxahkmyw.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/vxahkmyw.sc.entry.js",
+	"./ion-menu_4-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-menu_4-ios.entry.js",
 		"common",
 		49
 	],
-	"./w7d82ebh.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/w7d82ebh.entry.js",
-		0,
-		"common",
-		160
-	],
-	"./w7d82ebh.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/w7d82ebh.sc.entry.js",
-		0,
-		"common",
-		161
-	],
-	"./wbj4wz5k.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/wbj4wz5k.entry.js",
-		2,
-		"common",
-		162
-	],
-	"./wbj4wz5k.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/wbj4wz5k.sc.entry.js",
-		2,
-		"common",
-		163
-	],
-	"./wjdsdnuu.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/wjdsdnuu.entry.js",
-		"common",
-		86
-	],
-	"./wjdsdnuu.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/wjdsdnuu.sc.entry.js",
-		"common",
-		87
-	],
-	"./wjpkaasy.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/wjpkaasy.entry.js",
+	"./ion-menu_4-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-menu_4-md.entry.js",
 		"common",
 		50
 	],
-	"./wjpkaasy.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/wjpkaasy.sc.entry.js",
+	"./ion-modal-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-modal-ios.entry.js",
+		0,
 		"common",
 		51
 	],
-	"./wrbebrfs.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/wrbebrfs.entry.js",
-		"common",
-		120
-	],
-	"./wrbebrfs.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/wrbebrfs.sc.entry.js",
-		"common",
-		121
-	],
-	"./xar48p4b.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/xar48p4b.entry.js",
-		"common",
-		122
-	],
-	"./xar48p4b.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/xar48p4b.sc.entry.js",
-		"common",
-		123
-	],
-	"./xo7dncgt.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/xo7dncgt.entry.js",
-		"common",
-		88
-	],
-	"./xo7dncgt.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/xo7dncgt.sc.entry.js",
-		"common",
-		89
-	],
-	"./ygdst8ix.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ygdst8ix.entry.js",
-		"common",
-		90
-	],
-	"./ygdst8ix.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ygdst8ix.sc.entry.js",
-		"common",
-		91
-	],
-	"./yxoiyuhs.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/yxoiyuhs.entry.js",
-		"common",
-		92
-	],
-	"./yxoiyuhs.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/yxoiyuhs.sc.entry.js",
-		"common",
-		93
-	],
-	"./zfajadxx.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/zfajadxx.entry.js",
-		"common",
-		124
-	],
-	"./zfajadxx.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/zfajadxx.sc.entry.js",
-		"common",
-		125
-	],
-	"./ziv0mko0.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ziv0mko0.entry.js",
-		"common",
-		126
-	],
-	"./ziv0mko0.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/ziv0mko0.sc.entry.js",
-		"common",
-		127
-	],
-	"./zr4o4ivv.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/zr4o4ivv.entry.js",
+	"./ion-modal-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-modal-md.entry.js",
 		0,
-		"common",
-		164
-	],
-	"./zr4o4ivv.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/zr4o4ivv.sc.entry.js",
-		0,
-		"common",
-		165
-	],
-	"./zxlnzjcg.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/zxlnzjcg.entry.js",
 		"common",
 		52
 	],
-	"./zxlnzjcg.sc.entry.js": [
-		"./node_modules/@ionic/core/dist/esm/es5/build/zxlnzjcg.sc.entry.js",
+	"./ion-nav_5.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-nav_5.entry.js",
+		0,
 		"common",
 		53
+	],
+	"./ion-popover-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-popover-ios.entry.js",
+		0,
+		"common",
+		54
+	],
+	"./ion-popover-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-popover-md.entry.js",
+		0,
+		"common",
+		55
+	],
+	"./ion-progress-bar-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-progress-bar-ios.entry.js",
+		"common",
+		56
+	],
+	"./ion-progress-bar-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-progress-bar-md.entry.js",
+		"common",
+		57
+	],
+	"./ion-radio_2-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-radio_2-ios.entry.js",
+		"common",
+		58
+	],
+	"./ion-radio_2-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-radio_2-md.entry.js",
+		"common",
+		59
+	],
+	"./ion-range-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-range-ios.entry.js",
+		"common",
+		60
+	],
+	"./ion-range-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-range-md.entry.js",
+		"common",
+		61
+	],
+	"./ion-refresher_2-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-refresher_2-ios.entry.js",
+		"common",
+		62
+	],
+	"./ion-refresher_2-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-refresher_2-md.entry.js",
+		"common",
+		63
+	],
+	"./ion-reorder_2-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-reorder_2-ios.entry.js",
+		"common",
+		64
+	],
+	"./ion-reorder_2-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-reorder_2-md.entry.js",
+		"common",
+		65
+	],
+	"./ion-ripple-effect.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-ripple-effect.entry.js",
+		66
+	],
+	"./ion-route_4.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-route_4.entry.js",
+		"common",
+		67
+	],
+	"./ion-searchbar-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-searchbar-ios.entry.js",
+		"common",
+		68
+	],
+	"./ion-searchbar-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-searchbar-md.entry.js",
+		"common",
+		69
+	],
+	"./ion-segment_2-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-segment_2-ios.entry.js",
+		"common",
+		70
+	],
+	"./ion-segment_2-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-segment_2-md.entry.js",
+		"common",
+		71
+	],
+	"./ion-select_3-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-select_3-ios.entry.js",
+		"common",
+		72
+	],
+	"./ion-select_3-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-select_3-md.entry.js",
+		"common",
+		73
+	],
+	"./ion-slide_2-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-slide_2-ios.entry.js",
+		74
+	],
+	"./ion-slide_2-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-slide_2-md.entry.js",
+		75
+	],
+	"./ion-spinner.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-spinner.entry.js",
+		"common",
+		76
+	],
+	"./ion-split-pane-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-split-pane-ios.entry.js",
+		77
+	],
+	"./ion-split-pane-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-split-pane-md.entry.js",
+		78
+	],
+	"./ion-tab-bar_2-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-tab-bar_2-ios.entry.js",
+		"common",
+		79
+	],
+	"./ion-tab-bar_2-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-tab-bar_2-md.entry.js",
+		"common",
+		80
+	],
+	"./ion-tab_2.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-tab_2.entry.js",
+		"common",
+		9
+	],
+	"./ion-text.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-text.entry.js",
+		"common",
+		81
+	],
+	"./ion-textarea-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-textarea-ios.entry.js",
+		"common",
+		82
+	],
+	"./ion-textarea-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-textarea-md.entry.js",
+		"common",
+		83
+	],
+	"./ion-toast-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-toast-ios.entry.js",
+		"common",
+		84
+	],
+	"./ion-toast-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-toast-md.entry.js",
+		"common",
+		85
+	],
+	"./ion-toggle-ios.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-toggle-ios.entry.js",
+		"common",
+		86
+	],
+	"./ion-toggle-md.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-toggle-md.entry.js",
+		"common",
+		87
+	],
+	"./ion-virtual-scroll.entry.js": [
+		"./node_modules/@ionic/core/dist/esm-es5/ion-virtual-scroll.entry.js",
+		88
 	]
 };
 function webpackAsyncContext(req) {
@@ -820,7 +413,7 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = "./node_modules/@ionic/core/dist/esm/es5/build lazy recursive ^\\.\\/.*\\.entry\\.js$ include: \\.entry\\.js$";
+webpackAsyncContext.id = "./node_modules/@ionic/core/dist/esm-es5 lazy recursive ^\\.\\/.*\\.entry\\.js$ include: \\.entry\\.js$ exclude: \\.system\\.entry\\.js$";
 module.exports = webpackAsyncContext;
 
 /***/ }),
@@ -973,7 +566,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-header>\n      <ion-toolbar>\n          <ion-buttons slot=\"primary\">\n          </ion-buttons>\n          <ion-title><img class=\"logo\" src=\"https://komunat.de/app/assets/img/logo.png\"/></ion-title>\n          <ion-buttons slot=\"end\">\n            <ion-menu-button class=\"menu\" autoHide=\"false\"></ion-menu-button>\n          </ion-buttons>\n        </ion-toolbar>\n      </ion-header>\n  <ion-split-pane>\n    <ion-menu swipe-gesture=\"false\" type=\"overlay\">\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>Menü</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages\">\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\">\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n              <ion-label>\n                {{p.title}}\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n"
+module.exports = "<ion-app>\n  <ion-header>\n    <ion-toolbar>\n      <ion-buttons slot=\"primary\"> </ion-buttons>\n      <ion-title\n        ><img class=\"logo\" src=\"http://localhost:8100/assets/img/logo.png\"\n      /></ion-title>\n      <ion-buttons slot=\"end\">\n        <ion-menu-button class=\"menu\" autoHide=\"false\"></ion-menu-button>\n      </ion-buttons>\n    </ion-toolbar>\n  </ion-header>\n  <ion-split-pane>\n    <ion-menu swipe-gesture=\"false\" type=\"overlay\">\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>Menü</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages\">\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\">\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n              <ion-label>\n                {{ p.title }}\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n"
 
 /***/ }),
 
@@ -1124,7 +717,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".logo {\n  width: 40vw;\n  margin: auto;\n  margin-top: 1vh;\n  margin-bottom: 1vh; }\n\n.menu {\n  margin-right: 3vw; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zdHJvYnNpL1Byb2plY3RzL2tvbXVuYXQtcHdhL2tvbXVuYXQvc3JjL2FwcC9hcHAuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFdBQVc7RUFDWCxZQUFZO0VBQ1osZUFBZTtFQUNmLGtCQUFrQixFQUFBOztBQUV0QjtFQUNJLGlCQUFpQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvYXBwLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubG9nbyB7XG4gICAgd2lkdGg6IDQwdnc7XG4gICAgbWFyZ2luOiBhdXRvO1xuICAgIG1hcmdpbi10b3A6IDF2aDtcbiAgICBtYXJnaW4tYm90dG9tOiAxdmg7XG59XG4ubWVudSB7XG4gICAgbWFyZ2luLXJpZ2h0OiAzdnc7XG59Il19 */"
+module.exports = ".logo {\n  width: 40vw;\n  margin: auto;\n  margin-top: 1vh;\n  margin-bottom: 1vh; }\n\n.menu {\n  margin-right: 3vw; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zdHJvYnNpL1Byb2plY3RzL3RlYW10b21vcnJvdy9rb211bmF0LXB3YS9rb211bmF0L3NyYy9hcHAvYXBwLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxXQUFXO0VBQ1gsWUFBWTtFQUNaLGVBQWU7RUFDZixrQkFBa0IsRUFBQTs7QUFFdEI7RUFDSSxpQkFBaUIsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2FwcC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmxvZ28ge1xuICAgIHdpZHRoOiA0MHZ3O1xuICAgIG1hcmdpbjogYXV0bztcbiAgICBtYXJnaW4tdG9wOiAxdmg7XG4gICAgbWFyZ2luLWJvdHRvbTogMXZoO1xufVxuLm1lbnUge1xuICAgIG1hcmdpbi1yaWdodDogM3Z3O1xufSJdfQ== */"
 
 /***/ }),
 
@@ -1248,7 +841,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/strobsi/Projects/komunat-pwa/komunat/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/strobsi/Projects/teamtomorrow/komunat-pwa/komunat/src/main.ts */"./src/main.ts");
 
 
 /***/ })

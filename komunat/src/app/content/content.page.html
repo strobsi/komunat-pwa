@@ -1,31 +1,29 @@
 <div class="container">
-    <ion-row class="topContent">
-        <ion-col size="6">
-        <p class="middle small">Welche Aufgabe ist dir wichtiger?</p>
-        </ion-col>
-        <ion-col size="1">
-        </ion-col>
-        <ion-col size="3">
-            <div class="progressContainer">
-                <div class="progress">
-                  <div class="percent"></div>
-                </div>
-                <div class="steps">
-                  <div class="step" id="0"></div>
-                  <div class="step selected" id="1"></div>
-                  <div class="step" id="2"></div>
-                </div>
-              </div>
-              <br><br>
-        </ion-col>
-    </ion-row>
-        <div class="buttonSection">
-        <ion-card class="opt0 upper" (click) ="selected(0)">
-                <h2 class=".opt0 beautify small">{{this.btn0Val.name}}</h2>
-        </ion-card>
-        <ion-card class="opt1 lower"  (click) ="selected(1)">
-                  <h2 class=".opt1 beautify small">{{this.btn1Val.name}}</h2>
-          </ion-card>
+  <ion-row class="topContent">
+    <ion-col size="6">
+      <p class="middle small">Welche Aufgabe ist dir wichtiger?</p>
+    </ion-col>
+    <ion-col size="1"> </ion-col>
+    <ion-col size="3">
+      <div class="progressContainer">
+        <div class="progress">
+          <div class="percent"></div>
         </div>
-    </div>
-    
+        <div class="steps">
+          <div class="step" id="0"></div>
+          <div class="step selected" id="1"></div>
+          <div class="step" id="2"></div>
+        </div>
+      </div>
+      <br /><br />
+    </ion-col>
+  </ion-row>
+  <div class="buttonSection">
+    <ion-card class="opt0 upper" (click)="selected(0)">
+      <h2 class=".opt0 beautify small">{{btn0Val.name}}</h2>
+    </ion-card>
+    <ion-card class="opt1 lower" (click)="selected(1)">
+      <h2 class=".opt1 beautify small">{{btn1Val.name}}</h2>
+    </ion-card>
+  </div>
+</div>
