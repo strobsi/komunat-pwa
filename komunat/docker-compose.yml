@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   demo:
-    build: ./
+    image: komunat/pwa:2019
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
