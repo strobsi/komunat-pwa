@@ -11,6 +11,5 @@ WORKDIR /home/alpine/app/
 RUN npm rebuild node-sass && npm install
 RUN ionic cordova plugin add cordova-plugin-google-analytics
 RUN npm install @ionic-native/google-analytics
-RUN ionic cordova build browser --minify --prod
 
 ENTRYPOINT [ "ionic","serve" ]
