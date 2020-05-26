@@ -17,9 +17,8 @@ jobs:
       - name: Build App
         run: |
           cd komunat
-          rm ./package-lock.json
-          npm install
-          ionic build --prod --release
+          npm rebuild node-sass && npm install
+          ionic build
       - name: Upload build artifacts
         uses: actions/upload-artifact@v1
         with:
