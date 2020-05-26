@@ -58,7 +58,7 @@ var CdetailPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content>\n\n  <div class=\"container\">\n    <ion-row class=\"titleBar\">\n        <ion-col size=\"12\">\n        <ion-button expand=\"block\" fill=\"outline\" class=\"\" (click)=\"back()\"><ion-icon name=\"arrow-round-back\"></ion-icon>Zurück</ion-button>\n        </ion-col>\n    </ion-row>\n    <div class=\"candidateCard\" ng-model=\"candidate\">\n      <ion-row class=\"fullHeight\">\n        <ion-col size=\"5\" class=\"imageCol\">\n          <div class=\"cCardLeft\">\n              <ion-avatar>\n                  <img src=\"https://komunat.de/uploads/{{candidate.uuid}}.png\"/>\n                </ion-avatar>\n          </div>\n        </ion-col>\n\n        <ion-col size=\"7\" class=\"quoteCol\">\n            <div class=\"\">\n          <p class=\"black cursiv vertical-center\"><i>\"{{candidate.motto}}\"</i></p>\n          </div>\n        </ion-col>\n\n      </ion-row>\n    </div>    \n    <ion-slides zoom=\"false\">\n      <ion-slide>\n          <div class=\"eventList\">\n              <h4>MEINE WERTE</h4>\n              <br>\n              <div class=\"eventWrapper\" *ngFor=\"let e of candidate.values; let i = index\">\n                <div class=\"event\">\n                <hr>\n                  <ion-row class=\"eventTitle bold\">\n                    <ion-col size=\"2\">\n                      <p class=\"slim black\">{{i+1}}</p>\n                    </ion-col>\n                    <ion-col size=\"8\">\n                        <p>{{e.name}}</p>\n                    </ion-col>\n                  </ion-row>\n                </div>\n              </div>\n            </div>\n      </ion-slide>\n      <ion-slide>\n          <div class=\"eventList\">\n              <h4>MEINE AUFGABEN</h4>\n              <br>\n              <div class=\"eventWrapper\" *ngFor=\"let e of candidate.contents; let i = index\">\n                <div class=\"event\">\n                <hr>\n                  <ion-row class=\"eventTitle bold\">\n                    <ion-col size=\"2\">\n                      <p class=\"slim black\">{{i+1}}</p>\n                    </ion-col>\n                    <ion-col size=\"8\">\n                        <p>{{e.name}}</p>\n                    </ion-col>\n                  </ion-row>\n                </div>\n              </div>\n            </div>\n      </ion-slide>\n      <ion-slide>\n        <div class=\"eventList\">\n          <h4>KOMM VORBEI & TRIFF MICH HIER PERSÖNLICH</h4>\n          <br>\n          <div class=\"eventWrapper\" *ngFor=\"let event of events; let i = index\">\n            <div class=\"event\">\n            <hr>\n              <ion-row class=\"eventTitle bold\">\n                <p>{{event.title}}</p>\n              </ion-row>\n              <ion-row class=\"eventContent\">\n                <ion-col size=5>\n                <p class=\"black\"><span class=\"slim\">Beginn: </span><span class=\"bold\">{{event.startDate}}</span> </p>\n                <p class=\"black\"><span class=\"slim\">Ende: </span><span class=\"bold\">{{event.endDate}}</span></p>\n                </ion-col>\n                <ion-col size=\"7\">\n                  <p class=\"black\"><span class=\"slim\">Addresse: </span><span class=\"bold\">{{event.location}}</span></p>\n                </ion-col>\n              </ion-row>\n            </div>\n          </div>\n        </div>\n      </ion-slide>\n\n    </ion-slides>\n  </div>\n</ion-content>"
+module.exports = "<ion-content>\n  <div class=\"container\">\n    <ion-row class=\"titleBar\">\n      <ion-col size=\"12\">\n        <ion-button expand=\"block\" fill=\"outline\" class=\"\" (click)=\"back()\"\n          ><ion-icon name=\"arrow-round-back\"></ion-icon>Zurück</ion-button\n        >\n      </ion-col>\n    </ion-row>\n    <div class=\"candidateCard\" ng-model=\"candidate\">\n      <ion-row class=\"fullHeight\">\n        <ion-col size=\"5\" class=\"imageCol\">\n          <div class=\"cCardLeft\">\n            <ion-avatar>\n              <img src=\"http://localhost:8100/assets/img/avatar.png\" />\n            </ion-avatar>\n          </div>\n        </ion-col>\n\n        <ion-col size=\"7\" class=\"quoteCol\">\n          <div class=\"\">\n            <p class=\"black cursiv vertical-center\">\n              <i>\"{{candidate.motto}}\"</i>\n            </p>\n          </div>\n        </ion-col>\n      </ion-row>\n    </div>\n    <ion-slides zoom=\"false\">\n      <ion-slide>\n        <div class=\"eventList\">\n          <h4>MEINE WERTE</h4>\n          <br />\n          <div\n            class=\"eventWrapper\"\n            *ngFor=\"let e of candidate.values; let i = index\"\n          >\n            <div class=\"event\">\n              <hr />\n              <ion-row class=\"eventTitle bold\">\n                <ion-col size=\"2\">\n                  <p class=\"slim black\">{{i+1}}</p>\n                </ion-col>\n                <ion-col size=\"8\">\n                  <p>{{e.name}}</p>\n                </ion-col>\n              </ion-row>\n            </div>\n          </div>\n        </div>\n      </ion-slide>\n      <ion-slide>\n        <div class=\"eventList\">\n          <h4>MEINE AUFGABEN</h4>\n          <br />\n          <div\n            class=\"eventWrapper\"\n            *ngFor=\"let e of candidate.contents; let i = index\"\n          >\n            <div class=\"event\">\n              <hr />\n              <ion-row class=\"eventTitle bold\">\n                <ion-col size=\"2\">\n                  <p class=\"slim black\">{{i+1}}</p>\n                </ion-col>\n                <ion-col size=\"8\">\n                  <p>{{e.name}}</p>\n                </ion-col>\n              </ion-row>\n            </div>\n          </div>\n        </div>\n      </ion-slide>\n      <ion-slide>\n        <div class=\"eventList\">\n          <h4>KOMM VORBEI & TRIFF MICH HIER PERSÖNLICH</h4>\n          <br />\n          <div class=\"eventWrapper\" *ngFor=\"let event of events; let i = index\">\n            <div class=\"event\">\n              <hr />\n              <ion-row class=\"eventTitle bold\">\n                <p>{{event.title}}</p>\n              </ion-row>\n              <ion-row class=\"eventContent\">\n                <ion-col size=\"5\">\n                  <p class=\"black\">\n                    <span class=\"slim\">Beginn: </span\n                    ><span class=\"bold\">{{event.startDate}}</span>\n                  </p>\n                  <p class=\"black\">\n                    <span class=\"slim\">Ende: </span\n                    ><span class=\"bold\">{{event.endDate}}</span>\n                  </p>\n                </ion-col>\n                <ion-col size=\"7\">\n                  <p class=\"black\">\n                    <span class=\"slim\">Addresse: </span\n                    ><span class=\"bold\">{{event.location}}</span>\n                  </p>\n                </ion-col>\n              </ion-row>\n            </div>\n          </div>\n        </div>\n      </ion-slide>\n    </ion-slides>\n  </div>\n</ion-content>\n"
 
 /***/ }),
 
@@ -102,7 +102,7 @@ var CdetailPage = /** @class */ (function () {
             values: [],
             contents: [],
             events: [],
-            uuid: ""
+            uuid: "",
         };
     }
     CdetailPage.prototype.ngOnInit = function () {
@@ -132,18 +132,18 @@ var CdetailPage = /** @class */ (function () {
                 return 0;
             });
             console.log(_this.candidate);
-            var xhr = new XMLHttpRequest();
-            var url = "https://komunat.de/result/event";
-            var data = JSON.stringify({ candidate: _this.candidate.uuid });
-            xhr.open("POST", url, true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    var response = JSON.parse(xhr.responseText);
-                    _this.events = response;
-                }
-            };
-            xhr.send(data);
+            //  var xhr = new XMLHttpRequest();
+            //  var url = "https://komunat.de/result/event";
+            //  var data = JSON.stringify({candidate: this.candidate.uuid});
+            //  xhr.open("POST", url, true);
+            //  xhr.setRequestHeader("Content-Type", "application/json");
+            //  xhr.onreadystatechange = () => {
+            //      if (xhr.readyState === 4) {
+            //        var response = JSON.parse(xhr.responseText);
+            //        this.events = response;
+            //      }
+            //  };
+            //  xhr.send(data);
         });
     };
     CdetailPage.prototype.back = function () {
@@ -152,7 +152,7 @@ var CdetailPage = /** @class */ (function () {
     };
     CdetailPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-cdetail',
+            selector: "app-cdetail",
             template: __webpack_require__(/*! ./cdetail.page.html */ "./src/app/cdetail/cdetail.page.html"),
             styles: [__webpack_require__(/*! ./cdetail.page.scss */ "./src/app/cdetail/cdetail.page.scss")]
         }),

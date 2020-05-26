@@ -230,6 +230,8 @@ var ContentPage = /** @class */ (function () {
     }
     ContentPage.prototype.ngOnInit = function () {
         var _this = this;
+        alert("triggered");
+        this.newRound();
         var version = this.detectIE();
         var top = document.querySelector(".topContent");
         if (version === false) {
