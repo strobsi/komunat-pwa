@@ -185,7 +185,6 @@ export class ContentPage implements OnInit {
     ],
   ];
   ngOnInit() {
-    alert("triggered");
     this.newRound();
     var version = this.detectIE();
     var top = document.querySelector(".topContent");
