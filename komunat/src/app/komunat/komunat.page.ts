@@ -99,7 +99,7 @@ export class KomunatPage implements OnInit {
       },
       {
         id: 5,
-        name: "sozial-ökologischer Weitblick",
+        name: "Sozial-ökologischer Weitblick",
         rating: 0,
       },
       {
