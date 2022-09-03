@@ -1,4 +1,4 @@
-# komunat-pwa
+# DEPRECATED REPOSITORY
 
 PWA app of the kommunal
 
